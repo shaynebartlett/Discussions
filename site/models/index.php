@@ -60,8 +60,6 @@ class DiscussionsModelIndex extends JModel {
      */ 
 	function getCategories() {
 
-		global $mainframe, $option;
-		
 		static $items;
 		
 		if (isset($items)) {
@@ -133,10 +131,7 @@ class DiscussionsModelIndex extends JModel {
      * @return array 
      */ 
      function getRSSEntries() { 
-          
-		global $mainframe;
-                    
-                    
+
 		// get parameters
 		$params = JComponentHelper::getParams('com_discussions');
 		$rssSize = $params->get('rssSize', 20);

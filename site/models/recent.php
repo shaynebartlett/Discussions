@@ -62,7 +62,6 @@ class DiscussionsModelRecent extends JModel {
 	 * @since 1.5
 	 */
 	function __construct() {
-		global $mainframe;
 
 		parent::__construct();
 
@@ -118,8 +117,6 @@ class DiscussionsModelRecent extends JModel {
      * @return array
      */
      function getPostings() {
-
-		global $mainframe;
 
      	$_task = JRequest::getVar('task', 'time');
         $_time = JRequest::getVar('time', '24h');

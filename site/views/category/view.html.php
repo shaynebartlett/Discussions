@@ -25,12 +25,9 @@ class DiscussionsViewCategory extends JView {
      * 
      */ 
     function display() { 
-				
-		global $mainframe;
 
 		$document =& JFactory::getDocument();
 		
-		//$pathway	= &$mainframe->getPathway();
 		$app 		= JFactory::getApplication();
 		$pathway	= &$app->getPathway();
 				
@@ -52,7 +49,6 @@ class DiscussionsViewCategory extends JView {
 
 
 		// get parameters
-		//$params = &$mainframe->getParams();
 		$params = &$app->getParams();
 
 		$menus	= &JSite::getMenu();

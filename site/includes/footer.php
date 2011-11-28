@@ -11,7 +11,6 @@ require_once(JPATH_COMPONENT.DS.'classes/helper.php');
 $CofiHelper = new CofiHelper();
 
 // get parameters
-//$params = &$mainframe->getParams();
 $params =& JComponentHelper::getParams('com_discussions');
 
 $_showFooter = $params->get('showFooter', '1');

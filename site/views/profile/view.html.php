@@ -26,8 +26,6 @@ class DiscussionsViewProfile extends JView {
      */
     function display() {
 
-//		global $mainframe;
-
 		$document 	=& JFactory::getDocument();
 		$app 		= JFactory::getApplication();
 		$pathway	= &$app->getPathway();
@@ -52,19 +50,6 @@ class DiscussionsViewProfile extends JView {
 
 		$menus	= &JSite::getMenu();
 		$menu	= $menus->getActive();
-
-/*
-		if (is_object( $menu )) {
-			$menu_params = new JParameter( $menu->params );
-			if (!$menu_params->get( 'page_title')) {
-				$params->set('page_title',	JText::_( 'Forums' ));
-			}
-		} else {
-			$params->set('page_title',	JText::_( 'Forums' ));
-		}
-
-		$document->setTitle( $params->get( 'page_title' ) );
-*/
 
 		//set breadcrumbs
 		if( is_object($menu) && $menu->query['view'] != 'profile') {

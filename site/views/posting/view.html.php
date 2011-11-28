@@ -26,12 +26,9 @@ class DiscussionsViewPosting extends JView {
      */
     function display() {
 
-		global $mainframe;
-
 		$document =& JFactory::getDocument();
 
 		$app 		= JFactory::getApplication();
-
 
 		$postings               =& $this->get('Postings');
         $categoryId             =& $this->get('CategoryId');
@@ -57,26 +54,10 @@ class DiscussionsViewPosting extends JView {
 
 
 		// get parameters
-//		$params = &$mainframe->getParams();
 		$params = &$app->getParams();
 
 		$menus	= &JSite::getMenu();
 		$menu	= $menus->getActive();
-
-/*
-		if (is_object( $menu )) {
-			$menu_params = new JParameter( $menu->params );
-			if (!$menu_params->get( 'page_title')) {
-				$params->set('page_title',	JText::_( 'Forums' ));
-			}
-		} else {
-			$params->set('page_title',	JText::_( 'Forums' ));
-		}
-
-		$document->setTitle( $params->get( 'page_title' ) );
-*/
-
-
 
         $this->assignRef('postings', $postings);
 		$this->assignRef('categoryId', $categoryId);

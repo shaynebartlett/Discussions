@@ -165,7 +165,6 @@ class DiscussionsModelThread extends JModel {
 	 * @since 1.5
 	 */
 	function __construct() {
-		global $mainframe;
 
 		parent::__construct();
 		
@@ -188,7 +187,7 @@ class DiscussionsModelThread extends JModel {
      */
      function getPostings() {
 
-		global $mainframe;
+         $app = JFactory::getApplication();
 
      	$_catid = JRequest::getVar('catid', 0);
 
@@ -206,7 +205,7 @@ class DiscussionsModelThread extends JModel {
      	
 				if ( $logUser->isModerator() == 0) {	// user is not moderator -> kick him out of here
 					$redirectLink = JRoute::_( "index.php?option=com_discussions");
-					$mainframe->redirect( $redirectLink, JText::_( 'COFI_NO_ACCESS_TO_FORUM' ), "notice");			
+					$app->redirect( $redirectLink, JText::_( 'COFI_NO_ACCESS_TO_FORUM' ), "notice");
      			}
      	
      		}
@@ -230,7 +229,7 @@ class DiscussionsModelThread extends JModel {
         }
         else { // category does not exist
 			$redirectLink = JRoute::_( "index.php?option=com_discussions");
-			$mainframe->redirect( $redirectLink, JText::_( 'COFI_FORUM_NOT_EXISTS' ), "notice");
+			$app->redirect( $redirectLink, JText::_( 'COFI_FORUM_NOT_EXISTS' ), "notice");
         }
         
         

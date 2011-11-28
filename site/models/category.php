@@ -157,7 +157,6 @@ class DiscussionsModelCategory extends JModel {
 	 * @since 1.5
 	 */
 	function __construct() {
-		global $mainframe;
 
 		parent::__construct();
 		
@@ -181,11 +180,9 @@ class DiscussionsModelCategory extends JModel {
      */ 
      function getThreads() { 
           
-		global $mainframe;
-          
-//     	$_catid = JRequest::getVar('catid', 0);
- 		$_catid = JRequest::getInt('catid', 0);
+        $app = JFactory::getApplication();
 
+ 		$_catid = JRequest::getInt('catid', 0);
 
      	if ( $this->getExistStatus() != null ) { // check if this category exists
      	
@@ -198,7 +195,7 @@ class DiscussionsModelCategory extends JModel {
      	
 				if ( $logUser->isModerator() == 0) {	// user is not moderator -> kick him out of here
 					$redirectLink = JRoute::_( "index.php?option=com_discussions");
-					$mainframe->redirect( $redirectLink, JText::_( 'COFI_NO_ACCESS_TO_FORUM' ), "notice");			
+					$app->redirect( $redirectLink, JText::_( 'COFI_NO_ACCESS_TO_FORUM' ), "notice");
      			}
      	
      		}
@@ -222,7 +219,7 @@ class DiscussionsModelCategory extends JModel {
         }
         else { // category does not exist
 			$redirectLink = JRoute::_( "index.php?option=com_discussions");
-			$mainframe->redirect( $redirectLink, JText::_( 'COFI_FORUM_NOT_EXISTS' ), "notice");
+			$app->redirect( $redirectLink, JText::_( 'COFI_FORUM_NOT_EXISTS' ), "notice");
         }
         
         
@@ -279,7 +276,7 @@ class DiscussionsModelCategory extends JModel {
 
 
 	function _buildSelectQuery() {
-//     	$_catid = JRequest::getVar('catid', 0);
+
  		$_catid = JRequest::getInt('catid', 0);
 
 
@@ -340,7 +337,7 @@ class DiscussionsModelCategory extends JModel {
 	 */
 	function getCategoryName() {
 		if ( empty( $this->_categoryName)) {
-//            $_catid = JRequest::getVar('catid', 0);
+            
  			$_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
@@ -362,7 +359,7 @@ class DiscussionsModelCategory extends JModel {
 	 */
 	function getCategoryDescription() {
 		if ( empty( $this->_categoryDescription)) {
-//            $_catid = JRequest::getVar('catid', 0);
+
  			$_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
@@ -384,7 +381,7 @@ class DiscussionsModelCategory extends JModel {
 	 */
 	function getCategoryImage() {
 		if ( empty( $this->_categoryImage)) {
-//            $_catid = JRequest::getVar('catid', 0);
+
  			$_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
@@ -452,7 +449,7 @@ class DiscussionsModelCategory extends JModel {
 	 */
 	function getPrivateStatus() {
 		if ( empty( $this->_privateStatus)) {
-//            $_catid = JRequest::getVar('catid', 0);
+
  			$_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
@@ -475,7 +472,7 @@ class DiscussionsModelCategory extends JModel {
 	 */
 	function getExistStatus() {
 		if ( empty( $this->_existStatus)) {
-//            $_catid = JRequest::getVar('catid', 0);
+
  			$_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
@@ -593,8 +590,6 @@ class DiscussionsModelCategory extends JModel {
     	return $this->_rss_data;    
                 
      }    
-
-
 
 
 

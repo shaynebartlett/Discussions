@@ -40,17 +40,11 @@ $document =& JFactory::getDocument();
 
 $title = $document->getTitle();
 
-
-// $siteName = $mainframe->getCfg('sitename');
-
 $title = $this->subject . " - " . $this->categoryName;
 
 //$title = $title . " | " . $siteName;
 
 $document->setTitle( $title); 
-
-//$document->setDescription( $this->subject . " " . $this->categoryName); 
-
 
 $_metaDescription = trim( ereg_replace( "\n", " ", $this->metaDescription));
 

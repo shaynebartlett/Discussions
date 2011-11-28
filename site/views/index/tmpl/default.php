@@ -27,8 +27,6 @@ $document =& JFactory::getDocument();
 // set page description
 if ( JText::_( 'COFI_INDEX_META_DESCRIPTION') == "") {
 	$pageDescription = "";
-	// to joomla 1.6
-//	$pageDescriptionSuffix = $mainframe->getCfg('sitename');
 	$pageDescriptionSuffix = "";
 }
 

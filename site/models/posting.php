@@ -288,13 +288,10 @@ class DiscussionsModelPosting extends JModel {
 	 * @since 1.5
 	 */
 	function __construct() {
-	
-		// global $mainframe;
 
 		parent::__construct();
 
 		$app = JFactory::getApplication();
-
 
 		$user =& JFactory::getUser();
 
@@ -828,7 +825,6 @@ class DiscussionsModelPosting extends JModel {
 		// get parameters
 		$params = JComponentHelper::getParams('com_discussions');
 
-		//global $mainframe;
 		$app = JFactory::getApplication();
 		
 		$user =& JFactory::getUser();
@@ -913,7 +909,6 @@ class DiscussionsModelPosting extends JModel {
      */
      function savePosting() {
 
-		//global $mainframe;
 		$app = JFactory::getApplication();
 
         $params = JComponentHelper::getParams('com_discussions');
