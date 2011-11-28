@@ -3,7 +3,12 @@
 <config>
 
 	<fieldset name="general" label="COFI_CONFIG_GENERAL_SETTINGS">
-	
+
+        <field name="showLoginRow" type="list" default="0" label="COFI_CONFIG_SHOW_LOGIN_ROW" description="COFI_CONFIG_SHOW_LOGIN_ROW_DESCRIPTION">
+            <option value="0">COFI_CONFIG_NO</option>
+            <option value="1">COFI_CONFIG_YES</option>
+        </field>
+
 		<field name="rookie" type="list" default="0" label="COFI_CONFIG_ROOKIE_MODE" description="COFI_CONFIG_ROOKIE_MODE_DESCRIPTION">
 			<option value="0">COFI_CONFIG_DISABLED</option>
 			<option value="1">COFI_CONFIG_ROOKIE_1POST</option>

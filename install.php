@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 
 // version of new installed extension
-$version = "1.3";
+$version = "1.4";
 
 
 
@@ -245,9 +245,7 @@ else { // upgrade
 			$sql = "ALTER TABLE `#__discussions_categories` ADD COLUMN `banner_bottom` text DEFAULT ''";
 			$db->setQuery( $sql);
 			$db->query();			
-					
-					
-			break;
+
 		}
 
 
@@ -256,11 +254,20 @@ else { // upgrade
 			echo "Upgrading from 1.2 to " . $version;
 			echo "<br />";
 
-			// new fields											
-					
-			break;
 		}
 
+
+        case "1.3": { // upgrade 1.3 -> new version
+
+            echo "Upgrading from 1.3 to " . $version;
+            echo "<br />";
+
+            // new fields
+            $sql = "ALTER TABLE `#__discussions_users` ADD COLUMN `googleplus` varchar(100) DEFAULT ''";
+            $db->setQuery( $sql);
+            $db->query();
+
+        }
 
 		
 		default: {

@@ -134,6 +134,11 @@ class TableUser extends JTable {
 	 */
 	var $youtube = null;
 
+    /**
+     * @var string
+     */
+    var $googleplus = null;
+
 	/**
 	 * @var int
 	 */

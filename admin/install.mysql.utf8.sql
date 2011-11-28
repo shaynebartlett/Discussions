@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_users` (
   `facebook` varchar(100) DEFAULT '',
   `flickr` varchar(100) DEFAULT '',
   `youtube` varchar(100) DEFAULT '',  
+  `googleplus` varchar(100) DEFAULT '',
   `email_notification` tinyint(1) DEFAULT '0',
   `approval_notification` tinyint(1) DEFAULT '0',
   `show_online_status` tinyint(1) DEFAULT '1',

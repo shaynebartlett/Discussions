@@ -151,6 +151,7 @@ class DiscussionsModelUser extends JModel {
 			$user->facebook		= "";
 			$user->flickr		= "";
 			$user->youtube		= "";
+            $user->googleplus		= "";
 
 			$user->email_notification		= 0;
 			$user->approval_notification	= 0;

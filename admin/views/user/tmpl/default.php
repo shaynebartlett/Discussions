@@ -296,7 +296,18 @@ JHTML::_('behavior.tooltip');
 									<input class="text_area" type="text" name="facebook" id="facebook" value="<?php echo $this->user->facebook; ?>" size="50" maxlength="100" />
 								</td>
 							</tr>
-							
+
+                            <tr>
+                                <td class="key" style="padding: 10px;">
+                                    <label>
+                                        <?php echo JText::_('COFI_GOOGLEPLUS'); ?>
+                                    </label>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <input class="text_area" type="text" name="googleplus" id="googleplus" value="<?php echo $this->user->googleplus; ?>" size="50" maxlength="100" />
+                                </td>
+                            </tr>
+
 							<tr>
 								<td class="key" style="padding: 10px;">
 									<label>

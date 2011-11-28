@@ -42,6 +42,7 @@ class DiscussionsViewProfile extends JView {
         $facebook			=& $this->get('Facebook');
         $flickr				=& $this->get('Flickr');
         $youtube			=& $this->get('Youtube');
+        $googleplus			=& $this->get('Googleplus');
         $show_online_status	=& $this->get('ShowOnlineStatus');
 
 
@@ -68,6 +69,7 @@ class DiscussionsViewProfile extends JView {
         $this->assignRef('facebook', $facebook);
         $this->assignRef('flickr', $flickr);
         $this->assignRef('youtube', $youtube);
+        $this->assignRef('googleplus', $googleplus);
         $this->assignRef('show_online_status', $show_online_status);
 
 		$this->assignRef('params',		$params);
@@ -77,7 +79,6 @@ class DiscussionsViewProfile extends JView {
         parent::display();
 
     }
-
 
 
 }

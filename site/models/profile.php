@@ -128,6 +128,13 @@ class DiscussionsModelProfile extends JModel {
 
 	var $_youtube = null;
 
+    /**
+     * Google+
+     *
+     * @var String
+     */
+
+    var $_googleplus = null;
 
 	/**
 	 * Show online Status
@@ -235,6 +242,15 @@ class DiscussionsModelProfile extends JModel {
 			$this->_youtube = "";
 		}
 
+        $this->_googleplus = JRequest::getString( 'googleplus', '', 'POST');
+        $this->_googleplus = strtolower( $this->_googleplus);
+        $this->_googleplus = strip_tags( $this->_googleplus);
+        $this->_googleplus = str_replace( "http://", "", $this->_googleplus);
+        // check wether it's a google+ url, if not set to ""
+        if ( strpos( $this->_googleplus, "plus") === false) {
+            $this->_googleplus = "";
+        }
+
 
 		$this->_show_online_status = JRequest::getString( 'show_online_status', '', 'POST');
 
@@ -312,6 +328,7 @@ class DiscussionsModelProfile extends JModel {
 					", facebook = " . $db->Quote( $this->_facebook) .
 					", flickr = " . $db->Quote( $this->_flickr) .
 					", youtube = " . $db->Quote( $this->_youtube) .
+                    ", googleplus = " . $db->Quote( $this->_googleplus) .
 					", show_online_status = " . $db->Quote( $this->_show_online_status) .
 					" WHERE id = '".$user->id."'";
 
@@ -538,6 +555,29 @@ class DiscussionsModelProfile extends JModel {
 	}
 
 
+    /**
+     * Method to get the googleplus url of this user
+     *
+     * @access public
+     * @return String
+     */
+    function getGoogleplus() {
+
+        if (empty($this->_googleplus)) {
+
+            $db =& $this->getDBO();
+
+            $sql = "SELECT googleplus FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+
+            $db->setQuery( $sql);
+            $this->_googleplus = $db->loadResult();
+
+        }
+
+        return $this->_googleplus;
+    }
+
+
 	/**
 	 * Method to get the show_online status of this user
 	 *
@@ -576,7 +616,3 @@ class DiscussionsModelProfile extends JModel {
 
 
 } 
-
-
-?>
-

@@ -32,6 +32,8 @@ $_root = JURI::root();
 
 $document =& JFactory::getDocument(); 
 
+// Display login row?
+$showLoginRow = $params->get('showLoginRow', 0);
 
 // RSS feed stuff
 $useRssFeeds = $params->get('useRssFeeds', 1);		
@@ -254,20 +256,24 @@ if ( $this->forumBannerTop != "") {
 <?php
 if ( $user->guest) { // user is not logged in
 
-	echo "<table width='100%' class='noborder' style='margin:20px 0px 20px 0px;'>";
-    	echo "<tr>";
-        	echo "<td width='100%' align='left' valign='middle' class='noborder'>";                	
-        		$registerURL = "index.php?option=com_users&view=register";
-        		$loginURL    = "index.php?option=com_users&view=login";
-        	
-            	echo JText::_( 'COFI_NO_PUBLIC_WRITE' );
-            	
-            	echo "<a href='" . JRoute::_( $loginURL) . "' >" . JText::_( 'COFI_NO_PUBLIC_WRITE_LOGIN' ) . "</a>";
-            	echo JText::_( 'COFI_OR' );
-            	echo "<a href='" . JRoute::_( $registerURL) . "' >" . JText::_( 'COFI_NO_PUBLIC_WRITE_REGISTER' ) . "</a>";
-            echo "</td>";
-        echo "</tr>";
-    echo "</table>";
+    if ( $showLoginRow == 1) {
+
+        echo "<table width='100%' class='noborder' style='margin:20px 0px 20px 0px;'>";
+            echo "<tr>";
+                echo "<td width='100%' align='left' valign='middle' class='noborder'>";
+                    $registerURL = "index.php?option=com_users&view=register";
+                    $loginURL    = "index.php?option=com_users&view=login";
+
+                    echo JText::_( 'COFI_NO_PUBLIC_WRITE' );
+
+                    echo "<a href='" . JRoute::_( $loginURL) . "' >" . JText::_( 'COFI_NO_PUBLIC_WRITE_LOGIN' ) . "</a>";
+                    echo JText::_( 'COFI_OR' );
+                    echo "<a href='" . JRoute::_( $registerURL) . "' >" . JText::_( 'COFI_NO_PUBLIC_WRITE_REGISTER' ) . "</a>";
+                echo "</td>";
+            echo "</tr>";
+        echo "</table>";
+
+    }
     
 }
 else { // user is logged in

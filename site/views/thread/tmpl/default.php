@@ -73,6 +73,8 @@ else { // use the meta keywords configured for this forum
 // get parameters
 $params = JComponentHelper::getParams('com_discussions');
 
+// Display login row?
+$_showLoginRow          = $params->get('showLoginRow', 0); // 0 no, 1 yes
 
 $_imagesDisplayMode 	= $params->get( 'imagesDisplayMode', 0); // 0 Browser, 1 Slimbox, 2 RokBox
 $_includeMootoolsJS 	= $params->get( 'includeMootoolsJS', 0); // 0 no, 1 yes
@@ -285,22 +287,25 @@ if ( $this->forumBannerTop != "") {
 <?php
 if ( $user->guest) { // user is not logged in
 
-	echo "<table width='100%' class='noborder' style='margin:20px 0px 20px 0px;' border='0' >";
-    	echo "<tr>";
-        	echo "<td width='100%' align='left' valign='middle' class='noborder'>";
-        		$registerURL = "index.php?option=com_users&view=register";
-        		$loginURL    = "index.php?option=com_users&view=login";
-        	
-            	echo JText::_( 'COFI_NO_PUBLIC_WRITE' );
-            	
-            	echo "<a href='" . JRoute::_( $loginURL) . "' >" . JText::_( 'COFI_NO_PUBLIC_WRITE_LOGIN' ) . "</a>";
-            	echo JText::_( 'COFI_OR' );
-            	echo "<a href='" . JRoute::_( $registerURL) . "' >" . JText::_( 'COFI_NO_PUBLIC_WRITE_REGISTER' ) . "</a>";
-            echo "</td>";
-        echo "</tr>";
-        
-    echo "</table>";
-                
+    if ( $_showLoginRow == 1) {
+
+        echo "<table width='100%' class='noborder' style='margin:20px 0px 20px 0px;' border='0' >";
+            echo "<tr>";
+                echo "<td width='100%' align='left' valign='middle' class='noborder'>";
+                    $registerURL = "index.php?option=com_users&view=register";
+                    $loginURL    = "index.php?option=com_users&view=login";
+
+                    echo JText::_( 'COFI_NO_PUBLIC_WRITE' );
+
+                    echo "<a href='" . JRoute::_( $loginURL) . "' >" . JText::_( 'COFI_NO_PUBLIC_WRITE_LOGIN' ) . "</a>";
+                    echo JText::_( 'COFI_OR' );
+                    echo "<a href='" . JRoute::_( $registerURL) . "' >" . JText::_( 'COFI_NO_PUBLIC_WRITE_REGISTER' ) . "</a>";
+                echo "</td>";
+            echo "</tr>";
+
+        echo "</table>";
+
+    }
         
 	echo "<table class='noborder' style='margin:20px 0px 20px 0px;'>";
 
@@ -468,35 +473,42 @@ if ( $showBreadcrumbRow == "1") {
 
 
                 // display social media buttons
-				$twitter  = $CofiUser->getTwitter();
-				$facebook = $CofiUser->getFacebook();
-				$flickr   = $CofiUser->getFlickr();
-				$youtube  = $CofiUser->getYoutube();
-				
-				if( $twitter != "" || $facebook != "" || $flickr != "" || $youtube != "" || $_usePrimezilla == "1") {
+				$twitter    = $CofiUser->getTwitter();
+				$facebook   = $CofiUser->getFacebook();
+				$flickr     = $CofiUser->getFlickr();
+				$youtube    = $CofiUser->getYoutube();
+                $googleplus = $CofiUser->getGoogleplus();
+
+				if( $twitter != "" || $facebook != "" || $googleplus != "" || $flickr != "" || $youtube != "" || $_usePrimezilla == "1") {
 				
                 	echo "<div class='cofiSocialMediaBox'>";
 
 	                if ( $twitter != "") {
-	                	echo "<a href='http://" . $twitter . "' title='" . $opUserUsername . " on Twitter' target='_blank' >";
+	                	echo "<a href='http://" . $twitter . "' title='" . $opUserUsername . " " . JText::_( 'COFI_ON' ) . " Twitter' target='_blank' >";
 						echo "<img src='" . $_root . "components/com_discussions/assets/icons/twitter_16.png' style='margin: 10px 5px 10px 5px;' />";  
 						echo "</a>";              
 	                }
 	
 	                if ( $facebook != "") {
-	                	echo "<a href='http://" . $facebook . "' title='" . $opUserUsername . " on Facebook' target='_blank' >";
+	                	echo "<a href='http://" . $facebook . "' title='" . $opUserUsername . " " . JText::_( 'COFI_ON' ) . " Facebook' target='_blank' >";
 						echo "<img src='" . $_root . "components/com_discussions/assets/icons/facebook_16.png' style='margin: 10px 5px 10px 5px;' />";
 						echo "</a>";              
 	                }
-	
+
+                    if ( $googleplus != "") {
+                        echo "<a href='http://" . $googleplus . "' title='" . $opUserUsername . " " . JText::_( 'COFI_ON' ) . " Google+' target='_blank' >";
+                        echo "<img src='" . $_root . "components/com_discussions/assets/icons/google_plus_16.png' style='margin: 10px 5px 10px 5px;' />";
+                        echo "</a>";
+                    }
+
 	                if ( $flickr != "") {
-	                	echo "<a href='http://" . $flickr . "' title='" . $opUserUsername . " on Flickr' target='_blank' >";
+	                	echo "<a href='http://" . $flickr . "' title='" . $opUserUsername . " " . JText::_( 'COFI_ON' ) . " Flickr' target='_blank' >";
 						echo "<img src='" . $_root . "components/com_discussions/assets/icons/flickr_16.png' style='margin: 10px 5px 10px 5px;' />";
 						echo "</a>";              
 	                }
 	
 	                if ( $youtube != "") {
-	                	echo "<a href='http://" . $youtube . "' title='" . $opUserUsername . " on YouTube' target='_blank' >";
+	                	echo "<a href='http://" . $youtube . "' title='" . $opUserUsername . " " . JText::_( 'COFI_ON' ) . " YouTube' target='_blank' >";
 						echo "<img src='" . $_root . "components/com_discussions/assets/icons/youtube_16.png' style='margin: 10px 5px 10px 5px;' />";
 						echo "</a>";              
 	                }
@@ -712,9 +724,9 @@ if ( $showBreadcrumbRow == "1") {
 					else {
 					
 						echo "<div style='margin: 5px 0px 5px 0px;'>";
-	                		echo "<b>";
+	                		echo "<h4>";
 	                			echo $posting->subject;
-	                		echo "</b>";	
+	                		echo "</h4>";
 						echo "</div>";
 						
 					}
@@ -722,9 +734,9 @@ if ( $showBreadcrumbRow == "1") {
 				}
 				else { // following pages
 					echo "<div style='margin: 5px 0px 5px 0px;'>";
-                		echo "<b>";
+                		echo "<h4>";
                 			echo $posting->subject;
-                		echo "</b>";	
+                		echo "</h4>";
 					echo "</div>";					
 				}
 					

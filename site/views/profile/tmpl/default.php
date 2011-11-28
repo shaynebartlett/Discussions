@@ -349,6 +349,17 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
 				    echo "</div>";
 
 
+				    // google+
+					echo "<div class='cofiProfileFollowMeRow'>";
+
+						echo "<div class='cofiProfileFollowMeLabel'>Google+:</div> ";
+							echo "<div class='cofiProfileFollowMeValue'>";
+		            			echo "<input type='text' name='googleplus' id='googleplus' size='40' maxlength='100' value='".$this->googleplus."'>";
+						echo "</div>";
+
+				    echo "</div>";
+
+
 				    // flickr
 					echo "<div class='cofiProfileFollowMeRow'>";
 					
@@ -369,8 +380,7 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
 						echo "</div>";
 											
 				    echo "</div>";
-				    
-				    
+
 			    
 			    echo "</div>";
 		
