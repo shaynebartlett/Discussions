@@ -1,7 +1,7 @@
 Discussions
 ===========
 
-Discussions is a Joomla! 1.6 forum extension.
+Discussions is a Joomla! 1.7 forum extension.
 
 
 
@@ -13,4 +13,6 @@ Content
 2. Modules
 
 3. Plugins
+
+
 
