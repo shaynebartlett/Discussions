@@ -17,24 +17,37 @@ $params =& JComponentHelper::getParams('com_discussions');
 $_showFooter = $params->get('showFooter', '1');
 ?>
 
-<div class="cofiFooter">
+<?php
+if ( $_showFooter == '1' ) { // display codingfish footer
+    ?>
 
-	<?php
-	if ( $_showFooter == '1' ) { // display codingfish footer
-		?>
-			Discussions v<?php echo $CofiHelper->getVersion(); ?>
-			<br />
-			(c) 2010-2011 <a href="http://www.codingfish.com" target="_blank" title="Codingfish">Codingfish</a>
-		<?php
-	}
-	else {
-		?>
-		<!--
-		<?php echo "Discussions v" . $CofiHelper->getVersion(); ?>
-		http://www.codingfish.com
-		-->
-		<?php
-	}
-	?>
+    <div class="cofiFooter">
 
-</div>
+        <span id="cofiFooterLeft">
+
+            <a href="http://www.codingfish.com" target="_blank" title="Codingfish" id="cofiFooterLinkCF" >
+            <?php
+                echo "<img src='" . $_root . "/components/com_discussions/assets/icons/codingfish_16.png' align='top' />";
+            ?>
+            </a>
+
+        </span>
+
+        <span id="cofiFooterRight">
+
+            <a href="http://www.codingfish.com/products/discussions" target="_blank" title="Discussions v<?php echo $CofiHelper->getVersion(); ?>" id="cofiFooterLinkMP">Discussions</a>
+
+        </span>
+
+    </div>
+
+    <?php
+}
+else {
+    ?>
+    <!--
+    <?php echo "Codingfish Discussions v" . $CofiHelper->getVersion(); ?> http://www.codingfish.com
+    -->
+    <?php
+}
+?>

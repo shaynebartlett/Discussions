@@ -33,36 +33,50 @@ class plgSystemDiscussions extends JPlugin {
 	 * @param	string		message
 	 */
 	function onUserAfterSave( $user, $isnew, $success, $msg) {
-		
-		if ( $isnew && $success) {
-					
-			// add a record to #__discussions_users 
-			$db = JFactory::getDBO(); 
 
-			// get Rookie Mode setting from com_discussions parameters
-			$params = JComponentHelper::getParams('com_discussions');
-			
-			if ( $params->get('rookie', '0') == 0) { // 0 = no rookie mode
-				$rookie	= 0;
-			}
-			else { // everything else means rookie mode
-				$rookie	= 1;				
-			}
+        if ( $success) {
+
+            if ( $isnew) {
+
+                // add a record to #__discussions_users
+                $db = JFactory::getDBO();
+
+                // get Rookie Mode setting from com_discussions parameters
+                $params = JComponentHelper::getParams('com_discussions');
+
+                if ( $params->get('rookie', '0') == 0) { // 0 = no rookie mode
+                    $rookie	= 0;
+                }
+                else { // everything else means rookie mode
+                    $rookie	= 1;
+                }
 
 
-			$sql = "INSERT INTO " . $db->nameQuote('#__discussions_users') . " SET " . 
-					"id=" . $user['id'] . ", " . 
-					"username=\"" . $user['username'] . "\", " . 
-					"rookie=" . $rookie;
-			
-			
-			$db->setQuery( $sql); 
-			$db->query(); 
-						
-		}
-		else { // user is updated
-			// currently not needed
-		}
+                $sql = "INSERT INTO " . $db->nameQuote('#__discussions_users') . " SET " .
+                        "id=" . $user['id'] . ", " .
+                        "username=\"" . $user['username'] . "\", " .
+                        "rookie=" . $rookie;
+
+
+                $db->setQuery( $sql);
+                $db->query();
+
+            }
+            else { // user is updated
+
+                    // update the user record in #__discussions_users
+                    $db = JFactory::getDBO();
+
+                    $sql = "UPDATE " . $db->nameQuote('#__discussions_users') . " SET " .
+                            "username=\"" . $user['username'] . "\" " .
+                            "WHERE " . $db->nameQuote('id') . " = " . $user['id'];
+
+                    $db->setQuery( $sql);
+                    $db->query();
+
+            }
+
+        }
 		
 	}
 

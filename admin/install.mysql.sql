@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_categories` (
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `alias` varchar(255),
-  `description` varchar(200) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `image` varchar(100) DEFAULT NULL,
   `show_image` tinyint(1) DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '0',

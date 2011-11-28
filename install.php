@@ -151,7 +151,7 @@ else {
 
 }
 
-// enabled Discussions search plugin
+// enable Discussions search plugin
 $query = 'UPDATE ' . $db->nameQuote('#__extensions')
        	. ' SET ' . $db->nameQuote('enabled') . ' = 1'
        	. ' WHERE ' . $db->nameQuote('element') . ' = ' . $db->Quote('discussions')
