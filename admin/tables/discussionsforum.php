@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
 * Forum Table class
 */
-class TableForum extends JTable {
+class TableDiscussionsForum extends JTable {
 
 	function __construct(& $db) {
 	
@@ -23,21 +23,6 @@ class TableForum extends JTable {
 		
 	}
 
-
-/*
-	function bind($array, $ignore = '') {
-	
-		if (key_exists( 'params', $array ) && is_array( $array['params'] )) {
-		
-			$registry = new JRegistry();
-			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
-			
-		}
-
-		return parent::bind( $array, $ignore);
-	}
-*/
 
 	function check() {
 	

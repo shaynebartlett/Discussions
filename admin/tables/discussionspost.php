@@ -13,9 +13,9 @@ defined('_JEXEC') or die('Restricted access');
 
 
 /**
-* User Table class
+* Post Table class
 */
-class TableUser extends JTable {
+class TableDiscussionsPost extends JTable {
 
 	/**
 	 * Primary Key
@@ -25,136 +25,114 @@ class TableUser extends JTable {
 	var $id = null;
 
 	/**
-	 * @var string
+	 * @var int
 	 */
-	var $username = null;
+	var $parent_id = null;
 
 	/**
 	 * @var int
 	 */
-	var $view = null;
+	var $cat_id = null;
 
 	/**
 	 * @var int
 	 */
-	var $ordering = null;
+	var $thread = null;
 
 	/**
 	 * @var int
 	 */
-	var $posts = null;
-
-	/**
-	 * @var int
-	 */
-	var $status = null;
+	var $user_id = null;
 
 	/**
 	 * @var string
 	 */
-	var $avatar = null;
+	var $account = null;
 
 	/**
 	 * @var string
 	 */
-	var $signature = null;
+	var $name = null;
 
 	/**
 	 * @var string
 	 */
-	var $title = null;
+	var $email = null;
 
 	/**
 	 * @var string
 	 */
-	var $zipcode = null;
-
-	/**
-	 * @var string
-	 */
-	var $city = null;
-
-	/**
-	 * @var string
-	 */
-	var $country = null;
+	var $ip = null;
 
 	/**
 	 * @var int
 	 */
-	var $moderator = null;
-
-	/**
-	 * @var int
-	 */
-	var $moderated = null;
-
-	/**
-	 * @var int
-	 */
-	var $rookie = null;
-
-	/**
-	 * @var int
-	 */
-	var $trusted = null;
-
-	/**
-	 * @var int
-	 */
-	var $images = null;
-
-	/**
-	 * @var int
-	 */
-	var $files = null;
+	var $type = null;
 
 	/**
 	 * @var string
 	 */
-	var $website = null;
+	var $subject = null;
 
 	/**
 	 * @var string
 	 */
-	var $twitter = null;
+	var $alias = null;
 
 	/**
 	 * @var string
 	 */
-	var $facebook = null;
+	var $message = null;
 
 	/**
-	 * @var string
+	 * @var datetime
 	 */
-	var $flickr = null;
-
-	/**
-	 * @var string
-	 */
-	var $youtube = null;
-
-    /**
-     * @var string
-     */
-    var $googleplus = null;
+	var $date = null;
 
 	/**
 	 * @var int
 	 */
-	var $email_notification = null;
+	var $hits = null;
 
 	/**
 	 * @var int
 	 */
-	var $approval_notification = null;
+	var $locked = null;
 
 	/**
 	 * @var int
 	 */
-	var $show_online_status = null;
+	var $published = null;
 
+	/**
+	 * @var int
+	 */
+	var $counter_replies = null;
 
+	/**
+	 * @var datetime
+	 */
+	var $last_entry_date = null;
+
+	/**
+	 * @var int
+	 */
+	var $last_entry_user_id = null;
+
+	/**
+	 * @var int
+	 */
+	var $last_entry_msg_id = null;
+
+	/**
+	 * @var int
+	 */
+	var $sticky = null;
+
+	/**
+	 * @var int
+	 */
+	var $wfm = null;
 
 	/**
 	 * @var string
@@ -165,7 +143,7 @@ class TableUser extends JTable {
 
 	function __construct(& $db) {
 	
-		parent::__construct( '#__discussions_users', 'id', $db);
+		parent::__construct( '#__discussions_messages', 'id', $db);
 		
 	}
 

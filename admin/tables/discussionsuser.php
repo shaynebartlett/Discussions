@@ -13,9 +13,9 @@ defined('_JEXEC') or die('Restricted access');
 
 
 /**
-* Post Table class
+* User Table class
 */
-class TablePost extends JTable {
+class TableDiscussionsUser extends JTable {
 
 	/**
 	 * Primary Key
@@ -25,114 +25,136 @@ class TablePost extends JTable {
 	var $id = null;
 
 	/**
-	 * @var int
+	 * @var string
 	 */
-	var $parent_id = null;
+	var $username = null;
 
 	/**
 	 * @var int
 	 */
-	var $cat_id = null;
+	var $view = null;
 
 	/**
 	 * @var int
 	 */
-	var $thread = null;
+	var $ordering = null;
 
 	/**
 	 * @var int
 	 */
-	var $user_id = null;
+	var $posts = null;
+
+	/**
+	 * @var int
+	 */
+	var $status = null;
 
 	/**
 	 * @var string
 	 */
-	var $account = null;
+	var $avatar = null;
 
 	/**
 	 * @var string
 	 */
-	var $name = null;
+	var $signature = null;
 
 	/**
 	 * @var string
 	 */
-	var $email = null;
+	var $title = null;
 
 	/**
 	 * @var string
 	 */
-	var $ip = null;
-
-	/**
-	 * @var int
-	 */
-	var $type = null;
+	var $zipcode = null;
 
 	/**
 	 * @var string
 	 */
-	var $subject = null;
+	var $city = null;
 
 	/**
 	 * @var string
 	 */
-	var $alias = null;
+	var $country = null;
+
+	/**
+	 * @var int
+	 */
+	var $moderator = null;
+
+	/**
+	 * @var int
+	 */
+	var $moderated = null;
+
+	/**
+	 * @var int
+	 */
+	var $rookie = null;
+
+	/**
+	 * @var int
+	 */
+	var $trusted = null;
+
+	/**
+	 * @var int
+	 */
+	var $images = null;
+
+	/**
+	 * @var int
+	 */
+	var $files = null;
 
 	/**
 	 * @var string
 	 */
-	var $message = null;
+	var $website = null;
 
 	/**
-	 * @var datetime
+	 * @var string
 	 */
-	var $date = null;
+	var $twitter = null;
 
 	/**
-	 * @var int
+	 * @var string
 	 */
-	var $hits = null;
+	var $facebook = null;
 
 	/**
-	 * @var int
+	 * @var string
 	 */
-	var $locked = null;
+	var $flickr = null;
 
 	/**
-	 * @var int
+	 * @var string
 	 */
-	var $published = null;
+	var $youtube = null;
 
-	/**
-	 * @var int
-	 */
-	var $counter_replies = null;
-
-	/**
-	 * @var datetime
-	 */
-	var $last_entry_date = null;
+    /**
+     * @var string
+     */
+    var $googleplus = null;
 
 	/**
 	 * @var int
 	 */
-	var $last_entry_user_id = null;
+	var $email_notification = null;
 
 	/**
 	 * @var int
 	 */
-	var $last_entry_msg_id = null;
+	var $approval_notification = null;
 
 	/**
 	 * @var int
 	 */
-	var $sticky = null;
+	var $show_online_status = null;
 
-	/**
-	 * @var int
-	 */
-	var $wfm = null;
+
 
 	/**
 	 * @var string
@@ -143,7 +165,7 @@ class TablePost extends JTable {
 
 	function __construct(& $db) {
 	
-		parent::__construct( '#__discussions_messages', 'id', $db);
+		parent::__construct( '#__discussions_users', 'id', $db);
 		
 	}
 

@@ -86,7 +86,7 @@ class DiscussionsModelPost extends JModel {
 
 	function store( $data) {
 	
-		$row =& $this->getTable();
+        $row =& JTable::getInstance('discussionspost', 'Table');
 
 		if ( !$row->bind($data)) {
 		
@@ -96,9 +96,6 @@ class DiscussionsModelPost extends JModel {
 			
 		}
 
-
-
-		
 		if ( !$row->id) { // new entry
 
 			$row->date  = gmdate('Y-m-d H:i:s');

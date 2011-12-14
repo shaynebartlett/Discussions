@@ -269,8 +269,8 @@ class DiscussionsModelForums extends JModel {
 		
 		$cid = JRequest::getVar('cid');
 		
-		$row = & JTable::getInstance('Forum', 'Table');
-		
+        $row =& JTable::getInstance('discussionsforum', 'Table');
+
 		$row->load( $cid[0]);
 		
 		$row->move( -1, 'parent_id = ' . $row->parent_id);
@@ -291,7 +291,7 @@ class DiscussionsModelForums extends JModel {
 		
 		$cid = JRequest::getVar('cid');
 		
-		$row = & JTable::getInstance('Forum', 'Table');
+        $row =& JTable::getInstance('discussionsforum', 'Table');
 		
 		$row->load( $cid[0]);
 		

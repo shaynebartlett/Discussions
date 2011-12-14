@@ -86,7 +86,7 @@ class DiscussionsModelUser extends JModel {
 
 	function store( $data) {
 	
-		$row =& $this->getTable();
+        $row =& JTable::getInstance('discussionsuser', 'Table');
 
 		if ( !$row->bind($data)) {
 		
