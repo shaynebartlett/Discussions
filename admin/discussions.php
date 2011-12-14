@@ -10,17 +10,13 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-
-
-/*
- * Make sure the user is authorized to view this page
- */
-$user = & JFactory::getUser();
+if (!JFactory::getUser()->authorise('core.manage', 'com_discussions')) {
+    return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+}
 
 require_once (JPATH_COMPONENT.DS.'controller.php');
 
 $controller	= new DiscussionsController( );
-
 
 $controller->execute( JRequest::getCmd('task'));
 

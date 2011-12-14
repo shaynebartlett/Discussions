@@ -64,9 +64,9 @@ class DiscussionsViewForums extends JView {
 
 		JToolBarHelper::divider();
 
-		JToolBarHelper::preferences('com_discussions', '600', '800');
-				
-		
+        if (JFactory::getUser()->authorise('core.admin', 'com_discussions')) {
+		    JToolBarHelper::preferences('com_discussions', '600', '800');
+        }
 	
 		JSubMenuHelper::addEntry(JText::_('COFI_DASHBOARD'), 'index.php?option=com_discussions');
 		JSubMenuHelper::addEntry(JText::_('COFI_FORUMS'), 'index.php?option=com_discussions&view=forums', true);

@@ -30,11 +30,12 @@ class DiscussionsViewDashboard extends JView {
 	
 		$user = & JFactory::getUser();
 	
-		JToolBarHelper::title( "Discussions - " . JText::_('COFI_DASHBOARD'), "discussions.png");		
-		
-		JToolBarHelper::preferences('com_discussions', '600', '800');
-		
-	
+		JToolBarHelper::title( "Discussions - " . JText::_('COFI_DASHBOARD'), "discussions.png");
+
+        if (JFactory::getUser()->authorise('core.admin', 'com_discussions')) {
+		    JToolBarHelper::preferences('com_discussions', '600', '800');
+        }
+
 		JSubMenuHelper::addEntry(JText::_('COFI_DASHBOARD'), 'index.php?option=com_discussions', true);
 		JSubMenuHelper::addEntry(JText::_('COFI_FORUMS'), 'index.php?option=com_discussions&view=forums');
 		JSubMenuHelper::addEntry(JText::_('COFI_POSTS'), 'index.php?option=com_discussions&view=posts');

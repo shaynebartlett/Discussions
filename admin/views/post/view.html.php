@@ -38,8 +38,9 @@ class DiscussionsViewPost extends JView {
 		
 		JToolBarHelper::divider();
 		
-		JToolBarHelper::preferences('com_discussions', '600', '800');
-		
+        if (JFactory::getUser()->authorise('core.admin', 'com_discussions')) {
+		    JToolBarHelper::preferences('com_discussions', '600', '800');
+        }
 	
 		$post	=& $this->get('data');
 

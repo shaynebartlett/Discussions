@@ -38,11 +38,11 @@ class DiscussionsViewForum extends JView {
 		
 		JToolBarHelper::divider();
 		
-		JToolBarHelper::preferences('com_discussions', '600', '800');
-		
+        if (JFactory::getUser()->authorise('core.admin', 'com_discussions')) {
+		    JToolBarHelper::preferences('com_discussions', '600', '800');
+        }
 
 		$forum	=& $this->get('data');
-
 
 		$lists = array();
 						

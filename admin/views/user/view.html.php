@@ -24,10 +24,8 @@ class DiscussionsViewUser extends JView {
 		$edit = JRequest::getVar('edit',true);
 		$text = !$edit ? JText::_( 'New' ) : JText::_( 'Edit' );
 
-
 		JToolBarHelper::title(   "Discussions - " . JText::_('COFI_USER') . ': <small><small>[ ' . $text.' ]</small></small>', "discussions.png" );		
-		
-		
+
 		JToolBarHelper::save();
 		
 		if ( !$edit) {
@@ -39,14 +37,13 @@ class DiscussionsViewUser extends JView {
 		
 		JToolBarHelper::divider();
 		
-		JToolBarHelper::preferences('com_discussions', '600', '800');
-		
+        if (JFactory::getUser()->authorise('core.admin', 'com_discussions')) {
+		    JToolBarHelper::preferences('com_discussions', '600', '800');
+        }
 
 		$user	=& $this->get('data');
-
 					
 		$this->assignRef( 'user', $user);
-
 		
 		parent::display( $tpl);
 	}
