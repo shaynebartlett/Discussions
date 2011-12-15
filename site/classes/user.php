@@ -111,6 +111,7 @@ class CofiUser extends JObject {
         $this->_website    			= $_user['website'];
         $this->_twitter    			= $_user['twitter'];
         $this->_facebook   			= $_user['facebook'];
+        $this->_googleplus   		= $_user['googleplus'];
         $this->_flickr     			= $_user['flickr'];
         $this->_youtube    			= $_user['youtube'];
 
@@ -291,6 +292,9 @@ class CofiUser extends JObject {
 	function getFacebook() {
 		return $this->_facebook;
 	}
+    function getGooglePlus() {
+   		return $this->_googleplus;
+   	}
 	function getFlickr() {
 		return $this->_flickr;
 	}
