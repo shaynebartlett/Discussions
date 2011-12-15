@@ -80,8 +80,7 @@ class DiscussionsViewIndex extends JView {
 		else { // use the meta keywords configured for this index page
 			$document->setMetaData( "keywords", JText::_( 'COFI_INDEX_META_KEYWORDS'));
 		}				
-				
-				
+
 				
 										
 		$this->assignRef('categories',	$categories);
@@ -89,11 +88,9 @@ class DiscussionsViewIndex extends JView {
                 
                 
         // display the view 
-        parent::display(); 
+        parent::display();
 
     }
 
 
 }
-
-?>

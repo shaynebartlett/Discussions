@@ -1515,8 +1515,6 @@ class CofiHelper extends JObject {
 
 
 
-
-
 }
 
 

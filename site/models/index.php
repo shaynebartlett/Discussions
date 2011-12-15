@@ -36,8 +36,6 @@ class DiscussionsModelIndex extends JModel {
 	 * @var integer
 	 */
 	var $_total = 0;
-	
-	     
 
 
 
@@ -49,8 +47,6 @@ class DiscussionsModelIndex extends JModel {
 	function __construct() {
 		parent::__construct();
 	}
-
-
 
 
 	/** 
@@ -71,11 +67,11 @@ class DiscussionsModelIndex extends JModel {
 		$_timeformat	= $params->get( 'timeformat', '%H:%i');        		        	        		        		
 
 		$db =& $this->getDBO();		
-		
+
 		$user =& JFactory::getUser();
 		$logUser = new CofiUser( $user->id);
-			
-		if ( $logUser->isModerator()) {	// show me all categories				
+
+		if ( $logUser->isModerator()) {	// show me all categories
 				$query = "SELECT c.id, c.parent_id, c.name, c.alias, c.description, c.image, c.show_image, c.published, 
 						c.counter_posts, c.counter_threads, 
 						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username,
@@ -95,13 +91,12 @@ class DiscussionsModelIndex extends JModel {
 		$db->setQuery( $query );
 		$rows = $db->loadObjectList();
 
-		
 		$children = array ();
-				
+
 		if( count( $rows)){
 		
 			foreach ( $rows as $row) {
-			
+
 				$pt = $row->parent_id;
 				
 				$list = @$children[$pt] ? $children[$pt] : array ();
@@ -111,19 +106,17 @@ class DiscussionsModelIndex extends JModel {
 				$children[$pt] = $list;
 				
 			}
+
 		}
-		
-		$list = JHTML::_( 'menu.treerecurse', 0, '', array (), $children);
-		
+
+        $list = cofiTreeRecurse( 0, '', array (), $children, 10, 0, 1);
+
 		$items = $list;
 
 		return $items;
 		
 	}
 
-   
-   
-   
 
 	/** 
      * Gets RSS entries data 
@@ -151,8 +144,43 @@ class DiscussionsModelIndex extends JModel {
     	return $this->_data;    
                 
      }    
-   
-   
-     
-     
-} 
+
+}
+
+
+
+/**
+ * Get recursive category array
+ *
+ * @return array
+ */
+function cofiTreeRecurse( $id, $indent, $list, &$children, $maxlevel=9999, $level=0, $type=1 ) {
+
+    if (isset($children[$id]) && $level <= $maxlevel) {
+
+        foreach ($children[$id] as $row) {
+
+            $id = $row->id;
+            if ( $row->parent_id == 0 ) {
+                $txt = $row->name;
+            } else {
+                $txt = '- ' . $row->name;
+            }
+
+            $pt = $row->parent_id;
+            $list[$id] = $row;
+            $list[$id]->treename = $indent . $txt;
+            $list[$id]->children = !empty($children[$id]) ? count( $children[$id] ) : 0;
+            $list[$id]->section = ($row->parent_id==0);
+
+            // recursive call
+            $list = cofiTreeRecurse( $id, $indent . '- ', $list, $children, $maxlevel, $level+1, $type );
+
+        }
+
+    }
+
+    return $list;
+
+}
+

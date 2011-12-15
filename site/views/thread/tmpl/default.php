@@ -42,20 +42,28 @@ $title = $document->getTitle();
 
 $title = $this->subject . " - " . $this->categoryName;
 
-//$title = $title . " | " . $siteName;
+$document->setTitle( $title);
 
-$document->setTitle( $title); 
 
-$_metaDescription = trim( ereg_replace( "\n", " ", $this->metaDescription));
+$_search = array();
+$_search[0] = '/\n/';
+$_search[1] = '/\r/';
+$_search[2] = '/"/';
+$_search[3] = '/</';
+$_search[4] = '/>/';
+$_search[5] = '/\//';
+$_search[6] = '/  /';
 
-$_metaDescription = ereg_replace( "\r", " ", $_metaDescription);
+$_replace = array();
+$_replace[0] = ' ';
+$_replace[1] = ' ';
+$_replace[2] = ' ';
+$_replace[3] = ' ';
+$_replace[4] = ' ';
+$_replace[5] = ' ';
+$_replace[6] = ' ';
 
-$_metaDescription = ereg_replace( "\"", " ", $_metaDescription);
-$_metaDescription = ereg_replace( "<", " ", $_metaDescription);
-$_metaDescription = ereg_replace( ">", " ", $_metaDescription);
-$_metaDescription = ereg_replace( "/", " ", $_metaDescription);
-
-$_metaDescription = ereg_replace( ' +', ' ', $_metaDescription);
+$_metaDescription = preg_replace($_search, $_replace, trim($this->metaDescription));
 
 $document->setDescription( substr ( $_metaDescription, 0, 160)); 
 

@@ -47,7 +47,6 @@ class DiscussionsModelPosting extends JModel {
 	var $_categoryId = 0;
 
 
-
 	/**
 	 * category slug
 	 *
@@ -56,13 +55,20 @@ class DiscussionsModelPosting extends JModel {
 	var $_categorySlug = 0;
 
 
-
 	/**
 	 * category name
 	 *
 	 * @var String
 	 */
 	var $_categoryName = null;
+
+
+    /**
+   	 * category description
+   	 *
+   	 * @var String
+   	 */
+   	var $_categoryDescription = null;
 
 
 	/**
@@ -367,18 +373,6 @@ class DiscussionsModelPosting extends JModel {
 
 
 	/**
-     * Get recent postings
-     *
-     * @return array
-     */
-     function getPostings() {
-
-        return $this->_data;
-     }
-
-
-
-	/**
 	 * Method to get the id of this category
 	 *
 	 * @access public
@@ -427,6 +421,26 @@ class DiscussionsModelPosting extends JModel {
 		return $this->_categoryName;
 	}
 
+
+    /**
+   	 * Method to get the description of this category
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getCategoryDescription() {
+   		if ( empty( $this->_categoryDescription)) {
+               $_catid = JRequest::getInt('catid', 0);
+
+               $db =& $this->getDBO();
+
+               $categoryDescriptionQuery = "SELECT description FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+
+               $db->setQuery( $categoryDescriptionQuery);
+               $this->_categoryDescription = $db->loadResult();
+   		}
+   		return $this->_categoryDescription;
+   	}
 
 
 	/**

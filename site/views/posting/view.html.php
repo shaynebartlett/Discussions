@@ -34,6 +34,7 @@ class DiscussionsViewPosting extends JView {
         $categoryId             =& $this->get('CategoryId');
         $categorySlug           =& $this->get('CategorySlug');
         $categoryName           =& $this->get('CategoryName');
+        $categoryDescription    =& $this->get('CategoryDescription');
         $categoryImage          =& $this->get('CategoryImage');
         $headline               =& $this->get('Headline');
         $subject                =& $this->get('Subject');
@@ -63,6 +64,7 @@ class DiscussionsViewPosting extends JView {
 		$this->assignRef('categoryId', $categoryId);
 		$this->assignRef('categorySlug', $categorySlug);
 		$this->assignRef('categoryName', $categoryName);
+        $this->assignRef('categoryDescription', $categoryDescription);
 		$this->assignRef('categoryImage', $categoryImage);
 		$this->assignRef('headline', $headline);
 		$this->assignRef('subject', $subject);
