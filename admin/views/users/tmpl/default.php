@@ -110,10 +110,8 @@ $image_no  = $_root . "administrator/templates/bluestork/images/admin/publish_x.
 		foreach ( $rows as $row) {
 				
 			$id = JHTML::_('grid.id', $i, $row->id); 
-			$published = JHTML::_('grid.published', $row, $i);	
-			
+
 			$link 	= JRoute::_( 'index.php?option=com_discussions&view=user&task=edit&cid[]='. $row->id );
-				
 			?>
 
 			<tr class="<?php echo "row$k"; ?>">

@@ -109,8 +109,8 @@ class DiscussionsModelForums extends JModel {
 			}
 		}
 		
-		$list = JHTML::_( 'menu.treerecurse', 0, '', array (), $children);
-		
+		//$list = JHTML::_( 'menu.treerecurse', 0, '', array (), $children);
+        $list = cofiTreeRecurse( 0, '', array (), $children, 10, 0, 1);
 
 		if ( $search) {
 		
@@ -236,7 +236,7 @@ class DiscussionsModelForums extends JModel {
 	}
 
 
-
+/*
 	function indentRows( & $rows) {
 	
 		$children = array ();
@@ -256,11 +256,12 @@ class DiscussionsModelForums extends JModel {
 			}
 		}
 		
-		$entries = JHTML::_( 'menu.treerecurse', 0, '', array (), $children);
-				
+		//$entries = JHTML::_( 'menu.treerecurse', 0, '', array (), $children);
+        $entries = cofiTreeRecurse( 0, '', array (), $children, 10, 0, 1);
+
 		return $entries;
 	}
-
+*/
 
 
 	function orderup() {
@@ -352,8 +353,9 @@ class DiscussionsModelForums extends JModel {
 			}
 		}
 				
-		$list = JHTML::_( 'menu.treerecurse', 0, '', array (), $children);
-				
+		// $list = JHTML::_( 'menu.treerecurse', 0, '', array (), $children);
+        $list = cofiTreeRecurse( 0, '', array (), $children, 10, 0, 1);
+
 		$mitems = array ();
 		
 		foreach ($list as $entry) {
@@ -370,4 +372,40 @@ class DiscussionsModelForums extends JModel {
 
 
 	
+}
+
+
+/**
+ * Get recursive category array
+ *
+ * @return array
+ */
+function cofiTreeRecurse( $id, $indent, $list, &$children, $maxlevel=9999, $level=0, $type=1 ) {
+
+    if (isset($children[$id]) && $level <= $maxlevel) {
+
+        foreach ($children[$id] as $row) {
+
+            $id = $row->id;
+            if ( $row->parent_id == 0 ) {
+                $txt = $row->name;
+            } else {
+                $txt = '&nbsp;-&nbsp;' . $row->name;
+            }
+
+            $pt = $row->parent_id;
+            $list[$id] = $row;
+            $list[$id]->treename = $indent . $txt;
+            $list[$id]->children = !empty($children[$id]) ? count( $children[$id] ) : 0;
+            $list[$id]->section = ($row->parent_id==0);
+
+            // recursive call
+            $list = cofiTreeRecurse( $id, $indent . '&nbsp;&nbsp;&nbsp;', $list, $children, $maxlevel, $level+1, $type );
+
+        }
+
+    }
+
+    return $list;
+
 }

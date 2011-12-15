@@ -95,8 +95,8 @@ $ordering = ( ($this->lists['order'] == 'ordering' || $this->lists['order'] == '
 		$rows = &$this->rows;
 		
 		foreach ( $rows as $row) {
-				
-			$id = JHTML::_('grid.id', $i, $row->id); 
+
+			$id = JHTML::_('grid.id', $i, $row->id);
 			$published = JHTML::_('grid.published', $row, $i);	
 			
 			$link 	= JRoute::_( 'index.php?option=com_discussions&view=forum&task=edit&cid[]='. $row->id );
@@ -120,7 +120,7 @@ $ordering = ( ($this->lists['order'] == 'ordering' || $this->lists['order'] == '
 				<td>
 					
 					<span class="editlinktip hasTip" title="<?php echo JText::_( 'COFI_EDIT_FORUM' );?>::<?php echo $this->escape($row->name); ?>">
-						<a href="<?php echo $link; ?>"><?php echo $row->treename . $row->name; ?></a>
+                        <a href="<?php echo $link; ?>"><?php echo $row->treename; ?></a>
 					</span>
 					
 				</td>
