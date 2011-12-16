@@ -54,7 +54,17 @@ $_root = JURI::root();
     	</div>
   	</div>
 
-  
+
+    <div style="float:left;">
+     	<div class="icon">
+ 	    	<a href="index.php?option=com_discussions&amp;view=configuration">
+ 		    	<img alt="<?php echo JText::_('COFI_CONFIGURATION'); ?>" src="components/com_discussions/images/dashboard/configuration.png" />
+ 		    	<span><?php echo JText::_('COFI_CONFIGURATION'); ?></span>
+ 	    	</a>
+     	</div>
+   	</div>
+
+
 	<div class="clr"></div>
   
 </div>
