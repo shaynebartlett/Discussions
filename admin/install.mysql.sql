@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_meta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `version` varchar(100),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+);
 
 
 CREATE TABLE IF NOT EXISTS `#__discussions_categories` (
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_categories` (
   `image` varchar(100) DEFAULT NULL,
   `show_image` tinyint(1) DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '0',
-  `created` timestamp NULL DEFAULT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
   `counter_posts` int(11) NOT NULL,
   `counter_threads` int(11) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_categories` (
   `banner_top` text DEFAULT '',
   `banner_bottom` text DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1;
+) AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS `#__discussions_messages` (
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_messages` (
   KEY `idx_published`  (`published`),
   KEY `idx_wfm`  (`wfm`),
   KEY `idx_date`  (`date`)
-) ENGINE=MyISAM AUTO_INCREMENT=1;
+) AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS `#__discussions_users` (
@@ -110,7 +110,26 @@ CREATE TABLE IF NOT EXISTS `#__discussions_users` (
   `show_online_status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `idx_moderator` (`moderator`)  
-) ENGINE=MyISAM AUTO_INCREMENT=1;
+) AUTO_INCREMENT=1;
 
 
-
+CREATE TABLE IF NOT EXISTS `#__discussions_configuration` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `social_media_button_1` text DEFAULT '',
+  `social_media_button_2` text DEFAULT '',
+  `social_media_button_3` text DEFAULT '',
+  `share_code` text DEFAULT '',
+  `html_box_index_top` text DEFAULT '',
+  `html_box_index_bottom` text DEFAULT '',
+  `html_box_category_top` text DEFAULT '',
+  `html_box_category_bottom` text DEFAULT '',
+  `html_box_thread_top` text DEFAULT '',
+  `html_box_thread_bottom` text DEFAULT '',
+  `html_box_profile_top` text DEFAULT '',
+  `html_box_profile_bottom` text DEFAULT '',
+  `html_box_posting_top` text DEFAULT '',
+  `html_box_posting_bottom` text DEFAULT '',
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT=1;

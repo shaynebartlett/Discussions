@@ -60,6 +60,7 @@ class DiscussionsViewUsers extends JView {
 		JSubMenuHelper::addEntry(JText::_('COFI_FORUMS'), 'index.php?option=com_discussions&view=forums');
 		JSubMenuHelper::addEntry(JText::_('COFI_POSTS'), 'index.php?option=com_discussions&view=posts');
 		JSubMenuHelper::addEntry(JText::_('COFI_USERS'), 'index.php?option=com_discussions&view=users', true);
+        JSubMenuHelper::addEntry(JText::_('COFI_CONFIGURATION'), 'index.php?option=com_discussions&view=configuration');
 
 		parent::display($tpl);
 	}

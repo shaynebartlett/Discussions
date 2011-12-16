@@ -182,7 +182,10 @@ if ( $db->loadResult() == 0) { // no record found = fresh installation
 
 	$db->setQuery( "INSERT INTO `#__discussions_meta` ( id, version) VALUES ('1', '" . $version . "')");
 	$db->query();
-	
+
+    $db->setQuery( "INSERT INTO `#__discussions_configuration` ( id) VALUES ('1')");
+   	$db->query();
+
 }
 else { // upgrade
 
@@ -267,9 +270,38 @@ else { // upgrade
             $db->setQuery( $sql);
             $db->query();
 
+            // new tables
+            // create configuration table and insert one row
+            $sql = "CREATE TABLE IF NOT EXISTS `#__discussions_configuration` ( " .
+                  " `id` int(11) NOT NULL AUTO_INCREMENT, " .
+                  " `social_media_button_1` text DEFAULT '', " .
+                  " `social_media_button_2` text DEFAULT '', " .
+                  " `social_media_button_3` text DEFAULT '', " .
+                  " `share_code` text DEFAULT '', " .
+                  " `html_box_index_top` text DEFAULT '', " .
+                  " `html_box_index_bottom` text DEFAULT '', " .
+                  " `html_box_category_top` text DEFAULT '', " .
+                  " `html_box_category_bottom` text DEFAULT '', " .
+                  " `html_box_thread_top` text DEFAULT '', " .
+                  " `html_box_thread_bottom` text DEFAULT '', " .
+                  " `html_box_profile_top` text DEFAULT '', " .
+                  " `html_box_profile_bottom` text DEFAULT '', " .
+                  " `html_box_posting_top` text DEFAULT '', " .
+                  " `html_box_posting_bottom` text DEFAULT '', " .
+                  " `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP, " .
+                  " `modified` timestamp NULL DEFAULT NULL, " .
+                  " PRIMARY KEY (`id`) " .
+                  " ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
+            $db->setQuery();
+            $db->query();
+
+            $sql = "INSERT INTO `#__discussions_configuration` ( id) VALUES ('1')";
+            $db->setQuery();
+       	    $db->query();
+
         }
 
-		
+
 		default: {
 			break;
 		}
