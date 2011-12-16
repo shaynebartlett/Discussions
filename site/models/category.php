@@ -150,7 +150,6 @@ class DiscussionsModelCategory extends JModel {
 
 
 
-
 	/**
 	 * Constructor
 	 *
@@ -164,10 +163,15 @@ class DiscussionsModelCategory extends JModel {
 		$params = JComponentHelper::getParams('com_discussions');
 		
 		$_categoryListLength = $params->get('categoryListLength', '20');	
-				
-		$this->setState('limit', $_categoryListLength, 'int');
-		
-		$this->setState('limitstart', JRequest::getVar('limitstart', 0, '', 'int'));
+
+
+
+        // Get the pagination request variables
+      	$this->setState('limit', $_categoryListLength);
+      	$this->setState('limitstart', JRequest::getVar('limitstart', 0, '', 'int'));
+
+        //$this->_pagination = new JPagination( $this->getTotal(), $this->_limitstart, $this->_limit);
+        //$this->_pagination = new JPagination( $this->getTotal(), $this->getState('limitstart'), $this->getState('limit') );
 
 	}
 
@@ -205,12 +209,12 @@ class DiscussionsModelCategory extends JModel {
 
 			// Load threads if they doesn't exist
 			if (empty($this->_data)) {
-				$selectQuery = $this->_buildSelectQuery();
+			    $selectQuery = $this->_buildSelectQuery();
 
     	        $limitstart = $this->getState('limitstart');
- 	           $limit = $this->getState('limit');
-	
+ 	            $limit = $this->getState('limit');
 				$this->_data = $this->_getList( $selectQuery, $limitstart, $limit);
+
 			}
 		
         	// return the category list data 
@@ -235,7 +239,6 @@ class DiscussionsModelCategory extends JModel {
 	 */
 	function getTotal() {
 
-// 		$_catid = JRequest::getVar('catid', 0);
  		$_catid = JRequest::getInt('catid', 0);
 
 		if ( empty( $this->_total)) {
@@ -265,12 +268,16 @@ class DiscussionsModelCategory extends JModel {
 	 * @return integer
 	 */
 	function getPagination() {
-		if (empty($this->_pagination)) {
-			jimport('joomla.html.pagination');
-			$this->_pagination = new JPagination( $this->getTotal(), $this->getState('limitstart'), $this->getState('limit') );
-		}
 
-		return $this->_pagination;
+        if (empty($this->_pagination)) {
+
+            jimport('joomla.html.pagination');
+      		$this->_pagination = new JPagination( $this->getTotal(), $this->getState('limitstart'), $this->getState('limit') );
+
+      	}
+
+      	return $this->_pagination;
+
 	}
 
 

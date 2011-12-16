@@ -112,24 +112,28 @@ if ( $showBreadcrumbRow == "1") {
 
 
 
-
-
 <!-- Pagination Links -->
-<table width="100%" class="noborder" style="margin-bottom:10px;">
+<div class="pagination" style="border:0px;">
+
+<table width="100%" class="noborder" style="margin-bottom:10px; border: 0px;">
     <tr>
-        <td class="noborder">
+        <td class="noborder" style="border: 0px;">
             <?php
             echo $this->pagination->getPagesLinks();
             ?>
         </td>
-        <td class="noborder">
+        <td class="noborder" style="border: 0px;">
+            <p class="counter">
             <?php
             echo $this->pagination->getPagesCounter();
             ?>
+            </p>
         </td>
 
     </tr>
 </table>
+
+</div>
 <!-- Pagination Links -->
 
 
@@ -246,21 +250,27 @@ if ( $showBreadcrumbRow == "1") {
 
 
 <!-- Pagination Links -->
-<table width="100%" class="noborder" style="margin-top:10px;">
+<div class="pagination" style="border:0px;">
+
+<table width="100%" class="noborder" style="margin-top:10px; border: 0px;">
     <tr>
-        <td class="noborder">
+        <td class="noborder" style="border: 0px;">
             <?php
             echo $this->pagination->getPagesLinks();
             ?>
         </td>
-        <td class="noborder">
+        <td class="noborder" style="border: 0px;">
+            <p class="counter">
             <?php
             echo $this->pagination->getPagesCounter();
             ?>
+            </p>
         </td>
 
     </tr>
 </table>
+
+</div>
 <!-- Pagination Links -->
 
 

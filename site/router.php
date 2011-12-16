@@ -48,7 +48,6 @@ function DiscussionsBuildRoute( &$query) {
         unset( $query['id']); 
     }
 
-
     if (isset( $query['recent'])) {
         $segments[] = $query['recent'];
         unset( $query['recent']); 
@@ -58,12 +57,10 @@ function DiscussionsBuildRoute( &$query) {
         unset( $query['time']); 
     }
 
-
     if (isset( $query['limitstart'])) { 
-        $segments[] = $query['limitstart']; 
-        unset( $query['limitstart']); 
+        unset( $query['limitstart']);
     }
-    
+
     if (isset( $query['catidto'])) { 
         $segments[] = $query['catidto']; 
         unset( $query['catidto']); 
