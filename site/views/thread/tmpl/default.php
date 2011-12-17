@@ -718,7 +718,7 @@ if ( $showBreadcrumbRow == "1") {
 							
 						echo "</div>";
 
-						echo "<div class='clr' style='margin-bottom:5px'></div>";
+						echo "<div class='clr' style='margin-bottom:5px; clear:left;'></div>";
 					
 					}
 					else {
