@@ -38,6 +38,9 @@ $params = JComponentHelper::getParams('com_discussions');
 $_root = JURI::root();
 
 
+// show username / name?
+$showUsernameName = $params->get('showUsernameName', 0);
+
 // RSS feed stuff
 $useRssFeeds = $params->get('useRssFeeds', 1);		
 
@@ -264,7 +267,14 @@ if ( $logUser->isModerator() == 1) {
                 else {
                     echo $category->last_entry_date."";
                     echo "<br />";
-                    echo JText::_( 'COFI_BY' ) . " " . $category->username;
+
+                    if ( $showUsernameName == 1) {
+                        echo JText::_( 'COFI_BY' ) . " " . $category->realname;
+                    }
+                    else {
+                        echo JText::_( 'COFI_BY' ) . " " . $category->username;
+                    }
+
                 }
 
 				?>

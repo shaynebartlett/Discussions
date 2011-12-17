@@ -74,7 +74,7 @@ class DiscussionsModelIndex extends JModel {
 		if ( $logUser->isModerator()) {	// show me all categories
 				$query = "SELECT c.id, c.parent_id, c.name, c.alias, c.description, c.image, c.show_image, c.published, 
 						c.counter_posts, c.counter_threads, 
-						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username,
+						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username, u.name AS realname,
 						CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(':', c.id, c.alias) ELSE c.id END as slug
 						FROM ".$db->nameQuote('#__discussions_categories')."c LEFT JOIN  (".$db->nameQuote('#__users')." u) ON u.id=c.last_entry_user_id 
 						WHERE c.published='1' ORDER by c.ordering ASC";
@@ -82,7 +82,7 @@ class DiscussionsModelIndex extends JModel {
 		else { // only show the public forums (privates are hidden)
 				$query = "SELECT c.id, c.parent_id, c.name, c.alias, c.description, c.image, c.show_image, c.published, 
 						c.counter_posts, c.counter_threads, 
-						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username,
+						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username, u.name AS realname,
 						CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(':', c.id, c.alias) ELSE c.id END as slug
 						FROM ".$db->nameQuote('#__discussions_categories')."c LEFT JOIN  (".$db->nameQuote('#__users')." u) ON u.id=c.last_entry_user_id 
 						WHERE c.private='0' AND c.published='1' ORDER by c.ordering ASC";			

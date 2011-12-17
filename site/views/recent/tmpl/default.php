@@ -30,6 +30,9 @@ $CofiHelper = new CofiHelper();
 // get parameters
 $params = JComponentHelper::getParams('com_discussions');
 
+// show username / name?
+$showUsernameName = $params->get('showUsernameName', 0);
+
 // website root directory
 $_root = JURI::root();
 
@@ -161,10 +164,12 @@ if ( $showBreadcrumbRow == "1") {
             <?php
             $CofiUser = new CofiUser( $posting->user_id);
 
-            // $entryUsername = $CofiHelper->getUsernameById( $posting->user_id);
-			$entryUsername = $CofiUser->getUsername();
-
-
+            if ( $showUsernameName == 1) {
+                $entryUsername = $CofiHelper->getRealnameById( $posting->user_id);
+            }
+            else {
+                $entryUsername = $CofiHelper->getUsernameById( $posting->user_id);
+            }
 
             echo "<div class='cofiCategoryAvatarBox'>";
 

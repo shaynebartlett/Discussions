@@ -973,6 +973,23 @@ class CofiHelper extends JObject {
 
 	}
 
+    function getRealnameById( $id) {
+
+   		$db	=& JFactory::getDBO();
+
+   		$sql = "SELECT name FROM ".$db->nameQuote('#__users')." WHERE id='". $id . "'";
+
+   		$db->setQuery( $sql);
+   		$realname = $db->loadResult();
+
+   		if ( !$realname) {
+   			return "-";
+   		}
+   		else {
+   			return $realname;
+   		}
+
+   	}
 
 	function getZipcodeById( $id) {
 
@@ -1420,7 +1437,10 @@ class CofiHelper extends JObject {
 
 	        $params = JComponentHelper::getParams('com_discussions');        
 			$_dateformat	= $params->get( 'dateformat', '%d.%m.%Y');
-			$_timeformat	= $params->get( 'timeformat', '%H:%i');        		        	        		        		
+			$_timeformat	= $params->get( 'timeformat', '%H:%i');
+
+            // show username / name?
+            $showUsernameName = $params->get('showUsernameName', 0);
 
 
             $db	=& JFactory::getDBO();
@@ -1437,7 +1457,13 @@ class CofiHelper extends JObject {
 
             foreach ( $rows as $row ) {
 
-                $rUsername = $this->getUsernameById($row->user_id);
+                if ( $showUsernameName == 1) {
+                    $rUsername = $this->getRealnameById( $row->user_id);
+                }
+                else {
+                    $rUsername = $this->getUsernameById( $row->user_id);
+                }
+
                 $rUser = new CofiUser( $row->user_id);
 
                 $_html .= "<tr>";

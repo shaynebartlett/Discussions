@@ -79,6 +79,9 @@ else { // use the meta keywords configured for this forum
 // get parameters
 $params = JComponentHelper::getParams('com_discussions');
 
+// show username / name?
+$showUsernameName = $params->get('showUsernameName', 0);
+
 // Display login row?
 $_showLoginRow          = $params->get('showLoginRow', 0); // 0 no, 1 yes
 
@@ -467,11 +470,13 @@ if ( $showBreadcrumbRow == "1") {
                 echo "<div class='cofiAvatarBox'>";
                 $CofiUser = new CofiUser( $posting->user_id);
 
-                // get $post->username;
-				// $opUserUsername = $CofiHelper->getUsernameById( $posting->user_id);
-                $opUserUsername = $CofiUser->getUsername();
+                if ( $showUsernameName == 1) {
+                    $opUserUsername = $CofiHelper->getRealnameById( $posting->user_id);
+                }
+                else {
+                    $opUserUsername = $CofiHelper->getUsernameById( $posting->user_id);
+                }
 
-                
                 if ( $CofiUser->getAvatar() == "") { // display default avatar
                     echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' class='cofiAvatar' alt='$opUserUsername' title='$opUserUsername' />";
                 }

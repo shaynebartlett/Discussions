@@ -20,6 +20,12 @@ $user =& JFactory::getUser();
 $logUser = new CofiUser( $user->id);
 $CofiHelper = new CofiHelper();
 
+// get parameters
+$params = JComponentHelper::getParams('com_discussions');
+
+// show username / name?
+$showUsernameName = $params->get('showUsernameName', 0);
+
 $app = JFactory::getApplication();
 
 // website root directory
@@ -120,11 +126,15 @@ include( 'components/com_discussions/includes/topmenu.php');
 				
 							<td width="100" align="center" valign="top" class="cofiThreadTableRow<?php echo $rowColor; ?> cofiModerationBorder1" >
 				                <?php
-				
-				
+
                 				// get $post->username;
-								$opUserUsername = $CofiHelper->getUsernameById( $posting->user_id);
-				
+                                if ( $showUsernameName == 1) {
+                                    $opUserUsername = $CofiHelper->getRealnameById( $posting->user_id);
+                                }
+                                else {
+                                    $opUserUsername = $CofiHelper->getUsernameById( $posting->user_id);
+                                }
+
 				                // show avatar
 				                echo "<div class='cofiAvatarBox'>";
 				                $CofiUser = new CofiUser( $posting->user_id);

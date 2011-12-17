@@ -1028,8 +1028,21 @@ class DiscussionsModelPosting extends JModel {
 				        		        		        		        		
 				$_date = date( $_dateformat, $_unixtime);
 				$_time = date( $_timeformat, $_unixtime);     
-				        		
-        		$_timestamp = "\n\n" . JText::_( 'COFI_EDITED_BY' ) . " " . $user->username . " - " . $_date . " " . $_time;
+
+
+                // show username / name?
+                $showUsernameName = $params->get('showUsernameName', 0);
+
+                if ( $showUsernameName == 1) {
+                    $editUsername = $CofiHelper->getRealnameById( $user->id);
+                }
+                else {
+                    $editUsername = $CofiHelper->getUsernameById( $user->id);
+                }
+
+
+                //$_timestamp = "\n\n" . JText::_( 'COFI_EDITED_BY' ) . " " . $user->username . " - " . $_date . " " . $_time;
+        		$_timestamp = "\n\n" . JText::_( 'COFI_EDITED_BY' ) . " " . $editUsername . " - " . $_date . " " . $_time;
         		$_postText .= $_timestamp;
         		
         			

@@ -32,6 +32,9 @@ $_root = JURI::root();
 
 $document =& JFactory::getDocument(); 
 
+// show username / name?
+$showUsernameName = $params->get('showUsernameName', 0);
+
 // Display login row?
 $showLoginRow = $params->get('showLoginRow', 0);
 
@@ -417,32 +420,34 @@ if ( $showBreadcrumbRow == "1") {
 			<td align="left" class="cofiIndexTableRow<?php echo $rowColor; ?> cofiIndexTableRowTopic">
 
                 <?php
-                
-                	$_hoverSubject = $thread->subject;
-                	$_hoverSubject = str_replace( '\'', '"', $_hoverSubject);
-                
-                                
-                    $threadLink = JRoute::_('index.php?option=com_discussions&view=thread&catid='.$this->categorySlug.'&thread='.$thread->slug );
+                $_hoverSubject = $thread->subject;
+                $_hoverSubject = str_replace( '\'', '"', $_hoverSubject);
 
-                    echo "<a href='$threadLink' title='".$_hoverSubject."'>".$thread->subject."</a>";
-					
-					if ( $thread->locked == 1) { // show lock symbol
-						echo "<img src='" . $_root . "components/com_discussions/assets/threads/lock.png' style='margin-left: 5px; border:0px;' />";
-					}
-					
-					echo "<div class='cofiIndexTableRowTopicSubtitle'>";
-							
-					echo JText::_( 'COFI_POSTED' ) . " " . $thread->date . " " . JText::_( 'COFI_BY' ) . " ";
-					
-					echo "<b>";
-					                  
-                  	echo $CofiHelper->getUsernameById( $thread->user_id);
-                                      
-					echo "</b>";
-					
-					// echo " Views: ".$thread->hits;
-					
-					echo "</div>";
+
+                $threadLink = JRoute::_('index.php?option=com_discussions&view=thread&catid='.$this->categorySlug.'&thread='.$thread->slug );
+
+                echo "<a href='$threadLink' title='".$_hoverSubject."'>".$thread->subject."</a>";
+
+                if ( $thread->locked == 1) { // show lock symbol
+                    echo "<img src='" . $_root . "components/com_discussions/assets/threads/lock.png' style='margin-left: 5px; border:0px;' />";
+                }
+
+                echo "<div class='cofiIndexTableRowTopicSubtitle'>";
+
+                    echo JText::_( 'COFI_POSTED' ) . " " . $thread->date . " " . JText::_( 'COFI_BY' ) . " ";
+
+                    echo "<b>";
+
+                    if ( $showUsernameName == 1) {
+                        echo $CofiHelper->getRealnameById( $thread->user_id);
+                    }
+                    else {
+                        echo $CofiHelper->getUsernameById( $thread->user_id);
+                    }
+
+                    echo "</b>";
+
+                echo "</div>";
                 ?>
 
 			</td> 
@@ -460,7 +465,14 @@ if ( $showBreadcrumbRow == "1") {
 					    	echo "<div class='cofiCategoryAvatarBox'>";
 
                                 // $lastEntryUserUsername = $CofiHelper->getUsernameById( $thread->last_entry_user_id);
-                                $lastEntryUserUsername = $CofiUser->getUsername();
+                                //$lastEntryUserUsername = $CofiUser->getUsername();
+
+                                if ( $showUsernameName == 1) {
+                                    $lastEntryUserUsername = $CofiHelper->getRealnameById( $thread->last_entry_user_id);
+                                }
+                                else {
+                                    $lastEntryUserUsername = $CofiHelper->getUsernameById( $thread->last_entry_user_id);
+                                }
 
                                 if ( $CofiUser->getAvatar() == "") { // display default avatar
                                     echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' class='cofiCategoryDefaultAvatar' alt='$lastEntryUserUsername' title='$lastEntryUserUsername' />";

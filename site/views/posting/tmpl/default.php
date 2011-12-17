@@ -731,18 +731,19 @@ if ( $showBreadcrumbRow == "1") {
 
 
 
+
+
 <!-- HTML Box Bottom -->
 <?php
 $_htmlBoxBottom = $this->htmlBoxBottom;
 
 if ( $_htmlBoxBottom != "") {
 	echo "<div class='cofiHtmlBoxPostingBottom'>";
-		echo $_htmlBoxBottom;
+		echo $htmlBoxPostingBottom;
 	echo "</div>";
 }
 ?>
 <!-- HTML Box Bottom -->
-
 
 
 <?php

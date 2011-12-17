@@ -4,6 +4,11 @@
 
 	<fieldset name="general" label="COFI_CONFIG_GENERAL_SETTINGS">
 
+        <field name="showUsernameName" type="list" default="0" label="COFI_CONFIG_SHOW_USERNAME_NAME" description="COFI_CONFIG_SHOW_USERNAME_NAME_DESCRIPTION">
+      			<option value="0">COFI_CONFIG_USERNAME</option>
+      			<option value="1">COFI_CONFIG_NAME</option>
+      	</field>
+
         <field name="showLoginRow" type="list" default="0" label="COFI_CONFIG_SHOW_LOGIN_ROW" description="COFI_CONFIG_SHOW_LOGIN_ROW_DESCRIPTION">
             <option value="0">COFI_CONFIG_NO</option>
             <option value="1">COFI_CONFIG_YES</option>
