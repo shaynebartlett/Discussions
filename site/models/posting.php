@@ -1656,6 +1656,49 @@ class DiscussionsModelPosting extends JModel {
 	}
 
 
+    /**
+   	 * Method to get the HTML Box Top
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getHtmlBoxTop() {
+
+   		if ( empty( $this->_htmlBoxTop)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT html_box_posting_top FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_htmlBoxTop = $db->loadResult();
+   		}
+
+   		return $this->_htmlBoxTop;
+
+   	}
+
+    /**
+   	 * Method to get the HTML Box Bottom
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getHtmlBoxBottom() {
+
+   		if ( empty( $this->_htmlBoxBottom)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT html_box_posting_bottom FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_htmlBoxBottom = $db->loadResult();
+   		}
+
+   		return $this->_htmlBoxBottom;
+
+   	}
 
 
 

@@ -114,11 +114,11 @@ endif;
 
 <!-- HTML Box Top -->
 <?php
-$htmlBoxCategoryTop = $params->get('htmlBoxCategoryTop', '');
+$_htmlBoxTop = $this->htmlBoxTop;
 
-if ( $htmlBoxCategoryTop != "") {
+if ( $_htmlBoxTop != "") {
 	echo "<div class='cofiHtmlBoxCategoryTop'>";
-		echo $htmlBoxCategoryTop;
+		echo $_htmlBoxTop;
 	echo "</div>";
 }
 ?>
@@ -680,11 +680,11 @@ if ( $useRssFeeds == 1 && $showRssFeedIcon == 1) {
 
 <!-- HTML Box Bottom -->
 <?php
-$htmlBoxCategoryBottom = $params->get('htmlBoxCategoryBottom', '');		
+$_htmlBoxBottom = $this->htmlBoxBottom;
 
-if ( $htmlBoxCategoryBottom != "") {
+if ( $_htmlBoxBottom != "") {
 	echo "<div class='cofiHtmlBoxCategoryBottom'>";
-		echo $htmlBoxCategoryBottom;
+		echo $_htmlBoxBottom;
 	echo "</div>";
 }
 ?>

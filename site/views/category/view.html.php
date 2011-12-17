@@ -47,6 +47,9 @@ class DiscussionsViewCategory extends JView {
         $categoryMetaDescription	=& $this->get('CategoryMetaDescription');
         $categoryMetaKeywords      	=& $this->get('CategoryMetaKeywords');
 
+        $htmlBoxTop                 =& $this->get('HtmlBoxTop');
+        $htmlBoxBottom              =& $this->get('HtmlBoxBottom');
+
 
 		// get parameters
 		$params = &$app->getParams();
@@ -54,20 +57,8 @@ class DiscussionsViewCategory extends JView {
 		$menus	= &JSite::getMenu();
 		$menu	= $menus->getActive();
 
-/*
-		if (is_object( $menu )) {
-			$menu_params = new JParameter( $menu->params );
-			if (!$menu_params->get( 'page_title')) {
-				$params->set('page_title',	JText::_( 'Forums' ));
-			}
-		} else {
-			$params->set('page_title',	JText::_( 'Forums' ));
-		}
 
-*/		
-				
 		// Set Meta Tags
-		
 		// 1. Meta Title
 		if ( $categoryMetaTitle == "") {
 			$document->setTitle( $categoryName);
@@ -93,14 +84,15 @@ class DiscussionsViewCategory extends JView {
 		}
 
 
-
 		//set breadcrumbs
 		if( is_object($menu) && $menu->query['view'] != 'category') {
 			$pathway->addItem( $categoryName, '');
 		}
 
 
-        
+        $this->assignRef('htmlBoxTop',	$htmlBoxTop);
+        $this->assignRef('htmlBoxBottom', $htmlBoxBottom);
+
 		$this->assignRef('threads',	$threads);
 		$this->assignRef('pagination', $pagination);
 

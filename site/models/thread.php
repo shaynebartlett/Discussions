@@ -666,7 +666,118 @@ class DiscussionsModelThread extends JModel {
 	}
 
 
+    /**
+   	 * Method to get the HTML Box Top
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getHtmlBoxTop() {
 
+   		if ( empty( $this->_htmlBoxTop)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT html_box_thread_top FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_htmlBoxTop = $db->loadResult();
+   		}
+
+   		return $this->_htmlBoxTop;
+
+   	}
+
+    /**
+   	 * Method to get the HTML Box Bottom
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getHtmlBoxBottom() {
+
+   		if ( empty( $this->_htmlBoxBottom)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT html_box_thread_bottom FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_htmlBoxBottom = $db->loadResult();
+   		}
+
+   		return $this->_htmlBoxBottom;
+
+   	}
+
+
+    /**
+   	 * Method to get the Social Media Button 1
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getSocialMediaButton1() {
+
+   		if ( empty( $this->_socialMediaButton1)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT social_media_button_1 FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_socialMediaButton1 = $db->loadResult();
+   		}
+
+   		return $this->_socialMediaButton1;
+
+   	}
+
+
+    /**
+   	 * Method to get the Social Media Button 2
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getSocialMediaButton2() {
+
+   		if ( empty( $this->_socialMediaButton2)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT social_media_button_2 FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_socialMediaButton2 = $db->loadResult();
+   		}
+
+   		return $this->_socialMediaButton2;
+
+   	}
+
+
+    /**
+   	 * Method to get the Social Media Button 3
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getSocialMediaButton3() {
+
+   		if ( empty( $this->_socialMediaButton3)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT social_media_button_3 FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_socialMediaButton3 = $db->loadResult();
+   		}
+
+   		return $this->_socialMediaButton3;
+
+   	}
 
 
 }

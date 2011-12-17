@@ -76,11 +76,11 @@ endif;
 
 <!-- HTML Box Top -->
 <?php
-$htmlBoxPostingTop = $params->get('htmlBoxPostingTop', '');
+$_htmlBoxTop = $this->htmlBoxTop;
 
-if ( $htmlBoxPostingTop != "") {
+if ( $_htmlBoxTop != "") {
 	echo "<div class='cofiHtmlBoxPostingTop'>";
-		echo $htmlBoxPostingTop;
+		echo $_htmlBoxTop;
 	echo "</div>";
 }
 ?>
@@ -731,19 +731,18 @@ if ( $showBreadcrumbRow == "1") {
 
 
 
-
-
 <!-- HTML Box Bottom -->
 <?php
-$htmlBoxPostingBottom = $params->get('htmlBoxPostingBottom', '');		
+$_htmlBoxBottom = $this->htmlBoxBottom;
 
-if ( $htmlBoxPostingBottom != "") {
+if ( $_htmlBoxBottom != "") {
 	echo "<div class='cofiHtmlBoxPostingBottom'>";
-		echo $htmlBoxPostingBottom;
+		echo $_htmlBoxBottom;
 	echo "</div>";
 }
 ?>
 <!-- HTML Box Bottom -->
+
 
 
 <?php

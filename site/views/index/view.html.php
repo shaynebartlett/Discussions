@@ -29,7 +29,10 @@ class DiscussionsViewIndex extends JView {
 		$document =& JFactory::getDocument();
 				
 		$categories =& $this->get('Categories');
-				
+
+        $htmlBoxTop =& $this->get('HtmlBoxTop');
+        $htmlBoxBottom =& $this->get('HtmlBoxBottom');
+
 				
 		// get parameters
 	    $params =& JComponentHelper::getParams('com_discussions');
@@ -82,7 +85,10 @@ class DiscussionsViewIndex extends JView {
 		}				
 
 				
-										
+
+        $this->assignRef('htmlBoxTop',	$htmlBoxTop);
+        $this->assignRef('htmlBoxBottom', $htmlBoxBottom);
+
 		$this->assignRef('categories',	$categories);
 		$this->assignRef('params',		$params);
                 

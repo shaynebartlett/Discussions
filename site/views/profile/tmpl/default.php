@@ -42,11 +42,11 @@ endif;
 
 <!-- HTML Box Top -->
 <?php
-$htmlBoxProfileTop = $params->get('htmlBoxProfileTop', '');
+$_htmlBoxTop = $this->htmlBoxTop;
 
-if ( $htmlBoxProfileTop != "") {
+if ( $_htmlBoxTop != "") {
 	echo "<div class='cofiHtmlBoxProfileTop'>";
-		echo $htmlBoxProfileTop;
+		echo $_htmlBoxTop;
 	echo "</div>";
 }
 ?>
@@ -462,11 +462,11 @@ echo "</div>";
 
 <!-- HTML Box Bottom -->
 <?php
-$htmlBoxProfileBottom = $params->get('htmlBoxProfileBottom', '');		
+$_htmlBoxBottom = $this->htmlBoxBottom;
 
-if ( $htmlBoxProfileBottom != "") {
+if ( $_htmlBoxBottom != "") {
 	echo "<div class='cofiHtmlBoxProfileBottom'>";
-		echo $htmlBoxProfileBottom;
+		echo $_htmlBoxBottom;
 	echo "</div>";
 }
 ?>

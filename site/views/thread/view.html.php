@@ -58,6 +58,12 @@ class DiscussionsViewThread extends JView {
         $metaDescription    	=& $this->get('MetaDescription');
         $metaKeywords          	=& $this->get('MetaKeywords');
 
+        $htmlBoxTop             =& $this->get('HtmlBoxTop');
+        $htmlBoxBottom          =& $this->get('HtmlBoxBottom');
+        $socialMediaButton1     =& $this->get('SocialMediaButton1');
+        $socialMediaButton2     =& $this->get('SocialMediaButton2');
+        $socialMediaButton3     =& $this->get('SocialMediaButton3');
+
 
 		// get parameters
 		$params = &$app->getParams();
@@ -98,6 +104,11 @@ class DiscussionsViewThread extends JView {
 		}
 		
 
+        $this->assignRef('htmlBoxTop', $htmlBoxTop);
+        $this->assignRef('htmlBoxBottom', $htmlBoxBottom);
+        $this->assignRef('socialMediaButton1', $socialMediaButton1);
+        $this->assignRef('socialMediaButton2', $socialMediaButton2);
+        $this->assignRef('socialMediaButton3', $socialMediaButton3);
 
         $this->assignRef('postings', $postings);
 		$this->assignRef('pagination', $pagination);

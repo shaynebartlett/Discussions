@@ -44,6 +44,8 @@ class DiscussionsViewProfile extends JView {
         $youtube			=& $this->get('Youtube');
         $googleplus			=& $this->get('Googleplus');
         $show_online_status	=& $this->get('ShowOnlineStatus');
+        $htmlBoxTop         =& $this->get('HtmlBoxTop');
+        $htmlBoxBottom      =& $this->get('HtmlBoxBottom');
 
 
 		// get parameters
@@ -58,6 +60,8 @@ class DiscussionsViewProfile extends JView {
 		}
 
 
+        $this->assignRef('htmlBoxTop',	$htmlBoxTop);
+        $this->assignRef('htmlBoxBottom', $htmlBoxBottom);
 		$this->assignRef('headline', $headline);
         $this->assignRef('signature', $signature);
 		$this->assignRef('task', $task);

@@ -7,12 +7,17 @@
  * @link		http://www.codingfish.com
  */
  
-$params = JComponentHelper::getParams('com_discussions');
-$shareCode = $params->get('shareCode', '');		
 
-if ( $shareCode != "") {
+$db	=& JFactory::getDBO();
+
+$sql = "SELECT share_code FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+$db->setQuery( $sql);
+$_shareCode = $db->loadResult();
+
+if ( $_shareCode != "") {
 	echo "<div class='cofiShareCode'>";
-		echo $shareCode;
+		echo $_shareCode;
 	echo "</div>";
 }
 

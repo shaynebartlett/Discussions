@@ -52,6 +52,8 @@ class DiscussionsViewPosting extends JView {
         $image4_description     =& $this->get('Image4_description');
         $image5                 =& $this->get('Image5');
         $image5_description     =& $this->get('Image5_description');
+        $htmlBoxTop             =& $this->get('HtmlBoxTop');
+        $htmlBoxBottom          =& $this->get('HtmlBoxBottom');
 
 
 		// get parameters
@@ -60,6 +62,8 @@ class DiscussionsViewPosting extends JView {
 		$menus	= &JSite::getMenu();
 		$menu	= $menus->getActive();
 
+        $this->assignRef('htmlBoxTop',	$htmlBoxTop);
+        $this->assignRef('htmlBoxBottom', $htmlBoxBottom);
         $this->assignRef('postings', $postings);
 		$this->assignRef('categoryId', $categoryId);
 		$this->assignRef('categorySlug', $categorySlug);

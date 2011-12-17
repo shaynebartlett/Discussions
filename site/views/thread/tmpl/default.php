@@ -76,8 +76,6 @@ else { // use the meta keywords configured for this forum
 }
 
 
-
-
 // get parameters
 $params = JComponentHelper::getParams('com_discussions');
 
@@ -88,7 +86,6 @@ $_imagesDisplayMode 	= $params->get( 'imagesDisplayMode', 0); // 0 Browser, 1 Sl
 $_includeMootoolsJS 	= $params->get( 'includeMootoolsJS', 0); // 0 no, 1 yes
 $_includeSlimboxJS  	= $params->get( 'includeSlimboxJS', 0);  // 0 no, 1 yes
 $_usePrimezilla 		= $params->get( 'usePrimezilla', 0);  // 0 no, 1 yes
-$_callPrimezillaMode 	= $params->get( 'callPrimezillaMode', 0); // 0 username, 1 userid
 
 // Flickr
 $_useFlickr 	      	= $params->get( 'useFlickr', 0);  // 0 no, 1 yes
@@ -196,11 +193,11 @@ endif;
 
 <!-- HTML Box Top -->
 <?php
-$htmlBoxThreadTop = $params->get('htmlBoxThreadTop', '');
+$_htmlBoxTop = $this->htmlBoxTop;
 
-if ( $htmlBoxThreadTop != "") {
+if ( $_htmlBoxTop != "") {
 	echo "<div class='cofiHtmlBoxThreadTop'>";
-		echo $htmlBoxThreadTop;
+		echo $_htmlBoxTop;
 	echo "</div>";
 }
 ?>
@@ -539,23 +536,13 @@ if ( $showBreadcrumbRow == "1") {
 		                    
 							if ( $this->pzitemid == 0) { // got no itemid
 							
-								if ( $_callPrimezillaMode == 0) { // username
-									$linkPrimezilla  = JRoute::_( 'index.php?option=com_primezilla&view=message&task=new&username=' . $_username);
-								}
-								else { // userid
-									$linkPrimezilla  = JRoute::_( 'index.php?option=com_primezilla&view=message&task=new&userid=' . $posting->user_id);
-								}
-								
+								$linkPrimezilla  = JRoute::_( 'index.php?option=com_primezilla&view=message&task=new&userid=' . $posting->user_id);
+
 							}
 							else {
 							
-								if ( $_callPrimezillaMode == 0) { // username
-									$linkPrimezilla  = JRoute::_( 'index.php?option=com_primezilla&view=message&task=new&username=' . $_username . '&Itemid=' . $this->pzitemid);
-								}
-								else { // userid
-									$linkPrimezilla  = JRoute::_( 'index.php?option=com_primezilla&view=message&task=new&userid=' . $posting->user_id . '&Itemid=' . $this->pzitemid);
-								}
-								
+								$linkPrimezilla  = JRoute::_( 'index.php?option=com_primezilla&view=message&task=new&userid=' . $posting->user_id . '&Itemid=' . $this->pzitemid);
+
 							}		
      				            				            	
 	            			echo "<a href='" . $linkPrimezilla . "' title='" . JText::_( 'COFI_MESSAGE_TO' ) . " " . $opUserUsername . "' >";
@@ -715,18 +702,18 @@ if ( $showBreadcrumbRow == "1") {
 						echo "<div class='cofiSocialMediaButtonRow'>";
 						
 							echo "<div class='cofiSocialMediaButton1'>";
-								$socialMediaButton1 = $params->get('socialMediaButton1', '');
-								echo $socialMediaButton1;						
+                                $_socialMediaButton1 = $this->socialMediaButton1;
+								echo $_socialMediaButton1;
 							echo "</div>";
 	
 							echo "<div class='cofiSocialMediaButton2'>";
-								$socialMediaButton2 = $params->get('socialMediaButton2', '');
-								echo $socialMediaButton2;						
+                                $_socialMediaButton2 = $this->socialMediaButton2;
+                                echo $_socialMediaButton2;
 							echo "</div>";
 										
 							echo "<div class='cofiSocialMediaButton3'>";
-								$socialMediaButton3 = $params->get('socialMediaButton3', '');		
-								echo $socialMediaButton3;						
+                                $_socialMediaButton3 = $this->socialMediaButton3;
+                                echo $_socialMediaButton3;
 							echo "</div>";
 							
 						echo "</div>";
@@ -1325,11 +1312,11 @@ include( 'components/com_discussions/includes/share.php');
 
 <!-- HTML Box Bottom -->
 <?php
-$htmlBoxThreadBottom = $params->get('htmlBoxThreadBottom', '');		
+$_htmlBoxBottom = $this->htmlBoxBottom;
 
-if ( $htmlBoxThreadBottom != "") {
+if ( $_htmlBoxBottom != "") {
 	echo "<div class='cofiHtmlBoxThreadBottom'>";
-		echo $htmlBoxThreadBottom;
+		echo $_htmlBoxBottom;
 	echo "</div>";
 }
 ?>
