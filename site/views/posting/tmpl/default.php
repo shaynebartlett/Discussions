@@ -56,6 +56,36 @@ $_root = JURI::root();
 
     }
 
+    <?php
+    echo "Joomla.submitbutton = function confirmnotices(pressbutton) { ";
+
+        echo "var form = document.getElementById('postform');";
+
+        echo "if (form.postSubject.value == '') { ";
+            echo "alert( '" . JText::_('COFI_POST_MUST_HAVE_SUBJECT') . "');";
+            echo "return false;";
+        echo "}";
+
+        echo "if (form.postSubject.value.length < 5) { ";
+            echo "alert( '" . JText::_('COFI_POST_SUBJECT_TOO_SHORT') . "');";
+            echo "return false;";
+        echo "}";
+
+        echo "if (form.postText.value == '') { ";
+            echo "alert( '" . JText::_('COFI_POST_MUST_HAVE_TEXT') . "');";
+            echo "return false;";
+        echo "}";
+
+        echo "if (form.postText.value.length < 5) { ";
+            echo "alert( '" . JText::_('COFI_POST_TEXT_TOO_SHORT') . "');";
+            echo "return false;";
+        echo "}";
+
+        echo "form.submit();";
+
+   	echo "}";
+    ?>
+
 </script>
 
 <!-- Javascript functions -->
@@ -454,7 +484,7 @@ if ( $showBreadcrumbRow == "1") {
 							}					
 						}
 						echo "<input type='hidden' name='task' value='save'>";  			
-						echo "<input class='cofiButton' type='submit' name='submit' value='" . JText::_( 'COFI_SAVE' ) ."'>";
+						echo "<input class='cofiButton' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_( 'COFI_SAVE' ) ."'>";
 					
 					echo "</div> ";
 
