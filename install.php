@@ -265,6 +265,11 @@ else { // upgrade
             echo "Upgrading from 1.3 to " . $version;
             echo "<br />";
 
+            // change fields
+            $sql = "ALTER TABLE `#__discussions_categories` MODIFY `description` varchar(1000) DEFAULT ''";
+            $db->setQuery( $sql);
+            $db->query();
+
             // new fields
             $sql = "ALTER TABLE `#__discussions_users` ADD COLUMN `googleplus` varchar(100) DEFAULT ''";
             $db->setQuery( $sql);
