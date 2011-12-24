@@ -769,7 +769,7 @@ $_htmlBoxBottom = $this->htmlBoxBottom;
 
 if ( $_htmlBoxBottom != "") {
 	echo "<div class='cofiHtmlBoxPostingBottom'>";
-		echo $htmlBoxPostingBottom;
+		echo $_htmlBoxBottom;
 	echo "</div>";
 }
 ?>

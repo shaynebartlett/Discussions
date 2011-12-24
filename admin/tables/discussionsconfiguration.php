@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 
 
 /**
-* Forum Table class
+* Configuration Table class
 */
 class TableDiscussionsConfiguration extends JTable {
 

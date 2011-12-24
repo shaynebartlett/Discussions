@@ -15,13 +15,13 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $version = "1.4";
 
 
-
-
 $componentInstaller =& JInstaller::getInstance();
 $installer = new JInstaller();
 
 $db =& JFactory::getDBO();
 
+// get folder name
+$_rootDir = JPATH_ROOT;
 
 
 // check if Discussions system plugin is already installed
@@ -264,6 +264,22 @@ else { // upgrade
 
             echo "Upgrading from 1.3 to " . $version;
             echo "<br />";
+
+
+            // replace older table files because of name conflicts
+            $_fileToDelete = $_rootDir . "/administrator/components/com_discussions/tables/forum.php";
+            if ( file_exists( $_fileToDelete)) {
+                unlink( $_fileToDelete);
+            }
+            $_fileToDelete = $_rootDir . "/administrator/components/com_discussions/tables/post.php";
+            if ( file_exists( $_fileToDelete)) {
+                unlink( $_fileToDelete);
+            }
+            $_fileToDelete = $_rootDir . "/administrator/components/com_discussions/tables/user.php";
+            if ( file_exists( $_fileToDelete)) {
+                unlink( $_fileToDelete);
+            }
+
 
             // change fields
             $sql = "ALTER TABLE `#__discussions_categories` MODIFY `description` varchar(1000) DEFAULT ''";
