@@ -1235,21 +1235,6 @@ class CofiHelper extends JObject {
 
 		return $result;
 
-/*
-		$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $id . "' AND published='1'";
-				
-		$db->setQuery( $sql);
-		$result = $db->loadResult();
-
-		if ( !$result) {
-			return 0;
-		}
-		else {
-			return $result;
-		}
-
-*/
-
 	}
 
 

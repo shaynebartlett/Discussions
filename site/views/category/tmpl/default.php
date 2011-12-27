@@ -464,9 +464,6 @@ if ( $showBreadcrumbRow == "1") {
 
 					    	echo "<div class='cofiCategoryAvatarBox'>";
 
-                                // $lastEntryUserUsername = $CofiHelper->getUsernameById( $thread->last_entry_user_id);
-                                //$lastEntryUserUsername = $CofiUser->getUsername();
-
                                 if ( $showUsernameName == 1) {
                                     $lastEntryUserUsername = $CofiHelper->getRealnameById( $thread->last_entry_user_id);
                                 }

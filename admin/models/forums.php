@@ -236,34 +236,6 @@ class DiscussionsModelForums extends JModel {
 	}
 
 
-/*
-	function indentRows( & $rows) {
-	
-		$children = array ();
-				
-		if( count( $rows)){
-		
-			foreach ( $rows as $row) {
-			
-				$pt = $row->parent_id;
-				
-				$list = @$children[$pt] ? $children[$pt] : array ();
-				
-				array_push( $list, $row);
-				
-				$children[$pt] = $list;
-				
-			}
-		}
-		
-		//$entries = JHTML::_( 'menu.treerecurse', 0, '', array (), $children);
-        $entries = cofiTreeRecurse( 0, '', array (), $children, 10, 0, 1);
-
-		return $entries;
-	}
-*/
-
-
 	function orderup() {
 	
 		$app = JFactory::getApplication('administrator');
