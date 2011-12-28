@@ -223,6 +223,8 @@ $_root = JURI::root();
 					<a href="http://www.famfamfam.com" title="FamFamFam Silk Icon Set" target="_blank">Silk Icon Set</a>
 					<br />
 					<a href="http://www.komodomedia.com" title="Social Network Icon Pack" target="_blank">Social Network Icon Pack</a>
+                    <br />
+               	    <a href="http://glyphish.com" title="Glyphish Pro Icon Set" target="_blank">Glyphish Pro Icon Set</a>
 					<br />
 					nuvoX Icon Set
 					<br />
@@ -234,6 +236,8 @@ $_root = JURI::root();
 					<br />
 					<a href="http://www.digitalia.be" title="Slimbox" target="_blank">Slimbox</a>
 					<br />
+                    <a href="http://phpflickr.com" title="phpFlickr" target="_blank">phpFlickr</a>
+               		<br />
 					<br />
 				</div>
 							

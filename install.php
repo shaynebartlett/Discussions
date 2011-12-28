@@ -313,11 +313,11 @@ else { // upgrade
                   " `modified` timestamp NULL DEFAULT NULL, " .
                   " PRIMARY KEY (`id`) " .
                   " ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
-            $db->setQuery();
+            $db->setQuery( $sql);
             $db->query();
 
             $sql = "INSERT INTO `#__discussions_configuration` ( id) VALUES ('1')";
-            $db->setQuery();
+            $db->setQuery( $sql);
        	    $db->query();
 
         }
