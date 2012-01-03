@@ -300,7 +300,7 @@ if ( $user->guest) { // user is not logged in
         echo "<table width='100%' class='noborder' style='margin:20px 0px 20px 0px;' border='0' >";
             echo "<tr>";
                 echo "<td width='100%' align='left' valign='middle' class='noborder'>";
-                    $registerURL = "index.php?option=com_users&view=register";
+                    $registerURL = "index.php?option=com_users&view=registration";
                     $loginURL    = "index.php?option=com_users&view=login";
 
                     echo JText::_( 'COFI_NO_PUBLIC_WRITE' );
