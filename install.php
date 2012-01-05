@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 
 // version of new installed extension
-$version = "1.4";
+$version = "1.5";
 
 
 $componentInstaller =& JInstaller::getInstance();
@@ -319,6 +319,74 @@ else { // upgrade
             $sql = "INSERT INTO `#__discussions_configuration` ( id) VALUES ('1')";
             $db->setQuery( $sql);
        	    $db->query();
+
+        }
+
+
+        case "1.4": { // upgrade 1.4 -> new version
+
+            echo "Upgrading from 1.4 to " . $version;
+            echo "<br />";
+
+            // new fields
+            $sql = "ALTER TABLE `#__discussions_users` ADD COLUMN `messages_email_notifications` tinyint(1) NOT NULL DEFAULT '0'";
+            $db->setQuery( $sql);
+            $db->query();
+
+            $sql = "ALTER TABLE `#__discussions_users` ADD COLUMN `messages_use_signature` tinyint(1) NOT NULL DEFAULT '0'";
+            $db->setQuery( $sql);
+            $db->query();
+
+            $sql = "ALTER TABLE `#__discussions_users` ADD COLUMN `messages_use_signature_for_replies` tinyint(1) NOT NULL DEFAULT '0'";
+            $db->setQuery( $sql);
+            $db->query();
+
+            $sql = "ALTER TABLE `#__discussions_users` ADD COLUMN `messages_signature` text";
+            $db->setQuery( $sql);
+            $db->query();
+
+            // new tables
+            // create private messages inbox table
+            $sql = "CREATE TABLE IF NOT EXISTS `#__discussions_messages_inbox` ( " .
+                " `id` 			int(11) NOT NULL AUTO_INCREMENT, " .
+         	    " `user_id`		INTEGER UNSIGNED DEFAULT 0, " .
+                " `user_from_id`	INTEGER UNSIGNED DEFAULT 0, " .
+         	    " `msg_date`      DATE DEFAULT NULL, " .
+                " `msg_time`      TIME DEFAULT NULL, " .
+         	    " `subject`       VARCHAR(80) DEFAULT NULL, " .
+                " `message`       TEXT, " .
+         	    " `flag_read`     TINYINT(1) DEFAULT 0, " .
+                " `flag_answered` TINYINT(1) DEFAULT 0, " .
+         	    " `flag_deleted`  TINYINT(1) DEFAULT 0, " .
+                " PRIMARY KEY (`id`), " .
+                " KEY `idx_discussions_messages_inbox_user_id` (`user_id`), " .
+                " KEY `idx_discussions_messages_inbox_user_from_id` (`user_from_id`), " .
+                " KEY `idx_discussions_messages_inbox_msg_date` (`msg_date`), " .
+                " KEY `idx_discussions_messages_inbox_msg_time` (`msg_time`) " .
+                " ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
+            $db->setQuery( $sql);
+            $db->query();
+
+            // create private messages outbox table
+            $sql = "CREATE TABLE IF NOT EXISTS `#__discussions_messages_outbox` ( " .
+                " `id` 			int(11) NOT NULL AUTO_INCREMENT, " .
+             	" `user_id`		INTEGER UNSIGNED DEFAULT 0, " .
+                " `user_to_id`	INTEGER UNSIGNED DEFAULT 0, " .
+             	" `msg_date`      DATE DEFAULT NULL, " .
+                " `msg_time`      TIME DEFAULT NULL, " .
+             	" `subject`       VARCHAR(80) DEFAULT NULL, " .
+                " `message`       TEXT, " .
+             	" `flag_read`     TINYINT(1) DEFAULT 0, " .
+                " `flag_answered` TINYINT(1) DEFAULT 0, " .
+             	" `flag_deleted`  TINYINT(1) DEFAULT 0, " .
+                " PRIMARY KEY (`id`), " .
+                " KEY `idx_discussions_messages_outbox_user_id` (`user_id`), " .
+                " KEY `idx_discussions_messages_outbox_user_to_id` (`user_to_id`), " .
+                " KEY `idx_discussions_messages_outbox_msg_date` (`msg_date`), " .
+                " KEY `idx_discussions_messages_outbox_msg_time` (`msg_time`) " .
+                " ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
+            $db->setQuery( $sql);
+            $db->query();
 
         }
 
