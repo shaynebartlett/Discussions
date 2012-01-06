@@ -170,9 +170,9 @@
 	</fieldset>
 				
 
-	<fieldset name="otherextensions" label="COFI_CONFIG_SUPPORT_OTHER_EXTENSIONS">
+	<fieldset name="messages" label="COFI_CONFIG_MESSAGES_SETTINGS">
 
-		<field name="usePrimezilla" type="radio" default="0" label="COFI_CONFIG_USE_PRIMEZILLA" description="COFI_CONFIG_USE_PRIMEZILLA_DESCRIPTION">
+		<field name="useMessages" type="radio" default="1" label="COFI_CONFIG_USE_MESSAGES" description="COFI_CONFIG_USE_MESSAGES_DESCRIPTION">
 			<option value="0">COFI_CONFIG_NO</option>
 			<option value="1">COFI_CONFIG_YES</option>
 		</field>
