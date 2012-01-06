@@ -14,10 +14,17 @@ $app = JFactory::getApplication();
 
 $user =& JFactory::getUser();
 
+// get parameters
+$params = JComponentHelper::getParams('com_discussions');
+
+// Messages
+$useMessages = $params->get('useMessages', 1); // default = Yes
+
 
 $menuLinkHome    = JRoute::_( 'index.php?option=com_discussions');
 $menuLinkSearch  = '';
 $menuLinkProfile = JRoute::_( 'index.php?option=com_discussions&view=profile&task=profile');
+$menuLinkInbox   = JRoute::_( 'index.php?option=com_discussions&view=inbox&task=inbox');
 
 $menuLinkTime4h  = JRoute::_( 'index.php?option=com_discussions&view=recent&task=recent&time=4h');
 $menuLinkTime8h  = JRoute::_( 'index.php?option=com_discussions&view=recent&task=recent&time=8h');
@@ -38,6 +45,13 @@ echo "<div class='cofiMainmenuRow'>";
         echo "<div class='cofiMainmenuItem'>";
             echo "<a href='$menuLinkProfile'>" . JText::_( "COFI_PROFILE", true ) . "</a>";
         echo "</div>";
+
+        if ( $useMessages == 1) { // user is logged in
+            echo "<div class='cofiMainmenuItem'>";
+                echo "<a href='$menuLinkInbox'>" . JText::_( "COFI_MESSAGES_INBOX", true ) . "</a>";
+            echo "</div>";
+        }
+
     }
 
 

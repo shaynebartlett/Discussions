@@ -78,9 +78,6 @@ class DiscussionsViewThread extends JView {
 			$pathway->addItem( $subject, '');
 		}
 
-
-		$pzitemid = $CofiHelper->getItemidByComponentName( "com_primezilla");
-		
 		
 		// calculate jump point to last entry
 		$_threadListLength 	= $params->get('threadListLength', '20');	
@@ -128,7 +125,6 @@ class DiscussionsViewThread extends JView {
 		$this->assignRef('threadSlug', $threadSlug);	
 		$this->assignRef('stickyStatus', $stickyStatus);
 		$this->assignRef('lockedStatus', $lockedStatus);
-		$this->assignRef('pzitemid', $pzitemid);
 
 		$this->assignRef('lastEntryJumpPoint', $lastEntryJumpPoint);
 

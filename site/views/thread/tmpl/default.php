@@ -88,7 +88,7 @@ $_showLoginRow          = $params->get('showLoginRow', 0); // 0 no, 1 yes
 $_imagesDisplayMode 	= $params->get( 'imagesDisplayMode', 0); // 0 Browser, 1 Slimbox, 2 RokBox
 $_includeMootoolsJS 	= $params->get( 'includeMootoolsJS', 0); // 0 no, 1 yes
 $_includeSlimboxJS  	= $params->get( 'includeSlimboxJS', 0);  // 0 no, 1 yes
-$_usePrimezilla 		= $params->get( 'usePrimezilla', 0);  // 0 no, 1 yes
+$_useMessages 		    = $params->get( 'useMessages', 1);  // 0 no, 1 yes
 
 // Flickr
 $_useFlickr 	      	= $params->get( 'useFlickr', 0);  // 0 no, 1 yes
@@ -494,7 +494,7 @@ if ( $showBreadcrumbRow == "1") {
 				$youtube    = $CofiUser->getYoutube();
                 $googleplus = $CofiUser->getGoogleplus();
 
-				if( $twitter != "" || $facebook != "" || $googleplus != "" || $flickr != "" || $youtube != "" || $_usePrimezilla == "1") {
+				if( $twitter != "" || $facebook != "" || $googleplus != "" || $flickr != "" || $youtube != "" || $_useMessages == "1") {
 				
                 	echo "<div class='cofiSocialMediaBox'>";
 
@@ -533,24 +533,15 @@ if ( $showBreadcrumbRow == "1") {
 						echo "<br />";
 					}
 					else {
-		                if ( $_usePrimezilla == "1" && $opUserUsername != "-") {
+		                if ( $_useMessages == "1" && $opUserUsername != "-") {
 		                
 	
 		                    $_username = strtolower( $opUserUsername);
 		                    
 		                    
-							if ( $this->pzitemid == 0) { // got no itemid
-							
-								$linkPrimezilla  = JRoute::_( 'index.php?option=com_primezilla&view=message&task=new&userid=' . $posting->user_id);
+							$linkMessages  = JRoute::_( 'index.php?option=com_discussions&view=message&task=new&userid=' . $posting->user_id);
 
-							}
-							else {
-							
-								$linkPrimezilla  = JRoute::_( 'index.php?option=com_primezilla&view=message&task=new&userid=' . $posting->user_id . '&Itemid=' . $this->pzitemid);
-
-							}		
-     				            				            	
-	            			echo "<a href='" . $linkPrimezilla . "' title='" . JText::_( 'COFI_MESSAGE_TO' ) . " " . $opUserUsername . "' >";
+	            			echo "<a href='" . $linkMessages . "' title='" . JText::_( 'COFI_MESSAGE_TO' ) . " " . $opUserUsername . "' >";
 							echo "<img src='" . $_root . "components/com_discussions/assets/icons/pn_16.png' style='margin: 10px 5px 10px 5px;' />";
 							echo "</a>";              										
 	

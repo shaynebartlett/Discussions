@@ -156,11 +156,6 @@ class DiscussionsModelModeration extends JModel {
 					break;
 				}
 
-				case "createmsgaliases": {
-					$this->createMsgAliases();
-					break;
-				}
-
 				case "delete": {
 					$this->deletePost( $this->_post);
 					break;
@@ -477,52 +472,6 @@ class DiscussionsModelModeration extends JModel {
         return $wfmquery;
 
 	}
-
-
-
-	function createMsgaliases() {
-	
-        $db =& $this->getDBO();
-
-		$sql = "SELECT id, subject, alias FROM " . $db->nameQuote('#__discussions_messages');
-        $db->setQuery($sql);
-
-        $rows = $db->loadAssocList();
-        
-		if( count( $rows)) {
-
-			echo "Creating aliases...";
-			echo "<br />";
-		
-			foreach ($rows as $row) {
-			
-		        $m_id      	= $row['id'];
-		        $m_subject  = $row['subject'];
-						
-				// create alias for SEF URL
-				jimport( 'joomla.filter.output' );
-    			    			
-    			$m_alias = JFilterOutput::stringURLSafe($m_subject);
-				
-     			$sqlu = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
-							" SET alias = '".$m_alias."'" . 
-							" WHERE id = '".$m_id."'";
-        	
-        		$db->setQuery( $sqlu);
-        		$result = $db->query();
-								
-			}
-			
-			echo "<br />";
-			echo "done";
-			echo "<br />";
-			echo "<br />";
-		
-		}
-	
-        return $result;
-	}
-
 
 
 	/**

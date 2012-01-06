@@ -80,7 +80,22 @@ function DiscussionsBuildRoute( &$query) {
         $segments[] = $query['format']; 
         unset( $query['format']); 
     }
-     
+
+    if (isset( $query['profile'])) {
+        $segments[] = $query['profile'];
+        unset( $query['profile']);
+    }
+
+    if (isset( $query['inbox'])) {
+        $segments[] = $query['inbox'];
+        unset( $query['inbox']);
+    }
+
+    if (isset( $query['outbox'])) {
+        $segments[] = $query['outbox'];
+        unset( $query['outbox']);
+    }
+
     return $segments; 
     
 }
@@ -115,16 +130,25 @@ function DiscussionsParseRoute( $segments) {
 					break;
 				}		
 
-				case 'approve':
-				case 'createmsgaliases': {
-        			$vars['view'] = "moderation"; 				
-        			$vars['task']  = $segments[0];  // task = approve/createmsgaliases
+                case 'inbox': {
+                    $vars['view'] = "inbox";
+            		break;
+            	}
+
+                case 'outbox': {
+                    $vars['view'] = "outbox";
+            		break;
+            	}
+
+				case 'approve': {
+        			$vars['view'] = "moderation";
+        			$vars['task']  = $segments[0];
 					break;
 				}		
 
                 case 'recent': {
                     $vars['view'] = "recent";
-                    $vars['task']  = $segments[0];  // task = approve/createmsgaliases
+                    $vars['task']  = $segments[0];
                     $vars['time']  = "24h";         // default = 24h
                     break;
                 }
@@ -177,7 +201,7 @@ function DiscussionsParseRoute( $segments) {
 
                 case 'recent': {
                     $vars['view'] = "recent";
-                    $vars['task']  = $segments[0];  // task = approve/createmsgaliases
+                    $vars['task']  = $segments[0];
                     $vars['time']  = $segments[1];  // time = xxh
                     break;
                 }
