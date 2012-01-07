@@ -14,9 +14,9 @@ jimport( 'joomla.application.component.view');
 
 
 /** 
- * Inbox View
+ * Category View 
  */ 
-class DiscussionsViewInbox extends JView {
+class DiscussionsViewOutbox extends JView {
 
 
 	/** 
@@ -46,14 +46,14 @@ class DiscussionsViewInbox extends JView {
 		$document->setTitle( $params->get( 'page_title' ) );
 
 		//set breadcrumbs
-		if( is_object($menu) && $menu->query['view'] != 'inbox') {
-            $pathway->addItem( JText::_( 'COFI_MESSAGES_INBOX' ), 'Inbox');
+		if( is_object($menu) && $menu->query['view'] != 'outbox') {
+			$pathway->addItem( JText::_( 'COFI_MESSAGES_OUTBOX' ), 'Outbox');
 		}
 
 
         
 		$this->assignRef('messages',	$messages);
-		$this->assignRef('pagination',  $pagination);
+		$this->assignRef('pagination', 	$pagination);
                 
 		$this->assignRef('params',		$params);
            

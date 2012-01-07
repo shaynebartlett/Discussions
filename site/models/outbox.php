@@ -15,11 +15,10 @@ jimport('joomla.application.component.model');
 require_once(JPATH_COMPONENT.DS.'classes/user.php');
 
 
-
 /** 
- * Messages Inbox Model
+ * Messages Outbox Model
  */ 
-class DiscussionsModelInbox extends JModel {
+class DiscussionsModelOutbox extends JModel {
 
 	/**
 	 * Constructor
@@ -33,12 +32,12 @@ class DiscussionsModelInbox extends JModel {
         $app = JFactory::getApplication();
 
 		$config = JFactory::getConfig();
-
-		$db =& $this->getDBO(); 
+		
+		$db =& $this->getDBO(); 		
 
 
 		// Get the pagination request variables
-		$this->setState('limit', $app->getUserStateFromRequest('com_discussions.limit', 'limit', $config->getValue('config.list_limit'), 'int'));
+		$this->setState('limit', $app->getUserStateFromRequest('com_primezilla.limit', 'limit', $config->getValue('config.list_limit'), 'int'));
 		$this->setState('limitstart', JRequest::getVar('limitstart', 0, '', 'int'));
 
 
@@ -60,7 +59,7 @@ class DiscussionsModelInbox extends JModel {
 	            	}
 	        	}
 	
-				$sql = "DELETE FROM #__discussions_messages_inbox WHERE $whereclause";
+				$sql = "DELETE FROM #__discussions_messages_outbox WHERE $whereclause";
 				$db->setQuery( $sql);					
 				$db->query();
 	
@@ -68,53 +67,8 @@ class DiscussionsModelInbox extends JModel {
 	      	
 	    }
 
-	    if( $_submit == JText::_( 'COFI_BUTTON_MARK_READ' )) {
-	    
-	    	if( strlen( $_selmsg) > 0) {
-	      
-	      		$whereclause="";
-	        	$tok = strtok( $_selmsg, " ");
-	        	while ($tok !== false) {
-	            	$whereclause .= "id='".$tok."'";
-	            	$tok = strtok(" ");
-	            	if( $tok !== false) {
-	                	$whereclause .= " OR ";
-	            	}
-	        	}
-	
-				$sql = "UPDATE #__discussions_messages_inbox SET flag_read='1' WHERE $whereclause";
-				$db->setQuery( $sql);					
-				$db->query();
-	
-	      	}
-	      	
-	    }
-
-
-	    if( $_submit == JText::_( 'COFI_BUTTON_MARK_UNREAD' )) {
-	    
-	    	if( strlen( $_selmsg) > 0) {
-	      
-	      		$whereclause="";
-	        	$tok = strtok( $_selmsg, " ");
-	        	while ($tok !== false) {
-	            	$whereclause .= "id='".$tok."'";
-	            	$tok = strtok(" ");
-	            	if( $tok !== false) {
-	                	$whereclause .= " OR ";
-	            	}
-	        	}
-	
-				$sql = "UPDATE #__discussions_messages_inbox SET flag_read='0' WHERE $whereclause";
-				$db->setQuery( $sql);					
-				$db->query();
-	
-	      	}
-	      	
-	    }
-	    	    
-		
 	}
+
 
 
 	/** 
@@ -123,10 +77,10 @@ class DiscussionsModelInbox extends JModel {
      * @return array 
      */ 
      function getMessages() { 
-
+                         
         	$db =& $this->getDBO(); 
 
-			// Load messages if they doesn't exist
+			// Load messages if they don't exist
 			if (empty($this->_data)) {
 				$selectQuery = $this->_buildSelectQuery();
 
@@ -139,6 +93,7 @@ class DiscussionsModelInbox extends JModel {
         	return $this->_data;            
         
      } 
+
 
 
 	/**
@@ -157,6 +112,7 @@ class DiscussionsModelInbox extends JModel {
 	}
 
 
+
 	/**
 	 * Method to get a pagination object
 	 *
@@ -173,6 +129,7 @@ class DiscussionsModelInbox extends JModel {
 	}
 
 
+
 	function _buildSelectQuery() {
      	
 		$user 		=& 	JFactory::getUser();
@@ -184,17 +141,18 @@ class DiscussionsModelInbox extends JModel {
 
         $db =& $this->getDBO();
 
-		$selectQuery = "SELECT id, user_id, user_from_id,
+		$selectQuery = "SELECT id, user_id, user_to_id,
 							DATE_FORMAT( msg_date, '" . $_dateformat . "') AS msg_date, 
 							DATE_FORMAT( msg_time, '" . $_timeformat . "') AS msg_time, 
 							subject, message, 
 							flag_read, flag_answered, flag_deleted
-						FROM ".$db->nameQuote('#__discussions_messages_inbox')."
-						WHERE user_id = '".$_user_id."' AND flag_deleted != '1'
+						FROM " . $db->nameQuote( '#__discussions_messages_outbox') . "
+						WHERE user_id = '" . $_user_id . "' AND flag_deleted != '1'
 						ORDER BY id DESC";
 
         return $selectQuery;
 	}
+
 
 
 	function _buildCountQuery() {
@@ -204,7 +162,7 @@ class DiscussionsModelInbox extends JModel {
 
         $db =& $this->getDBO();
 
-		$countQuery = "SELECT * FROM ".$db->nameQuote('#__discussions_messages_inbox')." WHERE user_id = '".$_user_id."' AND flag_deleted != '1'";
+		$countQuery = "SELECT * FROM " . $db->nameQuote( '#__discussions_messages_outbox')." WHERE user_id = '" . $_user_id . "' AND flag_deleted != '1'";
 		return $countQuery;
 	}
 

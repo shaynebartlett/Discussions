@@ -38,7 +38,7 @@ $document =& JFactory::getDocument();
 $title = $document->getTitle();
 $siteName = $app->getCfg('sitename');
 
-$document->setTitle( $title); 
+$document->setTitle( $title);
 
 // get parameters
 $params = JComponentHelper::getParams('com_discussions');
@@ -60,11 +60,11 @@ endif;
 
 <!-- HTML Box Top -->
 <?php
-$htmlBoxInboxTop = $params->get('htmlBoxInboxTop', '');
+$htmlBoxOutboxTop = $params->get('htmlBoxOutboxTop', '');
 
-if ( $htmlBoxInboxTop != "") {
-	echo "<div class='cofiHtmlBoxCategoryTop'>";
-		echo $htmlBoxInboxTop;
+if ( $htmlBoxOutboxTop != "") {
+	echo "<div class='cofiHtmlBoxOutboxTop'>";
+		echo $htmlBoxOutboxTop;
 	echo "</div>";
 }
 ?>
@@ -79,14 +79,14 @@ include( 'components/com_discussions/includes/topmenu.php');
 
 
 <!-- Box name and description -->
-<table width="100%" class="noborder">
+<table width="100%" style="margin-bottom:10px;" class="noborder">
     <tr>
 
         <!-- box name and description -->
         <td align="left" class="noborder">
             <?php
             echo "<h3>";
-            	echo JText::_( "COFI_MESSAGES_INBOX");
+            	echo JText::_( "COFI_MESSAGES_OUTBOX");
             echo "</h3>";
             ?>
         </td>
@@ -100,13 +100,13 @@ include( 'components/com_discussions/includes/topmenu.php');
 
 
 <?php
-	echo "<table width='50%'  class='noborder' style='margin:20px 0px 20px 0px; border: 0px;'>";
+	echo "<table width='50%' class='noborder' style='margin:20px 0px 20px 0px;'>";
     	echo "<tr>";       	
 
-        	echo "<td width='16' align='center' valign='middle' class='noborder' style='border: 0px;'>";
+        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
             	echo "<img src='" . $_root . "/components/com_discussions/assets/threads/new.png' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
         	echo "</td>";
-        	echo "<td align='left' valign='middle' class='noborder' style='border: 0px;'>";
+        	echo "<td align='left' valign='middle' class='noborder'>";
             	$menuLinkNewTMP = "index.php?option=com_discussions&view=message&task=new";
             	$menuLinkNew = JRoute::_( $menuLinkNewTMP);
             	echo "<a href='".$menuLinkNew."'>" . JText::_( 'COFI_MESSAGES_NEW_MESSAGE' ) . "</a>";
@@ -138,10 +138,9 @@ include( 'components/com_discussions/includes/topmenu.php');
 
     </tr>
 </table>
-    
+
 </div>
 <!-- Pagination Links -->
-
 
 
 
@@ -157,13 +156,12 @@ include( 'components/com_discussions/includes/topmenu.php');
 			
 		</td>
 
-		<td width="200px" align="left" class="cofiTableHeader"><?php echo JText::_( 'COFI_MESSAGES_FROM' ); ?></td>
+		<td width="200px" align="left" class="cofiTableHeader"><?php echo JText::_( 'COFI_MESSAGES_TO' ); ?></td>
 
         <td align="left" class="cofiTableHeader"><?php echo JText::_( 'COFI_MESSAGES_SUBJECT' ); ?></td>
         
-        
 		<td width="170px" align="center" class="cofiTableHeader"><?php echo JText::_( 'COFI_MESSAGES_DATE' ); echo " / "; echo JText::_( 'COFI_MESSAGES_TIME' ); ?></td>
-						
+		
     </tr> 
 
 
@@ -181,17 +179,17 @@ include( 'components/com_discussions/includes/topmenu.php');
 				
 			</td> 
 
+
 			<td align="left" class="cofiIndexTableRowAvatar<?php echo $rowColor; ?> cofiIndexTableRowTopic">
 
 				<?php
 				
-				$_username = $CofiHelper->getUsernameById( $message->user_from_id);
+				$_username = $CofiHelper->getUsernameById( $message->user_to_id);
 				
-                $_avatar   = $CofiHelper->getAvatarById( $message->user_from_id);
+                $_avatar   = $CofiHelper->getAvatarById( $message->user_to_id);
 
                 echo "<table width='100%' cellspacing='0' cellpadding='0' border='0' class='noborder'>";
                     echo "<tr>";
-
 
                         echo "<td width='32' align='left' class='noborder'>";
 
@@ -200,35 +198,22 @@ include( 'components/com_discussions/includes/topmenu.php');
                                     echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' width='32px' height='32px' class='cofiCategoryDefaultAvatar' alt='$_username' title='$_username' />";
                                 }
                                 else { // display uploaded avatar
-                                    echo "<img src='" . $_root . "images/discussions/users/".$message->user_from_id."/small/".$_avatar."' width='32px' height='32px' class='cofiCategoryAvatar' alt='$_username' title='$_username' />";
+                                    echo "<img src='" . $_root . "images/discussions/users/".$message->user_to_id."/small/".$_avatar."' width='32px' height='32px' class='cofiCategoryAvatar' alt='$_username' title='$_username' />";
                                 }
                             echo "</div>";
 
                         echo "</td>";
 
-
                         echo "<td align='left' valign='center' class='noborder' style='padding-left: 5px;'>";
 
-
-						if ( $message->flag_read == 0) { // new message
-							                        
-							echo "<span class='cofiMessagesMessageUnread'>";
-	                        	echo $_username;
-							echo "</span>";
-	                        
-						}
-						else {
-
-							echo "<span class='cofiMessagesMessageRead'>";
-	                        	echo $_username;
-							echo "</span>";
-						
-						}
+						echo "<span class='cofiMessagesMessageRead'>";
+                        	echo $_username;
+						echo "</span>";
 
                         echo "</td>";
                     echo "</tr>";
                 echo "</table>";
-				
+                
 				?>
 								
 			</td> 
@@ -236,60 +221,36 @@ include( 'components/com_discussions/includes/topmenu.php');
 
 			<td align="left" class="cofiIndexTableRow<?php echo $rowColor; ?> cofiIndexTableRowTopic">
 
-                <?php
-                
-            	$_hoverSubject = $message->subject;
-            	$_hoverSubject = str_replace( '\'', '"', $_hoverSubject);
-            	//$_hoverSubject = addslashes($thread->subject);
-                                            
-                $messageLink = JRoute::_('index.php?option=com_primezilla&view=message&task=inbox&id='.$message->id);
+                <?php                
+                $_hoverSubject = $message->subject;
+                $_hoverSubject = str_replace( '\'', '"', $_hoverSubject);
+                                                
+                $messageLink = JRoute::_('index.php?option=com_primezilla&view=message&task=outbox&id='.$message->id);
 
-				if ( $message->flag_read == 0) {// new message
-                	echo "<a href='$messageLink' title='".$_hoverSubject."' class='cofiMessageUnread'>".$message->subject."</a>";					
-				}
-				else {
-                	echo "<a href='$messageLink' title='".$_hoverSubject."' class='cofiMessageRead'>" . $message->subject . "</a>";
-                }
-					
+                echo "<a href='$messageLink' title='".$_hoverSubject."'>".$message->subject."</a>";					
                 ?>
 
 			</td> 
 
 									
-			<td align="center" class="cofiIndexTableRow<?php echo $rowColor; ?> cofiIndexTableRowLastPost">
+			<td width="100" align="center" class="cofiIndexTableRow<?php echo $rowColor; ?> cofiIndexTableRowLastPost">
 
                 <?php
-				if ( $message->flag_read == 0) {// new message
-					echo "<span class='cofiMessageUnread'>";
-            			echo $message->msg_date;
-					echo "</span>";
-				}
-				else {
-					echo "<span class='cofiMessageRead'>";
-            			echo $message->msg_date;
-					echo "</span>";
-                }                			                			
-
+				echo "<span class='cofiMessagesMessageRead'>";
+        			echo $message->msg_date;
+				echo "</span>";
+				
 				echo "&nbsp;";
 
-				if ( $message->flag_read == 0) {// new message
-					echo "<span class='cofiMessageUnread'>";
-            			echo $message->msg_time;
-					echo "</span>";
-				}
-				else {
-					echo "<span class='cofiMessageRead'>";
-            			echo $message->msg_time;
-					echo "</span>";
-                }                			                			
+				echo "<span class='cofiMessagesMessageRead'>";
+        			echo $message->msg_time;
+				echo "</span>";
                 ?>
 
 			</td> 
 		
 		
     	</tr> 
-
-
 
 
 		<?php 
@@ -314,10 +275,6 @@ include( 'components/com_discussions/includes/topmenu.php');
 		<input type="hidden" name="selectedMessages" value="" />
 		
 		<input type="submit" name="submit" class="cofiButton" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_DELETE' );?>" onclick="return confirmdelete();" />
-		&nbsp;
-		<input type="submit" name="submit" class="cofiButton" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_MARK_READ' );?>" />
-		&nbsp;
-		<input type="submit" name="submit" class="cofiButton" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_MARK_UNREAD' );?>" />
 	
 	</div>
 
@@ -331,7 +288,7 @@ include( 'components/com_discussions/includes/topmenu.php');
 <div class="pagination" style="border:0px;">
 
 <table width="100%" class="noborder" style="margin-top:10px; border: 0px;">
-    <tr> 
+    <tr>
         <td class="noborder" style="border: 0px;">
             <?php
             echo $this->pagination->getPagesLinks();
@@ -355,11 +312,11 @@ include( 'components/com_discussions/includes/topmenu.php');
 
 <!-- HTML Box Bottom -->
 <?php
-$htmlBoxInboxBottom = $params->get('htmlBoxInboxBottom', '');		
+$htmlBoxOutboxBottom = $params->get('htmlBoxOutboxBottom', '');		
 
-if ( $htmlBoxInboxBottom != "") {
-	echo "<div class='cofiHtmlBoxInboxBottom'>";
-		echo $htmlBoxInboxBottom;
+if ( $htmlBoxOutboxBottom != "") {
+	echo "<div class='cofiHtmlBoxOutboxBottom'>";
+		echo $htmlBoxOutboxBottom;
 	echo "</div>";
 }
 ?>
@@ -374,5 +331,3 @@ include( 'components/com_discussions/includes/footer.php');
 ?>
 
 </div>
-
-
