@@ -859,6 +859,32 @@ h2 {
 }
 /* Footer */
 
+/* Messages */
+.cofiMessagesAvatarBox {
+	width:32px;
+	height:32px;
+	text-align: center;
+	background: white;
+	margin: 5px;
+	padding: 2px;
+	border: 1px solid #ddd;
+}
+.cofiMessagesMessageUnread {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+.cofiMessagesMessageRead {
+	/* font-weight: normal; */
+	font-size: 1.0em;
+}
 
+.cofiIndexTableRowAvatar1 {
+	background-color: #f7f7f7;
+    padding: 5px;
+}
+.cofiIndexTableRowAvatar2 {
+	background-color: #fcfcfc;
+    padding: 5px;
+}
 
-
+/* Messages */

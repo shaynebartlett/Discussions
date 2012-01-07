@@ -1525,6 +1525,25 @@ class CofiHelper extends JObject {
 	}
 
 
+    function getAvatarById( $id) {
+
+        $db	=& JFactory::getDBO();
+
+        $sql = "SELECT avatar FROM ".$db->nameQuote('#__discussions_users')." WHERE id='". $id . "'";
+
+        $db->setQuery( $sql);
+        $avatar = $db->loadResult();
+
+        if ( !$avatar) {
+            return "";
+        }
+        else {
+            return $avatar;
+        }
+
+    }
+
+
 
 }
 
