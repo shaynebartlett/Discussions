@@ -115,6 +115,8 @@ function DiscussionsParseRoute( $segments) {
     echo "<br />";
     echo "segments 1: " . $segments[1];
     echo "<br />";
+    echo "segments 2: " . $segments[2];
+    echo "<br />";
 
     die();
 */
@@ -210,11 +212,19 @@ function DiscussionsParseRoute( $segments) {
 
                 case 'inbox': {
                     $vars['view'] = "message";
-                    $vars['task']  = $segments[0];
+                    $vars['task'] = "inbox";
+                    $vars['type'] = "inbox";
+                    $vars['id']   = $segments[1]; // message id
             		break;
             	}
 
-
+                case 'outbox': {
+                    $vars['view'] = "message";
+                    $vars['task'] = "outbox";
+                    $vars['type'] = "outbox";
+                    $vars['id']   = $segments[1]; // message id
+            		break;
+            	}
 
 				default: {	
 					// category view
@@ -261,7 +271,8 @@ function DiscussionsParseRoute( $segments) {
 		        	$vars['catid']  = $segments[1];   // category slug
 		        	$vars['thread'] = $segments[2];   // thread slug
 					break;
-				}		
+				}
+
 
 				default: {	
 					break;

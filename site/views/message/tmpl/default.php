@@ -24,7 +24,7 @@ require_once(JPATH_COMPONENT.DS.'classes/helper.php');
 echo "<script type='text/javascript'>";
 
 	echo "function confirmdelete() { ";
- 		echo "return confirm('" . JText::_( 'COFI_CONFIRM_DELETE' ) . "');";
+ 		echo "return confirm('" . JText::_( 'COFI_MESSAGES_CONFIRM_DELETE' ) . "');";
 	echo "}";
 
 echo "</script>";
@@ -37,12 +37,12 @@ echo "<script type='text/javascript'>";
         echo "var form = document.getElementById('postform');";
 
         echo "if (form.postReceiver.value == '') { ";
-            echo "alert( '" . JText::_('COFI_MESSAGE_MUST_HAVE_RECIPIENT') . "');";
+            echo "alert( '" . JText::_('COFI_MESSAGES_MESSAGE_MUST_HAVE_RECIPIENT') . "');";
             echo "return false;";
         echo "}";
 
         echo "if (form.postSubject.value == '') { ";
-            echo "alert( '" . JText::_('COFI_MESSAGE_MUST_HAVE_SUBJECT') . "');";
+            echo "alert( '" . JText::_('COFI_MESSAGES_MESSAGE_MUST_HAVE_SUBJECT') . "');";
             echo "return false;";
         echo "}";
 
@@ -62,7 +62,7 @@ echo "</script>";
 $app = JFactory::getApplication();
 
 $user =& JFactory::getUser();
-$logUser = new CUser( $user->id);
+$logUser = new CofiUser( $user->id);
 
 
 // get parameters
@@ -72,7 +72,7 @@ $params = JComponentHelper::getParams('com_discussions');
 // website root directory
 $_root = JURI::root();
 
-$cHelper = new CHelper();
+$cHelper = new CofiHelper();
 
 
 
@@ -151,11 +151,11 @@ if ( $htmlBoxMessageTop != "") {
 							$_username = $cHelper->getUsernameById( $this->user_to_id);
 							
 
-					        	echo JText::_( 'COFI_MESSAGE_TO' ) . ": ";
+					        	echo JText::_( 'COFI_MESSAGES_MESSAGE_TO' ) . ": ";
 					        	echo "<br />";
 					        	echo "<br />";
 					        	
-                    			$_avatar   = $cHelper->getAvatarFromDiscussionsById( $this->user_to_id);
+                    			$_avatar   = $cHelper->getAvatarById( $this->user_to_id);
 
 
 				                echo "<table width='100%' cellspacing='0' cellpadding='0' border='0' class='noborder'>";
@@ -164,7 +164,7 @@ if ( $htmlBoxMessageTop != "") {
 
                                         echo "<td width='32' align='left' class='noborder'>";
 
-                                            echo "<div class='cofiAvatarBox'>";
+                                            echo "<div class='cofiMessagesAvatarBox'>";
                                                 if ( $_avatar == "") { // display default avatar
                                                     echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' width='32px' height='32px' class='cofiCategoryDefaultAvatar' alt='$_username' title='$_username' />";
                                                 }
@@ -194,18 +194,18 @@ if ( $htmlBoxMessageTop != "") {
 					switch ( $this->task) {
 					
 						case "new": {
-							echo JText::_( 'COFI_NEW_MESSAGE' );					
+							echo JText::_( 'COFI_MESSAGES_NEW_MESSAGE' );
 							break;
 						}
 
 						case "reply": {
-							echo JText::_( 'COFI_REPLY_MESSAGE' );					
+							echo JText::_( 'COFI_MESSAGES_REPLY_MESSAGE' );
 				        	$_user_from = $cHelper->getUsernameById( $this->user_from_id);
 							break;
 						}
 
 						case "quote": {
-							echo JText::_( 'COFI_QUOTE_MESSAGE' );					
+							echo JText::_( 'COFI_MESSAGES_QUOTE_MESSAGE' );
 				        	$_user_from = $cHelper->getUsernameById( $this->user_from_id);
 							break;
 						}
@@ -215,11 +215,11 @@ if ( $htmlBoxMessageTop != "") {
 							$_username = $cHelper->getUsernameById( $this->user_from_id);
 							
 
-					        	echo JText::_( 'COFI_MESSAGE_FROM' ) . ": ";
+					        	echo JText::_( 'COFI_MESSAGES_MESSAGE_FROM' ) . ": ";
 					        	echo "<br />";
 					        	echo "<br />";
 					        	
-                    			$_avatar   = $cHelper->getAvatarFromDiscussionsById( $this->user_from_id);
+                    			$_avatar   = $cHelper->getAvatarById( $this->user_from_id);
 
 
 				                echo "<table width='100%' cellspacing='0' cellpadding='0' border='0' class='noborder'>";
@@ -227,7 +227,7 @@ if ( $htmlBoxMessageTop != "") {
 
                                         echo "<td width='32' align='left' class='noborder'>";
 
-                                            echo "<div class='cofiAvatarBox'>";
+                                            echo "<div class='cofiMessagesAvatarBox'>";
                                                 if ( $_avatar == "") { // display default avatar
                                                     echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' width='32px' height='32px' class='cofiCategoryDefaultAvatar' alt='$_username' title='$_username' />";
                                                 }
@@ -281,7 +281,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
     		echo "<tr>";    		
     			echo "<td style='padding: 5px;' class='noborder'>";
 
-    				echo "<div class='cofiSubjectHeader'>" . JText::_( 'COFI_RECEIVER' ) . ":</div> ";
+    				echo "<div class='cofiSubjectHeader'>" . JText::_( 'COFI_MESSAGES_RECEIVER' ) . ":</div> ";
    					
    					   					
    						switch ( $this->task) {
@@ -304,7 +304,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
 		            				
 		            				
 		            			echo "</div>";		            			
-		            			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_RECEIVER_INFO' ) . "</div> ";
+		            			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_RECEIVER_INFO' ) . "</div> ";
 								break;
 							}   						
    						
@@ -314,7 +314,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
 		            			echo "<div class='cofiSubject'>";
 		            				echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' value='" . $_user_from . "' readonly>";
 		            			echo "</div>";		            			
-		            			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_RECEIVER_INFO' ) . "</div> ";
+		            			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_RECEIVER_INFO' ) . "</div> ";
 
 								break;
 							}   						
@@ -334,7 +334,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
     		echo "<tr>";    		
     			echo "<td style='padding: 5px;' class='noborder'>";
 
-    				echo "<div class='cofiSubjectHeader'>" . JText::_( 'COFI_SUBJECT' ) . ":</div> ";
+    				echo "<div class='cofiSubjectHeader'>" . JText::_( 'COFI_MESSAGES_SUBJECT' ) . ":</div> ";
    					
    					
    						switch ( $this->task) {
@@ -343,7 +343,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
 		            			echo "<div class='cofiSubject'>";
             						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80'>";	
 		            			echo "</div>";		            			
-            					echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_SUBJECT_INFO' ) . "</div> ";
+            					echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_SUBJECT_INFO' ) . "</div> ";
 								break;
 							}   						
    						
@@ -357,7 +357,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
 		            				$_subject = "Re: " . ltrim($_subject);		            			
             						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' value='" . $_subject . "' readonly>";	
 		            			echo "</div>";		            			
-            					echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_SUBJECT_INFO' ) . "</div> ";
+            					echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_SUBJECT_INFO' ) . "</div> ";
 
 								break;
 							}   						
@@ -374,7 +374,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
     		echo "<tr>";
     			echo "<td align='left' valign='top' style='padding: 5px;' class='noborder'>";
     			
-    				echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_TEXT' ) . ":</div> ";
+    				echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_MESSAGES_TEXT' ) . ":</div> ";
    					   			
    					echo "<div class='cofiText'>";		
    					
@@ -407,7 +407,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
     					
     				echo "</div>";
 
-            		echo "<div class='cofiTextFooter'>" . JText::_( 'COFI_TEXT_INFO' ) . "</div> ";
+            		echo "<div class='cofiTextFooter'>" . JText::_( 'COFI_MESSAGES_TEXT_INFO' ) . "</div> ";
 
 
 
@@ -417,7 +417,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
 						echo "<input type='hidden' name='dbmode' value='insert'>";
 								
 						echo "<input type='hidden' name='task' value='save'>";  			
-						echo "<input class='cofiButton' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_( 'COFI_SEND_MESSAGE' ) ."'>";
+						echo "<input class='cofiButton' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_( 'COFI_MESSAGES_SEND_MESSAGE' ) ."'>";
 					
 					echo "</div> ";
 
@@ -447,12 +447,12 @@ else { // display message
 	    	echo "<tr>";       	
 	
 	        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-	            	echo "<img src='" . $_root . "/components/com_discussions/assets/system/reply.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
+	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/reply.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
 	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
 	            	$menuLinkReplyTMP = "index.php?option=com_discussions&view=message&task=reply&id=" . $this->id;
 	            	$menuLinkReply = JRoute::_( $menuLinkReplyTMP);
-	            	echo "<a href='".$menuLinkReply."'>" . JText::_( 'COFI_REPLY_MESSAGE' ) . "</a>";
+	            	echo "<a href='".$menuLinkReply."'>" . JText::_( 'COFI_MESSAGES_REPLY_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
 
 
@@ -462,12 +462,12 @@ else { // display message
 
 
 	        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-	            	echo "<img src='" . $_root . "/components/com_discussions/assets/system/quote.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
+	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/quote.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
 	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
 	            	$menuLinkQuoteTMP = "index.php?option=com_discussions&view=message&task=quote&id=" . $this->id;
 	            	$menuLinkQuote = JRoute::_( $menuLinkQuoteTMP);
-	            	echo "<a href='".$menuLinkQuote."'>" . JText::_( 'COFI_QUOTE_MESSAGE' ) . "</a>";
+	            	echo "<a href='".$menuLinkQuote."'>" . JText::_( 'COFI_MESSAGES_QUOTE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
 
 
@@ -477,12 +477,12 @@ else { // display message
 	        	
 	        	  
 	        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-	            	echo "<img src='" . $_root . "/components/com_discussions/assets/system/delete.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
+	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/delete.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
 	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
 	            	$menuLinkDeleteTMP = "index.php?option=com_discussions&view=message&task=delete&id=" . $this->id;
 	            	$menuLinkDelete = JRoute::_( $menuLinkDeleteTMP);
-	            	echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_DELETE_MESSAGE' ) . "</a>";
+	            	echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_MESSAGES_DELETE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
 	        	  	        	
 	    	echo "</tr>";
@@ -498,12 +498,12 @@ else { // display message
 	    	echo "<tr>";       	
 		        	        	  
 	        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-	            	echo "<img src='" . $_root . "/components/com_discussions/assets/system/delete.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
+	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/delete.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
 	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
 	            	$menuLinkDeleteTMP = "index.php?option=com_discussions&view=message&task=odelete&id=" . $this->id;
 	            	$menuLinkDelete = JRoute::_( $menuLinkDeleteTMP);
-	            	echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_DELETE_MESSAGE' ) . "</a>";
+	            	echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_MESSAGES_DELETE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
 	        	  	        	
 	    	echo "</tr>";

@@ -1543,6 +1543,20 @@ class CofiHelper extends JObject {
     }
 
 
+    function setMessageReadFlagById( $id) {
+
+   		$db	=& JFactory::getDBO();
+
+   		$sql = "UPDATE ".$db->nameQuote('#__discussions_messages_inbox')." SET flag_read = '1' WHERE id=". $db->Quote($id);
+
+   		$db->setQuery( $sql);
+   		$result = $db->loadResult();
+
+   		return 1;
+
+   	}
+
+
 
 }
 

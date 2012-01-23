@@ -225,7 +225,7 @@ include( 'components/com_discussions/includes/topmenu.php');
                 $_hoverSubject = $message->subject;
                 $_hoverSubject = str_replace( '\'', '"', $_hoverSubject);
                                                 
-                $messageLink = JRoute::_('index.php?option=com_primezilla&view=message&task=outbox&id='.$message->id);
+                $messageLink = JRoute::_('index.php?option=com_discussions&view=message&task=outbox&id='.$message->id);
 
                 echo "<a href='$messageLink' title='".$_hoverSubject."'>".$message->subject."</a>";					
                 ?>
