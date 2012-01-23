@@ -43,6 +43,6 @@ $controller->redirect();
 		Discussions v<?php echo $version; ?>	
 	</div>
 	<div id="diFooterCopyright">
-		(c) 2010-2011 <a href="http://www.codingfish.com" target="_blank" title="Codingfish">Codingfish</a>
+		(c) 2010-2012 <a href="http://www.codingfish.com" target="_blank" title="Codingfish">Codingfish</a>
 	</div>
 </div>

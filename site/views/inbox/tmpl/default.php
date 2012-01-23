@@ -242,7 +242,7 @@ include( 'components/com_discussions/includes/topmenu.php');
             	$_hoverSubject = str_replace( '\'', '"', $_hoverSubject);
             	//$_hoverSubject = addslashes($thread->subject);
                                             
-                $messageLink = JRoute::_('index.php?option=com_primezilla&view=message&task=inbox&id='.$message->id);
+                $messageLink = JRoute::_('index.php?option=com_discussions&view=message&task=inbox&id='.$message->id);
 
 				if ( $message->flag_read == 0) {// new message
                 	echo "<a href='$messageLink' title='".$_hoverSubject."' class='cofiMessageUnread'>".$message->subject."</a>";					

@@ -132,11 +132,13 @@ function DiscussionsParseRoute( $segments) {
 
                 case 'inbox': {
                     $vars['view'] = "inbox";
+                    $vars['task']  = $segments[0];
             		break;
             	}
 
                 case 'outbox': {
                     $vars['view'] = "outbox";
+                    $vars['task']  = $segments[0];
             		break;
             	}
 
@@ -205,6 +207,14 @@ function DiscussionsParseRoute( $segments) {
                     $vars['time']  = $segments[1];  // time = xxh
                     break;
                 }
+
+                case 'inbox': {
+                    $vars['view'] = "message";
+                    $vars['task']  = $segments[0];
+            		break;
+            	}
+
+
 
 				default: {	
 					// category view

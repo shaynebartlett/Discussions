@@ -325,7 +325,15 @@ else { // upgrade
 
         case "1.4": { // upgrade 1.4 -> new version
 
-            echo "Upgrading from 1.4 to " . $version;
+      			echo "Upgrading from 1.4 to " . $version;
+      			echo "<br />";
+
+      	}
+
+
+        case "1.4.1": { // upgrade 1.4.1 -> new version
+
+            echo "Upgrading from 1.4.1 to " . $version;
             echo "<br />";
 
             // new fields
@@ -388,7 +396,47 @@ else { // upgrade
             $db->setQuery( $sql);
             $db->query();
 
-        }
+
+            // check if Primezilla inbox transfer is needed
+            $db->setQuery( 'SELECT COUNT(*) FROM `#__discussions_messages_inbox`');
+            if ( $db->loadResult() == 0) { // no records in Discussions inbox found -> transfer them from Primezilla
+
+                // if Primezilla is installed -> get all inbox messages from Primezilla
+                $db->setQuery( 'SELECT COUNT(*) FROM `#__primezilla_inbox`');
+
+                if ( $db->loadResult() > 0) { // records in inbox found -> transfer them into new discussions inbox
+
+                    $db->setQuery( "INSERT INTO `#__discussions_messages_inbox` " .
+                                        " ( id, user_id, user_from_id, msg_date, msg_time, subject, message) " .
+                                        " SELECT id, user_id, user_from_id, msg_date, msg_time, subject, message " .
+                                    " FROM `#__primezilla_inbox`");
+                    $db->query();
+
+                }
+
+            }
+
+            // check if Primezilla outbox transfer is needed
+            $db->setQuery( 'SELECT COUNT(*) FROM `#__discussions_messages_outbox`');
+            if ( $db->loadResult() == 0) { // no records in Discussions outbox found -> transfer them from Primezilla
+
+                // if Primezilla is installed -> get all outbox messages from Primezilla
+                $db->setQuery( 'SELECT COUNT(*) FROM `#__primezilla_outbox`');
+
+                if ( $db->loadResult() > 0) { // records in outbox found -> transfer them into new discussions outbox
+
+                    $db->setQuery( "INSERT INTO `#__discussions_messages_outbox` " .
+                                        " ( id, user_id, user_to_id, msg_date, msg_time, subject, message) " .
+                                        " SELECT id, user_id, user_to_id, msg_date, msg_time, subject, message " .
+                                    " FROM `#__primezilla_outbox`");
+                    $db->query();
+
+                }
+
+            }
+
+
+        } // 1.4.1
 
 
 		default: {
