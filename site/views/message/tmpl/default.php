@@ -380,9 +380,9 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
    					
    						if ( $this->task == "quote") {
    							echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText'>";
-	   							if ( $logUser->getUseSignature() == 1 && $logUser->getUseSignatureForReplies() == 1) { // use the users signature for quote
+	   							if ( $logUser->getMessagesUseSignature() == 1 && $logUser->getMessagesUseSignatureForReplies() == 1) { // use the users signature for quote
 	   								echo "\n\n\n";
-	   								echo $logUser->getSignature();
+	   								echo $logUser->getMessagesSignature();
 	   							}     								
 	   							echo "\n\n\n";
 	   							echo $this->messageText; // text from original message
@@ -391,15 +391,15 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
    						else { // blank textarea
    							echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText'>";   							
    								if ( $this->task == "reply") {
-		   							if ( $logUser->getUseSignature() == 1 && $logUser->getUseSignatureForReplies() == 1) { // use the users signature for reply
+		   							if ( $logUser->getMessagesUseSignature() == 1 && $logUser->getMessagesUseSignatureForReplies() == 1) { // use the users signature for reply
 		   								echo "\n\n\n";
-		   								echo $logUser->getSignature();
+		   								echo $logUser->getMessagesSignature();
 		   							}     								
    								} 
    								else { // new message
-		   							if ( $logUser->getUseSignature() == 1) { // use the users signature for new message
+		   							if ( $logUser->getMessagesUseSignature() == 1) { // use the users signature for new message
 		   								echo "\n\n\n";
-		   								echo $logUser->getSignature();
+		   								echo $logUser->getMessagesSignature();
 		   							}     								   								
    								}					   								
     						echo "</textarea>";

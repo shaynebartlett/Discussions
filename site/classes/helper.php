@@ -972,6 +972,26 @@ class CofiHelper extends JObject {
 
 	}
 
+
+    function getIdByUsername( $username) {
+
+   		$db	=& JFactory::getDBO();
+
+   		$sql = "SELECT id FROM ".$db->nameQuote('#__users')." WHERE username=" . $db->Quote($username);
+
+   		$db->setQuery( $sql);
+   		$id = $db->loadResult();
+
+   		if ( !$id) {
+   			return 0;
+   		}
+   		else {
+   			return $id;
+   		}
+
+   	}
+
+
     function getRealnameById( $id) {
 
    		$db	=& JFactory::getDBO();

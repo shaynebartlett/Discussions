@@ -75,6 +75,14 @@ class CofiUser extends JObject {
     var $_approval_notification = 0;
 
 
+    var $_messages_signature = "";
+
+    var $_messages_use_signature = "";
+
+    var $_messages_use_signature_for_replies = "";
+
+    var $_messages_email_notifications = "";
+
 
 
 	/**
@@ -117,6 +125,11 @@ class CofiUser extends JObject {
 
         $this->_email_notification  = $_user['email_notification'];
         $this->_approval_notification  = $_user['approval_notification'];
+
+        $this->_messages_signature  = "-- xxxxx";
+        $this->_messages_use_signature  = "0";
+        $this->_messages_use_signature_for_replies  = "0";
+        $this->_messages_email_notifications  = "0";
 
 	}
 
@@ -255,6 +268,23 @@ class CofiUser extends JObject {
 	function getShowOnlineStatus() {
 		return $this->_show_online_status;
 	}
+
+
+    function getMessagesSignature() {
+   		return $this->_messages_signature;
+   	}
+
+    function getMessagesUseSignature() {
+   		return $this->_messages_use_signature;
+   	}
+
+   	function getMessagesUseSignatureForReplies() {
+   		return $this->_messages_use_signature_for_replies;
+   	}
+
+    function getMessagesEmailNotifications() {
+   		return $this->_messages_email_notifications;
+   	}
 
 
 

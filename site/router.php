@@ -226,6 +226,15 @@ function DiscussionsParseRoute( $segments) {
             		break;
             	}
 
+                case 'reply': {
+                    $vars['view']   = "message";
+            		$vars['task'] 	= "reply";
+            		$vars['id'] 	= $segments[1]; // message id
+            		break;
+            	}
+
+
+
 				default: {	
 					// category view
 		        	$vars['view']   = "thread"; 			

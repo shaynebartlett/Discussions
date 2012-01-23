@@ -415,7 +415,7 @@ class DiscussionsModelMessage extends JModel {
 
 		$user =& JFactory::getUser();
 				
-		$cHelper = new CHelper();
+		$cHelper = new CofiHelper();
 
 		// redirect	link
 		$redirectLink = JRoute::_( "index.php?option=com_discussions&view=inbox");
@@ -469,7 +469,7 @@ class DiscussionsModelMessage extends JModel {
 
 
 				// get the receiving user object
-				$receivingUser 	= new CUser( $_postReceiverId);
+				$receivingUser 	= new CofiUser( $_postReceiverId);
 
 
         		$db =& $this->getDBO();
@@ -518,18 +518,18 @@ class DiscussionsModelMessage extends JModel {
 				if ( $inbox_result) { // insert in receiver inbox went fine
 				
 					// send email if receiver wants notification					
-					if ( $receivingUser->getEmailNotifications() == 1) {
+					if ( $receivingUser->getMessagesEmailNotifications() == 1) {
 					
 						// get data of this message					
 						$cHelper->sendNotificationEmailToReceiver( $_receiver_id, $_user_from_id, $_subject, $_message );
 					}					
 				
-					$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_BEEN_SENT' ), "notice");
+					$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_BEEN_SENT' ), "notice");
 
 				}
 				else {
 				
-					$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_SENT_ERROR' ), "message");
+					$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_SENT_ERROR' ), "message");
 					
 				}
 						
@@ -540,11 +540,11 @@ class DiscussionsModelMessage extends JModel {
 		
 		if ( $isSubjectTooShort) {
 		
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_SENT_SUBJECT' ), "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_SENT_SUBJECT' ), "message");
 			
 		}	
 
-		$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_BEEN_SENT' ), "notice");
+		$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_BEEN_SENT' ), "notice");
 
 		
         return 0; // save OK
@@ -572,7 +572,7 @@ class DiscussionsModelMessage extends JModel {
 	    // check if user is logged in - maybe session has timed out
 		if ($user->guest) { 
 			// if user is not logged in, kick him back to inbox
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_DELETED_SESSION' ), "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_DELETED_SESSION' ), "message");
 		} 
 	    
 	                   		
@@ -593,7 +593,7 @@ class DiscussionsModelMessage extends JModel {
 	
 		}
 		else {
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_DELETED_OWNER' ), "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_DELETED_OWNER' ), "message");
 		}
 	
 	
@@ -604,10 +604,10 @@ class DiscussionsModelMessage extends JModel {
 	
 	
 		if ( $result) { // delete went fine
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_BEEN_DELETED' ), "notice");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_BEEN_DELETED' ), "notice");
 		}
 		else {
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_DELETED_ERROR' ), "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_DELETED_ERROR' ), "message");
 		}
 	
 	   	return 0; // delete OK
@@ -634,7 +634,7 @@ class DiscussionsModelMessage extends JModel {
 	    // check if user is logged in - maybe session has timed out
 		if ($user->guest) { 
 			// if user is not logged in, kick him back to outbox
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_DELETED_SESSION' ), "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_DELETED_SESSION' ), "message");
 		} 
 	    
 	                   		
@@ -655,7 +655,7 @@ class DiscussionsModelMessage extends JModel {
 	
 		}
 		else {
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_DELETED_OWNER' ), "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_DELETED_OWNER' ), "message");
 		}
 	
 	
@@ -666,10 +666,10 @@ class DiscussionsModelMessage extends JModel {
 	
 	
 		if ( $result) { // delete went fine
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_BEEN_DELETED' ), "notice");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_BEEN_DELETED' ), "notice");
 		}
 		else {
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_DELETED_ERROR' ), "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_DELETED_ERROR' ), "message");
 		}
 	
 	   	return 0; // delete OK
