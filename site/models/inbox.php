@@ -53,7 +53,7 @@ class DiscussionsModelInbox extends JModel {
 	      		$whereclause="";
 	        	$tok = strtok( $_selmsg, " ");
 	        	while ($tok !== false) {
-	            	$whereclause .= "id='".$tok."'";
+	            	$whereclause .= "id=" . $db->Quote($tok);
 	            	$tok = strtok(" ");
 	            	if( $tok !== false) {
 	                	$whereclause .= " OR ";
@@ -75,7 +75,7 @@ class DiscussionsModelInbox extends JModel {
 	      		$whereclause="";
 	        	$tok = strtok( $_selmsg, " ");
 	        	while ($tok !== false) {
-	            	$whereclause .= "id='".$tok."'";
+	            	$whereclause .= "id=" . $db->Quote($tok);
 	            	$tok = strtok(" ");
 	            	if( $tok !== false) {
 	                	$whereclause .= " OR ";
@@ -98,7 +98,7 @@ class DiscussionsModelInbox extends JModel {
 	      		$whereclause="";
 	        	$tok = strtok( $_selmsg, " ");
 	        	while ($tok !== false) {
-	            	$whereclause .= "id='".$tok."'";
+	            	$whereclause .= "id=" . $db->Quote($tok);
 	            	$tok = strtok(" ");
 	            	if( $tok !== false) {
 	                	$whereclause .= " OR ";
@@ -178,7 +178,7 @@ class DiscussionsModelInbox extends JModel {
 		$user 		=& 	JFactory::getUser();
 		$_user_id 	= 	$user->id;
 
-        $params = JComponentHelper::getParams('com_primezilla');        
+        $params = JComponentHelper::getParams('com_discussions');
 		$_dateformat	= $params->get( 'dateformat', '%d.%m.%Y');
 		$_timeformat	= $params->get( 'timeformat', '%H:%i');        		        	        		        		
 
@@ -190,7 +190,7 @@ class DiscussionsModelInbox extends JModel {
 							subject, message, 
 							flag_read, flag_answered, flag_deleted
 						FROM ".$db->nameQuote('#__discussions_messages_inbox')."
-						WHERE user_id = '".$_user_id."' AND flag_deleted != '1'
+						WHERE user_id = " . $db->Quote($_user_id) . " AND flag_deleted != '1'
 						ORDER BY id DESC";
 
         return $selectQuery;
@@ -204,7 +204,7 @@ class DiscussionsModelInbox extends JModel {
 
         $db =& $this->getDBO();
 
-		$countQuery = "SELECT * FROM ".$db->nameQuote('#__discussions_messages_inbox')." WHERE user_id = '".$_user_id."' AND flag_deleted != '1'";
+		$countQuery = "SELECT * FROM ".$db->nameQuote('#__discussions_messages_inbox')." WHERE user_id = " . $db->Quote($_user_id) . " AND flag_deleted != '1'";
 		return $countQuery;
 	}
 

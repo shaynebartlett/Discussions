@@ -88,7 +88,7 @@ class CofiUser extends JObject {
 
         $db = JFactory::getDBO();
 
-		$query = "SELECT * FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$userid."'";
+		$query = "SELECT * FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($userid);
         $db->setQuery($query);
 
         $_user = $db->loadAssoc();
@@ -171,7 +171,7 @@ class CofiUser extends JObject {
 		$db = JFactory::getDBO();
 		$sql = "UPDATE ".$db->nameQuote( '#__discussions_users')." SET" . 
 					" moderator = " . $db->Quote( $this->_moderator) . 
-					" WHERE id = '".$this->_id."'";
+					" WHERE id = " . $db->Quote($this->_id);
 		$db->setQuery( $sql);
 		$result = $db->query();		
 	}
@@ -182,7 +182,7 @@ class CofiUser extends JObject {
 		$db = JFactory::getDBO();
 		$sql = "UPDATE ".$db->nameQuote( '#__discussions_users')." SET" . 
 					" moderated = " . $db->Quote( $this->_moderated) . 
-					" WHERE id = '".$this->_id."'";
+					" WHERE id = " . $db->Quote($this->_id);
 		$db->setQuery( $sql);
 		$result = $db->query();		
 	}
@@ -193,7 +193,7 @@ class CofiUser extends JObject {
 		$db = JFactory::getDBO();
 		$sql = "UPDATE ".$db->nameQuote( '#__discussions_users')." SET" . 
 					" rookie = " . $db->Quote( $this->_rookie) . 
-					" WHERE id = '".$this->_id."'";
+					" WHERE id = " . $db->Quote($this->_id);
 		$db->setQuery( $sql);
 		$result = $db->query();		
 	}
@@ -204,7 +204,7 @@ class CofiUser extends JObject {
 		$db = JFactory::getDBO();
 		$sql = "UPDATE ".$db->nameQuote( '#__discussions_users')." SET" . 
 					" trusted = " . $db->Quote( $this->_trusted) . 
-					" WHERE id = '".$this->_id."'";
+					" WHERE id = " . $db->Quote($this->_id);
 		$db->setQuery( $sql);
 		$result = $db->query();		
 	}

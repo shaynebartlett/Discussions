@@ -266,7 +266,7 @@ class CofiHelper extends JObject {
 	function increaseUserPostCounter( $user_id) {
 		$db	=& JFactory::getDBO();			
 	    $sql = "UPDATE ".$db->nameQuote( '#__discussions_users')." SET posts = posts + 1" . 
-	     			" WHERE id = '".$user_id."'";	        	
+	     			" WHERE id = " . $db->Quote($user_id);
 	    $db->setQuery( $sql);
 	    return $db->query();
 	}
@@ -274,7 +274,7 @@ class CofiHelper extends JObject {
 	function decreaseUserPostCounter( $user_id) {
 		$db	=& JFactory::getDBO();			
 	    $sql = "UPDATE ".$db->nameQuote( '#__discussions_users')." SET posts = posts - 1" . 
-	     			" WHERE id = '".$user_id."'";	        	
+	     			" WHERE id = " . $db->Quote($user_id);
 	    $db->setQuery( $sql);
 	    return $db->query();
 	}
@@ -287,32 +287,32 @@ class CofiHelper extends JObject {
 
 
 		// get latest post id
-		$sql = "SELECT id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id . 
-				"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+		$sql = "SELECT id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+				" AND published='1' ORDER BY DATE DESC LIMIT 1";
 		
 		$db->setQuery( $sql);
 		$_post_id = $db->loadResult();
 
 	
 		// get latest posting date in this thread
-		$sql = "SELECT date FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id . 
-				"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+		$sql = "SELECT date FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+				" AND published='1' ORDER BY DATE DESC LIMIT 1";
 		
 		$db->setQuery( $sql);
 		$_last_entry_date = $db->loadResult();
 
 
 		// get latest posting user_id in this thread
-		$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id . 
-				"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+		$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+				" AND published='1' ORDER BY DATE DESC LIMIT 1";
 		
 		$db->setQuery( $sql);
 		$_last_entry_user_id = $db->loadResult();
 
 
 		// get # of replies in this thread
-		$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id . 
-				"' AND published='1' AND parent_id <> '0'";
+		$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+				" AND published='1' AND parent_id <> '0'";
 		
 		$db->setQuery( $sql);
 		$_counter_replies = $db->loadResult();
@@ -322,11 +322,11 @@ class CofiHelper extends JObject {
 		// update thread stats
 		$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
 				" SET " .
-				"last_entry_date ='".$_last_entry_date."', " .
-			 	"last_entry_user_id ='".$_last_entry_user_id."', " . 
-			 	"last_entry_msg_id ='".$_post_id."', " . 
-			 	"counter_replies ='".$_counter_replies."'" . 
-				" WHERE thread = '".$thread_id."' AND parent_id='0'";
+				"last_entry_date =" . $db->Quote($_last_entry_date) . ", " .
+			 	"last_entry_user_id =" . $db->Quote($_last_entry_user_id) . ", " .
+			 	"last_entry_msg_id =" . $db->Quote($_post_id) . ", " .
+			 	"counter_replies =" . $db->Quote($_counter_replies) .
+				" WHERE thread = " . $db->Quote($thread_id) . " AND parent_id='0'";
 
 		$db->setQuery( $sql);
 		
@@ -354,32 +354,32 @@ class CofiHelper extends JObject {
 
 
 			// get latest post id
-			$sql = "SELECT id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id . 
-					"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+			$sql = "SELECT id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+					" AND published='1' ORDER BY DATE DESC LIMIT 1";
 			
 			$db->setQuery( $sql);
 			$_post_id = $db->loadResult();
 	
 		
 			// get latest posting date in this thread
-			$sql = "SELECT date FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id . 
-					"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+			$sql = "SELECT date FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+					" AND published='1' ORDER BY DATE DESC LIMIT 1";
 			
 			$db->setQuery( $sql);
 			$_last_entry_date = $db->loadResult();
 	
 	
 			// get latest posting user_id in this thread
-			$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id . 
-					"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+			$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+					" AND published='1' ORDER BY DATE DESC LIMIT 1";
 			
 			$db->setQuery( $sql);
 			$_last_entry_user_id = $db->loadResult();
 	
 	
 			// get # of replies in this thread
-			$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id . 
-					"' AND published='1' AND parent_id <> '0'";
+			$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+					" AND published='1' AND parent_id <> '0'";
 			
 			$db->setQuery( $sql);
 			$_counter_replies = $db->loadResult();
@@ -389,11 +389,11 @@ class CofiHelper extends JObject {
 			// update thread stats
 			$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
 					" SET " .
-					"last_entry_date ='".$_last_entry_date."', " .
-				 	"last_entry_user_id ='".$_last_entry_user_id."', " . 
-				 	"last_entry_msg_id ='".$_post_id."', " . 
-				 	"counter_replies ='".$_counter_replies."'" . 
-					" WHERE thread = '".$thread_id."' AND parent_id='0'";
+					"last_entry_date =" . $db->Quote($_last_entry_date) . ", " .
+				 	"last_entry_user_id =" . $db->Quote($_last_entry_user_id) . ", " .
+				 	"last_entry_msg_id =" . $db->Quote($_post_id) . ", " .
+				 	"counter_replies =" . $db->Quote($_counter_replies) .
+					" WHERE thread = " . $db->Quote($thread_id) . " AND parent_id='0'";
 	
 			$db->setQuery( $sql);
 			
@@ -416,32 +416,32 @@ class CofiHelper extends JObject {
 
 
 		// get latest posting date in this category
-		$sql = "SELECT date FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='". $category_id . 
-				"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+		$sql = "SELECT date FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=". $db->Quote($category_id) .
+				" AND published='1' ORDER BY DATE DESC LIMIT 1";
 		
 		$db->setQuery( $sql);
 		$_last_entry_date = $db->loadResult();
 
 
 		// get latest posting user_id in this category
-		$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='". $category_id . 
-				"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+		$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=". $db->Quote($category_id) .
+				" AND published='1' ORDER BY DATE DESC LIMIT 1";
 		
 		$db->setQuery( $sql);
 		$_last_entry_user_id = $db->loadResult();
 
 
 		// get # of threads in category
-		$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='". $category_id . 
-				"' AND published='1' AND parent_id = '0'";
+		$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=". $db->Quote($category_id) .
+				" AND published='1' AND parent_id = '0'";
 		
 		$db->setQuery( $sql);
 		$_counter_category_threads = $db->loadResult();
 
 
 		// get # of posts in category
-		$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='". $category_id . 
-				"' AND published='1'";
+		$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=". $db->Quote($category_id) .
+				" AND published='1'";
 		
 		$db->setQuery( $sql);
 		$_counter_category_posts = $db->loadResult();
@@ -449,11 +449,11 @@ class CofiHelper extends JObject {
 
 
 		$sql = "UPDATE ".$db->nameQuote( '#__discussions_categories') . 
-				" SET last_entry_date ='".$_last_entry_date."', " .
-				 "last_entry_user_id ='".$_last_entry_user_id."', " . 
-				 "counter_threads ='".$_counter_category_threads."', " . 
-				 "counter_posts ='".$_counter_category_posts."'" . 
-				" WHERE id = '".$category_id."'";
+				" SET last_entry_date =" . $db->Quote($_last_entry_date) . ", " .
+				 "last_entry_user_id =" . $db->Quote($_last_entry_user_id) . ", " .
+				 "counter_threads =" . $db->Quote($_counter_category_threads) . ", " .
+				 "counter_posts =" . $db->Quote($_counter_category_posts) .
+				" WHERE id = " . $db->Quote($category_id);
 
 		$db->setQuery( $sql);
 
@@ -481,32 +481,32 @@ class CofiHelper extends JObject {
 
 
 			// get latest posting date in this category
-			$sql = "SELECT date FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='". $category_id . 
-					"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+			$sql = "SELECT date FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=". $db->Quote($category_id) .
+					" AND published='1' ORDER BY DATE DESC LIMIT 1";
 			
 			$db->setQuery( $sql);
 			$_last_entry_date = $db->loadResult();
 	
 	
 			// get latest posting user_id in this category
-			$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='". $category_id . 
-					"' AND published='1' ORDER BY DATE DESC LIMIT 1";
+			$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=". $db->Quote($category_id) .
+					" AND published='1' ORDER BY DATE DESC LIMIT 1";
 			
 			$db->setQuery( $sql);
 			$_last_entry_user_id = $db->loadResult();
 	
 	
 			// get # of threads in category
-			$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='". $category_id . 
-					"' AND published='1' AND parent_id = '0'";
+			$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=". $db->Quote($category_id) .
+					" AND published='1' AND parent_id = '0'";
 			
 			$db->setQuery( $sql);
 			$_counter_category_threads = $db->loadResult();
 	
 	
 			// get # of posts in category
-			$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='". $category_id . 
-					"' AND published='1'";
+			$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=". $db->Quote($category_id) .
+					" AND published='1'";
 			
 			$db->setQuery( $sql);
 			$_counter_category_posts = $db->loadResult();
@@ -514,11 +514,11 @@ class CofiHelper extends JObject {
 	
 	
 			$sql = "UPDATE ".$db->nameQuote( '#__discussions_categories') . 
-					" SET last_entry_date ='".$_last_entry_date."', " .
-					 "last_entry_user_id ='".$_last_entry_user_id."', " . 
-					 "counter_threads ='".$_counter_category_threads."', " . 
-					 "counter_posts ='".$_counter_category_posts."'" . 
-					" WHERE id = '".$category_id."'";
+					" SET last_entry_date =" . $db->Quote($_last_entry_date) . ", " .
+					 "last_entry_user_id =" . $db->Quote($_last_entry_user_id) . ", " .
+					 "counter_threads =" . $db->Quote($_counter_category_threads) . ", " .
+					 "counter_posts =" . $db->Quote($_counter_category_posts) .
+					" WHERE id = ".$db->Quote($category_id);
 	
 			$db->setQuery( $sql);
 	
@@ -539,7 +539,7 @@ class CofiHelper extends JObject {
 
 		// get # posts of this user
 		$sql = "SELECT count(*) FROM " . $db->nameQuote('#__discussions_messages') . 
-					" WHERE user_id='". $user_id . "' AND published='1'";
+					" WHERE user_id=" . $db->Quote($user_id) . " AND published='1'";
 		
 		$db->setQuery( $sql);
 		$_count = $db->loadResult();
@@ -547,8 +547,8 @@ class CofiHelper extends JObject {
 					
 		// update user stats
 		$sql = "UPDATE " . $db->nameQuote( '#__discussions_users') . 
-				" SET posts='" . $_count . "'" . 
-				" WHERE id = '" . $user_id . "'";
+				" SET posts=" . $db->Quote($_count) .
+				" WHERE id = " . $db->Quote($user_id);
 
 		$db->setQuery( $sql);
 		
@@ -563,12 +563,11 @@ class CofiHelper extends JObject {
 		$db	=& JFactory::getDBO();		
 
 
-
 		// set WFM to 0 and published to 1
      	$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
 				" SET wfm = '0'" . "," .
 				" published = '1'" .
-				" WHERE id = '".$post_id."'";
+				" WHERE id = " . $db->Quote($post_id);
         
         $db->setQuery( $sql);
 		$db->query();	
@@ -578,20 +577,20 @@ class CofiHelper extends JObject {
 		// update the stats now
 
 		// get user id of this post
-		$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE id='". $post_id . "'";
+		$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE id=" . $db->Quote($post_id);
 		
 		$db->setQuery( $sql);
 		$_user_id = $db->loadResult();
 
 
 		// get thread id of this post
-		$sql = "SELECT thread FROM ".$db->nameQuote('#__discussions_messages')." WHERE id='". $post_id . "'";
+		$sql = "SELECT thread FROM ".$db->nameQuote('#__discussions_messages')." WHERE id=" . $db->Quote($post_id);
 		
 		$db->setQuery( $sql);
 		$_thread_id = $db->loadResult();
 
 		// get category id of this post
-		$sql = "SELECT cat_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE id='". $post_id . "'";
+		$sql = "SELECT cat_id FROM ".$db->nameQuote('#__discussions_messages')." WHERE id=" . $db->Quote($post_id);
 		
 		$db->setQuery( $sql);
 		$_cat_id = $db->loadResult();
@@ -634,7 +633,7 @@ class CofiHelper extends JObject {
 
 
 		// delete denied post from db
-     	$sql = "DELETE FROM ".$db->nameQuote( '#__discussions_messages') . " WHERE id = '".$post_id."'";
+     	$sql = "DELETE FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id = " . $db->Quote($post_id);
         
         $db->setQuery( $sql);
 		$db->query();	
@@ -709,7 +708,7 @@ class CofiHelper extends JObject {
 		$db	=& JFactory::getDBO();		
 
 		// get user id of this post
-		$sql = "SELECT moderated FROM ".$db->nameQuote('#__discussions_categories')." WHERE id='". $cat_id . "'";
+		$sql = "SELECT moderated FROM " . $db->nameQuote('#__discussions_categories') . " WHERE id=" . $db->Quote($cat_id);
 				
 		$db->setQuery( $sql);
 		$_moderated = $db->loadResult();
@@ -727,7 +726,7 @@ class CofiHelper extends JObject {
 
 		$db	=& JFactory::getDBO();		
 
-		$sql = "SELECT name FROM ".$db->nameQuote('#__discussions_categories')." WHERE id='". $id . "'";
+		$sql = "SELECT name FROM " . $db->nameQuote('#__discussions_categories') . " WHERE id=" . $db->Quote($id);
 
 		$db->setQuery( $sql);
 		$categoryname = $db->loadResult();
@@ -748,7 +747,7 @@ class CofiHelper extends JObject {
 
         $sql = "SELECT CASE WHEN CHAR_LENGTH(alias) THEN CONCAT_WS(':', id, alias) ELSE id END as cslug" .
                 " FROM " . $db->nameQuote('#__discussions_categories') .
-                " WHERE id='" . $id . "' AND published='1' AND private='0'";
+                " WHERE id=" . $db->Quote($id) . " AND published='1' AND private='0'";
 
 
         $db->setQuery( $sql);
@@ -770,7 +769,7 @@ class CofiHelper extends JObject {
 
         $sql = "SELECT CASE WHEN CHAR_LENGTH(alias) THEN CONCAT_WS(':', id, alias) ELSE id END as tslug" .
                 " FROM " . $db->nameQuote('#__discussions_messages') .
-                " WHERE id='" . $id . "' AND parent_id='0' AND published='1'";
+                " WHERE id=" . $db->Quote($id) . " AND parent_id='0' AND published='1'";
 
 
         $db->setQuery( $sql);
@@ -834,14 +833,14 @@ class CofiHelper extends JObject {
 				    $sql_categories = "SELECT id, name, " . 
 				    		" CASE WHEN CHAR_LENGTH(alias) THEN CONCAT_WS(':', id, alias) ELSE id END as slug" .
 				    		" FROM ".$db->nameQuote( '#__discussions_categories') . 
-				    		" WHERE parent_id='".$group_id."' AND published='1'" .
+				    		" WHERE parent_id=" . $db->Quote($group_id) . " AND published='1'" .
 				    		" ORDER BY ordering ASC";
 		        }
 		        else {  // get only public published categories in this group
 				    $sql_categories = "SELECT id, name, " .
 				    		" CASE WHEN CHAR_LENGTH(alias) THEN CONCAT_WS(':', id, alias) ELSE id END as slug" .
 				    		" FROM ".$db->nameQuote( '#__discussions_categories') . 
-				    		" WHERE parent_id='".$group_id."' AND private='0' AND published='1'" .
+				    		" WHERE parent_id=" . $db->Quote($group_id) . " AND private='0' AND published='1'" .
 				    		" ORDER BY ordering ASC";        
 		        }        
 
@@ -919,7 +918,7 @@ class CofiHelper extends JObject {
 
 				/* get categories from this group */
 				$sql_categories = "SELECT id, name FROM ".$db->nameQuote( '#__discussions_categories') . 
-				    		" WHERE parent_id='".$group_id."' AND published='1'" .
+				    		" WHERE parent_id=" . $db->Quote($group_id) . " AND published='1'" .
 				    		" ORDER BY ordering ASC";
 
 		        $db->setQuery( $sql_categories);
@@ -959,7 +958,7 @@ class CofiHelper extends JObject {
 
 		$db	=& JFactory::getDBO();		
 
-		$sql = "SELECT username FROM ".$db->nameQuote('#__users')." WHERE id='". $id . "'";
+		$sql = "SELECT username FROM ".$db->nameQuote('#__users')." WHERE id=" . $db->Quote($id);
 				
 		$db->setQuery( $sql);
 		$username = $db->loadResult();
@@ -977,7 +976,7 @@ class CofiHelper extends JObject {
 
    		$db	=& JFactory::getDBO();
 
-   		$sql = "SELECT name FROM ".$db->nameQuote('#__users')." WHERE id='". $id . "'";
+   		$sql = "SELECT name FROM ".$db->nameQuote('#__users')." WHERE id=" . $db->Quote($id);
 
    		$db->setQuery( $sql);
    		$realname = $db->loadResult();
@@ -995,7 +994,7 @@ class CofiHelper extends JObject {
 
 		$db	=& JFactory::getDBO();		
 
-		$sql = "SELECT zipcode FROM ".$db->nameQuote('#__users')." WHERE id='". $id . "'";
+		$sql = "SELECT zipcode FROM ".$db->nameQuote('#__users')." WHERE id=" . $db->Quote($id);
 				
 		$db->setQuery( $sql);
 		$zipcode = $db->loadResult();
@@ -1014,7 +1013,7 @@ class CofiHelper extends JObject {
 
 		$db	=& JFactory::getDBO();		
 
-		$sql = "SELECT city FROM ".$db->nameQuote('#__users')." WHERE id='". $id . "'";
+		$sql = "SELECT city FROM ".$db->nameQuote('#__users')." WHERE id=" . $db->Quote($id);
 				
 		$db->setQuery( $sql);
 		$city = $db->loadResult();
@@ -1033,7 +1032,7 @@ class CofiHelper extends JObject {
 
 		$db	=& JFactory::getDBO();		
 
-		$sql = "SELECT country FROM ".$db->nameQuote('#__users')." WHERE id='". $id . "'";
+		$sql = "SELECT country FROM ".$db->nameQuote('#__users')." WHERE id=" . $db->Quote($id);
 				
 		$db->setQuery( $sql);
 		$country = $db->loadResult();
@@ -1068,7 +1067,7 @@ class CofiHelper extends JObject {
 				case 1: { // Moderators
 
 					// check if user is moderator
-					$sql = "SELECT moderator FROM ".$db->nameQuote('#__discussions_users')." WHERE id='". $id . "'";				
+					$sql = "SELECT moderator FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($id);
 							
 					$db->setQuery( $sql);
 					$_isModerator = $db->loadResult();
@@ -1086,7 +1085,7 @@ class CofiHelper extends JObject {
 				case 2: { // Selected users
 								
 					// check if user is permitted
-					$sql = "SELECT images FROM ".$db->nameQuote('#__discussions_users')." WHERE id='". $id . "'";				
+					$sql = "SELECT images FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($id);
 							
 					$db->setQuery( $sql);
 					$_isImages = $db->loadResult();
@@ -1104,7 +1103,7 @@ class CofiHelper extends JObject {
 				case 3: { // Non rookies
 
 					// check if user is not a rookie anymore
-					$sql = "SELECT rookie FROM ".$db->nameQuote('#__discussions_users')." WHERE id='". $id . "'";				
+					$sql = "SELECT rookie FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($id);
 							
 					$db->setQuery( $sql);
 					$_isRookie = $db->loadResult();
@@ -1147,7 +1146,7 @@ class CofiHelper extends JObject {
 				while ( $plan !== false) {
 				
 					$sql = "SELECT userid FROM ".$db->nameQuote('#__acctexp_subscr') . 
-							" WHERE plan='". $plan . "' AND userid='" . $id . "' AND status='Active' ";
+							" WHERE plan=" . $db->Quote($plan) . " AND userid=" . $db->Quote($id) . " AND status='Active' ";
 														
 					$db->setQuery( $sql);
 					$result = $db->loadResult();
@@ -1228,7 +1227,7 @@ class CofiHelper extends JObject {
 		$db	=& JFactory::getDBO();		
 
 
-		$sql = "SELECT counter_replies + 1 FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $id . "' AND parent_id='0' AND published='1'";
+		$sql = "SELECT counter_replies + 1 FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=" . $db->Quote($id) . " AND parent_id='0' AND published='1'";
 				
 		$db->setQuery( $sql);
 		$result = $db->loadResult();
@@ -1242,8 +1241,8 @@ class CofiHelper extends JObject {
 
 		$db	=& JFactory::getDBO();		
 
-		$sql = "SELECT id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $id . 
-			"' AND published='1' ORDER BY id DESC LIMIT 1";
+		$sql = "SELECT id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($id) .
+			" AND published='1' ORDER BY id DESC LIMIT 1";
 				
 		$db->setQuery( $sql);
 		$result = $db->loadResult();
@@ -1270,8 +1269,8 @@ class CofiHelper extends JObject {
 
         $jumpPoint = ""; // default no jump point
 
-        $sql = "SELECT id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread='". $thread_id .
-            "' AND published='1' ORDER BY date ASC";
+        $sql = "SELECT id FROM ".$db->nameQuote('#__discussions_messages')." WHERE thread=". $db->Quote($thread_id) .
+            " AND published='1' ORDER BY date ASC";
 
         $db->setQuery( $sql);
 
@@ -1324,7 +1323,7 @@ class CofiHelper extends JObject {
 	    $image_folder = $rootDir . "/images/discussions/posts/" . $thread . "/";    
 		
         // get image name
-        $sql = "SELECT " . $image . " FROM #__discussions_messages WHERE id=".$id;	
+        $sql = "SELECT " . $image . " FROM #__discussions_messages WHERE id=" . $db->Quote($id);
 		$db->setQuery( $sql);
 		$imagename = $db->loadResult();
 
@@ -1356,7 +1355,7 @@ class CofiHelper extends JObject {
 
 		$db	=& JFactory::getDBO();		
 
-        $sql = "SELECT thread FROM #__discussions_messages WHERE id=".$id;	
+        $sql = "SELECT thread FROM #__discussions_messages WHERE id=" . $db->Quote($id);
 		$db->setQuery( $sql);
 		$thread = $db->loadResult();
 				
@@ -1364,7 +1363,7 @@ class CofiHelper extends JObject {
 
 		// 1. delete all existing images for this post
         // get image names
-        $sql = "SELECT image1, image2, image3, image4, image5 FROM #__discussions_messages WHERE id=".$id;
+        $sql = "SELECT image1, image2, image3, image4, image5 FROM #__discussions_messages WHERE id=" . $db->Quote($id);
 		$db->setQuery( $sql);
 		$rows = $db->loadObjectList();
 
@@ -1432,7 +1431,7 @@ class CofiHelper extends JObject {
             
 
             $sql = "SELECT user_id, DATE_FORMAT( date, '" . $_dateformat . " " . $_timeformat . "') AS rdate, message FROM ".$db->nameQuote('#__discussions_messages') .
-                    " WHERE thread='" . $id . "' AND published='1' ORDER BY date DESC LIMIT " . $number;
+                    " WHERE thread=" . $db->Quote($id) . " AND published='1' ORDER BY date DESC LIMIT " . $number;
 
             $db->setQuery( $sql);
             $rows = $db->loadObjectList();
@@ -1510,7 +1509,7 @@ class CofiHelper extends JObject {
 
 		$sql = 'SELECT count(*)' .
 				' FROM #__session' .
-				' WHERE userid=' . $id ;			
+				' WHERE userid=' . $db->Quote($id) ;
 							
 		$db->setQuery( $sql);
 		$_count = $db->loadResult();
@@ -1529,7 +1528,7 @@ class CofiHelper extends JObject {
 
         $db	=& JFactory::getDBO();
 
-        $sql = "SELECT avatar FROM ".$db->nameQuote('#__discussions_users')." WHERE id='". $id . "'";
+        $sql = "SELECT avatar FROM ".$db->nameQuote('#__discussions_users')." WHERE id=". $db->Quote($id);
 
         $db->setQuery( $sql);
         $avatar = $db->loadResult();

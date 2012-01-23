@@ -245,7 +245,7 @@ class DiscussionsModelCategory extends JModel {
 		
 			$db	=& JFactory::getDBO();
 
-			$sql = "SELECT count(*) FROM " . $db->nameQuote('#__discussions_messages') . " WHERE cat_id='".$_catid."' AND parent_id='0' AND published='1'";
+			$sql = "SELECT count(*) FROM " . $db->nameQuote('#__discussions_messages') . " WHERE cat_id=" . $db->Quote($_catid) . " AND parent_id='0' AND published='1'";
 			
 			$db->setQuery( $sql);
 
@@ -300,7 +300,7 @@ class DiscussionsModelCategory extends JModel {
                     		counter_replies, DATE_FORMAT( last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date,
                     		last_entry_user_id, hits, locked, sticky, published
 						FROM ".$db->nameQuote('#__discussions_messages')."
-						WHERE cat_id='".$_catid."' AND parent_id='0' AND published='1'
+						WHERE cat_id=" . $db->Quote($_catid) . " AND parent_id='0' AND published='1'
 						ORDER BY sticky DESC, last_entry_msg_id DESC";
 
         return $selectQuery;
@@ -314,10 +314,8 @@ class DiscussionsModelCategory extends JModel {
 	 * @return integer
 	 */
 	function getCategoryId() {
-     	$this->_categoryId = JRequest::getVar('catid', 0);
+     	$this->_categoryId = JRequest::getInt('catid', 0);
 
-		list( $this->_categoryId, $this->_categoryAlias) = explode(':', $this->_categoryId, 2);     	
-     	
 		return $this->_categoryId;
 	}
 
@@ -349,7 +347,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryNameQuery = "SELECT name FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $categoryNameQuery = "SELECT name FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryNameQuery);
             $this->_categoryName = $db->loadResult();
@@ -371,7 +369,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryDescriptionQuery = "SELECT description FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $categoryDescriptionQuery = "SELECT description FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryDescriptionQuery);
             $this->_categoryDescription = $db->loadResult();
@@ -393,7 +391,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryImageQuery = "SELECT image FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $categoryImageQuery = "SELECT image FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryImageQuery);
             $this->_categoryImage = $db->loadResult();
@@ -416,7 +414,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $forumBannerTopQuery = "SELECT banner_top FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id='" . $_catid . "'";
+            $forumBannerTopQuery = "SELECT banner_top FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $forumBannerTopQuery);
             $this->_forumBannerTop = $db->loadResult();
@@ -439,7 +437,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $forumBannerBottomQuery = "SELECT banner_bottom FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id='" . $_catid . "'";
+            $forumBannerBottomQuery = "SELECT banner_bottom FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $forumBannerBottomQuery);
             $this->_forumBannerBottom = $db->loadResult();
@@ -461,7 +459,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT private FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $sql = "SELECT private FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $sql);
             $this->_privateStatus = $db->loadResult();
@@ -484,7 +482,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT parent_id FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."' AND parent_id<>'0'";
+            $sql = "SELECT parent_id FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid) . " AND parent_id<>'0'";
 
             $db->setQuery( $sql);
             $this->_existStatus = $db->loadResult();
@@ -509,7 +507,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryMetaTitleQuery = "SELECT meta_title FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id='" . $_catid . "'";
+            $categoryMetaTitleQuery = "SELECT meta_title FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryMetaTitleQuery);
             $this->_categoryMetaTitle = $db->loadResult();
@@ -533,7 +531,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryMetaDescriptionQuery = "SELECT meta_description FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id='" . $_catid . "'";
+            $categoryMetaDescriptionQuery = "SELECT meta_description FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryMetaDescriptionQuery);
             $this->_categoryMetaDescription = $db->loadResult();
@@ -557,7 +555,7 @@ class DiscussionsModelCategory extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryMetaKeywordsQuery = "SELECT meta_keywords FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id='" . $_catid . "'";
+            $categoryMetaKeywordsQuery = "SELECT meta_keywords FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryMetaKeywordsQuery);
             $this->_categoryMetaKeywords = $db->loadResult();
@@ -589,7 +587,7 @@ class DiscussionsModelCategory extends JModel {
 							CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(':', c.id, c.alias) ELSE c.id END as cslug,
 							m.date, m.published, c.name	as category		 
 						FROM " . $db->nameQuote('#__discussions_messages') . " m, " . $db->nameQuote('#__discussions_categories') . " c " .
-                            " WHERE m.cat_id=" . $_catid . " AND m.parent_id=0 AND m.cat_id=c.id AND m.published=1 AND c.private=0" .
+                            " WHERE m.cat_id=" . $db->Quote($_catid) . " AND m.parent_id=0 AND m.cat_id=c.id AND m.published=1 AND c.private=0" .
 						    " ORDER BY m.date DESC";
 						    						    
 		$this->_rss_data = $this->_getList( $selectQuery, '0', $rssSize);

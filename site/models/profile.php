@@ -330,7 +330,7 @@ class DiscussionsModelProfile extends JModel {
 					", youtube = " . $db->Quote( $this->_youtube) .
                     ", googleplus = " . $db->Quote( $this->_googleplus) .
 					", show_online_status = " . $db->Quote( $this->_show_online_status) .
-					" WHERE id = '".$user->id."'";
+					" WHERE id = " . $db->Quote($user->id);
 
 	$db->setQuery( $sql);
 	$db->query();
@@ -359,7 +359,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT signature FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT signature FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_signature = $db->loadResult();
@@ -383,7 +383,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT zipcode FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT zipcode FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_zipcode = $db->loadResult();
@@ -406,7 +406,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT city FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT city FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_city = $db->loadResult();
@@ -429,7 +429,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT country FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT country FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_country = $db->loadResult();
@@ -452,7 +452,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT website FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT website FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_website = $db->loadResult();
@@ -475,7 +475,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT twitter FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT twitter FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_twitter = $db->loadResult();
@@ -498,7 +498,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT facebook FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT facebook FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_facebook = $db->loadResult();
@@ -521,7 +521,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT flickr FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT flickr FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_flickr = $db->loadResult();
@@ -544,7 +544,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT youtube FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT youtube FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_youtube = $db->loadResult();
@@ -567,7 +567,7 @@ class DiscussionsModelProfile extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT googleplus FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+            $sql = "SELECT googleplus FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 
             $db->setQuery( $sql);
             $this->_googleplus = $db->loadResult();
@@ -590,7 +590,7 @@ class DiscussionsModelProfile extends JModel {
 			
         	$db =& $this->getDBO();
 
-			$sql = "SELECT show_online_status FROM ".$db->nameQuote('#__discussions_users')." WHERE id='".$this->_userid."'";
+			$sql = "SELECT show_online_status FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
 			
             $db->setQuery( $sql);
             $this->_show_online_status = $db->loadResult();

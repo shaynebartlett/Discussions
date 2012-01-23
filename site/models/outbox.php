@@ -37,7 +37,7 @@ class DiscussionsModelOutbox extends JModel {
 
 
 		// Get the pagination request variables
-		$this->setState('limit', $app->getUserStateFromRequest('com_primezilla.limit', 'limit', $config->getValue('config.list_limit'), 'int'));
+		$this->setState('limit', $app->getUserStateFromRequest('com_discussions.limit', 'limit', $config->getValue('config.list_limit'), 'int'));
 		$this->setState('limitstart', JRequest::getVar('limitstart', 0, '', 'int'));
 
 
@@ -52,7 +52,7 @@ class DiscussionsModelOutbox extends JModel {
 	      		$whereclause="";
 	        	$tok = strtok( $_selmsg, " ");
 	        	while ($tok !== false) {
-	            	$whereclause .= "id='".$tok."'";
+	            	$whereclause .= "id=" . $db->Quote($tok);
 	            	$tok = strtok(" ");
 	            	if( $tok !== false) {
 	                	$whereclause .= " OR ";
@@ -147,7 +147,7 @@ class DiscussionsModelOutbox extends JModel {
 							subject, message, 
 							flag_read, flag_answered, flag_deleted
 						FROM " . $db->nameQuote( '#__discussions_messages_outbox') . "
-						WHERE user_id = '" . $_user_id . "' AND flag_deleted != '1'
+						WHERE user_id = " . $db->Quote($_user_id) . " AND flag_deleted != '1'
 						ORDER BY id DESC";
 
         return $selectQuery;
@@ -162,7 +162,7 @@ class DiscussionsModelOutbox extends JModel {
 
         $db =& $this->getDBO();
 
-		$countQuery = "SELECT * FROM " . $db->nameQuote( '#__discussions_messages_outbox')." WHERE user_id = '" . $_user_id . "' AND flag_deleted != '1'";
+		$countQuery = "SELECT * FROM " . $db->nameQuote( '#__discussions_messages_outbox')." WHERE user_id = " . $db->Quote($_user_id) . " AND flag_deleted != '1'";
 		return $countQuery;
 	}
 

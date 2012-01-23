@@ -189,7 +189,7 @@ class DiscussionsModelThread extends JModel {
 
          $app = JFactory::getApplication();
 
-     	$_catid = JRequest::getVar('catid', 0);
+     	$_catid = JRequest::getInt('catid', 0);
 
         $_categoryId = $_catid;
 
@@ -272,8 +272,8 @@ class DiscussionsModelThread extends JModel {
 
 
 	function _buildSelectQuery() {
-     	$_catid  = JRequest::getVar('catid', 0);
-     	$_thread = JRequest::getVar('thread', 0);
+     	$_catid  = JRequest::getInt('catid', 0);
+     	$_thread = JRequest::getInt('thread', 0);
 
         $params = JComponentHelper::getParams('com_discussions');        
 		$_dateformat	= $params->get( 'dateformat', '%d.%m.%Y');
@@ -290,7 +290,7 @@ class DiscussionsModelThread extends JModel {
                     image5, image5_description,
                     published
 					FROM ".$db->nameQuote('#__discussions_messages')."
-					WHERE cat_id='".$_catid."' AND thread='".$_thread."' AND published='1'
+					WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND published='1'
 					ORDER BY id ASC";
 
         return $selectQuery;
@@ -299,12 +299,12 @@ class DiscussionsModelThread extends JModel {
 
 
 	function _buildCountQuery() {
-     	$_catid  = JRequest::getVar('catid', 0);
-     	$_thread = JRequest::getVar('thread', 0);
+     	$_catid  = JRequest::getInt('catid', 0);
+     	$_thread = JRequest::getInt('thread', 0);
 
         $db =& $this->getDBO();
 
-		$countQuery = "SELECT * FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id='".$_catid."' AND thread='".$_thread."' AND published='1'";
+		$countQuery = "SELECT * FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND published='1'";
 		return $countQuery;
 	}
 
@@ -317,10 +317,8 @@ class DiscussionsModelThread extends JModel {
 	 * @return integer
 	 */
 	function getCategoryId() {
-     	$this->_categoryId = JRequest::getVar('catid', 0);
+     	$this->_categoryId = JRequest::getInt('catid', 0);
 
-		list( $this->_categoryId, $this->_categoryAlias) = explode(':', $this->_categoryId, 2);     	
-     	
 		return $this->_categoryId;
 	}
 
@@ -347,11 +345,11 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getCategoryName() {
 		if ( empty( $this->_categoryName)) {
-            $_catid = JRequest::getVar('catid', 0);
+            $_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
 
-            $categoryNameQuery = "SELECT name FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $categoryNameQuery = "SELECT name FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryNameQuery);
             $this->_categoryName = $db->loadResult();
@@ -368,11 +366,11 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getCategoryDescription() {
 		if ( empty( $this->_categoryDescription)) {
-            $_catid = JRequest::getVar('catid', 0);
+            $_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
 
-            $categoryDescriptionQuery = "SELECT description FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $categoryDescriptionQuery = "SELECT description FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryDescriptionQuery);
             $this->_categoryDescription = $db->loadResult();
@@ -389,11 +387,11 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getCategoryImage() {
 		if ( empty( $this->_categoryImage)) {
-            $_catid = JRequest::getVar('catid', 0);
+            $_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
 
-            $categoryImageQuery = "SELECT image FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $categoryImageQuery = "SELECT image FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=".$db->Quote($_catid);
 
             $db->setQuery( $categoryImageQuery);
             $this->_categoryImage = $db->loadResult();
@@ -410,11 +408,11 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getForumBannerTop() {
 		if ( empty( $this->_forumBannerTop)) {
-            $_catid = JRequest::getVar('catid', 0);
+            $_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
 
-            $forumBannerTopQuery = "SELECT banner_top FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $forumBannerTopQuery = "SELECT banner_top FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $forumBannerTopQuery);
             $this->_forumBannerTop = $db->loadResult();
@@ -430,11 +428,11 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getForumBannerBottom() {
 		if ( empty( $this->_forumBannerBottom)) {
-            $_catid = JRequest::getVar('catid', 0);
+            $_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
 
-            $forumBannerBottomQuery = "SELECT banner_bottom FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $forumBannerBottomQuery = "SELECT banner_bottom FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $forumBannerBottomQuery);
             $this->_forumBannerBottom = $db->loadResult();
@@ -454,13 +452,13 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getSubject() {
 		if ( empty( $this->_subject)) {
-            $_catid  = JRequest::getVar('catid', 0);
-            $_thread = JRequest::getVar('thread', 0);
+            $_catid  = JRequest::getInt('catid', 0);
+            $_thread = JRequest::getInt('thread', 0);
 
             $db =& $this->getDBO();
 
             $subjectQuery = "SELECT subject FROM ".$db->nameQuote( '#__discussions_messages')." 
-                                WHERE cat_id='".$_catid."' AND thread='".$_thread."' AND parent_id='0' AND published='1' ";
+                                WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' AND published='1' ";
 
 
             $db->setQuery( $subjectQuery);
@@ -479,7 +477,7 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getThread() {
 		if ( empty( $this->_threadId)) {
-            $this->_thread = JRequest::getVar('thread', 0);
+            $this->_thread = JRequest::getInt('thread', 0);
 		}
 
 		return $this->_thread;
@@ -493,10 +491,8 @@ class DiscussionsModelThread extends JModel {
 	 * @return integer
 	 */
 	function getThreadId() {
-     	$this->_threadId = JRequest::getVar('thread', 0);
+     	$this->_threadId = JRequest::getInt('thread', 0);
 
-		list( $this->_threadId, $this->_threadAlias) = explode(':', $this->_threadId, 2);     	
-     	
 		return $this->_threadId;
 	}
 
@@ -524,13 +520,13 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getStickyStatus() {
 	
-    	$_catid  = JRequest::getVar('catid', 0);
-        $_thread = JRequest::getVar('thread', 0);
+    	$_catid  = JRequest::getInt('catid', 0);
+        $_thread = JRequest::getInt('thread', 0);
 
         $db =& $this->getDBO();
 
         $sql = "SELECT sticky FROM ".$db->nameQuote( '#__discussions_messages')." 
-                                WHERE cat_id='".$_catid."' AND thread='".$_thread."' AND parent_id='0' ";
+                                WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' ";
 
 
         $db->setQuery( $sql);
@@ -548,13 +544,13 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getLockedStatus() {
 	
-    	$_catid  = JRequest::getVar('catid', 0);
-        $_thread = JRequest::getVar('thread', 0);
+    	$_catid  = JRequest::getInt('catid', 0);
+        $_thread = JRequest::getInt('thread', 0);
 
         $db =& $this->getDBO();
 
         $sql = "SELECT locked FROM ".$db->nameQuote( '#__discussions_messages')." 
-                                WHERE cat_id='".$_catid."' AND thread='".$_thread."' AND parent_id='0' ";
+                                WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' ";
 
 
         $db->setQuery( $sql);
@@ -573,11 +569,11 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getPrivateStatus() {
 		if ( empty( $this->_privateStatus)) {
-            $_catid = JRequest::getVar('catid', 0);
+            $_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT private FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."'";
+            $sql = "SELECT private FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $sql);
             $this->_privateStatus = $db->loadResult();
@@ -595,11 +591,11 @@ class DiscussionsModelThread extends JModel {
 	 */
 	function getExistStatus() {
 		if ( empty( $this->_existStatus)) {
-            $_catid = JRequest::getVar('catid', 0);
+            $_catid = JRequest::getInt('catid', 0);
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT parent_id FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id='".$_catid."' AND parent_id<>'0'";
+            $sql = "SELECT parent_id FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid) . " AND parent_id<>'0'";
 
             $db->setQuery( $sql);
             $this->_existStatus = $db->loadResult();
@@ -620,13 +616,13 @@ class DiscussionsModelThread extends JModel {
 	
 		if ( empty( $this->_metaDescription)) {
 		
-            $_catid  = JRequest::getVar('catid', 0);
-            $_thread = JRequest::getVar('thread', 0);
+            $_catid  = JRequest::getInt('catid', 0);
+            $_thread = JRequest::getInt('thread', 0);
 
             $db =& $this->getDBO();
 
             $query = "SELECT message FROM ".$db->nameQuote( '#__discussions_messages')." 
-                                WHERE cat_id='".$_catid."' AND thread='".$_thread."' AND parent_id='0' AND published='1' ";
+                                WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' AND published='1' ";
 
 
             $db->setQuery( $query);
@@ -654,7 +650,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $query = "SELECT meta_keywords FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id='" . $_catid . "'";
+            $query = "SELECT meta_keywords FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $query);
             $this->_metaKeywords = $db->loadResult();
