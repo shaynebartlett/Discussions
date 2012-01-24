@@ -539,7 +539,7 @@ if ( $showBreadcrumbRow == "1") {
 		                    $_username = strtolower( $opUserUsername);
 		                    
 		                    
-							$linkMessages  = JRoute::_( 'index.php?option=com_discussions&view=message&task=new&userid=' . $posting->user_id);
+							$linkMessages  = JRoute::_( 'index.php?option=com_discussions&view=message&task=msg_new&userid=' . $posting->user_id);
 
 	            			echo "<a href='" . $linkMessages . "' title='" . JText::_( 'COFI_MESSAGE_TO' ) . " " . $opUserUsername . "' >";
 							echo "<img src='" . $_root . "components/com_discussions/assets/icons/pn_16.png' style='margin: 10px 5px 10px 5px;' />";

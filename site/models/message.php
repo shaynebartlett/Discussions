@@ -153,7 +153,7 @@ class DiscussionsModelMessage extends JModel {
 
 		if ( $user->guest) { // user is not logged in
 			$redirectLink = JRoute::_( "index.php?option=com_discussions");
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_NOT_LOGGED_IN' ), "notice");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_NOT_LOGGED_IN' ), "notice");
 		}
 
 
@@ -165,25 +165,25 @@ class DiscussionsModelMessage extends JModel {
 				
 		switch ( $this->_task) {
 		
-			case "new": {
+			case "msg_new": {
 				//$this->_headline = "New Thread";
 				break;
 			}
 			
-			case "reply": {
+			case "msg_reply": {
 				break;
 			}
 			
-			case "quote": {
+			case "msg_quote": {
 				break;
 			}
 
-			case "delete": {
+			case "msg_idelete": {
  				$this->deleteInboxMessage();
 				break;
 			}
 
-			case "odelete": {
+			case "msg_odelete": {
  				$this->deleteOutboxMessage();
 				break;
 			}
@@ -418,7 +418,7 @@ class DiscussionsModelMessage extends JModel {
 		$cHelper = new CofiHelper();
 
 		// redirect	link
-		$redirectLink = JRoute::_( "index.php?option=com_discussions&view=inbox");
+		$redirectLink = JRoute::_( "index.php?option=com_discussions&view=inbox&task=inbox");
 
 
 
@@ -430,7 +430,7 @@ class DiscussionsModelMessage extends JModel {
 
 		// check if Id exists
 		if ( $_postReceiverId == 0) { // this user does not exist or is blocked
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_USER_NOT_EXISTS' ), "notice");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_USER_NOT_EXISTS' ), "notice");
 		}								
 				
 		$_postSubject   = JRequest::getString('postSubject', '');				
@@ -443,7 +443,7 @@ class DiscussionsModelMessage extends JModel {
         // check if user is logged in - maybe session has timed out
 		if ($user->guest) { 
 			// if user is not logged in, kick him back into category
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGE_HAS_NOT_BEEN_SENT_SESSION' ), "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_SENT_SESSION' ), "message");
     		
 		} 
         
@@ -566,7 +566,7 @@ class DiscussionsModelMessage extends JModel {
 			
 				
 		// redirect	link
-		$redirectLink = JRoute::_( "index.php?option=com_discussions&view=inbox");
+		$redirectLink = JRoute::_( "index.php?option=com_discussions&view=inbox&task=inbox");
 		        
 	    
 	    // check if user is logged in - maybe session has timed out

@@ -144,6 +144,12 @@ function DiscussionsParseRoute( $segments) {
             		break;
             	}
 
+                case 'msg_new': {
+                    $vars['view'] = "message";
+            		$vars['task'] = "msg_new";
+            	    break;
+            	}
+
 				case 'approve': {
         			$vars['view'] = "moderation";
         			$vars['task']  = $segments[0];
@@ -226,13 +232,40 @@ function DiscussionsParseRoute( $segments) {
             		break;
             	}
 
-                case 'reply': {
+                case 'msg_new': {
+                    $vars['view'] = "message";
+            		$vars['task'] = "msg_new";
+            		$vars['userid'] = $segments[1]; // userid
+            	    break;
+            	}
+
+                case 'msg_reply': {
                     $vars['view']   = "message";
-            		$vars['task'] 	= "reply";
+            		$vars['task'] 	= "msg_reply";
             		$vars['id'] 	= $segments[1]; // message id
             		break;
             	}
 
+                case 'msg_quote': {
+                    $vars['view']   = "message";
+            		$vars['task'] 	= "msg_quote";
+            		$vars['id'] 	= $segments[1]; // message id
+            		break;
+            	}
+
+                case 'msg_idelete': {
+                    $vars['view'] 	= "message";
+            		$vars['task'] 	= "msg_idelete";
+            		$vars['id'] 	= $segments[1]; // message id
+            		break;
+            	}
+
+                case 'msg_odelete': {
+                    $vars['view'] 	= "message";
+            		$vars['task'] 	= "msg_odelete";
+            		$vars['id'] 	= $segments[1]; // message id
+            		break;
+            	}
 
 
 				default: {	

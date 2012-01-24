@@ -78,7 +78,7 @@ $cHelper = new CofiHelper();
 
 // check if this is the owner of this message
 
-if ( $this->task == "new") {
+if ( $this->task == "msg_new") {
 	// do nothing for now
 }
 else {
@@ -91,7 +91,7 @@ else {
 			}
 			
 			default: {
-				$redirectLink = JRoute::_( "index.php?option=com_discussions&view=inbox");
+				$redirectLink = JRoute::_( "index.php?option=com_discussions&view=inbox&task=inbox");
 				break;
 			}
 		}
@@ -131,7 +131,7 @@ if ( $htmlBoxMessageTop != "") {
 
 
 <?php
-//include( 'components/com_primezilla/includes/topmenu.php');
+include( 'components/com_discussions/includes/topmenu.php');
 ?>
 
 
@@ -193,18 +193,18 @@ if ( $htmlBoxMessageTop != "") {
 				
 					switch ( $this->task) {
 					
-						case "new": {
+						case "msg_new": {
 							echo JText::_( 'COFI_MESSAGES_NEW_MESSAGE' );
 							break;
 						}
 
-						case "reply": {
+						case "msg_reply": {
 							echo JText::_( 'COFI_MESSAGES_REPLY_MESSAGE' );
 				        	$_user_from = $cHelper->getUsernameById( $this->user_from_id);
 							break;
 						}
 
-						case "quote": {
+						case "msg_quote": {
 							echo JText::_( 'COFI_MESSAGES_QUOTE_MESSAGE' );
 				        	$_user_from = $cHelper->getUsernameById( $this->user_from_id);
 							break;
@@ -272,7 +272,7 @@ if ( $htmlBoxMessageTop != "") {
 
 <?php
 
-if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
+if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "msg_quote") {
     echo "<form action='' method='post' name='postform' id='postform'>";
 
     	echo "<table cellspacing='1' cellpadding='0' width='100%' class='noborder'>";
@@ -286,7 +286,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
    					   					
    						switch ( $this->task) {
 
-							case "new": {
+							case "msg_new": {
 		            			echo "<div class='cofiSubject'>";
 
 		            				if ( $this->receiver_userid > 0) {
@@ -309,8 +309,8 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
 							}   						
    						
 
-							case "reply": 
-							case "quote": {
+							case "msg_reply":
+							case "msg_quote": {
 		            			echo "<div class='cofiSubject'>";
 		            				echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' value='" . $_user_from . "' readonly>";
 		            			echo "</div>";		            			
@@ -339,7 +339,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
    					
    						switch ( $this->task) {
 
-							case "new": {
+							case "msg_new": {
 		            			echo "<div class='cofiSubject'>";
             						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80'>";	
 		            			echo "</div>";		            			
@@ -348,8 +348,8 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
 							}   						
    						
 
-							case "reply": 
-							case "quote": {
+							case "msg_reply":
+							case "msg_quote": {
 		            			echo "<div class='cofiSubject'>";		            			
 		            				// shorten subject, remove multiple Re:
 		            				$_subject = $this->messageSubject;
@@ -378,7 +378,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
    					   			
    					echo "<div class='cofiText'>";		
    					
-   						if ( $this->task == "quote") {
+   						if ( $this->task == "msg_quote") {
    							echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText'>";
 	   							if ( $logUser->getMessagesUseSignature() == 1 && $logUser->getMessagesUseSignatureForReplies() == 1) { // use the users signature for quote
 	   								echo "\n\n\n";
@@ -390,7 +390,7 @@ if ( $this->task == "new" || $this->task == "reply" || $this->task == "quote") {
    						}
    						else { // blank textarea
    							echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText'>";   							
-   								if ( $this->task == "reply") {
+   								if ( $this->task == "msg_reply") {
 		   							if ( $logUser->getMessagesUseSignature() == 1 && $logUser->getMessagesUseSignatureForReplies() == 1) { // use the users signature for reply
 		   								echo "\n\n\n";
 		   								echo $logUser->getMessagesSignature();
@@ -450,7 +450,7 @@ else { // display message
 	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/reply.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
 	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
-	            	$menuLinkReplyTMP = "index.php?option=com_discussions&view=message&task=reply&id=" . $this->id;
+	            	$menuLinkReplyTMP = "index.php?option=com_discussions&view=message&task=msg_reply&id=" . $this->id;
 	            	$menuLinkReply = JRoute::_( $menuLinkReplyTMP);
 	            	echo "<a href='".$menuLinkReply."'>" . JText::_( 'COFI_MESSAGES_REPLY_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
@@ -465,7 +465,7 @@ else { // display message
 	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/quote.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
 	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
-	            	$menuLinkQuoteTMP = "index.php?option=com_discussions&view=message&task=quote&id=" . $this->id;
+	            	$menuLinkQuoteTMP = "index.php?option=com_discussions&view=message&task=msg_quote&id=" . $this->id;
 	            	$menuLinkQuote = JRoute::_( $menuLinkQuoteTMP);
 	            	echo "<a href='".$menuLinkQuote."'>" . JText::_( 'COFI_MESSAGES_QUOTE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
@@ -480,7 +480,7 @@ else { // display message
 	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/delete.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
 	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
-	            	$menuLinkDeleteTMP = "index.php?option=com_discussions&view=message&task=delete&id=" . $this->id;
+	            	$menuLinkDeleteTMP = "index.php?option=com_discussions&view=message&task=msg_idelete&id=" . $this->id;
 	            	$menuLinkDelete = JRoute::_( $menuLinkDeleteTMP);
 	            	echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_MESSAGES_DELETE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
@@ -501,7 +501,7 @@ else { // display message
 	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/delete.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
 	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
-	            	$menuLinkDeleteTMP = "index.php?option=com_discussions&view=message&task=odelete&id=" . $this->id;
+	            	$menuLinkDeleteTMP = "index.php?option=com_discussions&view=message&task=msg_odelete&id=" . $this->id;
 	            	$menuLinkDelete = JRoute::_( $menuLinkDeleteTMP);
 	            	echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_MESSAGES_DELETE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      

@@ -107,7 +107,7 @@ include( 'components/com_discussions/includes/topmenu.php');
             	echo "<img src='" . $_root . "/components/com_discussions/assets/threads/new.png' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
         	echo "</td>";
         	echo "<td align='left' valign='middle' class='noborder' style='border: 0px;'>";
-            	$menuLinkNewTMP = "index.php?option=com_discussions&view=message&task=new";
+            	$menuLinkNewTMP = "index.php?option=com_discussions&view=message&task=msg_new";
             	$menuLinkNew = JRoute::_( $menuLinkNewTMP);
             	echo "<a href='".$menuLinkNew."'>" . JText::_( 'COFI_MESSAGES_NEW_MESSAGE' ) . "</a>";
         	echo "</td>";        
