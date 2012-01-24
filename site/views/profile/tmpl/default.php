@@ -279,7 +279,7 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
 					
 						echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_TEXT' ) . ":</div> ";
 							echo "<div class='cofiText'>";			    			
-								echo "<textarea name='signature' cols='70' rows='3' wrap='VIRTUAL' id='signature'>";
+								echo "<textarea name='signature' cols='70' rows='5' wrap='VIRTUAL' id='signature'>";
 										echo $this->signature;
 							echo "</textarea>";
 						echo "</div>";
@@ -392,6 +392,119 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
 
 
 
+
+
+echo "<tr>";
+
+	echo "<td align='left' valign='top' class='noborder' style='padding: 5px;' colspan='2'>";
+
+		echo "<div class='cofiProfileFollowMeBox'>";
+
+
+			echo "<div class='cofiProfileFollowMeHeader'>";
+				echo "<div class='cofiProfileHeader'>";
+					echo JText::_( 'COFI_MESSAGES_SETTINGS' );
+	    		echo "</div>";
+	    	echo "</div>";
+
+
+		    // messages_email_notifications
+			echo "<div class='cofiProfileFollowMeRow'>";
+
+				echo "<div class='cofiProfileFollowMeLabel'  style='width: 200px;'>" . JText::_( 'COFI_MESSAGES_EMAIL_NOTIFICATIONS' ) . ":</div> ";
+
+				echo "<div class='cofiProfileFollowMeValue'>";
+
+					echo "<select id='messages_email_notifications' name='messages_email_notifications'>";
+						if ( $this->messages_email_notifications == 0) {
+							echo "<option value='1'>" . JText::_( 'COFI_YES' ) . "</option>";
+							echo "<option value='0' selected='selected'>" . JText::_( 'COFI_NO' ) . "</option>";
+						}
+						else {
+							echo "<option value='1' selected='selected'>" . JText::_( 'COFI_YES' ) . "</option>";
+							echo "<option value='0'>" . JText::_( 'COFI_NO' ) . "</option>";
+						}
+					echo "</select>";
+
+				echo "</div>";
+
+		    echo "</div>";
+
+
+
+            // messages_use_signature
+            echo "<div class='cofiProfileFollowMeRow'>";
+
+                echo "<div class='cofiProfileFollowMeLabel'  style='width: 200px;'>" . JText::_( 'COFI_MESSAGES_USE_SIGNATURE' ) . ":</div> ";
+
+                echo "<div class='cofiProfileFollowMeValue'>";
+
+                    echo "<select id='messages_use_signature' name='messages_use_signature'>";
+                        if ( $this->messages_use_signature == 0) {
+                            echo "<option value='1'>" . JText::_( 'COFI_YES' ) . "</option>";
+                            echo "<option value='0' selected='selected'>" . JText::_( 'COFI_NO' ) . "</option>";
+                        }
+                        else {
+                            echo "<option value='1' selected='selected'>" . JText::_( 'COFI_YES' ) . "</option>";
+                            echo "<option value='0'>" . JText::_( 'COFI_NO' ) . "</option>";
+                        }
+                    echo "</select>";
+
+                echo "</div>";
+
+            echo "</div>";
+
+
+            // messages_use_signature_for_replies
+            echo "<div class='cofiProfileFollowMeRow'>";
+
+                echo "<div class='cofiProfileFollowMeLabel'  style='width: 200px;'>" . JText::_( 'COFI_MESSAGES_USE_SIGNATURE_FOR_REPLIES' ) . ":</div> ";
+
+                echo "<div class='cofiProfileFollowMeValue'>";
+
+                    echo "<select id='messages_use_signature_for_replies' name='messages_use_signature_for_replies'>";
+                        if ( $this->messages_use_signature_for_replies == 0) {
+                            echo "<option value='1'>" . JText::_( 'COFI_YES' ) . "</option>";
+                            echo "<option value='0' selected='selected'>" . JText::_( 'COFI_NO' ) . "</option>";
+                        }
+                        else {
+                            echo "<option value='1' selected='selected'>" . JText::_( 'COFI_YES' ) . "</option>";
+                            echo "<option value='0'>" . JText::_( 'COFI_NO' ) . "</option>";
+                        }
+                    echo "</select>";
+
+                echo "</div>";
+
+            echo "</div>";
+
+
+            // messages_signature
+            echo "<div class='cofiProfileSignatureRow'>";
+
+                echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_MESSAGES_SIGNATURE' ) . ":</div> ";
+                    echo "<div class='cofiText'>";
+                        echo "<textarea name='messages_signature' cols='70' rows='5' wrap='VIRTUAL' id='messages_signature'>";
+                                echo $this->messages_signature;
+                    echo "</textarea>";
+                echo "</div>";
+
+                echo "<div class='cofiTextFooter'>" . JText::_( 'COFI_MESSAGES_SIGNATURE_INFO' ) . "</div> ";
+
+           echo "</div>";
+
+
+
+	    echo "</div>";
+
+	echo "</td>";
+echo "</tr>";
+
+
+
+
+
+
+
 		echo "<tr>";
 		
 			echo "<td align='left' valign='top' class='noborder' style='padding: 5px;' colspan='2'>";
@@ -409,7 +522,7 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
 				    // show online status
 					echo "<div class='cofiProfileFollowMeRow'>";
 					
-						echo "<div class='cofiProfileFollowMeLabel'  style='width: 150px;'>" . JText::_( 'COFI_SHOW_ONLINE_STATUS' ) . ":</div> ";
+						echo "<div class='cofiProfileFollowMeLabel'  style='width: 200px;'>" . JText::_( 'COFI_SHOW_ONLINE_STATUS' ) . ":</div> ";
 						
 						echo "<div class='cofiProfileFollowMeValue'>";
 						

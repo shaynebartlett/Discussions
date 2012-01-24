@@ -47,6 +47,11 @@ class DiscussionsViewProfile extends JView {
         $htmlBoxTop         =& $this->get('HtmlBoxTop');
         $htmlBoxBottom      =& $this->get('HtmlBoxBottom');
 
+        $messages_email_notifications       =& $this->get('MessagesEmailNotifications');
+        $messages_use_signature             =& $this->get('MessagesUseSignature');
+        $messages_use_signature_for_replies =& $this->get('MessagesUseSignatureForReplies');
+        $messages_signature                 =& $this->get('MessagesSignature');
+
 
 		// get parameters
 		$params = &$app->getParams();
@@ -75,6 +80,11 @@ class DiscussionsViewProfile extends JView {
         $this->assignRef('youtube', $youtube);
         $this->assignRef('googleplus', $googleplus);
         $this->assignRef('show_online_status', $show_online_status);
+
+        $this->assignRef('messages_email_notifications', $messages_email_notifications);
+        $this->assignRef('messages_use_signature', $messages_use_signature);
+        $this->assignRef('messages_use_signature_for_replies', $messages_use_signature_for_replies);
+        $this->assignRef('messages_signature', $messages_signature);
 
 		$this->assignRef('params',		$params);
 

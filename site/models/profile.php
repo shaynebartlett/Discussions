@@ -133,7 +133,6 @@ class DiscussionsModelProfile extends JModel {
      *
      * @var String
      */
-
     var $_googleplus = null;
 
 	/**
@@ -141,7 +140,6 @@ class DiscussionsModelProfile extends JModel {
 	 *
 	 * @var Integer
 	 */
-
 	var $_show_online_status = null;
 
 
@@ -150,9 +148,35 @@ class DiscussionsModelProfile extends JModel {
 	 *
 	 * @var Integer
 	 */
-
 	var $_delete_avatar = null;
 
+    /**
+     * Messages Email notifications
+     *
+     * @var String
+     */
+    var $_messages_email_notifications = null;
+
+    /**
+     * Messages use signature
+     *
+     * @var String
+     */
+    var $_messages_use_signature = null;
+
+    /**
+     * Messages use signature for replies
+     *
+     * @var String
+     */
+    var $_messages_use_signature_for_replies = null;
+
+    /**
+     * Messages signature
+     *
+     * @var String
+     */
+    var $_messages_signature = null;
 
 
 
@@ -252,6 +276,11 @@ class DiscussionsModelProfile extends JModel {
         }
 
 
+        $this->_messages_email_notifications = JRequest::getString( 'messages_email_notifications', '0', 'POST');
+        $this->_messages_use_signature = JRequest::getString( 'messages_use_signature', '0', 'POST');
+        $this->_messages_use_signature_for_replies = JRequest::getString( 'messages_use_signature_for_replies', '0', 'POST');
+        $this->_messages_signature = JRequest::getString( 'messages_signature', '', 'POST');
+
 		$this->_show_online_status = JRequest::getString( 'show_online_status', '', 'POST');
 
 		$this->_delete_avatar = JRequest::getInt( 'cb_avatar', 0, 'POST');
@@ -329,6 +358,10 @@ class DiscussionsModelProfile extends JModel {
 					", flickr = " . $db->Quote( $this->_flickr) .
 					", youtube = " . $db->Quote( $this->_youtube) .
                     ", googleplus = " . $db->Quote( $this->_googleplus) .
+                    ", messages_email_notifications = " . $db->Quote( $this->_messages_email_notifications) .
+                    ", messages_use_signature = " . $db->Quote( $this->_messages_use_signature) .
+                    ", messages_use_signature_for_replies = " . $db->Quote( $this->_messages_use_signature_for_replies) .
+                    ", messages_signature = " . $db->Quote( $this->_messages_signature) .
 					", show_online_status = " . $db->Quote( $this->_show_online_status) .
 					" WHERE id = " . $db->Quote($user->id);
 
@@ -656,6 +689,95 @@ class DiscussionsModelProfile extends JModel {
 
    		return $this->_htmlBoxBottom;
 
+   	}
+
+
+    /**
+   	 * Method to get the messages_email_notifications status of this user
+   	 *
+   	 * @access public
+   	 * @return String 0 = no, 1 = yes
+   	 */
+   	function getMessagesEmailNotifications() {
+
+   		if (empty($this->_messages_email_notifications)) {
+
+           	$db =& $this->getDBO();
+
+   			$sql = "SELECT messages_email_notifications FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
+
+               $db->setQuery( $sql);
+               $this->_messages_email_notifications = $db->loadResult();
+
+   		}
+
+   		return $this->_messages_email_notifications;
+   	}
+
+    /**
+   	 * Method to get the messages_use_signature status of this user
+   	 *
+   	 * @access public
+   	 * @return String 0 = no, 1 = yes
+   	 */
+   	function getMessagesUseSignature() {
+
+   		if (empty($this->_messages_use_signature)) {
+
+           	$db =& $this->getDBO();
+
+   			$sql = "SELECT messages_use_signature FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
+
+               $db->setQuery( $sql);
+               $this->_messages_use_signature = $db->loadResult();
+
+   		}
+
+   		return $this->_messages_use_signature;
+   	}
+
+    /**
+   	 * Method to get the messages_use_signature_for_replies status of this user
+   	 *
+   	 * @access public
+   	 * @return String 0 = no, 1 = yes
+   	 */
+   	function getMessagesUseSignatureForReplies() {
+
+   		if (empty($this->_messages_use_signature_for_replies)) {
+
+           	$db =& $this->getDBO();
+
+   			$sql = "SELECT messages_use_signature_for_replies FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
+
+               $db->setQuery( $sql);
+               $this->_messages_use_signature_for_replies = $db->loadResult();
+
+   		}
+
+   		return $this->_messages_use_signature_for_replies;
+   	}
+
+    /**
+   	 * Method to get the messages_signature of this user
+   	 *
+   	 * @access public
+   	 * @return String Signature
+   	 */
+   	function getMessagesSignature() {
+
+   		if (empty($this->_messages_signature)) {
+
+           	$db =& $this->getDBO();
+
+   			$sql = "SELECT messages_signature FROM ".$db->nameQuote('#__discussions_users')." WHERE id=" . $db->Quote($this->_userid);
+
+               $db->setQuery( $sql);
+               $this->_messages_signature = $db->loadResult();
+
+   		}
+
+   		return $this->_messages_signature;
    	}
 
 

@@ -68,7 +68,7 @@ class DiscussionsModelInbox extends JModel {
 	      	
 	    }
 
-	    if( $_submit == JText::_( 'COFI_BUTTON_MARK_READ' )) {
+	    if( $_submit == JText::_( 'COFI_MESSAGES_BUTTON_MARK_READ' )) {
 	    
 	    	if( strlen( $_selmsg) > 0) {
 	      
@@ -91,7 +91,7 @@ class DiscussionsModelInbox extends JModel {
 	    }
 
 
-	    if( $_submit == JText::_( 'COFI_BUTTON_MARK_UNREAD' )) {
+	    if( $_submit == JText::_( 'COFI_MESSAGES_BUTTON_MARK_UNREAD' )) {
 	    
 	    	if( strlen( $_selmsg) > 0) {
 	      
