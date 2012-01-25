@@ -702,6 +702,72 @@ class CofiHelper extends JObject {
 	}
 
 
+    function sendNotificationEmailToReceiver( $user_to_id, $user_from_id, $msg_subject, $msg_text  ) {
+
+   		// get settings from com_discussions parameters
+   		$params = JComponentHelper::getParams('com_discussions');
+
+   		$SiteName 	= $params->get('emailSiteName', '');
+   		$from 		= $params->get('emailFrom', '');
+   		$sender 	= $params->get('emailSender', '');
+   		$link 		= $params->get('emailLink', '');
+
+   		$subject 	= $params->get('emailMSGSubject', '');
+   		$msgprefix  = $params->get('emailMSGMessagePrefix', '');
+   		$msgpostfix = $params->get('emailMSGMessagePostfix', '');
+
+
+   		jimport( 'joomla.mail.helper' );
+
+   		$db	=& JFactory::getDBO();
+
+        $sql = "SELECT username FROM ".$db->nameQuote( '#__users') . " WHERE id = '" . $user_to_id . "'";
+        $db->setQuery( $sql);
+       	$username = $db->loadResult();
+
+        $sql = "SELECT email FROM ".$db->nameQuote( '#__users') . " WHERE id = '" . $user_to_id . "'";
+        $db->setQuery( $sql);
+       	$email    = $db->loadResult();
+
+   		$username_from = $this->getUsernameById( $user_from_id);
+
+   		$subject = $subject . " " . $username_from . " " . JText::_('COFI_MESSAGES_SENT_YOU_A_MESSAGE');
+
+
+   		if ( JMailHelper::isEmailAddress( $email)) {
+
+       		// construct email
+       		$msg		= $msgprefix; // prefix e.g. "This is a system message..."
+       		if ($msgprefix != "") {
+       			$msg = $msg . "\n\n";
+       		}
+       		$msg     	= $msg . $username. ", \n\n";
+       		$msg     	= $msg . JText::_('COFI_MESSAGES_YOU_HAVE_A_MESSAGE_FROM') . " " . $username_from . ":\n\n";
+
+       		$msg     	= $msg . $msg_subject . "\n\n";
+       		$msg     	= $msg . $msg_text . "\n\n";
+
+       		if ($msgpostfix != "") {
+       			$msg = $msg . "\n\n";
+       		}
+       		$msg     	= $msg . $msgpostfix; // postfix e.g. advertising
+
+   			$body	 = sprintf( $msg, $SiteName, $sender, $from, $link);
+
+   			// Clean the email data
+   			$subject = JMailHelper::cleanSubject( $subject);
+   			$body	 = JMailHelper::cleanBody( $body);
+   			$sender	 = JMailHelper::cleanAddress( $sender);
+
+
+   			JUtility::sendMail( $from, $sender, $email, $subject, $body);
+
+   		}
+
+   		return 0;
+
+   	}
+
 
 	function isCategoryModerated( $cat_id) {
 
