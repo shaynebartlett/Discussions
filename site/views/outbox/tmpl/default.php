@@ -60,11 +60,10 @@ endif;
 
 <!-- HTML Box Top -->
 <?php
-$htmlBoxOutboxTop = $params->get('htmlBoxOutboxTop', '');
-
-if ( $htmlBoxOutboxTop != "") {
-	echo "<div class='cofiHtmlBoxOutboxTop'>";
-		echo $htmlBoxOutboxTop;
+$_htmlBoxTop = $this->htmlBoxTop;
+if ( $_htmlBoxTop != "") {
+	echo "<div class='cofiHtmlBoxCategoryTop'>";
+		echo $_htmlBoxTop;
 	echo "</div>";
 }
 ?>
@@ -312,11 +311,11 @@ include( 'components/com_discussions/includes/topmenu.php');
 
 <!-- HTML Box Bottom -->
 <?php
-$htmlBoxOutboxBottom = $params->get('htmlBoxOutboxBottom', '');		
+$_htmlBoxBottom = $this->htmlBoxBottom;
 
-if ( $htmlBoxOutboxBottom != "") {
-	echo "<div class='cofiHtmlBoxOutboxBottom'>";
-		echo $htmlBoxOutboxBottom;
+if ( $_htmlBoxBottom != "") {
+	echo "<div class='cofiHtmlBoxCategoryBottom'>";
+		echo $_htmlBoxBottom;
 	echo "</div>";
 }
 ?>

@@ -353,6 +353,24 @@ else { // upgrade
             $db->setQuery( $sql);
             $db->query();
 
+
+            $sql = "ALTER TABLE `#__discussions_configuration` ADD COLUMN `html_box_inbox_top` text DEFAULT ''";
+            $db->setQuery( $sql);
+            $db->query();
+
+            $sql = "ALTER TABLE `#__discussions_configuration` ADD COLUMN `html_box_inbox_bottom` text DEFAULT ''";
+            $db->setQuery( $sql);
+            $db->query();
+
+            $sql = "ALTER TABLE `#__discussions_configuration` ADD COLUMN `html_box_outbox_top` text DEFAULT ''";
+            $db->setQuery( $sql);
+            $db->query();
+
+            $sql = "ALTER TABLE `#__discussions_configuration` ADD COLUMN `html_box_outbox_bottom` text DEFAULT ''";
+            $db->setQuery( $sql);
+            $db->query();
+
+
             // new tables
             // create private messages inbox table
             $sql = "CREATE TABLE IF NOT EXISTS `#__discussions_messages_inbox` ( " .

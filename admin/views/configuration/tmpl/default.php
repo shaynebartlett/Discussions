@@ -236,6 +236,52 @@ JHTML::_('behavior.tooltip');
 
 
                             <tr>
+                     		    <td valign="top" class="key" style="padding: 10px;">
+                     			    <label>
+                     				    <?php echo JText::_('COFI_HTML_BOX_INBOX_TOP'); ?>
+                     				</label>
+                     			</td>
+                     			<td style="padding: 10px;">
+                     			    <textarea name="html_box_inbox_top" id="html_box_inbox_top" rows="5" cols="50" style="width: 100%;"><?php echo $this->configuration->html_box_inbox_top; ?></textarea>
+                     			</td>
+                     		</tr>
+
+                            <tr>
+                     		    <td valign="top" class="key" style="padding: 10px;">
+                     			    <label>
+                     				    <?php echo JText::_('COFI_HTML_BOX_INBOX_BOTTOM'); ?>
+                     				</label>
+                     			</td>
+                     			<td style="padding: 10px;">
+                     			    <textarea name="html_box_inbox_bottom" id="html_box_inbox_bottom" rows="5" cols="50" style="width: 100%;"><?php echo $this->configuration->html_box_inbox_bottom; ?></textarea>
+                     			</td>
+                     		</tr>
+
+
+                            <tr>
+                     		    <td valign="top" class="key" style="padding: 10px;">
+                     			    <label>
+                     				    <?php echo JText::_('COFI_HTML_BOX_OUTBOX_TOP'); ?>
+                     				</label>
+                     			</td>
+                     			<td style="padding: 10px;">
+                     			    <textarea name="html_box_outbox_top" id="html_box_outbox_top" rows="5" cols="50" style="width: 100%;"><?php echo $this->configuration->html_box_outbox_top; ?></textarea>
+                     			</td>
+                     		</tr>
+
+                            <tr>
+                     		    <td valign="top" class="key" style="padding: 10px;">
+                     			    <label>
+                     				    <?php echo JText::_('COFI_HTML_BOX_OUTBOX_BOTTOM'); ?>
+                     				</label>
+                     			</td>
+                     			<td style="padding: 10px;">
+                     			    <textarea name="html_box_outbox_bottom" id="html_box_outbox_bottom" rows="5" cols="50" style="width: 100%;"><?php echo $this->configuration->html_box_outbox_bottom; ?></textarea>
+                     			</td>
+                     		</tr>
+
+
+                            <tr>
                      		    <td class="key" style="padding: 20px 10px 10px 10px;">
                      			    &nbsp;
                      			</td>

@@ -35,6 +35,9 @@ class DiscussionsViewInbox extends JView {
 		$messages               =& $this->get('Messages');
 		$pagination             =& $this->get('Pagination');
 
+        $htmlBoxTop             =& $this->get('HtmlBoxTop');
+        $htmlBoxBottom          =& $this->get('HtmlBoxBottom');
+
 
 		// get parameters
 		$params = &$app->getParams();
@@ -51,6 +54,8 @@ class DiscussionsViewInbox extends JView {
 		}
 
 
+        $this->assignRef('htmlBoxTop',	$htmlBoxTop);
+        $this->assignRef('htmlBoxBottom', $htmlBoxBottom);
         
 		$this->assignRef('messages',	$messages);
 		$this->assignRef('pagination',  $pagination);

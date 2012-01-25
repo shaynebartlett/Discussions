@@ -133,6 +133,10 @@ CREATE TABLE IF NOT EXISTS `#__discussions_configuration` (
   `html_box_profile_bottom` text DEFAULT '',
   `html_box_posting_top` text DEFAULT '',
   `html_box_posting_bottom` text DEFAULT '',
+  `html_box_inbox_top` text DEFAULT '',
+  `html_box_inbox_bottom` text DEFAULT '',
+  `html_box_outbox_top` text DEFAULT '',
+  `html_box_outbox_bottom` text DEFAULT '',
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)

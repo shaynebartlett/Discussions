@@ -20,6 +20,21 @@ require_once(JPATH_COMPONENT.DS.'classes/user.php');
  */ 
 class DiscussionsModelOutbox extends JModel {
 
+    /**
+   	 * html box top
+   	 *
+   	 * @var String
+   	 */
+   	var $_htmlBoxTop = null;
+
+    /**
+   	 * html box bottom
+   	 *
+   	 * @var String
+   	 */
+   	var $_htmlBoxBottom = null;
+
+
 	/**
 	 * Constructor
 	 *
@@ -165,6 +180,53 @@ class DiscussionsModelOutbox extends JModel {
 		$countQuery = "SELECT * FROM " . $db->nameQuote( '#__discussions_messages_outbox')." WHERE user_id = " . $db->Quote($_user_id) . " AND flag_deleted != '1'";
 		return $countQuery;
 	}
+
+
+    /**
+   	 * Method to get the HTML Box Top
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getHtmlBoxTop() {
+
+   		if ( empty( $this->_htmlBoxTop)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT html_box_outbox_top FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_htmlBoxTop = $db->loadResult();
+   		}
+
+   		return $this->_htmlBoxTop;
+
+   	}
+
+    /**
+   	 * Method to get the HTML Box Bottom
+   	 *
+   	 * @access public
+   	 * @return String
+   	 */
+   	function getHtmlBoxBottom() {
+
+   		if ( empty( $this->_htmlBoxBottom)) {
+
+               $db =& $this->getDBO();
+
+               $sql = "SELECT html_box_outbox_bottom FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+
+               $db->setQuery( $sql);
+               $this->_htmlBoxBottom = $db->loadResult();
+   		}
+
+   		return $this->_htmlBoxBottom;
+
+   	}
+
+
 
 
 } 
