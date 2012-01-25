@@ -75,14 +75,13 @@ class CofiUser extends JObject {
     var $_approval_notification = 0;
 
 
+    var $_messages_email_notifications = "0";
+
+    var $_messages_use_signature = "0";
+
+    var $_messages_use_signature_for_replies = "0";
+
     var $_messages_signature = "";
-
-    var $_messages_use_signature = "";
-
-    var $_messages_use_signature_for_replies = "";
-
-    var $_messages_email_notifications = "";
-
 
 
 	/**
@@ -101,35 +100,35 @@ class CofiUser extends JObject {
 
         $_user = $db->loadAssoc();
 
-        $this->_username      		= $_user['username'];
-        $this->_posts      			= $_user['posts'];
-        $this->_avatar     			= $_user['avatar'];
-        $this->_signature  			= $_user['signature'];
-        $this->_title      			= $_user['title'];
-        $this->_zipcode    			= $_user['zipcode'];
-        $this->_city       			= $_user['city'];
-        $this->_country    			= $_user['country'];
-        $this->_show_online_status 	= $_user['show_online_status'];
+        $this->_username      		    = $_user['username'];
+        $this->_posts      			    = $_user['posts'];
+        $this->_avatar     			    = $_user['avatar'];
+        $this->_signature  			    = $_user['signature'];
+        $this->_title      			    = $_user['title'];
+        $this->_zipcode    			    = $_user['zipcode'];
+        $this->_city       			    = $_user['city'];
+        $this->_country    			    = $_user['country'];
+        $this->_show_online_status 	    = $_user['show_online_status'];
         
-        $this->_moderator  			= $_user['moderator'];
-        $this->_moderated  			= $_user['moderated'];
-        $this->_rookie     			= $_user['rookie'];
-        $this->_trusted    			= $_user['trusted'];
+        $this->_moderator  			    = $_user['moderator'];
+        $this->_moderated  			    = $_user['moderated'];
+        $this->_rookie     			    = $_user['rookie'];
+        $this->_trusted    			    = $_user['trusted'];
 
-        $this->_website    			= $_user['website'];
-        $this->_twitter    			= $_user['twitter'];
-        $this->_facebook   			= $_user['facebook'];
-        $this->_googleplus   		= $_user['googleplus'];
-        $this->_flickr     			= $_user['flickr'];
-        $this->_youtube    			= $_user['youtube'];
+        $this->_website    			    = $_user['website'];
+        $this->_twitter    			    = $_user['twitter'];
+        $this->_facebook   			    = $_user['facebook'];
+        $this->_googleplus   		    = $_user['googleplus'];
+        $this->_flickr     			    = $_user['flickr'];
+        $this->_youtube    			    = $_user['youtube'];
 
-        $this->_email_notification  = $_user['email_notification'];
-        $this->_approval_notification  = $_user['approval_notification'];
+        $this->_email_notification      = $_user['email_notification'];
+        $this->_approval_notification   = $_user['approval_notification'];
 
-        $this->_messages_signature  = "-- xxxxx";
-        $this->_messages_use_signature  = "0";
-        $this->_messages_use_signature_for_replies  = "0";
-        $this->_messages_email_notifications  = "0";
+        $this->_messages_email_notifications        = $_user['messages_email_notifications'];
+        $this->_messages_use_signature              = $_user['messages_use_signature'];
+        $this->_messages_use_signature_for_replies  = $_user['messages_use_signature_for_replies'];
+        $this->_messages_signature                  = $_user['messages_signature'];
 
 	}
 
@@ -270,8 +269,8 @@ class CofiUser extends JObject {
 	}
 
 
-    function getMessagesSignature() {
-   		return $this->_messages_signature;
+    function getMessagesEmailNotifications() {
+   		return $this->_messages_email_notifications;
    	}
 
     function getMessagesUseSignature() {
@@ -282,10 +281,9 @@ class CofiUser extends JObject {
    		return $this->_messages_use_signature_for_replies;
    	}
 
-    function getMessagesEmailNotifications() {
-   		return $this->_messages_email_notifications;
+    function getMessagesSignature() {
+   		return $this->_messages_signature;
    	}
-
 
 
 	function isModerator() {

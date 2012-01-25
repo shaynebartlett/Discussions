@@ -19,7 +19,7 @@ require_once(JPATH_COMPONENT.DS.'classes/helper.php');
 
 
 /**
- * Primezilla Message Model
+ * Discussions Message Model
  */
 class DiscussionsModelMessage extends JModel {
 
