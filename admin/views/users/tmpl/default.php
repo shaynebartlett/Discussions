@@ -9,6 +9,8 @@
   
 defined('_JEXEC') or die('Restricted access'); 
 
+require_once( JPATH_COMPONENT.DS.'classes/helper.php');
+
 // website root directory
 $_root = JURI::root();
 
@@ -16,6 +18,8 @@ $ordering = ( ($this->lists['order'] == 'ordering' || $this->lists['order'] == '
 
 $image_yes = $_root . "administrator/templates/bluestork/images/admin/tick.png";
 $image_no  = $_root . "administrator/templates/bluestork/images/admin/publish_x.png";
+
+$CofiHelper = new CofiBackendHelper();
 ?>
 
 <form action="index.php" method="post" name="adminForm" id="adminForm">
@@ -50,7 +54,10 @@ $image_no  = $_root . "administrator/templates/bluestork/images/admin/publish_x.
 
 			<th width="10"><?php echo JText::_( 'COFI_POSTS' ); ?></th>
 
-			
+            <th width="10"><?php echo JText::_( 'COFI_MESSAGES_NUMBER_INBOX' ); ?></th>
+
+            <th width="10"><?php echo JText::_( 'COFI_MESSAGES_NUMBER_OUTBOX' ); ?></th>
+
 			<th width="100" style="text-align: left;"><?php echo JText::_( 'COFI_TITLE' ); ?></th>
 
 			<th width="100" style="text-align: left;"><?php echo JText::_( 'COFI_COUNTRY' ); ?></th>
@@ -85,7 +92,7 @@ $image_no  = $_root . "administrator/templates/bluestork/images/admin/publish_x.
 	
 		<tr>
 		
-			<td colspan="15">
+			<td colspan="17">
 			
 				<?php echo $this->pageNav->getListFooter(); ?>
 				
@@ -141,8 +148,19 @@ $image_no  = $_root . "administrator/templates/bluestork/images/admin/publish_x.
 					echo $row->posts; 
 					?>
 				</td>
-				
-				
+
+                <td align="left">
+            	    <?php
+                    echo $CofiHelper->getNumberOfInboxMessagesByUserId( $row->id);
+            		?>
+            	</td>
+
+                <td align="left">
+            	    <?php
+                    echo $CofiHelper->getNumberOfOutboxMessagesByUserId( $row->id);
+            		?>
+            	</td>
+
 				<td align="left">
 					<?php 
 					echo $row->title; 

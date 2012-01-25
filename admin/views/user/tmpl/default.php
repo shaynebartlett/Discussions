@@ -9,7 +9,11 @@
   
 defined('_JEXEC') or die('Restricted access'); 
 
+require_once( JPATH_COMPONENT.DS.'classes/helper.php');
+
 JHTML::_('behavior.tooltip');
+
+$CofiHelper = new CofiBackendHelper();
 ?>
 
 <script language="javascript" type="text/javascript">
@@ -48,12 +52,16 @@ JHTML::_('behavior.tooltip');
 			
 				<td valign="top">
 									
-						<legend>
-							<?php echo JText::_('COFI_USER_DETAILS');?>
-						</legend>
-						
+
 						<table class="admintable" width="100%">
 													
+                            <tr>
+                                <td colspan="2" valign="top" class="key" style="padding: 10px;">
+                                    <legend>
+                                        <?php echo JText::_('COFI_USER_FORUM_SETTINGS');?>
+                                    </legend>
+                                </td>
+                            </tr>
 
 
 							<tr>
@@ -70,6 +78,21 @@ JHTML::_('behavior.tooltip');
 									</b>
 								</td>
 							</tr>
+
+                            <tr>
+                                <td class="key" style="padding: 10px;">
+                                    <label>
+                                        <?php echo JText::_('COFI_POSTS'); ?>
+                                    </label>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <b>
+                                        <?php
+                                        echo $this->user->posts;
+                                        ?>
+                                    </b>
+                                </td>
+                            </tr>
 
 							<tr>
 								<td class="key" style="padding: 10px;">
@@ -214,22 +237,6 @@ JHTML::_('behavior.tooltip');
 								</td>
 							</tr>
 
-
-							<tr>
-								<td class="key" style="padding: 10px;">
-									<label>
-										<?php echo JText::_('COFI_POSTS'); ?>
-									</label>
-								</td>
-								<td style="padding: 10px;">
-									<b>
-										<?php
-										echo $this->user->posts; 
-										?>
-									</b>
-								</td>
-							</tr>
-
 							<tr>
 								<td class="key" style="padding: 10px;">
 									<label>
@@ -342,8 +349,109 @@ JHTML::_('behavior.tooltip');
 							</tr>
 
 
+
+                            <tr>
+                                <td colspan="2" valign="top" class="key" style="padding: 10px;">
+                                    <legend>
+                                        <?php echo JText::_('COFI_CONFIG_MESSAGES_SETTINGS');?>
+                                    </legend>
+                                </td>
+                            </tr>
+
+                            <tr>
+                               <td class="key" style="padding: 10px;">
+                                   <label>
+                                       <?php echo JText::_('COFI_MESSAGES_NUMBER_INBOX'); ?>
+                                   </label>
+                               </td>
+                               <td style="padding: 10px;">
+                                   <b>
+                                       <?php
+                                        echo $CofiHelper->getNumberOfInboxMessagesByUserId( $this->user->id);
+                                       ?>
+                                   </b>
+                               </td>
+                           </tr>
+
+                            <tr>
+                               <td class="key" style="padding: 10px;">
+                                   <label>
+                                       <?php echo JText::_('COFI_MESSAGES_NUMBER_OUTBOX'); ?>
+                                   </label>
+                               </td>
+                               <td style="padding: 10px;">
+                                   <b>
+                                       <?php
+                                        echo $CofiHelper->getNumberOfOutboxMessagesByUserId( $this->user->id);
+                                       ?>
+                                   </b>
+                               </td>
+                           </tr>
+
+                            <tr>
+                                <td valign="top" class="key" style="padding: 10px;">
+                                    <label>
+                                        <?php echo JText::_('COFI_MESSAGES_EMAIL_NOTIFICATIONS'); ?>
+                                    </label>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <fieldset class="radio">
+                                        <?php
+                                        $html = JHTML::_('select.booleanlist', 'messages_email_notifications', 'class="inputbox"', $this->user->messages_email_notifications);
+                                        echo $html;
+                                        ?>
+                                    </fieldset>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td valign="top" class="key" style="padding: 10px;">
+                                    <label>
+                                        <?php echo JText::_('COFI_MESSAGES_USE_SIGNATURE'); ?>
+                                    </label>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <fieldset class="radio">
+                                        <?php
+                                        $html = JHTML::_('select.booleanlist', 'messages_use_signature', 'class="inputbox"', $this->user->messages_use_signature);
+                                        echo $html;
+                                        ?>
+                                    </fieldset>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td valign="top" class="key" style="padding: 10px;">
+                                    <label>
+                                        <?php echo JText::_('COFI_MESSAGES_USE_SIGNATURE_FOR_REPLIES'); ?>
+                                    </label>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <fieldset class="radio">
+                                        <?php
+                                        $html = JHTML::_('select.booleanlist', 'messages_use_signature_for_replies', 'class="inputbox"', $this->user->messages_use_signature_for_replies);
+                                        echo $html;
+                                        ?>
+                                    </fieldset>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td valign="top" class="key" style="padding: 10px;">
+                                    <label>
+                                        <?php echo JText::_('COFI_MESSAGES_SIGNATURE'); ?>
+                                    </label>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <textarea name="messages_signature" id="messages_signature" rows="5" cols="50" style="width: 100%;"><?php echo $this->user->messages_signature; ?></textarea>
+                                </td>
+                            </tr>
+
+
 						</table>
-												
+
+
+
 						<input type="hidden" name="option" value="com_discussions" />
 						<input type="hidden" name="task" value="" />						
 						<input type="hidden" name="cid[]" value="<?php echo $this->user->id; ?>" />

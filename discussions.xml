@@ -52,6 +52,7 @@
 		
 		<files folder="admin">
 			<folder>assets</folder>
+            <folder>classes</folder>
 			<folder>controllers</folder>
 			<folder>images</folder>
 			<folder>models</folder>
