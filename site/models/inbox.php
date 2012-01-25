@@ -47,6 +47,22 @@ class DiscussionsModelInbox extends JModel {
 
         $app = JFactory::getApplication();
 
+        $user =& JFactory::getUser();
+
+        $redirectLink = JRoute::_( "index.php?option=com_discussions");
+
+        if ( $user->guest) { // user is not logged in
+            $app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_NOT_LOGGED_IN' ), "notice");
+        }
+
+        $params         = JComponentHelper::getParams('com_discussions');
+        $_useMessages   = $params->get( 'useMessages', 1);  // 0 no, 1 yes
+
+        if ( $_useMessages != 1) { // messages feature is disabled
+            $app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_FEATURE_NOT_ENABLED' ), "notice");
+        }
+
+
 		$config = JFactory::getConfig();
 
 		$db =& $this->getDBO(); 
