@@ -50,7 +50,7 @@ class DiscussionsModelMessages extends JModel {
 
    		$db	=& JFactory::getDBO();
 
-   		$query = "SELECT count(*) FROM #__discussions_inbox";
+   		$query = "SELECT count(*) FROM #__discussions_messages_inbox";
 
    		$db->setQuery($query);
 
@@ -63,7 +63,7 @@ class DiscussionsModelMessages extends JModel {
 
    		$db	=& JFactory::getDBO();
 
-   		$query = "SELECT count(*) FROM #__discussions_outbox";
+   		$query = "SELECT count(*) FROM #__discussions_messages_outbox";
 
    		$db->setQuery($query);
 
