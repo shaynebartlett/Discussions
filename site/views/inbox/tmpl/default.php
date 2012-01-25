@@ -76,17 +76,23 @@ include( 'components/com_discussions/includes/topmenu.php');
 ?>
 
 
-
 <!-- Box name and description -->
-<table width="100%" class="noborder">
+<br />
+<table class="noborder">
     <tr>
 
         <!-- box name and description -->
-        <td align="left" class="noborder">
+        <td align="left" valign="center" class="noborder">
             <?php
-            echo "<h3>";
+            echo "<h3 style='margin: 0px; padding: 0px;'>";
             	echo JText::_( "COFI_MESSAGES_INBOX");
             echo "</h3>";
+            ?>
+        </td>
+        <td align="left" valign="center" class="noborder">
+            <?php
+            $menuLinkOutbox = JRoute::_( 'index.php?option=com_discussions&view=outbox&task=outbox');
+            echo "<a href='$menuLinkOutbox' style='margin-left:20px;'>" . JText::_( "COFI_MESSAGES_OUTBOX", true ) . "</a>";
             ?>
         </td>
         <!-- box name and description -->
@@ -94,6 +100,7 @@ include( 'components/com_discussions/includes/topmenu.php');
 
     </tr>
 </table>
+<br />
 <!-- Box name and description -->
 
 

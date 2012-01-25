@@ -48,7 +48,7 @@ echo "<div class='cofiMainmenuRow'>";
 
         if ( $useMessages == 1) { // user is logged in
             echo "<div class='cofiMainmenuItem'>";
-                echo "<a href='$menuLinkInbox'>" . JText::_( "COFI_MESSAGES_INBOX", true ) . "</a>";
+                echo "<a href='$menuLinkInbox'>" . JText::_( "COFI_MESSAGES_MAILBOX", true ) . "</a>";
             echo "</div>";
         }
 
