@@ -1274,40 +1274,6 @@ class CofiHelper extends JObject {
 	}
 
 
-	function getItemidByComponentName( $component) {
-
-		$db	=& JFactory::getDBO();		
-
-		$sql = "SELECT id FROM " . $db->nameQuote('#__components') . " WHERE " . $db->nameQuote('option') . "='" . $component . "'";
-					
-		$db->setQuery( $sql);
-		$componentid = $db->loadResult();
-
-		if ( !$componentid) {
-		
-			return 0;
-			
-		}
-		else {
-
-			$sql = "SELECT id FROM " . $db->nameQuote('#__menu') . 
-					" WHERE " . $db->nameQuote('componentid') . "='" . $componentid . "' AND parent='0' AND published='1' ";
-					
-			$db->setQuery( $sql);
-			$itemid = $db->loadResult();
-	
-			if ( !$itemid) {
-				return 0;
-			}
-			else {
-				return $itemid;
-			}
-		
-		}
-
-	}
-
-
 	function getNumberOfPostsByThreadId( $id) {
 
 		$db	=& JFactory::getDBO();		
