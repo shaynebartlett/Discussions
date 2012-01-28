@@ -498,10 +498,6 @@ class DiscussionsModelMessage extends JModel {
         		$db->setQuery( $inbox_sql);
         		$inbox_result = $db->query();
 
-				//$db->setQuery( "SELECT LAST_INSERT_ID() FROM ".$db->nameQuote( '#__primezilla_inbox'));
-				//$_messageId = $db->loadResult();
-
-
 
 				// 2. put message in sender outbox        		
         		$outbox_sql = "INSERT INTO ".$db->nameQuote( '#__discussions_messages_outbox') .
@@ -794,7 +790,7 @@ class DiscussionsModelMessage extends JModel {
 
 		if ( $_id <> 0) {
 		
-	        $params = JComponentHelper::getParams('com_primezilla');        
+	        $params = JComponentHelper::getParams('com_discussions');
 			$_timeformat	= $params->get( 'timeformat', '%H:%i');        		        	        		        		
 		
         	$db =& $this->getDBO();
