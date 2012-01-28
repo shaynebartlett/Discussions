@@ -19,10 +19,11 @@ Example: com_discussions_1_5_j25 is Discussions version 1.5 for Joomla! 2.5
 
 2. Modules
 
-There are 2 optional modules which you would need to install separately.
+There are 3 optional modules which you would need to install separately.
 
 mod_discussions_recentx shows the recent x (x is configurable) active threads in your forum.
 mod_discussions_onliners shows the currrently logged in users.
+mod_discussions_messages shows new messages in the mailbox.
 
 
 3. Plugins
