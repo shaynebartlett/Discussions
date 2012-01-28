@@ -415,7 +415,6 @@ else { // upgrade
             $db->query();
 
 
-
             // if Primezilla is installed -> get messages profile settings from Primezilla
             $db->setQuery( 'SELECT COUNT(*) FROM `#__primezilla_users`');
 
@@ -497,6 +496,61 @@ if ( $db->loadResult() == 0) { // no records found = fresh installation
 
 	$db->setQuery( "INSERT INTO `#__discussions_users` ( id, username) SELECT id, username FROM `#__users` ORDER BY id ASC");
 	$db->query();
+
+
+    // if Primezilla is installed -> get messages profile settings from Primezilla
+    $db->setQuery( 'SELECT COUNT(*) FROM `#__primezilla_users`');
+
+    if ( $db->loadResult() > 0) { // records in users found -> transfer profile data to extended discussions profile
+
+        $db->setQuery( "UPDATE `#__discussions_users` d, `#__primezilla_users` p " .
+                        " SET " . $db->nameQuote('d.messages_email_notifications') . " = " . $db->nameQuote('p.email_notifications') . ", " .
+                                $db->nameQuote('d.messages_use_signature') . " = " . $db->nameQuote('p.use_signature') . ", " .
+                                $db->nameQuote('d.messages_use_signature_for_replies') . " = " . $db->nameQuote('p.use_signature_for_replies') . ", " .
+                                $db->nameQuote('d.messages_signature') . " = " . $db->nameQuote('p.signature') .
+                        " WHERE d.id = p.id");
+        $db->query();
+
+    }
+
+    // check if Primezilla inbox transfer is needed
+    $db->setQuery( 'SELECT COUNT(*) FROM `#__discussions_messages_inbox`');
+    if ( $db->loadResult() == 0) { // no records in Discussions inbox found -> transfer them from Primezilla
+
+        // if Primezilla is installed -> get all inbox messages from Primezilla
+        $db->setQuery( 'SELECT COUNT(*) FROM `#__primezilla_inbox`');
+
+        if ( $db->loadResult() > 0) { // records in inbox found -> transfer them into new discussions inbox
+
+            $db->setQuery( "INSERT INTO `#__discussions_messages_inbox` " .
+                                " ( id, user_id, user_from_id, msg_date, msg_time, subject, message) " .
+                                " SELECT id, user_id, user_from_id, msg_date, msg_time, subject, message " .
+                            " FROM `#__primezilla_inbox`");
+            $db->query();
+
+        }
+
+    }
+
+    // check if Primezilla outbox transfer is needed
+    $db->setQuery( 'SELECT COUNT(*) FROM `#__discussions_messages_outbox`');
+    if ( $db->loadResult() == 0) { // no records in Discussions outbox found -> transfer them from Primezilla
+
+        // if Primezilla is installed -> get all outbox messages from Primezilla
+        $db->setQuery( 'SELECT COUNT(*) FROM `#__primezilla_outbox`');
+
+        if ( $db->loadResult() > 0) { // records in outbox found -> transfer them into new discussions outbox
+
+            $db->setQuery( "INSERT INTO `#__discussions_messages_outbox` " .
+                                " ( id, user_id, user_to_id, msg_date, msg_time, subject, message) " .
+                                " SELECT id, user_id, user_to_id, msg_date, msg_time, subject, message " .
+                            " FROM `#__primezilla_outbox`");
+            $db->query();
+
+        }
+
+    }
+
 	
 }
 
