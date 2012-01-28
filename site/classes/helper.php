@@ -1607,6 +1607,19 @@ class CofiHelper extends JObject {
    	}
 
 
+    function getNumberOfNewMessagesByUserId( $id) {
+
+   		$db	=& JFactory::getDBO();
+
+        $sql = "SELECT count(*) FROM #__discussions_messages_inbox WHERE user_id=" . $db->Quote($id) . " AND flag_read='0' AND flag_deleted='0'";
+
+   		$db->setQuery( $sql);
+   		$_count = $db->loadResult();
+
+        return $_count;
+
+   	}
+
 
 }
 

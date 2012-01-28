@@ -14,7 +14,7 @@
 
 	<files>
 
-		<filename module="mod_discussions">mod_discussions.php</filename>
+		<filename module="mod_discussions_messages">mod_discussions_messages.php</filename>
 		<filename>email_16.png</filename>
         <filename>index.html</filename>
 

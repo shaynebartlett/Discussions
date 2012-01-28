@@ -10,6 +10,10 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+require_once(JPATH_COMPONENT.DS.'classes/helper.php');
+$CofiHelper = new CofiHelper();
+
+
 $app = JFactory::getApplication();
 
 $user =& JFactory::getUser();
@@ -47,9 +51,19 @@ echo "<div class='cofiMainmenuRow'>";
         echo "</div>";
 
         if ( $useMessages == 1) { // user is logged in
+
             echo "<div class='cofiMainmenuItem'>";
                 echo "<a href='$menuLinkInbox'>" . JText::_( "COFI_MESSAGES_MAILBOX", true ) . "</a>";
+                $_newMessages = $CofiHelper->getNumberOfNewMessagesByUserId($user->id);
+                if ( $_newMessages > 0) {
+                    echo " (<b>";
+                    echo $_newMessages;
+                    echo "</b>)";
+                }
             echo "</div>";
+
+
+
         }
 
     }
