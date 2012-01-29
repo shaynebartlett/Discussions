@@ -746,8 +746,8 @@ class DiscussionsModelMessage extends JModel {
 		if ( $_id <> 0) {
 
 	        $params = JComponentHelper::getParams('com_discussions');
-			$_dateformat	= $params->get( 'dateformat', '%d.%m.%Y');
-		
+            $_dateformat	= substr( $params->get( 'dateformat', '%d.%m.%Y'), 0, 10); // max 10 chars
+
         	$db =& $this->getDBO();
 
 	    	switch ( $_type) {

@@ -288,8 +288,8 @@ class DiscussionsModelCategory extends JModel {
 
 
         $params = JComponentHelper::getParams('com_discussions');        
-		$_dateformat	= $params->get( 'dateformat', '%d.%m.%Y');
-		$_timeformat	= $params->get( 'timeformat', '%H:%i');        		        	        		        		
+        $_dateformat	= substr( $params->get( 'dateformat', '%d.%m.%Y'), 0, 10); // max 10 chars
+      	$_timeformat	= substr( $params->get( 'timeformat', '%H:%i'), 0, 10); // max 10 chars
 
 
         $db =& $this->getDBO();
