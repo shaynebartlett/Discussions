@@ -2,8 +2,10 @@ Discussions
 ===========
 
 Discussions is a Joomla! 2.5 forum extension.
+It will most probably run on Joomla! 1.7 as well but from now on only Joomla! 2.5 is tested.
+Joomla! 2.5 is the new Long Term Support Release(LTS) so if still run J1.7 or even J1.6 please update now and use Discussions 1.5.
 
-
+Discussions 1.5 is the first release which will only be available for Joomla! 2.5 (1.7). Sorry, no more Joomla! 1.5 versions.
 
 Content
 ----------------------
