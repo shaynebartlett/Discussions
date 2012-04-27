@@ -27,7 +27,7 @@ class DiscussionsControllerConfiguration extends JController {
 
    		JRequest::checkToken() or jexit( 'Invalid Token' );
 
-   		$post	= JRequest::get('post', JREQUEST_ALLOWHTML);
+   		$post	= JRequest::get('post', JREQUEST_ALLOWRAW);
 
    		$cid	= JRequest::getVar( 'cid', array(0), 'post', 'array' );
 

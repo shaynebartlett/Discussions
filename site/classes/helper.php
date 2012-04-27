@@ -10,7 +10,8 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die('Restricted Access');
 
-require_once(JPATH_COMPONENT.DS.'classes/user.php');
+//require_once(JPATH_COMPONENT.DS.'classes/user.php');
+require_once(JPATH_SITE.'/components/com_discussions/classes/user.php');
 
 
 /**

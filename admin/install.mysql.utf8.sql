@@ -181,3 +181,22 @@ CREATE TABLE IF NOT EXISTS `#__discussions_messages_outbox` (
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE IF NOT EXISTS `#__discussions_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `cat_id` int(11) NOT NULL DEFAULT '0',
+  `context_id` int(11) NOT NULL DEFAULT '0',
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `comment` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT '0',
+  `wfm` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx_discussions_comments_parent_id` (`parent_id`),
+  KEY `idx_discussions_comments_cat_id` (`cat_id`),
+  KEY `idx_discussions_comments_context_id` (`context_id`),
+  KEY `idx_discussions_comments_user_id` (`user_id`),
+  KEY `idx_discussions_comments_created_at` (`created_at`),
+  KEY `idx_discussions_comments_wfm` (`wfm`)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
