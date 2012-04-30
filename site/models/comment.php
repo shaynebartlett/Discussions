@@ -71,6 +71,12 @@ class DiscussionsModelComment extends JModel {
 	 */
 	var $_comment = null;
 
+    /**
+   	 * wdycf
+   	 *
+   	 * @var String
+   	 */
+   	var $_wdycf = null;
 
 	/**
 	 * published
@@ -102,11 +108,6 @@ class DiscussionsModelComment extends JModel {
 
 		$user =& JFactory::getUser();
 
-        $redirectLink = JRoute::_( "index.php");
-
-		if ( $user->guest) { // user is not logged in
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_NOT_LOGGED_IN' ), "notice");
-		}
 
 
         $this->_cat_id 		    = JRequest::getInt( 'cat_id', 0, 'POST');
@@ -114,9 +115,18 @@ class DiscussionsModelComment extends JModel {
         $this->_context_id 		= JRequest::getInt( 'context_id', 0, 'POST');
         $this->_user_id 		= JRequest::getInt( 'user_id', 0, 'POST');
      	$this->_comment   		= JRequest::getString( 'comment', '', 'POST');
+        $this->_wdycf   		= JRequest::getString( 'wdycf', '', 'POST');
         $this->_published   	= JRequest::getInt( 'published', '', 'POST');
         $this->_wfm   		    = JRequest::getInt( 'wfm', '', 'POST');
-     	//$this->_task   			= JRequest::getString( 'task', '', 'POST');
+
+        //$redirectLink = JRoute::_( "index.php");
+        $redirectLink = $this->_wdycf;
+
+
+		if ( $user->guest) { // user is not logged in
+			$app->redirect( $redirectLink, "You are not logged in!", "notice");
+		}
+
 
 
 		switch ( $this->_task) {
@@ -156,16 +166,15 @@ class DiscussionsModelComment extends JModel {
 		$cHelper = new CofiHelper();
 
 		// redirect	link
-		$redirectLink = JRoute::_( "index.php");
+		$redirectLink = $this->_wdycf;
 
         $this->_comment = strip_tags($this->_comment);
-
 
 
         // check if user is logged in - maybe session has timed out
 		if ($user->guest) {
 			// if user is not logged in, kick him back into category
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_SENT_SESSION' ), "message");
+			$app->redirect( $redirectLink, "You are not logged in!", "message");
 
 		}
 
@@ -204,12 +213,12 @@ class DiscussionsModelComment extends JModel {
 
 				if ( $result) { // insert in discussions comments table went fine
 
-					$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_BEEN_SENT' ), "notice");
+					$app->redirect( $redirectLink, "Thank you, your comment has been saved and is waiting for moderator approval now.", "notice");
 
 				}
 				else {
 
-					$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_SENT_ERROR' ), "message");
+					$app->redirect( $redirectLink, "Your comment has not been saved. An unexpected error has occured.", "message");
 
 				}
 
@@ -220,11 +229,11 @@ class DiscussionsModelComment extends JModel {
 
 		if ( $isCommentTooShort) {
 
-			$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_NOT_BEEN_SENT_SUBJECT' ), "message");
+			$app->redirect( $redirectLink, "Your comment was too short. Please enter at least 5 characters.", "message");
 
 		}
 
-		$app->redirect( $redirectLink, JText::_( 'COFI_MESSAGES_MESSAGE_HAS_BEEN_SENT' ), "notice");
+		$app->redirect( $redirectLink, "Thank you, your comment has been saved and is waiting for moderator approval now.", "notice");
 
 
         return 0; // save OK

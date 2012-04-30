@@ -132,8 +132,12 @@ class plgContentDiscussions extends JPlugin {
 
             $_comments_list = $db->loadAssocList();
 
+            $counter = 0;
+
     		reset( $_comments_list);
     		while (list($key, $val) = each( $_comments_list)) {
+
+                $counter += 1;
 
                 $_comment_user_id    = $_comments_list[$key]['user_id'];
                	$_comment_comment    = $_comments_list[$key]['comment'];
@@ -169,13 +173,20 @@ class plgContentDiscussions extends JPlugin {
                             $html .= $_comment_created_at;
                         $html .= "</div>";
 
+                        $html .= "<div class='cofiCommentsCounter'>";
+                            $html .= $counter;
+                        $html .= "</div>";
+
+
                     $html .= "</div>"; // row1
 
 
                     $html .= "<div class='cofiCommentsEntryRow2'>";
 
                         $html .= "<div class='cofiCommentsComment'>";
-                            $html .= $_comment_comment;
+                            // transfer emoticon code into html image code
+                            $_comment_comment = $CofiHelper->replace_emoticon_tags( $_comment_comment);
+                            $html .= nl2br( $_comment_comment);
                         $html .= "</div>"; // comment
 
                     $html .= "</div>"; // row2
@@ -234,8 +245,7 @@ class plgContentDiscussions extends JPlugin {
                 $html .= '<br />';
 
                 $link = "index.php?option=com_discussions&view=comment";
-
-
+                $wdycf = JURI::current();
 
                 $html .= "<form action='" . $link . "' method='post' name='commentform' id='commentform'>";
 
@@ -253,6 +263,8 @@ class plgContentDiscussions extends JPlugin {
                 $html .= "<input type='hidden' name='context_id' id='context_id' value='1'>"; // 1 = Article
                 $html .= "<input type='hidden' name='cat_id' id='cat_id' value='" . $row->catid ."'>";
                 $html .= "<input type='hidden' name='parent_id' id='parent_id' value='" . $row->id ."'>";
+
+                $html .= "<input type='hidden' name='wdycf' id='wdycf' value='" . $wdycf ."'>";
 
                 $html .= "<input type='hidden' name='published' id='published' value='0'>";
                 $html .= "<input type='hidden' name='wfm' id='wfm' value='0'>";

@@ -859,6 +859,7 @@ h2 {
 }
 /* Footer */
 
+
 /* Messages */
 .cofiMessagesAvatarBox {
 	width:32px;
@@ -874,10 +875,8 @@ h2 {
 	font-size: 1.1em;
 }
 .cofiMessagesMessageRead {
-	/* font-weight: normal; */
 	font-size: 1.0em;
 }
-
 .cofiIndexTableRowAvatar1 {
 	background-color: #f7f7f7;
     padding: 5px;
@@ -890,14 +889,18 @@ h2 {
 
 
 /* Comments */
-.cofiCommentsEntry {
+.discussionsCommentsAfter {
     width:100%;
+    margin: 50px 0px 10px 0px;
+}
+.cofiCommentsEntry {
     border: 1px solid #ddd;
    	background: white;
-   	margin: 20px 30px 10px 0px;
+   	margin: 20px 0px 10px 0px;
    	padding: 5px;
 }
 .cofiCommentsEntryRow1 {
+    width:95%;
     float: left;
     padding: 5px;
 }
@@ -924,6 +927,14 @@ h2 {
 .cofiCommentsCreatedAt {
     float: left;
     font-weight: normal;
+    margin: 10px 0px 0px 10px;
+}
+.cofiCommentsCounter {
+    float: right;
+    text-align: right;
+    font-weight: bold;
+    font-size: 2.5em;
+    color: #dddddd;
     margin: 10px 0px 0px 10px;
 }
 .cofiCommentsComment {
