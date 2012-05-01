@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 
 // version of new installed extension
-$version = "1.5";
+$version = "1.6";
 
 
 $componentInstaller =& JInstaller::getInstance();
@@ -22,6 +22,7 @@ $db =& JFactory::getDBO();
 
 // get folder name
 $_rootDir = JPATH_ROOT;
+
 
 
 // check if Discussions system plugin is already installed
@@ -172,6 +173,65 @@ else {
 	echo "<br />";
     
 }
+
+
+
+
+
+// check if Discussions content plugin is already installed
+$pathToPlgDiscussionsContent = $componentInstaller->getPath('source') . DS . 'plugins' . DS . 'content';
+
+$query = 'SELECT COUNT(*)'
+			. ' FROM ' . $db->nameQuote('#__extensions')
+			. ' WHERE ' . $db->nameQuote('element') . ' = '
+			. $db->Quote('discussions')
+			. ' AND ' . $db->nameQuote('type') . ' = '
+			. $db->Quote('plugin')
+			. ' AND ' . $db->nameQuote('folder') . ' = '
+			. $db->Quote('content');
+
+$db->setQuery($query);
+
+$discussionsContentPluginInstalled = (bool)$db->loadResult();
+
+if ( $discussionsContentPluginInstalled) {
+
+	// upgrade the Discussions content plugin
+	if ( !$installer->install( $pathToPlgDiscussionsContent)) {
+
+		echo "Failed to upgrade the Discussions content plugin!";
+		echo "<br />";
+
+	}
+	else {
+
+		echo "Successfully upgraded the Discussions content plugin";
+		echo "<br />";
+
+	}
+
+}
+else {
+
+	// install the Discussions content plugin
+	if ( !$installer->install( $pathToPlgDiscussionsContent)) {
+
+		echo "Failed to install the Discussions content plugin!";
+		echo "<br />";
+
+	}
+	else {
+
+		echo "Successfully installed the Discussions content plugin";
+		echo "<br />";
+
+	}
+
+}
+
+// Note: The content plugin is not enabled by default
+
+
 
 
 
@@ -470,6 +530,39 @@ else { // upgrade
 
 
         } // 1.4.1
+
+
+        case "1.5": { // upgrade 1.5 -> new version
+
+            echo "Upgrading from 1.5 to " . $version;
+            echo "<br />";
+
+            // create comments table
+            $sql = "CREATE TABLE IF NOT EXISTS `#__discussions_comments` ( " .
+                " `id` 			int(11) NOT NULL AUTO_INCREMENT, " .
+             	" `parent_id`	int(11) NOT NULL DEFAULT 0, " .
+                " `cat_id`	    int(11) NOT NULL DEFAULT 0, " .
+                " `context_id`	int(11) NOT NULL DEFAULT 0, " .
+                " `user_id`	    int(11) NOT NULL DEFAULT 0, " .
+                " `comment`     text NOT NULL, " .
+                " `created_at`  timestamp NULL DEFAULT CURRENT_TIMESTAMP, " .
+                " `updated_at`  timestamp NULL DEFAULT NULL, " .
+                " `published`   tinyint(1) NOT NULL DEFAULT 0, " .
+                " `wfm`         tinyint(1) DEFAULT 0, " .
+                " PRIMARY KEY (`id`), " .
+                " KEY `idx_discussions_comments_parent_id` (`parent_id`), " .
+                " KEY `idx_discussions_comments_cat_id` (`cat_id`), " .
+                " KEY `idx_discussions_comments_context_id` (`context_id`), " .
+                " KEY `idx_discussions_comments_user_id` (`user_id`), " .
+                " KEY `idx_discussions_comments_created_at` (`created_at`), " .
+                " KEY `idx_discussions_comments_wfm` (`wfm`) " .
+                " ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
+            $db->setQuery( $sql);
+            $db->query();
+
+
+        } // 1.5
+
 
 
 		default: {
