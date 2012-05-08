@@ -43,6 +43,7 @@ class DiscussionsViewMessages extends JView {
 		JSubMenuHelper::addEntry(JText::_('COFI_POSTS'), 'index.php?option=com_discussions&view=posts');
 		JSubMenuHelper::addEntry(JText::_('COFI_USERS'), 'index.php?option=com_discussions&view=users');
         JSubMenuHelper::addEntry(JText::_('COFI_MESSAGES'), 'index.php?option=com_discussions&view=messages', true);
+        JSubMenuHelper::addEntry(JText::_('COFI_COMMENTS'), 'index.php?option=com_discussions&view=comments');
         JSubMenuHelper::addEntry(JText::_('COFI_CONFIGURATION'), 'index.php?option=com_discussions&view=configuration');
 
 
