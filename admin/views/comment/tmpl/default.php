@@ -77,7 +77,7 @@ JHTML::_('behavior.tooltip');
                             <tr>
                                 <td class="key" style="padding: 10px;">
                                     <label>
-                                        <?php echo JText::_('COFI_CONTENT'); ?>
+                                        <?php echo JText::_('COFI_COMMENT_TO'); ?>
                                     </label>
                                 </td>
                                 <td style="padding: 10px;">

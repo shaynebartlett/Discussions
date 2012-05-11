@@ -537,6 +537,13 @@ else { // upgrade
             echo "Upgrading from 1.5 to " . $version;
             echo "<br />";
 
+            // new fields
+            $sql = "ALTER TABLE `#__discussions_users` ADD COLUMN `comments_about_author` text";
+            $db->setQuery( $sql);
+            $db->query();
+
+
+            // new tables
             // create comments table
             $sql = "CREATE TABLE IF NOT EXISTS `#__discussions_comments` ( " .
                 " `id` 			int(11) NOT NULL AUTO_INCREMENT, " .

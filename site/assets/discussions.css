@@ -940,4 +940,26 @@ h2 {
 .cofiCommentsComment {
     padding: 5px;
 }
+
+.discussionsCommentsAboutAuthor {
+    height: 134px;
+    background: #F5F5F5;
+   	margin: 0px 0px 20px 0px;
+   	padding: 10px;
+   	border: 1px solid #ddd;
+}
+.cofiCommentsAboutAuthorAvatarBox {
+    float: left;
+	width:128px;
+	height:128px;
+	text-align: center;
+	background: white;
+	padding: 2px;
+	border: 1px solid #ddd;
+}
+.cofiCommentAboutAuthorText {
+    width: 470px;
+    float: left;
+    margin: 0px 0px 0px 20px;
+}
 /* Comments */

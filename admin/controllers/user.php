@@ -53,8 +53,10 @@ class DiscussionsControllerUser extends JController {
 	
 		JRequest::checkToken() or jexit( 'Invalid Token' );
 
-		$post	= JRequest::get('post');
-		
+//		$post	= JRequest::get('post');
+        $post	= JRequest::get('post', JREQUEST_ALLOWRAW);
+
+
 		$cid	= JRequest::getVar( 'cid', array(0), 'post', 'array' );
 		
 		$post['id'] = (int) $cid[0];

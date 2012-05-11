@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_users` (
   `messages_use_signature` tinyint(1) NOT NULL DEFAULT '0',
   `messages_use_signature_for_replies` tinyint(1) NOT NULL DEFAULT '0',
   `messages_signature` text,
+  `comments_about_author` text,
   PRIMARY KEY (`id`),
   KEY `idx_moderator` (`moderator`)    
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

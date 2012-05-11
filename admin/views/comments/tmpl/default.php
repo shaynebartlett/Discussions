@@ -52,7 +52,7 @@ $ordering = ( ($this->lists['order'] == 'ordering' || $this->lists['order'] == '
 
             <th class="title" width="10%" nowrap="nowrap"><?php echo JText::_( 'COFI_USER' ); ?></th>
 
-            <th class="title" width="30%" nowrap="nowrap" style="text-align: left;"><?php echo JText::_( 'COFI_CONTENT' ); ?></th>
+            <th class="title" width="30%" nowrap="nowrap" style="text-align: left;"><?php echo JText::_( 'COFI_COMMENT_TO' ); ?></th>
 
 			<th class="title" width="1%" nowrap="nowrap"><?php echo JText::_( 'COFI_PUBLISHED' ); ?></th>
 

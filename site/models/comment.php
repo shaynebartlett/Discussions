@@ -213,6 +213,15 @@ class DiscussionsModelComment extends JModel {
 
 				if ( $result) { // insert in discussions comments table went fine
 
+                    // todo make configurable
+
+                    $_receiver_user_id = 63; // get from system
+                    $_user_id = $user->id;
+                    $_content = $this->_parent_id; // get title
+                    $_comment = $this->_comment;
+
+                    $cHelper->sendCommentNotificationEmail( $_receiver_user_id, $_user_id, $_content, $_comment );
+
 					$app->redirect( $redirectLink, "Thank you, your comment has been saved and is waiting for moderator approval now.", "notice");
 
 				}

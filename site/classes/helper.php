@@ -770,6 +770,71 @@ class CofiHelper extends JObject {
    	}
 
 
+    function sendCommentNotificationEmail( $_receiver_user_id, $_user_id, $_content, $_comment ) {
+
+   		// get settings from com_discussions parameters
+   		$params = JComponentHelper::getParams('com_discussions');
+
+   		$SiteName 	= $params->get('emailSiteName', '');
+   		$from 		= $params->get('emailFrom', '');
+   		$sender 	= $params->get('emailSender', '');
+   		$link 		= $params->get('emailLink', '');
+
+   		$subject 	= $params->get('emailCMTSubject', '');
+   		$msgprefix  = $params->get('emailCMTMessagePrefix', '');
+   		$msgpostfix = $params->get('emailCMTMessagePostfix', '');
+
+
+   		jimport( 'joomla.mail.helper' );
+
+        $db	=& JFactory::getDBO();
+
+        $sql = "SELECT username FROM ".$db->nameQuote( '#__users') . " WHERE id = " . $db->Quote($_user_id);
+        $db->setQuery( $sql);
+        $username = $db->loadResult();
+
+        $sql = "SELECT email FROM ".$db->nameQuote( '#__users') . " WHERE id = " . $db->Quote($_receiver_user_id);
+        $db->setQuery( $sql);
+        $email    = $db->loadResult();
+
+        $_username_from = $this->getUsernameById( $_user_id);
+
+      	$subject = $subject . " " . $_username_from . " wrote a comment!";
+
+        if ( JMailHelper::isEmailAddress( $email)) {
+
+          		// construct email
+          		$msg		= $msgprefix; // prefix e.g. "This is a system message..."
+          		if ($msgprefix != "") {
+          			$msg = $msg . "\n\n";
+          		}
+          		$msg     	= $msg . "Dear Admin" . ", \n\n";
+          		$msg     	= $msg . "There's a new comment from " . $_username_from . ":\n\n";
+
+//          		$msg     	= $msg . $_content . "\n\n";
+          		$msg     	= $msg . $_comment . "\n\n";
+
+          		if ($msgpostfix != "") {
+          			$msg = $msg . "\n\n";
+          		}
+          		$msg     	= $msg . $msgpostfix; // postfix e.g. advertising
+
+      			$body	 = sprintf( $msg, $SiteName, $sender, $from, $link);
+
+      			// Clean the email data
+      			$subject = JMailHelper::cleanSubject( $subject);
+      			$body	 = JMailHelper::cleanBody( $body);
+      			$sender	 = JMailHelper::cleanAddress( $sender);
+
+
+      			JUtility::sendMail( $from, $sender, $email, $subject, $body);
+
+      		}
+
+        return 0;
+    }
+
+
 	function isCategoryModerated( $cat_id) {
 
 		$db	=& JFactory::getDBO();		
@@ -1620,6 +1685,25 @@ class CofiHelper extends JObject {
         return $_count;
 
    	}
+
+
+    function getAboutAuthorById( $id) {
+
+        $db	=& JFactory::getDBO();
+
+        $sql = "SELECT comments_about_author FROM ".$db->nameQuote('#__discussions_users')." WHERE id=". $db->Quote($id);
+
+        $db->setQuery( $sql);
+        $about_author = $db->loadResult();
+
+        if ( !$about_author) {
+            return "";
+        }
+        else {
+            return $about_author;
+        }
+
+    }
 
 
 }

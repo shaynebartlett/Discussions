@@ -448,6 +448,29 @@ $CofiHelper = new CofiBackendHelper();
                             </tr>
 
 
+
+
+                            <tr>
+                                <td colspan="2" valign="top" class="key" style="padding: 10px;">
+                                    <legend>
+                                        <?php echo JText::_('COFI_COMMENTS_SETTINGS');?>
+                                    </legend>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td valign="top" class="key" style="padding: 10px;">
+                                    <label>
+                                        <?php echo JText::_('COFI_COMMENTS_ABOUT_AUTHOR'); ?>
+                                    </label>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <textarea name="comments_about_author" id="comments_about_author" rows="5" cols="50" style="width: 100%;"><?php echo $this->user->comments_about_author; ?></textarea>
+                                </td>
+                            </tr>
+
+
+
 						</table>
 
 

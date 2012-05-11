@@ -76,7 +76,7 @@ class plgContentDiscussions extends JPlugin {
             // $html .= '<br />';
             // e.g. com_content.article
 
-            /*
+/*
             $html .= '<br />';
             $html .= "id: " . $row->id;
             $html .= '<br />';
@@ -84,15 +84,53 @@ class plgContentDiscussions extends JPlugin {
             $html .= '<br />';
             $html .= "catid: " . $row->catid;
             $html .= '<br />';
-            */
+
+            $html .= '<br />';
+            $html .= "created_by: " . $row->created_by;
+            $html .= '<br />';
+*/
 
             /*
             $html .= '<br />';
-            print_r($row);
+            var_dump($row);
             $html .= '<br />';
             */
 
             $html .= '<div class="discussionsCommentsAfter">';
+
+
+            $html .= "<h3>About the author</h3>";
+
+
+            $html .= '<div class="discussionsCommentsAboutAuthor">';
+
+                $_avatar       = $CofiHelper->getAvatarById( $row->created_by);
+                $_about_author = $CofiHelper->getAboutAuthorById( $row->created_by);
+
+                $html .= "<div class='cofiCommentsAboutAuthorAvatarBox'>";
+
+                    if ( $_avatar == "") { // display default avatar
+                        $html .= "<img src='" . $_root . "components/com_discussions/assets/users/user.png' width='128' height='128' class='cofiCategoryDefaultAvatar' alt='$row->created_by_alias' title='$row->created_by_alias' />";
+                    }
+                    else { // display uploaded avatar
+                        $html .= "<img src='" . $_root . "images/discussions/users/".$row->created_by."/large/".$_avatar."' width='128' height='128' class='cofiCategoryAvatar' alt='$row->created_by_alias' title='$row->created_by_alias' />";
+                    }
+
+                $html .= "</div>";
+
+
+                $html .= "<div class='cofiCommentAboutAuthorText'>";
+
+                    $html .= $_about_author;
+
+                $html .= "</div>";
+
+
+            $html .= '</div>';
+
+
+            $html .= '<br style="clear: left;" />';
+
 
 
 
