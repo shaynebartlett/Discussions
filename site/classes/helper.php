@@ -118,7 +118,6 @@ class CofiHelper extends JObject {
 
         for ( $i=0; $i < $count; $i++) {
 
-
             $_start = strpos  ( $text  ,  "[flickr=", $_offset);
             $_end   = strpos  ( $text  ,  "]", $_start) ;
 
@@ -126,15 +125,14 @@ class CofiHelper extends JObject {
 
             $_source = substr( $text, $_start, $_end-$_start+1);
 
+            $photo = $f->photos_getSizes( $_id);
 
-            $photo = $f->photos_getInfo( $_id);
-
-            $_small  = $f->buildPhotoURL( $photo, "square");
-            $_medium = $f->buildPhotoURL( $photo, "medium");
-            $_target = $photo['urls']['url'][0]['_content'];
+			$_small  = $photo[0]['source'];
+			$_medium = $photo[6]['source'];
+			$_target = $photo[6]['url'];
+			$_target = substr( $_target, 0, strlen($_target) - 9);
 
             $_replacement = "";
-
 
             // detect display mode: 0=browser popup, 1=slimbox, 3=YOOeffects
             switch ( $mode) {
