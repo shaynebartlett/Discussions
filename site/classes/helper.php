@@ -127,9 +127,27 @@ class CofiHelper extends JObject {
 
             $photo = $f->photos_getSizes( $_id);
 
+
 			$_small  = $photo[0]['source'];
-			$_medium = $photo[6]['source'];
-			$_target = $photo[6]['url'];
+
+            $_medium = $photo[6]['source'];
+            $_target = $photo[6]['url'];
+
+            if ( $_medium == null) {
+                $_medium = $photo[5]['source'];
+                $_target = $photo[5]['url'];
+            }
+
+            if ( $_medium == null) {
+                $_medium = $photo[4]['source'];
+                $_target = $photo[4]['url'];
+            }
+
+            if ( $_medium == null) {
+                $_medium = $photo[3]['source'];
+                $_target = $photo[3]['url'];
+            }
+
 			$_target = substr( $_target, 0, strlen($_target) - 9);
 
             $_replacement = "";
