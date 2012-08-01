@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension version="2.5" type="module" client="site" method="upgrade">
+		
+	<name>Discussions RecentX BS</name>
+	<creationDate>July 2012</creationDate>
+	<author>Codingfish (Achim Fischer)</author> 
+	<authorEmail>info@codingfish.com</authorEmail> 
+	<authorUrl>http://www.codingfish.com</authorUrl>
+	<copyright>All rights reserved.</copyright> 
+	<license>GPL 2</license> 
+	<version>1.6</version>
+	<description>Module for Codingfish Discussions. Displays recent X forum postings. Bootstrap version.</description>
+
+	<files>
+		<filename module="mod_discussions_recentx_bs">mod_discussions_recentx_bs.php</filename>
+		<filename>index.html</filename>
+	</files> 
+	
+	<config>
+		
+		<fields name="params">	
+
+			<fieldset name="basic">
+			
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+				<field name="number" type="text" default="5" label="# of entries to show" description="How many entries do you want to show in the recent x box?" />
+
+				<field name="replies" type="text" default="replies" label="replies text" description="Enter your 'Replies' text" />
+
+		        <field name="show_history" type="radio" label="Show history" default="1" description="Show history?">
+		            <option value="1">Yes</option>
+		            <option value="0">No</option>
+		        </field>
+
+		        <field name="history" type="text" default="History"  label="History text" description="Enter your 'History' text" />
+		        <field name="hours" type="text" default="h"  label="Hours text" description="Enter your 'Hours' text" />
+
+
+				<field name="show_poweredby" type="radio" label="Show powered by" default="1" description="Show powered by Discussions?">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>		
+					
+			</fieldset>
+						
+		</fields>	
+		
+	</config>
+	
+</extension>

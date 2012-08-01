@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension version="2.5" type="module" client="site" method="upgrade">
+
+	<name>Discussions Comments</name>
+	<creationDate>May 2012</creationDate>
+	<author>Codingfish (Achim Fischer)</author> 
+	<authorEmail>info@codingfish.com</authorEmail> 
+	<authorUrl>http://www.codingfish.com</authorUrl>
+	<copyright>All rights reserved.</copyright> 
+	<license>GPL 2</license> 
+	<version>1.6</version>
+	<description>Module for Codingfish Discussions. Shows recent article comments</description>
+
+    
+	<files>
+		<filename module="mod_discussions_comments">mod_discussions_comments.php</filename>
+        <filename>index.html</filename>
+	</files>
+        
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+		        <field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+		        <field name="number" type="text" default="" label="max # of comments to show" description="How many comments do you want to show?" />
+                <field name="characters" type="text" default="" label="max # of characters to show" description="How many characters do you want to show for each comment?" />
+		        <field name="show_poweredby" type="radio" label="show powered by" default="1" description="Show powered by Discussions?">
+			        <option value="1">Yes</option>
+			        <option value="0">No</option>
+		        </field>
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>
