@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="finder" method="upgrade">
+
+    <name>Smart Search - Discussions</name>
+    <creationDate>July 2012</creationDate>
+	<author>Codingfish (Achim Fischer)</author>
+    <authorEmail>info@codingfish.com</authorEmail>
+   	<authorUrl>http://www.codingfish.com</authorUrl>
+	<copyright>All rights reserved.</copyright>
+	<license>GPL 2</license>
+	<version>2.5.0</version>
+	<description>Smart Search Plugin for Codingfish Discussions</description>
+
+	<files>
+		<file plugin="discussions">discussions.php</file>
+    	<filename>index.html</filename>
+	</files>
+
+</extension>
