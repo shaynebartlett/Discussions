@@ -515,6 +515,9 @@ class DiscussionsModelModeration extends JModel {
 		// Check if thread id = post id, means this is the original post OP
 		// if OP then delete all posts in this thread (delete thread)
 		// if not OP then delete single post
+
+         JPluginHelper::importPlugin('content');
+
 		if ( $_threadId == $post) {
 
 			// get post ids in this thread
@@ -545,27 +548,39 @@ class DiscussionsModelModeration extends JModel {
 			// get users who posted in this thread
 	     	$sql = "SELECT DISTINCT user_id FROM" . $db->nameQuote( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
 	        $db->setQuery( $sql);
-			$_userList = $db->loadAssocList();						
+			$_userList = $db->loadAssocList();
+
+			// update user stats
+			if( count( $_userList)) {
+				foreach ($_userList as $_user) {
+					$u_id = $_user['user_id'];
+					$CofiHelper->updateUserStats( $u_id);
+				}
+			}
+
+
+            // get posts in this thread
+	     	$sql = "SELECT id FROM" . $db->nameQuote( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
+	        $db->setQuery( $sql);
+			$_postList = $db->loadAssocList();
+
+			// remove posts from smart search index
+            $dispatcher	= JDispatcher::getInstance();
+			if( count( $_postList)) {
+				foreach ($_postList as $_post) {
+					$_id = $_post['id'];
+                    $dispatcher->trigger('onContentAfterDelete', array ('com_discussions.post', &$_id));
+				}
+			}
+
 
 			// delete thread ( all posts in it) from db
 	     	$sql = "DELETE FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
 	        $db->setQuery( $sql);
 			$db->query();	
-			
-			// now update user stats					
-			if( count( $_userList)) {		
 
-				foreach ($_userList as $_user) {
 
-					$u_id = $_user['user_id'];			
 
-					// update user stats
-					$result = $CofiHelper->updateUserStats( $u_id);					
-
-				}
-
-			}								
-								
 		}
 		else { // not OP
 		
@@ -576,25 +591,31 @@ class DiscussionsModelModeration extends JModel {
 	     	$sql = "DELETE FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
 	        $db->setQuery( $sql);
 			$db->query();	
-		
+
+
+            // trigger event for smart search plugin
+            $dispatcher	= JDispatcher::getInstance();
+            $dispatcher->trigger('onContentAfterDelete', array ('com_discussions.post', &$post));
+
+
 			// change parent id of possible replies to this post
      		$sql = "UPDATE " . $db->nameQuote( '#__discussions_messages') . 
      					" SET parent_id = " . $db->Quote($_parentId) .
      					" WHERE parent_id = " . $db->Quote($post);
         	
         	$db->setQuery( $sql);
-        	$result = $db->query();
+        	$db->query();
 
 			// update category stats
-			$result = $CofiHelper->updateThreadStats( $_threadId);
+			$CofiHelper->updateThreadStats( $_threadId);
 
 			// update user stats
-			$result = $CofiHelper->updateUserStats( $_userId);
+			$CofiHelper->updateUserStats( $_userId);
 								
 		}
 		
 		// update category stats
-		$result = $CofiHelper->updateCategoryStats( $_categoryId);									
+		$CofiHelper->updateCategoryStats( $_categoryId);
 
 		// redirect	link
 		$redirectLink = JRoute::_( "index.php?option=com_discussions&view=index");
@@ -603,7 +624,6 @@ class DiscussionsModelModeration extends JModel {
         return 0;
 
 	}
-
 
 
 }
