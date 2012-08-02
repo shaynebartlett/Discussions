@@ -1722,6 +1722,25 @@ class CofiHelper extends JObject {
     }
 
 
+    function getAuthorIdByContentId( $id) {
+
+        $db	=& JFactory::getDBO();
+
+        $sql = "SELECT created_by FROM ".$db->nameQuote('#__content')." WHERE id=". $db->Quote($id);
+
+        $db->setQuery( $sql);
+        $_authorId = $db->loadResult();
+
+        if ( !$_authorId) {
+            return 0;
+        }
+        else {
+            return $_authorId;
+        }
+
+    }
+
+
 }
 
 

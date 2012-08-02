@@ -124,7 +124,9 @@ class DiscussionsModelComment extends JModel {
 
 
 		if ( $user->guest) { // user is not logged in
-			$app->redirect( $redirectLink, "You are not logged in!", "notice");
+
+            $app->redirect( $redirectLink, JText::_( 'COFI_NOT_LOGGED_IN' ), "notice");
+
 		}
 
 
@@ -173,11 +175,10 @@ class DiscussionsModelComment extends JModel {
 
         // check if user is logged in - maybe session has timed out
 		if ($user->guest) {
-			// if user is not logged in, kick him back into category
-			$app->redirect( $redirectLink, "You are not logged in!", "message");
+
+            $app->redirect( $redirectLink, JText::_( 'COFI_NOT_LOGGED_IN' ), "message");
 
 		}
-
 
 
 		// 1. check if comment >= 5 chars
@@ -189,67 +190,63 @@ class DiscussionsModelComment extends JModel {
 		}
 
 
-			if ( !$isCommentTooShort) { // check if comment text has minimum length
+        if ( !$isCommentTooShort) { // check if comment text has minimum length
 
-        		$db =& $this->getDBO();
-
-
-				// 1. save comment in discussions comments table
-        		$sql = "INSERT INTO ".$db->nameQuote( '#__discussions_comments') .
-            					" ( parent_id, cat_id, context_id, user_id, comment, published, wfm) " .
-            					" VALUES ( " .
-                                $db->Quote( $this->_parent_id) . ", " .
-                                $db->Quote( $this->_cat_id) . ", " .
-                                $db->Quote( $this->_context_id) . ", " .
-                                $db->Quote( $user->id) . ", " .
-            					$db->Quote( $this->_comment) . ", " .
-                                $db->Quote( $this->_published) . ", " .
-            					$db->Quote( $this->_wfm) .
-            					" )";
-
-        		$db->setQuery( $sql);
-        		$result = $db->query();
+            $db =& $this->getDBO();
 
 
-				if ( $result) { // insert in discussions comments table went fine
+            // 1. save comment in discussions comments table
+            $sql = "INSERT INTO ".$db->nameQuote( '#__discussions_comments') .
+                            " ( parent_id, cat_id, context_id, user_id, comment, published, wfm) " .
+                            " VALUES ( " .
+                            $db->Quote( $this->_parent_id) . ", " .
+                            $db->Quote( $this->_cat_id) . ", " .
+                            $db->Quote( $this->_context_id) . ", " .
+                            $db->Quote( $user->id) . ", " .
+                            $db->Quote( $this->_comment) . ", " .
+                            $db->Quote( $this->_published) . ", " .
+                            $db->Quote( $this->_wfm) .
+                            " )";
 
-                    // todo make configurable
-
-                    $_receiver_user_id = 63; // get from system
-                    $_user_id = $user->id;
-                    $_content = $this->_parent_id; // get title
-                    $_comment = $this->_comment;
-
-                    $cHelper->sendCommentNotificationEmail( $_receiver_user_id, $_user_id, $_content, $_comment );
-
-					$app->redirect( $redirectLink, "Thank you, your comment has been saved and is waiting for moderator approval now.", "notice");
-
-				}
-				else {
-
-					$app->redirect( $redirectLink, "Your comment has not been saved. An unexpected error has occured.", "message");
-
-				}
-
-			}
+            $db->setQuery( $sql);
+            $result = $db->query();
 
 
+            if ( $result) { // insert in discussions comments table went fine
+
+                $_user_id = $user->id;
+                $_content = $this->_parent_id; // get title
+                $_comment = $this->_comment;
+
+                // get article author id
+                $_receiver_user_id = $cHelper->getAuthorIdByContentId( $_content);
+
+                // send notification email to article author
+                $cHelper->sendCommentNotificationEmail( $_receiver_user_id, $_user_id, $_content, $_comment );
+
+                $app->redirect( $redirectLink, JText::_( 'COFI_COMMENTS_COMMENT_HAS_BEEN_SAVED' ), "notice");
+
+            }
+            else {
+
+                $app->redirect( $redirectLink, JText::_( 'COFI_COMMENTS_COMMENT_HAS_NOT_BEEN_SAVED_ERROR' ), "message");
+
+            }
+
+        }
 
 
 		if ( $isCommentTooShort) {
 
-			$app->redirect( $redirectLink, "Your comment was too short. Please enter at least 5 characters.", "message");
+			$app->redirect( $redirectLink, JText::_( 'COFI_COMMENTS_COMMENT_TOO_SHORT' ), "message");
 
 		}
 
-		$app->redirect( $redirectLink, "Thank you, your comment has been saved and is waiting for moderator approval now.", "notice");
+		$app->redirect( $redirectLink, JText::_( 'COFI_COMMENTS_COMMENT_HAS_BEEN_SAVED' ), "notice");
 
 
         return 0; // save OK
      }
-
-
-
 
 
 
