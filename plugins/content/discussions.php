@@ -12,8 +12,6 @@ defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.plugin.plugin');
 
-//JHTML::_('stylesheet', 'discussions.css', 'components/com_discussions/assets/');
-
 
 /**
  * Plugin for Codingfish Discussions
@@ -33,18 +31,47 @@ class plgContentDiscussions extends JPlugin {
    	}
 
 
-/*
+
 	function onContentBeforeDisplay($context, &$row, &$params, $page=0) {
+
+        // website root directory
+        $_root = JURI::root();
+
+        $document = &JFactory::getDocument();
+        $_css = $_root . 'components/com_discussions/assets/discussions.css';
+     	$document->addStyleSheet($_css);
+
+        $db	=& JFactory::getDBO();
 
         $html = '';
 
         $html .= '<div class="discussionsCommentsBefore">';
-        	$html .= "#Comments:";
-		$html .= "</div>\n<br />\n";
+
+            // get # of replies in this article
+			$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_comments')." WHERE parent_id=". $db->Quote($row->id) .
+					" AND published='1' AND parent_id <> '0'";
+
+			$db->setQuery( $sql);
+			$_counter_comments = $db->loadResult();
+
+            switch ($_counter_comments) {
+
+                case 1: {
+                    $html .= $_counter_comments . " " . JText::_('PLG_CONTENT_DISCUSSIONS_NUMBER_COMMENTS_SINGULAR');
+                    break;
+                }
+                default: {
+                    $html .= $_counter_comments . " " . JText::_('PLG_CONTENT_DISCUSSIONS_NUMBER_COMMENTS_PLURAL');
+                    break;
+                }
+
+            }
+
+		$html .= "</div>";
 
         return $html;
 	}
-*/
+
 
 	function onContentAfterDisplay($context, &$row, &$params, $page=0) {
 
@@ -52,8 +79,6 @@ class plgContentDiscussions extends JPlugin {
         $_root = JURI::root();
 
         $db	=& JFactory::getDBO();
-
-        // todo make categories configurable
 
         if ( $row->fulltext) {
 
@@ -71,36 +96,12 @@ class plgContentDiscussions extends JPlugin {
 
             $html .= '<br />';
 
-            // $html .= '<br />';
-            // $html .= "context: " . $context;
-            // $html .= '<br />';
-            // e.g. com_content.article
-
-/*
-            $html .= '<br />';
-            $html .= "id: " . $row->id;
-            $html .= '<br />';
-
-            $html .= '<br />';
-            $html .= "catid: " . $row->catid;
-            $html .= '<br />';
-
-            $html .= '<br />';
-            $html .= "created_by: " . $row->created_by;
-            $html .= '<br />';
-*/
-
-            /*
-            $html .= '<br />';
-            var_dump($row);
-            $html .= '<br />';
-            */
-
             $html .= '<div class="discussionsCommentsAfter">';
 
 
-            $html .= "<h3>About the author</h3>";
-
+            $html .= "<h3>";
+                $html .= JText::_('PLG_CONTENT_DISCUSSIONS_ABOUT_AUTHOR');
+            $html .= "</h3>";
 
             $html .= '<div class="discussionsCommentsAboutAuthor">';
 
@@ -135,7 +136,7 @@ class plgContentDiscussions extends JPlugin {
 
 
             // show Number of Comments
-            // get # of replies in this thread
+            // get # of replies in this article
 			$sql = "SELECT count(*) FROM ".$db->nameQuote('#__discussions_comments')." WHERE parent_id=". $db->Quote($row->id) .
 					" AND published='1' AND parent_id <> '0'";
 
@@ -145,18 +146,41 @@ class plgContentDiscussions extends JPlugin {
             switch ( $_counter_comments) {
 
                 case 0: {
-                    $html .= "<h3>There are no comments to \"" . $row->title ."\" yet</h3>";
+
+                    $html .= "<h3>";
+                        $html .= JText::_('PLG_CONTENT_DISCUSSIONS_NO_COMMENTS_TO_1');
+                        $html .= $row->title;
+                        $html .= JText::_('PLG_CONTENT_DISCUSSIONS_NO_COMMENTS_TO_2');
+                    $html .= "</h3>";
+
                     break;
+
                 }
 
                 case 1: {
-                    $html .= "<h3>Showing 1 comment to \"" . $row->title . "\"</h3>";
+
+                    $html .= "<h3>";
+                        $html .= JText::_('PLG_CONTENT_DISCUSSIONS_SHOWING_ONE_COMMENT_TO_1');
+                        $html .= $row->title;
+                        $html .= JText::_('PLG_CONTENT_DISCUSSIONS_SHOWING_ONE_COMMENT_TO_2');
+                    $html .= "</h3>";
+
                     break;
+
                 }
 
                 default: {
-                    $html .= "<h3>Showing " . $_counter_comments . " comments to \"" . $row->title . "\"</h3>";
+
+                    $html .= "<h3>";
+                        $html .= JText::_('PLG_CONTENT_DISCUSSIONS_SHOWING_COMMENTS_TO_1');
+                        $html .= $_counter_comments;
+                        $html .= JText::_('PLG_CONTENT_DISCUSSIONS_SHOWING_COMMENTS_TO_2');
+                        $html .= $row->title;
+                        $html .= JText::_('PLG_CONTENT_DISCUSSIONS_SHOWING_COMMENTS_TO_3');
+                    $html .= "</h3>";
+
                     break;
+
                 }
 
             }
@@ -241,9 +265,10 @@ class plgContentDiscussions extends JPlugin {
             // comment form
             if ( $user->guest == 1) { // guest user -> no comments
 
-                //$html .= JText::sprintf( 'PLG_VOTE_USER_RATING', $img, $rating_count );
                 $html .= '<br />';
-                $html .= "<h3>Please login and leave a comment</h3>";
+                    $html .= "<h3>";
+                        $html .= JText::_('PLG_CONTENT_DISCUSSIONS_PLEASE_LOGIN');
+                    $html .= "</h3>";
                 $html .= '<br />';
 
             }
@@ -256,12 +281,12 @@ class plgContentDiscussions extends JPlugin {
                 $html .= "var form = document.getElementById('commentform');";
 
                 $html .= "if (form.comment.value == '') { ";
-                $html .= "alert( 'A comment must have some text. An empty text is not very helpful :-)');";
+                $html .= "alert( '" . JText::_('PLG_CONTENT_DISCUSSIONS_ALERT_COMMENT_MUST_HAVE_TEXT') . "');";
                 $html .= "return false;";
                 $html .= "}";
 
                 $html .= "if (form.comment.value.length < 5) { ";
-                $html .= "alert( 'The comment text is too short, please enter at least 5 characters');";
+                $html .= "alert( '" . JText::_('PLG_CONTENT_DISCUSSIONS_ALERT_COMMENT_TEXT_TOO_SHORT') . "');";
                 $html .= "return false;";
                 $html .= "}";
 
@@ -273,12 +298,12 @@ class plgContentDiscussions extends JPlugin {
 
 
                 $html .= '<br />';
-                $html .= "<h3>Leave a comment</h3>";
+                $html .= "<h3>";
+                    $html .= JText::_('PLG_CONTENT_DISCUSSIONS_LEAVE_COMMENT');
+                $html .= "</h3>";
 
 
-                $html .= "Wanna leave a comment? Great idea! You found the right place :-) ";
-                $html .= "Please note that my comments are moderated, so don't waste your (and my) time with spam comments. ";
-                $html .= "Let's have a nice conversation.";
+                $html .= JText::_('PLG_CONTENT_DISCUSSIONS_COMMENT_TEASER');
                 $html .= '<br />';
                 $html .= '<br />';
 
@@ -287,11 +312,14 @@ class plgContentDiscussions extends JPlugin {
 
                 $html .= "<form action='" . $link . "' method='post' name='commentform' id='commentform'>";
 
-                $html .= "<strong>Your comment</strong>";
+
+                $html .= "<strong>";
+                    $html .= JText::_('PLG_CONTENT_DISCUSSIONS_YOUR_COMMENT');
+                $html .= "</strong>";
                 $html .= '<br />';
                 $html .= '<br />';
 
-                $html .= "<textarea name='comment' cols='100' rows='10' wrap='VIRTUAL' id='comment'>";
+                $html .= "<textarea name='comment' cols='100' rows='10' wrap='VIRTUAL' id='comment' style='width: 500px;'>";
 
                 $html .= "</textarea>";
 
@@ -309,7 +337,7 @@ class plgContentDiscussions extends JPlugin {
 
 
                 $html .= "<br />";
-                $html .= "<input class='cofiButton' type='submit' name='submit' onclick='return Joomla.submitbutton()' value=' Submit comment '>";
+                $html .= "<input class='cofiButton' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_('PLG_CONTENT_DISCUSSIONS_SUBMIT_COMMENT') ."'>";
 
                 $html .= "</form>";
 

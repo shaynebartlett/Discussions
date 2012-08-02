@@ -889,6 +889,11 @@ h2 {
 
 
 /* Comments */
+.discussionsCommentsBefore {
+    width:100%;
+    margin: 0px 0px 5px 5px;
+    font-weight: bold;
+}
 .discussionsCommentsAfter {
     width:100%;
     margin: 50px 0px 10px 0px;
