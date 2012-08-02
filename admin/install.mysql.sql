@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_users` (
   `email_notification` tinyint(1) DEFAULT '0',
   `approval_notification` tinyint(1) DEFAULT '0',
   `show_online_status` tinyint(1) DEFAULT '1',
-  `messages_email_notifications` tinyint(1) NOT NULL DEFAULT '0',
+  `messages_email_notifications` tinyint(1) NOT NULL DEFAULT '1',
   `messages_use_signature` tinyint(1) NOT NULL DEFAULT '0',
   `messages_use_signature_for_replies` tinyint(1) NOT NULL DEFAULT '0',
   `messages_signature` text,
