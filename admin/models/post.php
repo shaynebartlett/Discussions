@@ -153,7 +153,8 @@ class DiscussionsModelPost extends JModel {
 			$post->counter_replies     	= 0;
 			$post->sticky				= 0;
 			$post->wfm					= 0;
-						
+            $post->apikey_id		    = 0;
+
 			$this->_data				= $post;
 			
 			return (boolean) $this->_data;

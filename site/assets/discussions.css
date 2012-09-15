@@ -968,3 +968,18 @@ h2 {
     margin: 0px 0px 0px 20px;
 }
 /* Comments */
+
+
+/* via text e.g. via Chimoora for Android */
+.cofiViaLink {
+    color: #999;
+    font-size: smaller;
+}
+.cofiViaLink a:link a:visited {
+    color: #999999; text-decoration: none;
+}
+.cofiViaLink a:hover {
+    color: #999999; text-decoration: underline;
+}
+/* via text e.g. via Chimoora for Android */
+

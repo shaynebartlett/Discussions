@@ -187,12 +187,7 @@ class DiscussionsModelThread extends JModel {
      */
      function getPostings() {
 
-         $app = JFactory::getApplication();
-
-     	$_catid = JRequest::getInt('catid', 0);
-
-        $_categoryId = $_catid;
-
+        $app = JFactory::getApplication();
 
      	if ( $this->getExistStatus() != null ) { // check if this category exists
      	
@@ -288,7 +283,7 @@ class DiscussionsModelThread extends JModel {
                     image3, image3_description, 
                     image4, image4_description,
                     image5, image5_description,
-                    published
+                    published, apikey_id
 					FROM ".$db->nameQuote('#__discussions_messages')."
 					WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND published='1'
 					ORDER BY id ASC";

@@ -1741,6 +1741,43 @@ class CofiHelper extends JObject {
     }
 
 
+    function getViaNameById( $id) {
+
+   		$db	=& JFactory::getDBO();
+
+   		$sql = "SELECT name FROM ".$db->nameQuote('#__restapi_apikeys')." WHERE id=" . $db->Quote($id);
+
+   		$db->setQuery( $sql);
+   		$_via = $db->loadResult();
+
+   		if ( !$_via) {
+   			return "";
+   		}
+   		else {
+   			return $_via;
+   		}
+
+   	}
+
+    function getViaUrlById( $id) {
+
+   		$db	=& JFactory::getDBO();
+
+   		$sql = "SELECT url FROM ".$db->nameQuote('#__restapi_apikeys')." WHERE id=" . $db->Quote($id);
+
+   		$db->setQuery( $sql);
+   		$_url = $db->loadResult();
+
+   		if ( !$_url) {
+   			return "";
+   		}
+   		else {
+   			return $_url;
+   		}
+
+   	}
+
+
 }
 
 

@@ -47,6 +47,14 @@ class DiscussionsModelPosting extends JModel {
 	var $_categoryId = 0;
 
 
+    /**
+	 * apikey id
+	 *
+	 * @var integer
+	 */
+	var $_apikeyId = 0;
+
+
 	/**
 	 * category slug
 	 *
@@ -312,7 +320,8 @@ class DiscussionsModelPosting extends JModel {
      	$this->_thread = JRequest::getInt( 'thread', 0);
 		$this->_categoryId = JRequest::getInt('catid', 0);
 		$this->_categorySlug = JRequest::getString('catid', 0);
-				
+        $this->_apikeyId = JRequest::getInt('apikey_id', 0);
+
 
      	if ( $this->getExistStatus() != null ) { // check if this category exists
 		
@@ -383,6 +392,21 @@ class DiscussionsModelPosting extends JModel {
 
 		return $this->_categoryId;
 	}
+
+
+    /**
+   	 * Method to get the apikey id of this post
+   	 *
+   	 * @access public
+   	 * @return integer
+   	 */
+   	function getApikeyId() {
+
+        $this->_apikeyId = JRequest::getInt('apikey_id', 0);
+
+   		return $this->_apikeyId;
+
+   	}
 
 
 	/**
@@ -967,6 +991,8 @@ class DiscussionsModelPosting extends JModel {
 		$_postParent    = JRequest::getInt('parent', '0');
 		$_postId        = JRequest::getInt('id', '0');
 
+        $_apikeyId        = JRequest::getInt('apikey_id', '0');
+
 
 		// get user IP address
 		$_postIpAddress = $_SERVER['REMOTE_ADDR'];
@@ -1188,14 +1214,14 @@ class DiscussionsModelPosting extends JModel {
         		$insert_sql = "INSERT INTO ".$db->nameQuote( '#__discussions_messages') .
             					" ( parent_id, cat_id, thread, user_id, account, name, email, ip, subject, alias, message, image1_description,  image2_description, image3_description, image4_description, image5_description, published, wfm) " .
             					" VALUES ( " .
-                                $db->Quote($_postParent) . ", " .
-                                $db->Quote($_postCatId) . ", " .
-                                $db->Quote($_postThread) . ", " .
-                                $db->Quote($user->id) . ", " .
-                                $db->Quote($user->username) . ", " .
-                                $db->Quote($user->name) . ", " .
-                                $db->Quote($user->email) . ", " .
-                                $db->Quote($_postIpAddress) .  ", " .
+                                $db->Quote( $_postParent) . ", " .
+                                $db->Quote( $_postCatId) . ", " .
+                                $db->Quote( $_postThread) . ", " .
+                                $db->Quote( $user->id) . ", " .
+                                $db->Quote( $user->username) . ", " .
+                                $db->Quote( $user->name) . ", " .
+                                $db->Quote( $user->email) . ", " .
+                                $db->Quote( $_postIpAddress) .  ", " .
             					$db->Quote( $_postSubject) . ", " . 
             					$db->Quote( $alias) . ", " . 
             					$db->Quote( $_postText) . ", " .
@@ -1204,8 +1230,9 @@ class DiscussionsModelPosting extends JModel {
             					$db->Quote( $_image3_description) . ", " .
             					$db->Quote( $_image4_description) . ", " .
             					$db->Quote( $_image5_description) . ", " .            					
-                                $db->Quote($published) . ", " .
-                                $db->Quote($wfm) . " )";
+                                $db->Quote( $published) . ", " .
+                                $db->Quote( $wfm) . ", " .
+                                $db->Quote( $_apikeyId) . " )";
 
 
         		$db->setQuery( $insert_sql);

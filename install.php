@@ -597,6 +597,9 @@ else { // upgrade
             $db->setQuery( $sql);
             $db->query();
 
+            $sql = "ALTER TABLE `#__discussions_messages` ADD COLUMN `apikey_id` int(11) NOT NULL DEFAULT '0'";
+            $db->setQuery( $sql);
+            $db->query();
 
             // new tables
             // create comments table
@@ -611,13 +614,15 @@ else { // upgrade
                 " `updated_at`  timestamp NULL DEFAULT NULL, " .
                 " `published`   tinyint(1) NOT NULL DEFAULT 0, " .
                 " `wfm`         tinyint(1) DEFAULT 0, " .
+                " `apikey_id`   int(11) NOT NULL DEFAULT 0, " .
                 " PRIMARY KEY (`id`), " .
                 " KEY `idx_discussions_comments_parent_id` (`parent_id`), " .
                 " KEY `idx_discussions_comments_cat_id` (`cat_id`), " .
                 " KEY `idx_discussions_comments_context_id` (`context_id`), " .
                 " KEY `idx_discussions_comments_user_id` (`user_id`), " .
                 " KEY `idx_discussions_comments_created_at` (`created_at`), " .
-                " KEY `idx_discussions_comments_wfm` (`wfm`) " .
+                " KEY `idx_discussions_comments_wfm` (`wfm`), " .
+                " KEY `idx_discussions_comments_apikey_id` (`apikey_id`) " .
                 " ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
             $db->setQuery( $sql);
             $db->query();

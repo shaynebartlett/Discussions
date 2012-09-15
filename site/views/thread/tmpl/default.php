@@ -672,18 +672,35 @@ if ( $showBreadcrumbRow == "1") {
 
 			<td align="left" valign="top" class="cofiThreadTableRow<?php echo $rowColor; ?> cofiThreadBorder2" >
 
-
-
 				<?php
                 //echo "<div style='width: 745px; overflow:hidden;'>";
 
-				
 				// anchor
 				echo "<a name='p" . $posting->id . "'></a>";				
 				
                 echo $posting->date;
-                	         
-                	                						
+
+
+                // if posting not from web -> show via <source>
+                if ( $posting->apikey_id > 0) { // only show via if not from web
+
+                    $_vianame = $CofiHelper->getViaNameById( $posting->apikey_id);
+                    $_viaurl  = $CofiHelper->getViaUrlById( $posting->apikey_id);
+
+                    echo " <span class='cofiViaLink'>";
+
+                    if ( $_viaurl != "") {
+                        echo "via <a href='$_viaurl' target='_blank' title='$_vianame' style='color: #999999;'>" . $_vianame . "</a>";
+                    }
+                    else {
+                        echo "via " . $_vianame;
+                    }
+
+                    echo "</span>";
+
+                }
+
+                    
 				$pageOffset = JRequest::getVar('limitstart', 0, '', 'int');
 				
 				if ( $pageOffset == 0) { // first page off this thread

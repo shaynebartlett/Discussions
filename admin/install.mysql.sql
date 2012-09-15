@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `#__discussions_messages` (
   `image4_description` varchar(255) DEFAULT '',
   `image5` varchar(255) DEFAULT '',
   `image5_description` varchar(255) DEFAULT '',
+  `apikey_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_thread` (`thread`),
   KEY `idx_sticky` (`sticky`),
@@ -76,7 +77,8 @@ CREATE TABLE IF NOT EXISTS `#__discussions_messages` (
   KEY `idx_last_entry_msg_id` (`last_entry_msg_id`),
   KEY `idx_published`  (`published`),
   KEY `idx_wfm`  (`wfm`),
-  KEY `idx_date`  (`date`)
+  KEY `idx_date`  (`date`),
+  KEY `idx_apikey_id` (`apikey_id`)
 ) AUTO_INCREMENT=1;
 
 
@@ -193,11 +195,13 @@ CREATE TABLE IF NOT EXISTS `#__discussions_comments` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '0',
   `wfm` tinyint(1) DEFAULT '0',
+  `apikey_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_discussions_comments_parent_id` (`parent_id`),
   KEY `idx_discussions_comments_cat_id` (`cat_id`),
   KEY `idx_discussions_comments_context_id` (`context_id`),
   KEY `idx_discussions_comments_user_id` (`user_id`),
   KEY `idx_discussions_comments_created_at` (`created_at`),
-  KEY `idx_discussions_comments_wfm` (`wfm`)
+  KEY `idx_discussions_comments_wfm` (`wfm`),
+  KEY `idx_discussions_comments_apikey_id` (`apikey_id`)
 ) AUTO_INCREMENT=1;
