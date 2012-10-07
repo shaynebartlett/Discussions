@@ -293,10 +293,10 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 		            				
 		            					$_receivername = $cHelper->getUsernameById( $this->receiver_userid);
 		            				
-		            					echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' value='" . $_receivername . "' >";
+		            					echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;' value='" . $_receivername . "' >";
 		            				}
 		            				else {
-		            					echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80'>";	
+		            					echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;'>";
 		            				}
 		            				
 		            				
@@ -312,7 +312,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 							case "msg_reply":
 							case "msg_quote": {
 		            			echo "<div class='cofiSubject'>";
-		            				echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' value='" . $_user_from . "' readonly>";
+		            				echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;' value='" . $_user_from . "' readonly>";
 		            			echo "</div>";		            			
 		            			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_RECEIVER_INFO' ) . "</div> ";
 
@@ -341,7 +341,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 
 							case "msg_new": {
 		            			echo "<div class='cofiSubject'>";
-            						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80'>";	
+            						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' style='width: 500px;'>";
 		            			echo "</div>";		            			
             					echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_SUBJECT_INFO' ) . "</div> ";
 								break;
@@ -355,7 +355,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 		            				$_subject = $this->messageSubject;
 		            				$_subject = str_replace( "Re:", "", $_subject);
 		            				$_subject = "Re: " . ltrim($_subject);		            			
-            						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' value='" . $_subject . "' readonly>";	
+            						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' style='width: 500px;' value='" . $_subject . "' readonly>";
 		            			echo "</div>";		            			
             					echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_SUBJECT_INFO' ) . "</div> ";
 
@@ -379,7 +379,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
    					echo "<div class='cofiText'>";		
    					
    						if ( $this->task == "msg_quote") {
-   							echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText'>";
+   							echo "<textarea name='postText' cols='80' rows='20' style='width: 600px;' wrap='VIRTUAL' id='postText'>";
 	   							if ( $logUser->getMessagesUseSignature() == 1 && $logUser->getMessagesUseSignatureForReplies() == 1) { // use the users signature for quote
 	   								echo "\n\n\n";
 	   								echo $logUser->getMessagesSignature();
@@ -389,7 +389,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
     						echo "</textarea>";   						
    						}
    						else { // blank textarea
-   							echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText'>";   							
+   							echo "<textarea name='postText' cols='80' rows='20' style='width: 600px;' wrap='VIRTUAL' id='postText'>";
    								if ( $this->task == "msg_reply") {
 		   							if ( $logUser->getMessagesUseSignature() == 1 && $logUser->getMessagesUseSignatureForReplies() == 1) { // use the users signature for reply
 		   								echo "\n\n\n";

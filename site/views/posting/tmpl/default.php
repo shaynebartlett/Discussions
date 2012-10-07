@@ -237,7 +237,7 @@ if ( $showBreadcrumbRow == "1") {
 					if ( $this->task == "new") { // new posting
 
             			echo "<div class='cofiSubject'>";
-            				echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80'>";	
+            				echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' style='width: 500px;'>";
             			echo "</div>";
             			
             			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MIN_5_CHARS' ) . "</div> ";
@@ -267,7 +267,7 @@ if ( $showBreadcrumbRow == "1") {
     				echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_TEXT' ) . ":</div> ";
    					   			
    					echo "<div class='cofiText'>";			    			
-   						echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText'>";
+   						echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText' style='width: 600px;'>";
 							if ( $this->task == "quote") {
    								echo "[quote]" . $this->messageText . "[/quote]";
 							}
@@ -333,7 +333,7 @@ if ( $showBreadcrumbRow == "1") {
 				    		echo "<div class='cofiImageHeader'>" . JText::_( 'COFI_IMAGE_1_DESCRIPTION' ) . ":</div> ";
 				   							
 	            			echo "<div class='cofiImageDescription'>";
-								echo "<input type='text' name='image1_description' id='image1_description' size='50' maxlength='80' value='" . $this->image1_description . "' >";
+								echo "<input type='text' name='image1_description' id='image1_description' size='50' maxlength='80' style='width: 500px;' value='" . $this->image1_description . "' >";
 	            			echo "</div>";
 	            			
 	            			echo "<div class='cofiImageFooter'>" . JText::_( 'COFI_IMAGE_1_DESCRIPTION_HELP' ) . "</div> ";
@@ -365,7 +365,7 @@ if ( $showBreadcrumbRow == "1") {
 				    		echo "<div class='cofiImageHeader'>" . JText::_( 'COFI_IMAGE_2_DESCRIPTION' ) . ":</div> ";
 				   							
 	            			echo "<div class='cofiImageDescription'>";
-								echo "<input type='text' name='image2_description' id='image2_description' size='50' maxlength='80' value='" . $this->image2_description . "'>";
+								echo "<input type='text' name='image2_description' id='image2_description' size='50' maxlength='80' style='width: 500px;' value='" . $this->image2_description . "'>";
 	            			echo "</div>";
 	            			
 	            			echo "<div class='cofiImageFooter'>" . JText::_( 'COFI_IMAGE_2_DESCRIPTION_HELP' ) . "</div> ";
@@ -397,7 +397,7 @@ if ( $showBreadcrumbRow == "1") {
 				    		echo "<div class='cofiImageHeader'>" . JText::_( 'COFI_IMAGE_3_DESCRIPTION' ) . ":</div> ";
 				   							
 	            			echo "<div class='cofiImageDescription'>";
-								echo "<input type='text' name='image3_description' id='image3_description' size='50' maxlength='80' value='" . $this->image3_description . "' >";
+								echo "<input type='text' name='image3_description' id='image3_description' size='50' maxlength='80' style='width: 500px;' value='" . $this->image3_description . "' >";
 	            			echo "</div>";
 	            			
 	            			echo "<div class='cofiImageFooter'>" . JText::_( 'COFI_IMAGE_3_DESCRIPTION_HELP' ) . "</div> ";
@@ -429,7 +429,7 @@ if ( $showBreadcrumbRow == "1") {
 				    		echo "<div class='cofiImageHeader'>" . JText::_( 'COFI_IMAGE_4_DESCRIPTION' ) . ":</div> ";
 				   							
 	            			echo "<div class='cofiImageDescription'>";
-								echo "<input type='text' name='image4_description' id='image4_description' size='50' maxlength='80' value='" . $this->image4_description . "'>";
+								echo "<input type='text' name='image4_description' id='image4_description' size='50' maxlength='80' style='width: 500px;' value='" . $this->image4_description . "'>";
 	            			echo "</div>";
 	            			
 	            			echo "<div class='cofiImageFooter'>" . JText::_( 'COFI_IMAGE_4_DESCRIPTION_HELP' ) . "</div> ";
@@ -460,7 +460,7 @@ if ( $showBreadcrumbRow == "1") {
 				    		echo "<div class='cofiImageHeader'>" . JText::_( 'COFI_IMAGE_5_DESCRIPTION' ) . ":</div> ";
 				   							
 	            			echo "<div class='cofiImageDescription'>";
-								echo "<input type='text' name='image5_description' id='image5_description' size='50' maxlength='80' value='" . $this->image5_description . "' >";
+								echo "<input type='text' name='image5_description' id='image5_description' size='50' maxlength='80' style='width: 500px;' value='" . $this->image5_description . "' >";
 	            			echo "</div>";
 	            			
 	            			echo "<div class='cofiImageFooter'>" . JText::_( 'COFI_IMAGE_5_DESCRIPTION_HELP' ) . "</div> ";

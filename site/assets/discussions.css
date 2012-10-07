@@ -263,6 +263,7 @@ h2 {
 	font-size: 1.4em;
 	font-weight: bold;
     margin-top: 10px;
+    width: 500px;
 }
 .cofiSubjectFooter {
 	font-size: 1.0em;
@@ -280,6 +281,7 @@ h2 {
 }
 .cofiText {
     margin-top: 10px;
+    width: 600px;
 }
 .cofiTextFooter {
 	font-size: 1.0em;
@@ -310,6 +312,7 @@ h2 {
 	font-size: 1.4em;
 	font-weight: bold;
     margin-top: 10px;
+    width: 500px;
 }
 .cofiImageFooter {
 	font-size: 1.0em;

@@ -700,7 +700,7 @@ if ( $showBreadcrumbRow == "1") {
 
                 }
 
-                    
+
 				$pageOffset = JRequest::getVar('limitstart', 0, '', 'int');
 				
 				if ( $pageOffset == 0) { // first page off this thread

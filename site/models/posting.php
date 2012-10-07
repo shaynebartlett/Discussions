@@ -1211,8 +1211,10 @@ class DiscussionsModelPosting extends JModel {
             	$alias = $_postSubject;
     			$alias = JFilterOutput::stringURLSafe($alias);
 
+                $_apikeyId = 0; // web
+
         		$insert_sql = "INSERT INTO ".$db->nameQuote( '#__discussions_messages') .
-            					" ( parent_id, cat_id, thread, user_id, account, name, email, ip, subject, alias, message, image1_description,  image2_description, image3_description, image4_description, image5_description, published, wfm) " .
+            					" ( parent_id, cat_id, thread, user_id, account, name, email, ip, subject, alias, message, image1_description,  image2_description, image3_description, image4_description, image5_description, published, wfm, apikey_id) " .
             					" VALUES ( " .
                                 $db->Quote( $_postParent) . ", " .
                                 $db->Quote( $_postCatId) . ", " .
