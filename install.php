@@ -601,6 +601,15 @@ else { // upgrade
             $db->setQuery( $sql);
             $db->query();
 
+            $sql = "ALTER TABLE `#__discussions_messages` ADD COLUMN `latitude` float";
+            $db->setQuery( $sql);
+            $db->query();
+
+            $sql = "ALTER TABLE `#__discussions_messages` ADD COLUMN `longitude` float";
+            $db->setQuery( $sql);
+            $db->query();
+
+
             // new tables
             // create comments table
             $sql = "CREATE TABLE IF NOT EXISTS `#__discussions_comments` ( " .
@@ -615,6 +624,8 @@ else { // upgrade
                 " `published`   tinyint(1) NOT NULL DEFAULT 0, " .
                 " `wfm`         tinyint(1) DEFAULT 0, " .
                 " `apikey_id`   int(11) NOT NULL DEFAULT 0, " .
+                " `latitude`    float, " .
+                " `longitude`   float, " .
                 " PRIMARY KEY (`id`), " .
                 " KEY `idx_discussions_comments_parent_id` (`parent_id`), " .
                 " KEY `idx_discussions_comments_cat_id` (`cat_id`), " .

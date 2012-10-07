@@ -47,12 +47,20 @@ class DiscussionsModelPosting extends JModel {
 	var $_categoryId = 0;
 
 
+
     /**
-	 * apikey id
+	 * latitude
 	 *
-	 * @var integer
+	 * @var float
 	 */
-	var $_apikeyId = 0;
+	var $_latitude = 0;
+
+    /**
+	 * longitude
+	 *
+	 * @var float
+	 */
+	var $_longitude = 0;
 
 
 	/**
@@ -320,8 +328,9 @@ class DiscussionsModelPosting extends JModel {
      	$this->_thread = JRequest::getInt( 'thread', 0);
 		$this->_categoryId = JRequest::getInt('catid', 0);
 		$this->_categorySlug = JRequest::getString('catid', 0);
-        $this->_apikeyId = JRequest::getInt('apikey_id', 0);
 
+        $this->_latitude = JRequest::getString('latitude', '');
+        $this->_longitude = JRequest::getString('longitude', '');
 
      	if ( $this->getExistStatus() != null ) { // check if this category exists
 		
@@ -393,20 +402,6 @@ class DiscussionsModelPosting extends JModel {
 		return $this->_categoryId;
 	}
 
-
-    /**
-   	 * Method to get the apikey id of this post
-   	 *
-   	 * @access public
-   	 * @return integer
-   	 */
-   	function getApikeyId() {
-
-        $this->_apikeyId = JRequest::getInt('apikey_id', 0);
-
-   		return $this->_apikeyId;
-
-   	}
 
 
 	/**
@@ -991,7 +986,10 @@ class DiscussionsModelPosting extends JModel {
 		$_postParent    = JRequest::getInt('parent', '0');
 		$_postId        = JRequest::getInt('id', '0');
 
-        $_apikeyId        = JRequest::getInt('apikey_id', '0');
+
+        $_latitude      = JRequest::getString('latitude', '');
+        $_longitude     = JRequest::getString('longitude', '');
+
 
 
 		// get user IP address
@@ -1211,10 +1209,8 @@ class DiscussionsModelPosting extends JModel {
             	$alias = $_postSubject;
     			$alias = JFilterOutput::stringURLSafe($alias);
 
-                $_apikeyId = 0; // web
-
         		$insert_sql = "INSERT INTO ".$db->nameQuote( '#__discussions_messages') .
-            					" ( parent_id, cat_id, thread, user_id, account, name, email, ip, subject, alias, message, image1_description,  image2_description, image3_description, image4_description, image5_description, published, wfm, apikey_id) " .
+            					" ( parent_id, cat_id, thread, user_id, account, name, email, ip, subject, alias, message, image1_description,  image2_description, image3_description, image4_description, image5_description, published, wfm, latitude, longitude) " .
             					" VALUES ( " .
                                 $db->Quote( $_postParent) . ", " .
                                 $db->Quote( $_postCatId) . ", " .
@@ -1234,7 +1230,8 @@ class DiscussionsModelPosting extends JModel {
             					$db->Quote( $_image5_description) . ", " .            					
                                 $db->Quote( $published) . ", " .
                                 $db->Quote( $wfm) . ", " .
-                                $db->Quote( $_apikeyId) . " )";
+                                $db->Quote( $_latitude) . ", " .
+                                $db->Quote( $_longitude) . " )";
 
 
         		$db->setQuery( $insert_sql);

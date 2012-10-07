@@ -94,6 +94,21 @@ class DiscussionsModelComment extends JModel {
    	var $_wfm = 0;
 
 
+    /**
+	 * latitude
+	 *
+	 * @var float
+	 */
+	var $_latitude = 0;
+
+    /**
+	 * longitude
+	 *
+	 * @var float
+	 */
+	var $_longitude = 0;
+
+
 
 	/**
 	 * Constructor
@@ -118,6 +133,9 @@ class DiscussionsModelComment extends JModel {
         $this->_wdycf   		= JRequest::getString( 'wdycf', '', 'POST');
         $this->_published   	= JRequest::getInt( 'published', '', 'POST');
         $this->_wfm   		    = JRequest::getInt( 'wfm', '', 'POST');
+
+        $this->_latitude        = JRequest::getString('latitude', '');
+        $this->_longitude       = JRequest::getString('longitude', '');
 
         //$redirectLink = JRoute::_( "index.php");
         $redirectLink = $this->_wdycf;
@@ -197,7 +215,7 @@ class DiscussionsModelComment extends JModel {
 
             // 1. save comment in discussions comments table
             $sql = "INSERT INTO ".$db->nameQuote( '#__discussions_comments') .
-                            " ( parent_id, cat_id, context_id, user_id, comment, published, wfm) " .
+                            " ( parent_id, cat_id, context_id, user_id, comment, published, wfm, latitude, longitude) " .
                             " VALUES ( " .
                             $db->Quote( $this->_parent_id) . ", " .
                             $db->Quote( $this->_cat_id) . ", " .
@@ -205,7 +223,9 @@ class DiscussionsModelComment extends JModel {
                             $db->Quote( $user->id) . ", " .
                             $db->Quote( $this->_comment) . ", " .
                             $db->Quote( $this->_published) . ", " .
-                            $db->Quote( $this->_wfm) .
+                            $db->Quote( $this->_wfm) . ", " .
+                            $db->Quote( $this->_latitude) . ", " .
+                            $db->Quote( $this->_longitude) .
                             " )";
 
             $db->setQuery( $sql);
