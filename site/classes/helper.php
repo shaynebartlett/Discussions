@@ -169,8 +169,8 @@ class CofiHelper extends JObject {
                     break;
                 }
 
-                case 3: { // ZOOeffects
-                    $_replacement .= "<a rel='shadowbox[$posting_id]' href='$_medium' title='$photo[title]' target='_blank' >";
+                case 3: { // YOOeffects
+                    $_replacement .= "<a data-lightbox='group:$posting_id' href='$_medium' title='$photo[title]' target='_blank' >";
                     $_replacement .= "<img width='75px' heigth='75px' border='0' alt='$photo[title]' " . "src='" . $_small . "' class='cofiFlickrImage' >";
                     $_replacement .= "</a>";
                     break;
@@ -786,7 +786,7 @@ class CofiHelper extends JObject {
    	}
 
 
-    function sendCommentNotificationEmail( $_receiver_user_id, $_user_id, $_content, $_comment ) {
+    function sendCommentNotificationEmail( $_receiver_user_id, $_user_id, $_comment ) {
 
    		// get settings from com_discussions parameters
    		$params = JComponentHelper::getParams('com_discussions');
@@ -805,9 +805,7 @@ class CofiHelper extends JObject {
 
         $db	=& JFactory::getDBO();
 
-        $sql = "SELECT username FROM ".$db->nameQuote( '#__users') . " WHERE id = " . $db->Quote($_user_id);
-        $db->setQuery( $sql);
-        $username = $db->loadResult();
+        $_username_author = $this->getUsernameById( $_receiver_user_id);;
 
         $sql = "SELECT email FROM ".$db->nameQuote( '#__users') . " WHERE id = " . $db->Quote($_receiver_user_id);
         $db->setQuery( $sql);
@@ -824,7 +822,7 @@ class CofiHelper extends JObject {
           		if ($msgprefix != "") {
           			$msg = $msg . "\n\n";
           		}
-          		$msg     	= $msg . "Dear Admin" . ", \n\n";
+          		$msg     	= $msg . "Dear " . $_username_author . ", \n\n";
           		$msg     	= $msg . "There's a new comment from " . $_username_from . ":\n\n";
 
 //          		$msg     	= $msg . $_content . "\n\n";

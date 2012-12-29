@@ -242,7 +242,7 @@ class DiscussionsModelComment extends JModel {
                 $_receiver_user_id = $cHelper->getAuthorIdByContentId( $_content);
 
                 // send notification email to article author
-                $cHelper->sendCommentNotificationEmail( $_receiver_user_id, $_user_id, $_content, $_comment );
+                $cHelper->sendCommentNotificationEmail( $_receiver_user_id, $_user_id, $_comment );
 
                 $app->redirect( $redirectLink, JText::_( 'COFI_COMMENTS_COMMENT_HAS_BEEN_SAVED' ), "notice");
 

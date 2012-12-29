@@ -85,7 +85,7 @@ $showUsernameName = $params->get('showUsernameName', 0);
 // Display login row?
 $_showLoginRow          = $params->get('showLoginRow', 0); // 0 no, 1 yes
 
-$_imagesDisplayMode 	= $params->get( 'imagesDisplayMode', 0); // 0 Browser, 1 Slimbox, 2 RokBox
+$_imagesDisplayMode 	= $params->get( 'imagesDisplayMode', 0); // 0 Browser, 1 Slimbox, 2 RokBox, 3 YOOeffects
 $_includeMootoolsJS 	= $params->get( 'includeMootoolsJS', 0); // 0 no, 1 yes
 $_includeSlimboxJS  	= $params->get( 'includeSlimboxJS', 0);  // 0 no, 1 yes
 $_useMessages 		    = $params->get( 'useMessages', 1);  // 0 no, 1 yes
@@ -101,6 +101,14 @@ $_useYouTube 	      	= $params->get( 'useYouTube', '0');  // 0 no, 1 yes
 $_youtube_video_width 	= $params->get( 'youtube_video_width', '640');  // default 640 pixel
 $_youtube_video_height	= $params->get( 'youtube_video_height', '385');  // default 385 pixel
 
+// Google Map (static)
+$_useThreadMap          = $params->get( 'useThreadMap', '0');  // 0 no, 1 yes
+$_thread_map_width 	    = $params->get( 'thread_map_size_width', '600');  // default 600 pixel
+$_thread_map_height	    = $params->get( 'thread_map_size_height', '100');   // default 100 pixel
+$_thread_map_zoom_level	= $params->get( 'thread_map_zoom_level', '10');   // default 100 pixel
+
+
+echo "map_height: " . $_thread_map_height;
 
 if ( $_useFlickr == 1) {
 
@@ -673,13 +681,25 @@ if ( $showBreadcrumbRow == "1") {
 			<td align="left" valign="top" class="cofiThreadTableRow<?php echo $rowColor; ?> cofiThreadBorder2" >
 
 				<?php
-                //echo "<div style='width: 745px; overflow:hidden;'>";
-
 				// anchor
 				echo "<a name='p" . $posting->id . "'></a>";				
-				
-                echo $posting->date;
 
+                if ( $_useThreadMap == 1) {
+
+                    // if posting has location -> show link to map
+                    if ( $posting->latitude != null && $posting->longitude != null) {
+                        echo " <span class='cofiMap'>";
+                            $_latitude  = $posting->latitude;
+                            $_longitude = $posting->longitude;
+                            echo "<img src='http://maps.google.com/maps/api/staticmap?center=" . $_latitude . "," . $_longitude . "&zoom=" . $_thread_map_zoom_level . "&size=" . $_thread_map_width . "x" . $_thread_map_height . "&sensor=false&markers=color:red%7C" . $_latitude . "," . $_longitude ."'>";
+                        echo "</span>";
+                        echo "<br>";
+                        echo "<br>";
+                    }
+
+                }
+
+                echo $posting->date;
 
                 // if posting not from web -> show via <source>
                 if ( $posting->apikey_id > 0) { // only show via if not from web
@@ -688,18 +708,15 @@ if ( $showBreadcrumbRow == "1") {
                     $_viaurl  = $CofiHelper->getViaUrlById( $posting->apikey_id);
 
                     echo " <span class='cofiViaLink'>";
-
-                    if ( $_viaurl != "") {
-                        echo "via <a href='$_viaurl' target='_blank' title='$_vianame' style='color: #999999;'>" . $_vianame . "</a>";
-                    }
-                    else {
-                        echo "via " . $_vianame;
-                    }
-
+                        if ( $_viaurl != "") {
+                            echo "via <a href='$_viaurl' target='_blank' title='$_vianame' style='color: #999999;'>" . $_vianame . "</a>";
+                        }
+                        else {
+                            echo "via " . $_vianame;
+                        }
                     echo "</span>";
 
                 }
-
 
 				$pageOffset = JRequest::getVar('limitstart', 0, '', 'int');
 				
@@ -817,7 +834,7 @@ if ( $showBreadcrumbRow == "1") {
 						}
 
 						case 3: { // YOOeffects
-                            $_linktag = " rel='shadowbox[" . $posting->id . "]' ";
+                            $_linktag = " data-lightbox='group:" . $posting->id . "' ";
                             break;
                         }
 

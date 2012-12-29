@@ -283,7 +283,7 @@ class DiscussionsModelThread extends JModel {
                     image3, image3_description, 
                     image4, image4_description,
                     image5, image5_description,
-                    published, apikey_id
+                    published, apikey_id, latitude, longitude
 					FROM ".$db->nameQuote('#__discussions_messages')."
 					WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND published='1'
 					ORDER BY id ASC";

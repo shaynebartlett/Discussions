@@ -97,6 +97,7 @@
 			<option value="0">COFI_CONFIG_IMAGES_DISPLAY_BROWSER_WINDOW</option>
 			<option value="1">COFI_CONFIG_IMAGES_DISPLAY_SLIMBOX</option>
 			<option value="2">COFI_CONFIG_IMAGES_DISPLAY_ROKBOX</option>
+            <option value="3">COFI_CONFIG_IMAGES_DISPLAY_YOOEFFECTS</option>
 		</field>
 
 		<field name="includeMootoolsJS" type="radio" default="0" label="COFI_CONFIG_INCLUDE_MOOTOOLS_JS" description="COFI_CONFIG_INCLUDE_MOOTOOLS_JS_DESCRIPTION">
@@ -117,6 +118,7 @@
             <option value="0">COFI_CONFIG_FLICKR_BROWSER_WINDOW</option>
             <option value="1">COFI_CONFIG_FLICKR_SLIMBOX</option>
 			<option value="2">COFI_CONFIG_FLICKR_ROKBOX</option>
+            <option value="3">COFI_CONFIG_FLICKR_YOOEFFECTS</option>
         </field>
         
         <field name="flickr_apikey" type="text" default="80e0b939631d60c4f575b54d78f29a24" label="COFI_CONFIG_FLICKR_API_KEY" description="COFI_CONFIG_FLICKR_API_KEY_DESCRIPTION" />
@@ -140,7 +142,22 @@
         
 	</fieldset>
 
-        
+
+    <fieldset name="map" label="COFI_CONFIG_THREAD_MAP_SETTINGS">
+
+        <field name="useThreadMap" type="radio" default="0" label="COFI_CONFIG_USE_THREAD_MAP" description="COFI_CONFIG_USE_THREAD_MAP_DESCRIPTION">
+            <option value="0">COFI_CONFIG_NO</option>
+            <option value="1">COFI_CONFIG_YES</option>
+        </field>
+
+       	<field name="thread_map_size_width" type="text" default="600" label="COFI_CONFIG_THREAD_MAP_SIZE_WIDTH" description="COFI_CONFIG_THREAD_MAP_SIZE_WIDTH_DESCRIPTION" />
+        <field name="thread_map_size_height" type="text" default="100" label="COFI_CONFIG_THREAD_MAP_SIZE_HEIGHT" description="COFI_CONFIG_THREAD_MAP_SIZE_HEIGHT_DESCRIPTION" />
+
+        <field name="thread_map_zoom_level" type="text" default="10" label="COFI_CONFIG_THREAD_MAP_ZOOM_LEVEL" description="COFI_CONFIG_THREAD_MAP_ZOOM_LEVEL_DESCRIPTION" />
+
+   	</fieldset>
+
+
 	<fieldset name="rss" label="COFI_CONFIG_RSS_SETTINGS">
 
 		<field name="useRssFeeds" type="radio" default="1" label="COFI_CONFIG_USE_RSS_FEEDS" description="COFI_CONFIG_USE_RSS_FEEDS_DESCRIPTION">
