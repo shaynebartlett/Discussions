@@ -70,6 +70,7 @@ include( 'components/com_discussions/includes/topmenu.php');
 	<b>
 	*** FOR MODERATORS ONLY ***
 	</b>
+    <br />
 </center>
 
 

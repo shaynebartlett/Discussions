@@ -108,8 +108,6 @@ $_thread_map_height	    = $params->get( 'thread_map_size_height', '100');   // d
 $_thread_map_zoom_level	= $params->get( 'thread_map_zoom_level', '10');   // default 100 pixel
 
 
-echo "map_height: " . $_thread_map_height;
-
 if ( $_useFlickr == 1) {
 
     $_flickr_apikey     = $params->get( 'flickr_apikey', '');
@@ -187,18 +185,6 @@ if ( $_includeSlimboxJS == 1) { // include Slimbox JS
 
 </script>
 <!-- Javascript functions -->
-
-
-
-<?php 
-if ( $this->params->def( 'show_page_title', 1 ) ) : 
-	?>
-	<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-		<?php echo $this->escape($this->params->get('page_title')); ?>
-	</div>
-	<?php 
-endif; 
-?>
 
 
 

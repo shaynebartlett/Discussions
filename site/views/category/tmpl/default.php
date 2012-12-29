@@ -103,18 +103,6 @@ if ( $useRssFeeds == 1) {
 
 
 
-<?php 
-if ( $this->params->def( 'show_page_title', 1 ) ) : 
-	?>
-	<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-		<?php echo $this->escape($this->params->get('page_title')); ?>
-	</div>
-	<?php 
-endif; 
-?>
-
-
-
 <!-- HTML Box Top -->
 <?php
 $_htmlBoxTop = $this->htmlBoxTop;
@@ -171,7 +159,10 @@ if ( $logUser->isModerator() == 1) {
 			</center>
 			<?php
 		}
-		
+
+        echo "<br>";
+        echo "<br>";
+
 	}
 }
 ?>
