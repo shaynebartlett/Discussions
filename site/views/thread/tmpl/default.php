@@ -85,7 +85,7 @@ $showUsernameName = $params->get('showUsernameName', 0);
 // Display login row?
 $_showLoginRow          = $params->get('showLoginRow', 0); // 0 no, 1 yes
 
-$_imagesDisplayMode 	= $params->get( 'imagesDisplayMode', 0); // 0 Browser, 1 Slimbox, 2 RokBox, 3 YOOeffects
+$_imagesDisplayMode 	= $params->get( 'imagesDisplayMode', 0); // 0 Browser, 1 Slimbox, 2 RokBox, 3 Widgetkit
 $_includeMootoolsJS 	= $params->get( 'includeMootoolsJS', 0); // 0 no, 1 yes
 $_includeSlimboxJS  	= $params->get( 'includeSlimboxJS', 0);  // 0 no, 1 yes
 $_useMessages 		    = $params->get( 'useMessages', 1);  // 0 no, 1 yes
@@ -833,7 +833,7 @@ if ( $showBreadcrumbRow == "1") {
 							break;
 						}
 
-						case 3: { // YOOeffects
+						case 3: { // Widgetkit
                             $_linktag = " data-lightbox='group:" . $posting->id . "' ";
                             break;
                         }

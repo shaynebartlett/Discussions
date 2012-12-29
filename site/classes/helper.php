@@ -169,7 +169,7 @@ class CofiHelper extends JObject {
                     break;
                 }
 
-                case 3: { // YOOeffects
+                case 3: { // Widgetkit
                     $_replacement .= "<a data-lightbox='group:$posting_id' href='$_medium' title='$photo[title]' target='_blank' >";
                     $_replacement .= "<img width='75px' heigth='75px' border='0' alt='$photo[title]' " . "src='" . $_small . "' class='cofiFlickrImage' >";
                     $_replacement .= "</a>";

@@ -97,7 +97,7 @@
 			<option value="0">COFI_CONFIG_IMAGES_DISPLAY_BROWSER_WINDOW</option>
 			<option value="1">COFI_CONFIG_IMAGES_DISPLAY_SLIMBOX</option>
 			<option value="2">COFI_CONFIG_IMAGES_DISPLAY_ROKBOX</option>
-            <option value="3">COFI_CONFIG_IMAGES_DISPLAY_YOOEFFECTS</option>
+            <option value="3">COFI_CONFIG_IMAGES_DISPLAY_WIDGETKIT</option>
 		</field>
 
 		<field name="includeMootoolsJS" type="radio" default="0" label="COFI_CONFIG_INCLUDE_MOOTOOLS_JS" description="COFI_CONFIG_INCLUDE_MOOTOOLS_JS_DESCRIPTION">
@@ -118,7 +118,7 @@
             <option value="0">COFI_CONFIG_FLICKR_BROWSER_WINDOW</option>
             <option value="1">COFI_CONFIG_FLICKR_SLIMBOX</option>
 			<option value="2">COFI_CONFIG_FLICKR_ROKBOX</option>
-            <option value="3">COFI_CONFIG_FLICKR_YOOEFFECTS</option>
+            <option value="3">COFI_CONFIG_FLICKR_WIDGETKIT</option>
         </field>
         
         <field name="flickr_apikey" type="text" default="80e0b939631d60c4f575b54d78f29a24" label="COFI_CONFIG_FLICKR_API_KEY" description="COFI_CONFIG_FLICKR_API_KEY_DESCRIPTION" />
