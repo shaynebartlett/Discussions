@@ -2,10 +2,9 @@ Discussions
 ===========
 
 Discussions is a Joomla! 2.5 forum extension.
-It will most probably run on Joomla! 1.7 as well but from now on only Joomla! 2.5 is tested.
-Joomla! 2.5 is the new Long Term Support Release(LTS) so if still run J1.7 or even J1.6 please update now and use Discussions 1.5.
 
-Discussions 1.5 is the first release which will only be available for Joomla! 2.5 (1.7). Sorry, no more Joomla! 1.5 versions.
+Discussions 1.6 is only available for Joomla! 2.5. Not tested on Joomla! 3.x, yet.
+
 
 Content
 ----------------------
@@ -16,7 +15,7 @@ com_discussions_VERSION_JOOMLAVERSION
 
 This is the main installation file.
 
-Example: com_discussions_1_5_j25 is Discussions version 1.5 for Joomla! 2.5
+Example: com_discussions_1_6_j25 is Discussions version 1.6 for Joomla! 2.5
 
 
 2. Modules
@@ -30,7 +29,16 @@ mod_discussions_messages shows new messages in the mailbox.
 
 3. Plugins
 
-The 2 plugins (system and search) are included in the main installation file com_discussions_VERSION_JOOMLAVERSION
-There is no action needed, they are installed automatically during component installation.
+There are 4 plugins (system, search, smart search and content) included in the main installation file com_discussions_VERSION_JOOMLAVERSION
+
+System - Discussions: Syncs Joomla! users with Discussions users. (enabled by default)
+Search - Discussions: For the "old" Joomla! search. (enabled by default)
+Smart Search - Discussions: For the "new" Joomla! smart search aka finder. (NOT enabled by default)
+Content - Discussions: For the Discussions comment feature. (NOT enabled by default)
+
+The plugins are installed automatically during component installation.
+
+Please note: You have to enable the Smart Search or Content plugin manually if you would like to use those features.
+
 
 
