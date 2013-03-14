@@ -191,7 +191,7 @@ class DiscussionsModelModeration extends JModel {
         $db =& $this->getDBO();
 
 		// make thread sticky
-     	$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
+     	$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') .
      						" SET sticky = '1'" . 
      						" WHERE thread = " . $db->Quote($this->_thread) . " AND parent_id='0'";
         	
@@ -220,7 +220,7 @@ class DiscussionsModelModeration extends JModel {
         $db =& $this->getDBO();
 
 		// make thread unsticky
-     	$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
+     	$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') .
      						" SET sticky = '0'" . 
      						" WHERE thread = " . $db->Quote($this->_thread) . " AND parent_id='0'";
         	
@@ -249,7 +249,7 @@ class DiscussionsModelModeration extends JModel {
         $db =& $this->getDBO();
 
 		// lock thread
-     	$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
+     	$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') .
      						" SET locked = '1'" . 
      						" WHERE thread = " . $db->Quote($this->_thread) . " AND parent_id='0'";
         	
@@ -279,7 +279,7 @@ class DiscussionsModelModeration extends JModel {
         $db =& $this->getDBO();
 
 		// unlock thread
-     	$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
+     	$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') .
      						" SET locked = '0'" . 
      						" WHERE thread = " . $db->Quote($this->_thread) . " AND parent_id='0'";
         	
@@ -310,7 +310,7 @@ class DiscussionsModelModeration extends JModel {
 		$CofiHelper = new CofiHelper();
 
 		// move category
-     	$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . 
+     	$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') .
 					" SET cat_id = " . $db->Quote($this->_categoryTo) .
 					" WHERE thread = " . $db->Quote($this->_thread);
         	
@@ -466,7 +466,7 @@ class DiscussionsModelModeration extends JModel {
         
 		$wfmquery = "SELECT id, parent_id, cat_id, thread, user_id, type, subject, message,
                     DATE_FORMAT( date, '" . $_dateformat . " " . $_timeformat . "') AS date, published, wfm
-					FROM ".$db->nameQuote('#__discussions_messages')."
+					FROM ".$db->quoteName('#__discussions_messages')."
 					WHERE wfm='1' ORDER BY id ASC";
 					
         return $wfmquery;
@@ -489,25 +489,25 @@ class DiscussionsModelModeration extends JModel {
 
 
 		// 1. get thread id		
-        $_threadQuery = "SELECT thread FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
+        $_threadQuery = "SELECT thread FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
         $db->setQuery( $_threadQuery);
         $_threadId = $db->loadResult();
 
 
 		// 2. get parent id		
-        $_parentQuery = "SELECT parent_id FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
+        $_parentQuery = "SELECT parent_id FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
         $db->setQuery( $_parentQuery);
         $_parentId = $db->loadResult();
 		
 		
 		// 3. get category id		
-        $_categoryQuery = "SELECT cat_id FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
+        $_categoryQuery = "SELECT cat_id FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
         $db->setQuery( $_categoryQuery);
         $_categoryId = $db->loadResult();
 
 
 		// 4. get user id		
-        $_userQuery = "SELECT user_id FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
+        $_userQuery = "SELECT user_id FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
         $db->setQuery( $_userQuery);
         $_userId = $db->loadResult();
 						
@@ -521,7 +521,7 @@ class DiscussionsModelModeration extends JModel {
 		if ( $_threadId == $post) {
 
 			// get post ids in this thread
-	     	$sql = "SELECT id FROM" . $db->nameQuote( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
+	     	$sql = "SELECT id FROM" . $db->quoteName( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
 	        $db->setQuery( $sql);
 			$_postList = $db->loadAssocList();
 			
@@ -546,7 +546,7 @@ class DiscussionsModelModeration extends JModel {
 			}								
 			
 			// get users who posted in this thread
-	     	$sql = "SELECT DISTINCT user_id FROM" . $db->nameQuote( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
+	     	$sql = "SELECT DISTINCT user_id FROM" . $db->quoteName( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
 	        $db->setQuery( $sql);
 			$_userList = $db->loadAssocList();
 
@@ -560,7 +560,7 @@ class DiscussionsModelModeration extends JModel {
 
 
             // get posts in this thread
-	     	$sql = "SELECT id FROM" . $db->nameQuote( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
+	     	$sql = "SELECT id FROM" . $db->quoteName( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
 	        $db->setQuery( $sql);
 			$_postList = $db->loadAssocList();
 
@@ -575,7 +575,7 @@ class DiscussionsModelModeration extends JModel {
 
 
 			// delete thread ( all posts in it) from db
-	     	$sql = "DELETE FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
+	     	$sql = "DELETE FROM " . $db->quoteName( '#__discussions_messages') . " WHERE thread=" . $db->Quote($_threadId);
 	        $db->setQuery( $sql);
 			$db->query();	
 
@@ -588,7 +588,7 @@ class DiscussionsModelModeration extends JModel {
 			$CofiHelper->deleteImagesByPostId( $post);
 		
 			// delete post from db
-	     	$sql = "DELETE FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
+	     	$sql = "DELETE FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($post);
 	        $db->setQuery( $sql);
 			$db->query();	
 
@@ -599,7 +599,7 @@ class DiscussionsModelModeration extends JModel {
 
 
 			// change parent id of possible replies to this post
-     		$sql = "UPDATE " . $db->nameQuote( '#__discussions_messages') . 
+     		$sql = "UPDATE " . $db->quoteName( '#__discussions_messages') .
      					" SET parent_id = " . $db->Quote($_parentId) .
      					" WHERE parent_id = " . $db->Quote($post);
         	

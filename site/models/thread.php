@@ -284,7 +284,7 @@ class DiscussionsModelThread extends JModel {
                     image4, image4_description,
                     image5, image5_description,
                     published, apikey_id, latitude, longitude
-					FROM ".$db->nameQuote('#__discussions_messages')."
+					FROM ".$db->quoteName('#__discussions_messages')."
 					WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND published='1'
 					ORDER BY id ASC";
 
@@ -299,7 +299,7 @@ class DiscussionsModelThread extends JModel {
 
         $db =& $this->getDBO();
 
-		$countQuery = "SELECT * FROM ".$db->nameQuote('#__discussions_messages')." WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND published='1'";
+		$countQuery = "SELECT * FROM ".$db->quoteName('#__discussions_messages')." WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND published='1'";
 		return $countQuery;
 	}
 
@@ -344,7 +344,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryNameQuery = "SELECT name FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+            $categoryNameQuery = "SELECT name FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryNameQuery);
             $this->_categoryName = $db->loadResult();
@@ -365,7 +365,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryDescriptionQuery = "SELECT description FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+            $categoryDescriptionQuery = "SELECT description FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryDescriptionQuery);
             $this->_categoryDescription = $db->loadResult();
@@ -386,7 +386,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryImageQuery = "SELECT image FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=".$db->Quote($_catid);
+            $categoryImageQuery = "SELECT image FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=".$db->Quote($_catid);
 
             $db->setQuery( $categoryImageQuery);
             $this->_categoryImage = $db->loadResult();
@@ -407,7 +407,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $forumBannerTopQuery = "SELECT banner_top FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+            $forumBannerTopQuery = "SELECT banner_top FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $forumBannerTopQuery);
             $this->_forumBannerTop = $db->loadResult();
@@ -427,7 +427,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $forumBannerBottomQuery = "SELECT banner_bottom FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+            $forumBannerBottomQuery = "SELECT banner_bottom FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $forumBannerBottomQuery);
             $this->_forumBannerBottom = $db->loadResult();
@@ -452,7 +452,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $subjectQuery = "SELECT subject FROM ".$db->nameQuote( '#__discussions_messages')." 
+            $subjectQuery = "SELECT subject FROM ".$db->quoteName( '#__discussions_messages')."
                                 WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' AND published='1' ";
 
 
@@ -520,7 +520,7 @@ class DiscussionsModelThread extends JModel {
 
         $db =& $this->getDBO();
 
-        $sql = "SELECT sticky FROM ".$db->nameQuote( '#__discussions_messages')." 
+        $sql = "SELECT sticky FROM ".$db->quoteName( '#__discussions_messages')."
                                 WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' ";
 
 
@@ -544,7 +544,7 @@ class DiscussionsModelThread extends JModel {
 
         $db =& $this->getDBO();
 
-        $sql = "SELECT locked FROM ".$db->nameQuote( '#__discussions_messages')." 
+        $sql = "SELECT locked FROM ".$db->quoteName( '#__discussions_messages')."
                                 WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' ";
 
 
@@ -568,7 +568,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT private FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+            $sql = "SELECT private FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $sql);
             $this->_privateStatus = $db->loadResult();
@@ -590,7 +590,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT parent_id FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid) . " AND parent_id<>'0'";
+            $sql = "SELECT parent_id FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid) . " AND parent_id<>'0'";
 
             $db->setQuery( $sql);
             $this->_existStatus = $db->loadResult();
@@ -616,7 +616,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $query = "SELECT message FROM ".$db->nameQuote( '#__discussions_messages')." 
+            $query = "SELECT message FROM ".$db->quoteName( '#__discussions_messages')."
                                 WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' AND published='1' ";
 
 
@@ -645,7 +645,7 @@ class DiscussionsModelThread extends JModel {
 
             $db =& $this->getDBO();
 
-            $query = "SELECT meta_keywords FROM " . $db->nameQuote( '#__discussions_categories') . " WHERE id=" . $db->Quote($_catid);
+            $query = "SELECT meta_keywords FROM " . $db->quoteName( '#__discussions_categories') . " WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $query);
             $this->_metaKeywords = $db->loadResult();
@@ -669,7 +669,7 @@ class DiscussionsModelThread extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT html_box_thread_top FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT html_box_thread_top FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_htmlBoxTop = $db->loadResult();
@@ -691,7 +691,7 @@ class DiscussionsModelThread extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT html_box_thread_bottom FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT html_box_thread_bottom FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_htmlBoxBottom = $db->loadResult();
@@ -714,7 +714,7 @@ class DiscussionsModelThread extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT social_media_button_1 FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT social_media_button_1 FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_socialMediaButton1 = $db->loadResult();
@@ -737,7 +737,7 @@ class DiscussionsModelThread extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT social_media_button_2 FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT social_media_button_2 FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_socialMediaButton2 = $db->loadResult();
@@ -760,7 +760,7 @@ class DiscussionsModelThread extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT social_media_button_3 FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT social_media_button_3 FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_socialMediaButton3 = $db->loadResult();

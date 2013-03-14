@@ -2,7 +2,7 @@
 <extension version="1.6" type="plugin" group="content" method="upgrade">
 
 	<name>Content - Discussions</name>
-	<creationDate>August 2012</creationDate>
+	<creationDate>March 2013</creationDate>
 	<author>Codingfish (Achim Fischer)</author>
 	<authorEmail>info@codingfish.com</authorEmail>
 	<authorUrl>http://www.codingfish.com</authorUrl>
@@ -16,7 +16,13 @@
 		<filename>index.html</filename>
         <folder>language</folder>
 	</files>
-	
-	<params/>
-	
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="exclude_categories"  type="text" default="" label="PLG_CONTENT_DISCUSSIONS_EXCLUDE_CATEGORIES" description="PLG_CONTENT_DISCUSSIONS_EXCLUDE_CATEGORIES_DESCRIPTION" />
+            </fieldset>
+        </fields>
+    </config>
+
 </extension>

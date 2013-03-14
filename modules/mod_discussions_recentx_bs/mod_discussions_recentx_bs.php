@@ -52,13 +52,13 @@ if (count($posts)) {
     foreach ($posts as $post) {
 
 		// get Discussions Itemid	
-		$sqlitemid = "SELECT id FROM ".$db->nameQuote( '#__menu')." WHERE link LIKE '%com_discussions%' AND level = '1' AND published = '1'";
+		$sqlitemid = "SELECT id FROM ".$db->quoteName( '#__menu')." WHERE link LIKE '%com_discussions%' AND level = '1' AND published = '1'";
 		$db->setQuery( $sqlitemid);
 		$itemid = $db->loadResult();	
 
 	
 		// get # of replies for this thread	
-		$sql = "SELECT count(*) FROM ".$db->nameQuote( '#__discussions_messages')." WHERE thread='".$post->msg_id."' AND parent_id != '0' AND published = '1'";
+		$sql = "SELECT count(*) FROM ".$db->quoteName( '#__discussions_messages')." WHERE thread='".$post->msg_id."' AND parent_id != '0' AND published = '1'";
 		$db->setQuery( $sql);
 		$replies = $db->loadResult();	
 	

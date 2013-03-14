@@ -104,7 +104,7 @@ if (count($comments)) {
 
                 // get correct Itemid
                 $_like = "%&id=" . $comment->cat_id . "%";
-                $sqlitemid = "SELECT id FROM ".$db->nameQuote( '#__menu')." WHERE component_id=22 AND link LIKE '" . $_like . "' AND published = '1'";
+                $sqlitemid = "SELECT id FROM ".$db->quoteName( '#__menu')." WHERE component_id=22 AND link LIKE '" . $_like . "' AND published = '1'";
 
                 $db->setQuery( $sqlitemid);
                 $_itemid = $db->loadResult();

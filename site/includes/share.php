@@ -10,7 +10,7 @@
 
 $db	=& JFactory::getDBO();
 
-$sql = "SELECT share_code FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+$sql = "SELECT share_code FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
 $db->setQuery( $sql);
 $_shareCode = $db->loadResult();

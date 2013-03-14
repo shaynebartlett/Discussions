@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 $user= &JFactory::getUser();
 
 $db	=& JFactory::getDBO();		
-$sql = "SELECT version FROM ".$db->nameQuote('#__discussions_meta')." WHERE id='1'";		
+$sql = "SELECT version FROM ".$db->quoteName('#__discussions_meta')." WHERE id='1'";
 $db->setQuery( $sql);
 $version = $db->loadResult();
 

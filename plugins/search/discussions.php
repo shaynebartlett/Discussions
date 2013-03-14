@@ -67,7 +67,7 @@ class plgSearchDiscussions extends JPlugin {
 			case 'exact':
 				// build an exact match LIKE condition
 				$text = $db->Quote('%'.$db->getEscaped($text, true).'%', false);
-				$conditions = $db->nameQuote('subject') . " LIKE $text" . " OR " . $db->nameQuote('message') . " LIKE $text";
+				$conditions = $db->quoteName('subject') . " LIKE $text" . " OR " . $db->quoteName('message') . " LIKE $text";
 				break;
 				
 			case 'all':
@@ -77,7 +77,7 @@ class plgSearchDiscussions extends JPlugin {
 				$wordConditions = array();
 				foreach (preg_split("~\s+~", $text) as $word) {
 					$word = $db->Quote('%'.$db->getEscaped($word, true).'%', false);
-					$wordConditions[] = $db->nameQuote('subject') . " LIKE $word"  . " OR " . $db->nameQuote('message') . " LIKE $word";
+					$wordConditions[] = $db->quoteName('subject') . " LIKE $word"  . " OR " . $db->quoteName('message') . " LIKE $word";
 				}
 				// determine the glue and put it all together!
 				$glue = ($phrase == 'all') ? ') AND (' : ') OR (';
@@ -91,21 +91,21 @@ class plgSearchDiscussions extends JPlugin {
 		switch ($ordering) {
 		
 			case 'popular':
-				$order = $db->nameQuote('hits') . ' DESC';
+				$order = $db->quoteName('hits') . ' DESC';
 				break;
 				
 			case 'alpha':
 			case 'category':
-				$order = $db->nameQuote('cat_id') . ' ASC';
+				$order = $db->quoteName('cat_id') . ' ASC';
 				break;
 				
 			case "oldest":
-				$order = $db->nameQuote('created') . ' ASC';
+				$order = $db->quoteName('created') . ' ASC';
 				break;
 				
 			case "newest":
 			default:
-				$order = $db->nameQuote('date') . ' DESC';
+				$order = $db->quoteName('date') . ' DESC';
 				break;
 		}		
 						
@@ -130,7 +130,7 @@ class plgSearchDiscussions extends JPlugin {
 
 	
 		// get Discussions Itemid	
-		$sqlitemid = "SELECT id FROM " . $db->nameQuote( '#__menu') . " WHERE link LIKE '%com_discussions%' AND level = '1' AND published = '1'";
+		$sqlitemid = "SELECT id FROM " . $db->quoteName( '#__menu') . " WHERE link LIKE '%com_discussions%' AND level = '1' AND published = '1'";
 		$db->setQuery( $sqlitemid);
 		$itemid = $db->loadResult();	
 			

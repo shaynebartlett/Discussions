@@ -430,7 +430,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryNameQuery = "SELECT name FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+            $categoryNameQuery = "SELECT name FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryNameQuery);
             $this->_categoryName = $db->loadResult();
@@ -451,7 +451,7 @@ class DiscussionsModelPosting extends JModel {
 
                $db =& $this->getDBO();
 
-               $categoryDescriptionQuery = "SELECT description FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+               $categoryDescriptionQuery = "SELECT description FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
                $db->setQuery( $categoryDescriptionQuery);
                $this->_categoryDescription = $db->loadResult();
@@ -472,7 +472,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $categoryImageQuery = "SELECT image FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+            $categoryImageQuery = "SELECT image FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $categoryImageQuery);
             $this->_categoryImage = $db->loadResult();
@@ -492,7 +492,7 @@ class DiscussionsModelPosting extends JModel {
         $db =& $this->getDBO();
 
 		$sql = "SELECT CASE WHEN CHAR_LENGTH(alias) THEN CONCAT_WS(':', id, alias) ELSE id END as slug
-						FROM ".$db->nameQuote('#__discussions_messages')."
+						FROM ".$db->quoteName('#__discussions_messages')."
 						WHERE thread=" . $db->Quote($id) . " AND parent_id='0' AND published='1' ";
 
         $db->setQuery( $sql);
@@ -517,7 +517,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $subjectQuery = "SELECT subject FROM ".$db->nameQuote( '#__discussions_messages')." 
+            $subjectQuery = "SELECT subject FROM ".$db->quoteName( '#__discussions_messages')."
                                 WHERE cat_id=" . $db->Quote($_catid) . " AND thread=" . $db->Quote($_thread) . " AND parent_id='0' AND published='1' ";
 
             $db->setQuery( $subjectQuery);
@@ -593,7 +593,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image1 FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image1 FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -620,7 +620,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image1_description FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image1_description FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -647,7 +647,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image2 FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image2 FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -674,7 +674,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image2_description FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image2_description FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -702,7 +702,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image3 FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image3 FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -729,7 +729,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image3_description FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image3_description FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -756,7 +756,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image4 FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image4 FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -783,7 +783,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image4_description FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image4_description FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -810,7 +810,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image5 FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image5 FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -837,7 +837,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT image5_description FROM " . $db->nameQuote( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
+            $sql = "SELECT image5_description FROM " . $db->quoteName( '#__discussions_messages') . " WHERE id=" . $db->Quote($_id);
 
             $db->setQuery( $sql);
             
@@ -867,14 +867,14 @@ class DiscussionsModelPosting extends JModel {
 
         $db =& $this->getDBO();
 
-        $sql = "SELECT DATE_FORMAT( date, '%d.%m.%Y %k:%i') AS date FROM " . $db->nameQuote( '#__discussions_messages') . 
+        $sql = "SELECT DATE_FORMAT( date, '%d.%m.%Y %k:%i') AS date FROM " . $db->quoteName( '#__discussions_messages') .
         			" WHERE id=" . $db->Quote($_postId) . " AND published='1' ";
 
         $db->setQuery( $sql);
         $date = $db->loadResult();
 
 
-        $sql = "SELECT user_id FROM " . $db->nameQuote( '#__discussions_messages') . 
+        $sql = "SELECT user_id FROM " . $db->quoteName( '#__discussions_messages') .
         			" WHERE id=" . $db->Quote($_postId) . " AND published='1' ";
 
         $db->setQuery( $sql);
@@ -1069,7 +1069,7 @@ class DiscussionsModelPosting extends JModel {
         		
         			
 				if ( $logUser->isModerator()) { // moderators are allowed to edit all posts
-     				$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . " SET" . 
+     				$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') . " SET" .
      					" message = " . $db->Quote( $_postText) . ", " .
      					" image1_description = " . $db->Quote( $_image1_description) . ", " .
      					" image2_description = " . $db->Quote( $_image2_description) . ", " .
@@ -1079,7 +1079,7 @@ class DiscussionsModelPosting extends JModel {
      					" WHERE id = " . $db->Quote($_postId);
 				}
 				else { // no mod? then user must be owner
-     				$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages') . " SET" . 
+     				$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') . " SET" .
      					" message = " . $db->Quote( $_postText) . ", " .
      					" image1_description = " . $db->Quote( $_image1_description) . ", " .
      					" image2_description = " . $db->Quote( $_image2_description) . ", " .
@@ -1209,7 +1209,7 @@ class DiscussionsModelPosting extends JModel {
             	$alias = $_postSubject;
     			$alias = JFilterOutput::stringURLSafe($alias);
 
-        		$insert_sql = "INSERT INTO ".$db->nameQuote( '#__discussions_messages') .
+        		$insert_sql = "INSERT INTO ".$db->quoteName( '#__discussions_messages') .
             					" ( parent_id, cat_id, thread, user_id, account, name, email, ip, subject, alias, message, image1_description,  image2_description, image3_description, image4_description, image5_description, published, wfm, latitude, longitude) " .
             					" VALUES ( " .
                                 $db->Quote( $_postParent) . ", " .
@@ -1239,19 +1239,19 @@ class DiscussionsModelPosting extends JModel {
 
 
         		// $_postId = last_insert_id();
-				$db->setQuery( "SELECT LAST_INSERT_ID() FROM ".$db->nameQuote( '#__discussions_messages'));
+				$db->setQuery( "SELECT LAST_INSERT_ID() FROM ".$db->quoteName( '#__discussions_messages'));
 				$_postId = $db->loadResult();
 
 				// get parent and set thread to id if 0
 				if ( $_postThread == 0) { // no thread id, so it is like id
 					$_postThread = $_postId;
-    				$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages')." SET thread = " . $db->Quote($_postThread) . " WHERE id = " . $db->Quote($_postId);
+    				$sql = "UPDATE ".$db->quoteName( '#__discussions_messages')." SET thread = " . $db->Quote($_postThread) . " WHERE id = " . $db->Quote($_postId);
         			$db->setQuery( $sql);
         			$result = $db->query();
 				}
 				else { // thread is set
 					if ( $_postParent == 0) { // no parent id, so it is like thread id
-    					$sql = "UPDATE ".$db->nameQuote( '#__discussions_messages')." SET parent_id = " . $db->Quote($_postThread) . " WHERE id = " . $db->Quote($_postId);
+    					$sql = "UPDATE ".$db->quoteName( '#__discussions_messages')." SET parent_id = " . $db->Quote($_postThread) . " WHERE id = " . $db->Quote($_postId);
         				$db->setQuery( $sql);
         				$result = $db->query();
 					}
@@ -1360,7 +1360,7 @@ class DiscussionsModelPosting extends JModel {
 		if ( $_id <> 0) {
 		
         	$db =& $this->getDBO();
-			$db->setQuery( "SELECT message FROM ".$db->nameQuote( '#__discussions_messages')." WHERE id=".$db->Quote($_id));
+			$db->setQuery( "SELECT message FROM ".$db->quoteName( '#__discussions_messages')." WHERE id=".$db->Quote($_id));
 			$_messageText = $db->loadResult();
 		
 		}
@@ -1397,7 +1397,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT private FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
+            $sql = "SELECT private FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid);
 
             $db->setQuery( $sql);
             $this->_privateStatus = $db->loadResult();
@@ -1419,7 +1419,7 @@ class DiscussionsModelPosting extends JModel {
 
             $db =& $this->getDBO();
 
-            $sql = "SELECT parent_id FROM ".$db->nameQuote( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid) . " AND parent_id<>'0'";
+            $sql = "SELECT parent_id FROM ".$db->quoteName( '#__discussions_categories')." WHERE id=" . $db->Quote($_catid) . " AND parent_id<>'0'";
 
             $db->setQuery( $sql);
             $this->_existStatus = $db->loadResult();
@@ -1705,7 +1705,7 @@ class DiscussionsModelPosting extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT html_box_posting_top FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT html_box_posting_top FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_htmlBoxTop = $db->loadResult();
@@ -1727,7 +1727,7 @@ class DiscussionsModelPosting extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT html_box_posting_bottom FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT html_box_posting_bottom FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_htmlBoxBottom = $db->loadResult();

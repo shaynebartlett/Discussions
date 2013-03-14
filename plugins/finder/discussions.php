@@ -107,7 +107,7 @@ class plgFinderDiscussions extends FinderIndexerAdapter {
 
 		// get Discussions Itemid	
 		$db		  =& JFactory::getDBO();
-		$sqlitemid = "SELECT id FROM ".$db->nameQuote( '#__menu')." WHERE link LIKE '%com_discussions%' AND level = '1' AND published = '1'";
+		$sqlitemid = "SELECT id FROM ".$db->quoteName( '#__menu')." WHERE link LIKE '%com_discussions%' AND level = '1' AND published = '1'";
 		$db->setQuery( $sqlitemid);
 		$this->item_id = $db->loadResult();	
 

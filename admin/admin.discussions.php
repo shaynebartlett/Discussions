@@ -14,7 +14,7 @@ JHTML::_('behavior.tooltip');
 $user = & JFactory::getUser();
 
 $db	=& JFactory::getDBO();		
-$sql = "SELECT version FROM ".$db->nameQuote('#__discussions_meta')." WHERE id='1'";		
+$sql = "SELECT version FROM ".$db->quoteName('#__discussions_meta')." WHERE id='1'";
 $db->setQuery( $sql);
 $version = $db->loadResult();
 
@@ -43,6 +43,6 @@ $controller->redirect();
 		Discussions v<?php echo $version; ?>	
 	</div>
 	<div id="diFooterCopyright">
-		(c) 2010-2012 <a href="http://www.codingfish.com" target="_blank" title="Codingfish">Codingfish</a>
+		(c) 2010-2013 <a href="http://www.codingfish.com" target="_blank" title="Codingfish">Codingfish</a>
 	</div>
 </div>

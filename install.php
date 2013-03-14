@@ -29,12 +29,12 @@ $_rootDir = JPATH_ROOT;
 $pathToPlgDiscussionsSystem = $componentInstaller->getPath('source') . DS . 'plugins' . DS . 'system';
 
 $query = 'SELECT COUNT(*)'
-			. ' FROM ' . $db->nameQuote('#__extensions')
-			. ' WHERE ' . $db->nameQuote('element') . ' = '
+			. ' FROM ' . $db->quoteName('#__extensions')
+			. ' WHERE ' . $db->quoteName('element') . ' = '
 			. $db->Quote('discussions')
-			. ' AND ' . $db->nameQuote('type') . ' = '
+			. ' AND ' . $db->quoteName('type') . ' = '
 			. $db->Quote('plugin')
-			. ' AND ' . $db->nameQuote('folder') . ' = '
+			. ' AND ' . $db->quoteName('folder') . ' = '
 			. $db->Quote('system');
 			
 $db->setQuery($query);
@@ -78,11 +78,11 @@ else {
 
 
 // enable Discussions system plugin
-$query = 'UPDATE ' . $db->nameQuote('#__extensions')
-       	. ' SET ' . $db->nameQuote('enabled') . ' = 1'
-       	. ' WHERE ' . $db->nameQuote('element') . ' = ' . $db->Quote('discussions')
-       	. ' AND ' .   $db->nameQuote('type')  . ' = ' . $db->Quote('plugin')
-       	. ' AND ' .   $db->nameQuote('folder')  . ' = ' . $db->Quote('system');
+$query = 'UPDATE ' . $db->quoteName('#__extensions')
+       	. ' SET ' . $db->quoteName('enabled') . ' = 1'
+       	. ' WHERE ' . $db->quoteName('element') . ' = ' . $db->Quote('discussions')
+       	. ' AND ' .   $db->quoteName('type')  . ' = ' . $db->Quote('plugin')
+       	. ' AND ' .   $db->quoteName('folder')  . ' = ' . $db->Quote('system');
        	
 $db->setQuery($query);
 
@@ -105,12 +105,12 @@ else {
 $pathToPlgDiscussionsSearch = $componentInstaller->getPath('source') . DS . 'plugins' . DS . 'search';
 
 $query = 'SELECT COUNT(*)'
-			. ' FROM ' . $db->nameQuote('#__extensions')
-			. ' WHERE ' . $db->nameQuote('element') . ' = '
+			. ' FROM ' . $db->quoteName('#__extensions')
+			. ' WHERE ' . $db->quoteName('element') . ' = '
 			. $db->Quote('discussions')
-			. ' AND ' . $db->nameQuote('type') . ' = '
+			. ' AND ' . $db->quoteName('type') . ' = '
 			. $db->Quote('plugin')
-			. ' AND ' . $db->nameQuote('folder') . ' = '
+			. ' AND ' . $db->quoteName('folder') . ' = '
 			. $db->Quote('search');
 			
 $db->setQuery($query);
@@ -153,11 +153,11 @@ else {
 }
 
 // enable Discussions search plugin
-$query = 'UPDATE ' . $db->nameQuote('#__extensions')
-       	. ' SET ' . $db->nameQuote('enabled') . ' = 1'
-       	. ' WHERE ' . $db->nameQuote('element') . ' = ' . $db->Quote('discussions')
-       	. ' AND ' .   $db->nameQuote('type')  . ' = ' . $db->Quote('plugin')
-       	. ' AND ' .   $db->nameQuote('folder')  . ' = ' . $db->Quote('search');
+$query = 'UPDATE ' . $db->quoteName('#__extensions')
+       	. ' SET ' . $db->quoteName('enabled') . ' = 1'
+       	. ' WHERE ' . $db->quoteName('element') . ' = ' . $db->Quote('discussions')
+       	. ' AND ' .   $db->quoteName('type')  . ' = ' . $db->Quote('plugin')
+       	. ' AND ' .   $db->quoteName('folder')  . ' = ' . $db->Quote('search');
        	
 $db->setQuery($query);
 
@@ -182,12 +182,12 @@ else {
 $pathToPlgDiscussionsContent = $componentInstaller->getPath('source') . DS . 'plugins' . DS . 'content';
 
 $query = 'SELECT COUNT(*)'
-			. ' FROM ' . $db->nameQuote('#__extensions')
-			. ' WHERE ' . $db->nameQuote('element') . ' = '
+			. ' FROM ' . $db->quoteName('#__extensions')
+			. ' WHERE ' . $db->quoteName('element') . ' = '
 			. $db->Quote('discussions')
-			. ' AND ' . $db->nameQuote('type') . ' = '
+			. ' AND ' . $db->quoteName('type') . ' = '
 			. $db->Quote('plugin')
-			. ' AND ' . $db->nameQuote('folder') . ' = '
+			. ' AND ' . $db->quoteName('folder') . ' = '
 			. $db->Quote('content');
 
 $db->setQuery($query);
@@ -238,12 +238,12 @@ else {
 $pathToPlgDiscussionsFinder = $componentInstaller->getPath('source') . DS . 'plugins' . DS . 'finder';
 
 $query = 'SELECT COUNT(*)'
-			. ' FROM ' . $db->nameQuote('#__extensions')
-			. ' WHERE ' . $db->nameQuote('element') . ' = '
+			. ' FROM ' . $db->quoteName('#__extensions')
+			. ' WHERE ' . $db->quoteName('element') . ' = '
 			. $db->Quote('discussions')
-			. ' AND ' . $db->nameQuote('type') . ' = '
+			. ' AND ' . $db->quoteName('type') . ' = '
 			. $db->Quote('plugin')
-			. ' AND ' . $db->nameQuote('folder') . ' = '
+			. ' AND ' . $db->quoteName('folder') . ' = '
 			. $db->Quote('finder');
 
 $db->setQuery($query);
@@ -536,10 +536,10 @@ else { // upgrade
             if ( $db->loadResult() > 0) { // records in users found -> transfer profile data to extended discussions profile
 
                 $db->setQuery( "UPDATE `#__discussions_users d`, `#__primezilla_users p` " .
-                                " SET " . $db->nameQuote('d.messages_email_notifications') . " = " . $db->nameQuote('p.email_notifications') . ", " .
-                                        $db->nameQuote('d.messages_use_signature') . " = " . $db->nameQuote('p.use_signature') . ", " .
-                                        $db->nameQuote('d.messages_use_signature_for_replies') . " = " . $db->nameQuote('p.use_signature_for_replies') . ", " .
-                                        $db->nameQuote('d.messages_signature') . " = " . $db->nameQuote('p.signature') .
+                                " SET " . $db->quoteName('d.messages_email_notifications') . " = " . $db->quoteName('p.email_notifications') . ", " .
+                                        $db->quoteName('d.messages_use_signature') . " = " . $db->quoteName('p.use_signature') . ", " .
+                                        $db->quoteName('d.messages_use_signature_for_replies') . " = " . $db->quoteName('p.use_signature_for_replies') . ", " .
+                                        $db->quoteName('d.messages_signature') . " = " . $db->quoteName('p.signature') .
                                 " WHERE d.id = p.id");
                 $db->query();
 

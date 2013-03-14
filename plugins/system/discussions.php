@@ -52,7 +52,7 @@ class plgSystemDiscussions extends JPlugin {
                 }
 
 
-                $sql = "INSERT INTO " . $db->nameQuote('#__discussions_users') . " SET " .
+                $sql = "INSERT INTO " . $db->quoteName('#__discussions_users') . " SET " .
                         "id=" . $user['id'] . ", " .
                         "username=\"" . $user['username'] . "\", " .
                         "rookie=" . $rookie;
@@ -67,9 +67,9 @@ class plgSystemDiscussions extends JPlugin {
                     // update the user record in #__discussions_users
                     $db = JFactory::getDBO();
 
-                    $sql = "UPDATE " . $db->nameQuote('#__discussions_users') . " SET " .
+                    $sql = "UPDATE " . $db->quoteName('#__discussions_users') . " SET " .
                             "username=\"" . $user['username'] . "\" " .
-                            "WHERE " . $db->nameQuote('id') . " = " . $user['id'];
+                            "WHERE " . $db->quoteName('id') . " = " . $user['id'];
 
                     $db->setQuery( $sql);
                     $db->query();
@@ -96,8 +96,8 @@ class plgSystemDiscussions extends JPlugin {
 			
 			case 1: { // raw
 
-				$sql = 'DELETE FROM '.$db->nameQuote('#__discussions_users') . ' WHERE ' . 
-										$db->nameQuote('id').' = '.$user['id'];
+				$sql = 'DELETE FROM '.$db->quoteName('#__discussions_users') . ' WHERE ' .
+										$db->quoteName('id').' = '.$user['id'];
 
 				$db->setQuery( $sql); 
 				$db->query(); 
@@ -108,19 +108,19 @@ class plgSystemDiscussions extends JPlugin {
 			case 2: { // soft
 
 				// 1. update messages table, set all posts of this user to specified userid
-				$sql = 'UPDATE '.$db->nameQuote('#__discussions_messages') . 
+				$sql = 'UPDATE '.$db->quoteName('#__discussions_messages') .
 										' SET ' . 
-										$db->nameQuote('user_id') . ' = '. $deleteUser . 
+										$db->quoteName('user_id') . ' = '. $deleteUser .
 										' WHERE ' . 
-										$db->nameQuote('user_id') . ' = ' . $user['id'];
+										$db->quoteName('user_id') . ' = ' . $user['id'];
 
 				$db->setQuery( $sql); 
 				$db->query(); 
 				
 
 				// 2. now delete user from users table
-				$sql = 'DELETE FROM '.$db->nameQuote('#__discussions_users') . ' WHERE ' . 
-										$db->nameQuote('id').' = '.$user['id'];
+				$sql = 'DELETE FROM '.$db->quoteName('#__discussions_users') . ' WHERE ' .
+										$db->quoteName('id').' = '.$user['id'];
 
 				$db->setQuery( $sql); 
 				$db->query(); 

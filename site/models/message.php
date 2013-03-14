@@ -250,12 +250,12 @@ class DiscussionsModelMessage extends JModel {
         	switch ( $_type) {
         	
         		case "outbox": { 
-					$db->setQuery( "SELECT user_id FROM ".$db->nameQuote( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT user_id FROM ".$db->quoteName( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 				
 				default: { // inbox
-					$db->setQuery( "SELECT user_id FROM ".$db->nameQuote( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT user_id FROM ".$db->quoteName( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 			
@@ -286,7 +286,7 @@ class DiscussionsModelMessage extends JModel {
 		if ( $_id <> 0) {
 		
         	$db =& $this->getDBO();
-			$db->setQuery( "SELECT user_from_id FROM ".$db->nameQuote( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
+			$db->setQuery( "SELECT user_from_id FROM ".$db->quoteName( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
 			$_user_from_id = $db->loadResult();
 		
 		}
@@ -312,7 +312,7 @@ class DiscussionsModelMessage extends JModel {
 		if ( $_id <> 0) {
 		
         	$db =& $this->getDBO();
-			$db->setQuery( "SELECT user_to_id FROM ".$db->nameQuote( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
+			$db->setQuery( "SELECT user_to_id FROM ".$db->quoteName( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
 			$_user_to_id = $db->loadResult();
 		
 		}
@@ -345,12 +345,12 @@ class DiscussionsModelMessage extends JModel {
 	    	switch ( $_type) {
 	    	
 	    		case "outbox": { 
-					$db->setQuery( "SELECT subject FROM ".$db->nameQuote( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT subject FROM ".$db->quoteName( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 				
 				default: { // inbox
-					$db->setQuery( "SELECT subject FROM ".$db->nameQuote( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT subject FROM ".$db->quoteName( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 			
@@ -386,12 +386,12 @@ class DiscussionsModelMessage extends JModel {
 	    	switch ( $_type) {
 	    	
 	    		case "outbox": { 
-					$db->setQuery( "SELECT message FROM ".$db->nameQuote( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT message FROM ".$db->quoteName( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 				
 				default: { // inbox
-					$db->setQuery( "SELECT message FROM ".$db->nameQuote( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT message FROM ".$db->quoteName( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 			
@@ -484,7 +484,7 @@ class DiscussionsModelMessage extends JModel {
 
 
 				// 1. put message in receiver inbox        		
-        		$inbox_sql = "INSERT INTO ".$db->nameQuote( '#__discussions_messages_inbox') .
+        		$inbox_sql = "INSERT INTO ".$db->quoteName( '#__discussions_messages_inbox') .
             					" ( user_id, user_from_id, msg_date, msg_time, subject, message) " .
             					" VALUES ( " .
                                 $db->Quote($_receiver_id) . ", " .
@@ -500,7 +500,7 @@ class DiscussionsModelMessage extends JModel {
 
 
 				// 2. put message in sender outbox        		
-        		$outbox_sql = "INSERT INTO ".$db->nameQuote( '#__discussions_messages_outbox') .
+        		$outbox_sql = "INSERT INTO ".$db->quoteName( '#__discussions_messages_outbox') .
             					" ( user_id, user_to_id, msg_date, msg_time, subject, message) " .
             					" VALUES ( " .
                                 $db->Quote($_user_from_id) . ", " .
@@ -587,7 +587,7 @@ class DiscussionsModelMessage extends JModel {
 	
 		$db =& $this->getDBO();
 	
-		$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id);
+		$sql = "SELECT user_id FROM ".$db->quoteName('#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id);
 				
 	    $db->setQuery( $sql);
 	    $message_user_id = $db->loadResult();
@@ -601,7 +601,7 @@ class DiscussionsModelMessage extends JModel {
 		}
 	
 	
-		$sql = "DELETE FROM " . $db->nameQuote( '#__discussions_messages_inbox') . " WHERE id=" . $db->Quote($_id);
+		$sql = "DELETE FROM " . $db->quoteName( '#__discussions_messages_inbox') . " WHERE id=" . $db->Quote($_id);
 	
 		$db->setQuery( $sql);
 		$result = $db->query();
@@ -649,7 +649,7 @@ class DiscussionsModelMessage extends JModel {
 	
 		$db =& $this->getDBO();
 	
-		$sql = "SELECT user_id FROM ".$db->nameQuote('#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id);
+		$sql = "SELECT user_id FROM ".$db->quoteName('#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id);
 				
 	    $db->setQuery( $sql);
 	    $message_user_id = $db->loadResult();
@@ -663,7 +663,7 @@ class DiscussionsModelMessage extends JModel {
 		}
 	
 	
-		$sql = "DELETE FROM " . $db->nameQuote( '#__discussions_messages_outbox') . " WHERE id=" . $db->Quote($_id);
+		$sql = "DELETE FROM " . $db->quoteName( '#__discussions_messages_outbox') . " WHERE id=" . $db->Quote($_id);
 	
 		$db->setQuery( $sql);
 		$result = $db->query();
@@ -753,12 +753,12 @@ class DiscussionsModelMessage extends JModel {
 	    	switch ( $_type) {
 	    	
 	    		case "outbox": { 
-					$db->setQuery( "SELECT DATE_FORMAT( msg_date, '" . $_dateformat . "') AS msg_date FROM ".$db->nameQuote( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT DATE_FORMAT( msg_date, '" . $_dateformat . "') AS msg_date FROM ".$db->quoteName( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 				
 				default: { // inbox
-					$db->setQuery( "SELECT DATE_FORMAT( msg_date, '" . $_dateformat . "') AS msg_date FROM ".$db->nameQuote( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT DATE_FORMAT( msg_date, '" . $_dateformat . "') AS msg_date FROM ".$db->quoteName( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 			
@@ -798,12 +798,12 @@ class DiscussionsModelMessage extends JModel {
 	    	switch ( $_type) {
 	    	
 	    		case "outbox": { 
-					$db->setQuery( "SELECT DATE_FORMAT( msg_time, '" . $_timeformat . "') AS msg_time FROM ".$db->nameQuote( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT DATE_FORMAT( msg_time, '" . $_timeformat . "') AS msg_time FROM ".$db->quoteName( '#__discussions_messages_outbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 				
 				default: { // inbox
-					$db->setQuery( "SELECT DATE_FORMAT( msg_time, '" . $_timeformat . "') AS msg_time FROM ".$db->nameQuote( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
+					$db->setQuery( "SELECT DATE_FORMAT( msg_time, '" . $_timeformat . "') AS msg_time FROM ".$db->quoteName( '#__discussions_messages_inbox')." WHERE id=" . $db->Quote($_id));
 					break;
 				}
 			

@@ -76,7 +76,7 @@ class DiscussionsModelIndex extends JModel {
 						c.counter_posts, c.counter_threads, 
 						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username, u.name AS realname,
 						CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(':', c.id, c.alias) ELSE c.id END as slug
-						FROM ".$db->nameQuote('#__discussions_categories')."c LEFT JOIN  (".$db->nameQuote('#__users')." u) ON u.id=c.last_entry_user_id 
+						FROM ".$db->quoteName('#__discussions_categories')."c LEFT JOIN  (".$db->quoteName('#__users')." u) ON u.id=c.last_entry_user_id
 						WHERE c.published='1' ORDER by c.ordering ASC";
 		}
 		else { // only show the public forums (privates are hidden)
@@ -84,7 +84,7 @@ class DiscussionsModelIndex extends JModel {
 						c.counter_posts, c.counter_threads, 
 						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username, u.name AS realname,
 						CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(':', c.id, c.alias) ELSE c.id END as slug
-						FROM ".$db->nameQuote('#__discussions_categories')."c LEFT JOIN  (".$db->nameQuote('#__users')." u) ON u.id=c.last_entry_user_id 
+						FROM ".$db->quoteName('#__discussions_categories')."c LEFT JOIN  (".$db->quoteName('#__users')." u) ON u.id=c.last_entry_user_id
 						WHERE c.private='0' AND c.published='1' ORDER by c.ordering ASC";			
 		}
 
@@ -135,7 +135,7 @@ class DiscussionsModelIndex extends JModel {
 							CASE WHEN CHAR_LENGTH(m.alias) THEN CONCAT_WS(':', m.id, m.alias) ELSE m.id END as mslug,	
 							CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(':', c.id, c.alias) ELSE c.id END as cslug,
 							m.date, m.published, c.name	as category		 
-						FROM " . $db->nameQuote('#__discussions_messages') . " m, " . $db->nameQuote('#__discussions_categories') . " c " .
+						FROM " . $db->quoteName('#__discussions_messages') . " m, " . $db->quoteName('#__discussions_categories') . " c " .
                             " WHERE m.parent_id=0 AND m.cat_id=c.id AND m.published=1 AND c.private=0" .
 						    " ORDER BY m.date DESC";
 						    						    
@@ -158,7 +158,7 @@ class DiscussionsModelIndex extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT html_box_index_top FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT html_box_index_top FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_htmlBoxTop = $db->loadResult();
@@ -180,7 +180,7 @@ class DiscussionsModelIndex extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT html_box_index_bottom FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT html_box_index_bottom FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_htmlBoxBottom = $db->loadResult();

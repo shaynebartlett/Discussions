@@ -226,8 +226,8 @@ class DiscussionsModelRecent extends JModel {
 							" m.type, DATE_FORMAT( m.date, '" . $_dateformat . " " . $_timeformat . "') AS date_created," .
                     		" m.published" .
 						" FROM " . 
-							$db->nameQuote( '#__discussions_messages') . " m," .
-							$db->nameQuote( '#__discussions_categories') . " c" .
+							$db->quoteName( '#__discussions_messages') . " m," .
+							$db->quoteName( '#__discussions_categories') . " c" .
 						" WHERE" . 
 							" m.cat_id=c.id" . " AND" .
 							" c.private='0'" . " AND" .
@@ -284,8 +284,8 @@ class DiscussionsModelRecent extends JModel {
 
 
 		$countQuery = "SELECT m.* FROM " . 
-					$db->nameQuote( '#__discussions_messages') . " m," .
-					$db->nameQuote( '#__discussions_categories') . " c" .
+					$db->quoteName( '#__discussions_messages') . " m," .
+					$db->quoteName( '#__discussions_categories') . " c" .
 				" WHERE" . 
 					" m.cat_id=c.id" . " AND" .
 					" c.private='0'" . " AND" .

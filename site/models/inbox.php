@@ -220,7 +220,7 @@ class DiscussionsModelInbox extends JModel {
 							DATE_FORMAT( msg_time, '" . $_timeformat . "') AS msg_time, 
 							subject, message, 
 							flag_read, flag_answered, flag_deleted
-						FROM ".$db->nameQuote('#__discussions_messages_inbox')."
+						FROM ".$db->quoteName('#__discussions_messages_inbox')."
 						WHERE user_id = " . $db->Quote($_user_id) . " AND flag_deleted != '1'
 						ORDER BY id DESC";
 
@@ -235,7 +235,7 @@ class DiscussionsModelInbox extends JModel {
 
         $db =& $this->getDBO();
 
-		$countQuery = "SELECT * FROM ".$db->nameQuote('#__discussions_messages_inbox')." WHERE user_id = " . $db->Quote($_user_id) . " AND flag_deleted != '1'";
+		$countQuery = "SELECT * FROM ".$db->quoteName('#__discussions_messages_inbox')." WHERE user_id = " . $db->Quote($_user_id) . " AND flag_deleted != '1'";
 		return $countQuery;
 	}
 
@@ -252,7 +252,7 @@ class DiscussionsModelInbox extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT html_box_inbox_top FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT html_box_inbox_top FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_htmlBoxTop = $db->loadResult();
@@ -274,7 +274,7 @@ class DiscussionsModelInbox extends JModel {
 
                $db =& $this->getDBO();
 
-               $sql = "SELECT html_box_inbox_bottom FROM ".$db->nameQuote( '#__discussions_configuration')." WHERE id='1'";
+               $sql = "SELECT html_box_inbox_bottom FROM ".$db->quoteName( '#__discussions_configuration')." WHERE id='1'";
 
                $db->setQuery( $sql);
                $this->_htmlBoxBottom = $db->loadResult();

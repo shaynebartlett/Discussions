@@ -214,7 +214,7 @@ class DiscussionsModelComment extends JModel {
 
 
             // 1. save comment in discussions comments table
-            $sql = "INSERT INTO ".$db->nameQuote( '#__discussions_comments') .
+            $sql = "INSERT INTO ".$db->quoteName( '#__discussions_comments') .
                             " ( parent_id, cat_id, context_id, user_id, comment, published, wfm, latitude, longitude) " .
                             " VALUES ( " .
                             $db->Quote( $this->_parent_id) . ", " .

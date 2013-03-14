@@ -23,7 +23,7 @@ class CofiBackendHelper extends JObject {
 
 		$db	=& JFactory::getDBO();
 
-		$sql = "SELECT count(*) FROM " . $db->nameQuote('#__discussions_messages_inbox') . " WHERE user_id=" . $db->Quote($id);
+		$sql = "SELECT count(*) FROM " . $db->quoteName('#__discussions_messages_inbox') . " WHERE user_id=" . $db->Quote($id);
 				
 		$db->setQuery( $sql);
 		$result = $db->loadResult();
@@ -37,7 +37,7 @@ class CofiBackendHelper extends JObject {
 
    		$db	=& JFactory::getDBO();
 
-   		$sql = "SELECT count(*) FROM " . $db->nameQuote('#__discussions_messages_outbox') . " WHERE user_id=" . $db->Quote($id);
+   		$sql = "SELECT count(*) FROM " . $db->quoteName('#__discussions_messages_outbox') . " WHERE user_id=" . $db->Quote($id);
 
    		$db->setQuery( $sql);
    		$result = $db->loadResult();

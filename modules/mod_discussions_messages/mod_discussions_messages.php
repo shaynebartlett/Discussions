@@ -36,7 +36,7 @@ $new_entries = $db->loadResult();
 
 
 // get Discussions itemid
-$sql = "SELECT extension_id FROM " . $db->nameQuote('#__extensions') . " WHERE " . $db->nameQuote('element') . "='com_discussions' AND " . $db->nameQuote('type') . "='component'";
+$sql = "SELECT extension_id FROM " . $db->quoteName('#__extensions') . " WHERE " . $db->quoteName('element') . "='com_discussions' AND " . $db->quoteName('type') . "='component'";
 $db->setQuery( $sql);
 $componentid = $db->loadResult();
 
@@ -44,8 +44,8 @@ if ( !$componentid) {
 	$itemid = 0;	
 }
 else {
-	$sql = "SELECT id FROM " . $db->nameQuote('#__menu') . 
-			" WHERE " . $db->nameQuote('component_id') . "='" . $componentid . "' AND parent_id='1' AND published='1' ";
+	$sql = "SELECT id FROM " . $db->quoteName('#__menu') .
+			" WHERE " . $db->quoteName('component_id') . "='" . $componentid . "' AND parent_id='1' AND published='1' ";
 			
 	$db->setQuery( $sql);
 	$itemid = $db->loadResult();
