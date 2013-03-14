@@ -235,7 +235,7 @@ class DiscussionsModelComments extends JModel {
 		$db = & JFactory::getDBO();
 		
 		
-		$query = "SELECT id, comment, published, DATE_FORMAT( created_at, \"%d.%m.%Y %k:%i\") AS commentdate FROM #__discussions_comments ORDER BY created_at DESC LIMIT " . $count;
+		$query = "SELECT id, LEFT(comment, 80) AS comment, published, DATE_FORMAT( created_at, \"%d.%m.%Y %k:%i\") AS commentdate FROM #__discussions_comments ORDER BY created_at DESC LIMIT " . $count;
 						
 		$db->setQuery($query);
 		

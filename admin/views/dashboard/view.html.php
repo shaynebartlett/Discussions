@@ -21,8 +21,11 @@ class DiscussionsViewDashboard extends JView {
 		
 		$latestEntries = $model->getLatestEntries();
 		$this->assignRef('latestEntries',$latestEntries);
-				
-		$numOfEntries = $model->countEntries();
+
+        // $latestComments = $model->getLatestComments();
+        // $this->assignRef('latestComments',$latestComments);
+
+        $numOfEntries = $model->countEntries();
 		$this->assignRef('numOfItems',$numOfItems);
 		
 		$numOfCategories = $model->countCategories();
@@ -51,7 +54,11 @@ class DiscussionsViewDashboard extends JView {
 		$latestPosts = $postsModel->latestPosts( 10);  // get 10 latest posts		
 		$this->assignRef( 'latestPosts', $latestPosts);
 
-			
+        require_once ( JPATH_COMPONENT.DS.'models'.DS.'comments.php');
+        $commentsModel = new DiscussionsModelComments;
+        $latestComments = $commentsModel->latestComments( 10);  // get 10 latest comments
+        $this->assignRef( 'latestComments', $latestComments);
+
 			
 		parent::display($tpl);
 	}

@@ -96,7 +96,7 @@ $_root = JURI::root();
 	jimport('joomla.html.pane');
 	
 	$pane =& JPane::getInstance('Tabs');
-	
+
 	echo $pane->startPane('discussionsPane');
 	
 		echo $pane->startPanel(JText::_('COFI_LATEST_POSTS'), 'latestpoststab');
@@ -176,6 +176,86 @@ $_root = JURI::root();
 			echo "</div>";
 					
 		echo $pane->endPanel();
+
+
+        echo $pane->startPanel(JText::_('COFI_LATEST_COMMENTS'), 'latestcommentstab');
+
+        echo "<div>";
+
+        $rows = &$this->latestComments;
+
+        echo "<table width='100%' cellspacing='1' cellpadding='2' >";
+
+
+        echo "<thead>";
+
+        echo "<tr>";
+
+        echo "<td>";
+        echo JText::_('COFI_DATE');
+        echo "</td>";
+
+        echo "<td>";
+        echo JText::_('COFI_COMMENT');
+        echo "</td>";
+
+        echo "<td>";
+        echo JText::_('COFI_PUBLISHED');
+        echo "</td>";
+
+        echo "</tr>";
+
+        echo "</thead>";
+
+        echo "<tbody>";
+
+        foreach ( $rows as $row) {
+
+            $link 	= JRoute::_( 'index.php?option=com_discussions&view=comment&task=edit&cid[]='. $row->id );
+            ?>
+
+            <tr class="<?php echo "row$k"; ?>">
+
+                <td>
+                    <?php
+                    echo $row->commentdate;
+                    ?>
+                </td>
+
+                <td>
+                    <?php
+                    echo "<a href='" . $link . "'>";
+                    echo $row->comment;
+                    echo "</a>";
+                    ?>
+                </td>
+
+
+                <td>
+                    <?php
+                    if ( $row->published) {
+                        echo "<img src='" . $_root . "administrator/templates/bluestork/images/admin/tick.png' width='16px' height='16px' />";
+                    }
+                    else {
+                        echo "<img src='" . $_root . "administrator/templates/bluestork/images/admin/publish_r.png' width='16px' height='16px' />";
+                    }
+                    ?>
+                </td>
+
+
+            </tr>
+
+        <?php
+        }
+
+        echo "</tbody>";
+
+        echo "</table>";
+
+        echo "</div>";
+
+        echo $pane->endPanel();
+
 
 		
 		echo $pane->startPanel(JText::_('COFI_ABOUT'), 'abouttab');
