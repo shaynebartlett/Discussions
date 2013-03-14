@@ -2,7 +2,7 @@
 /**
  * @package		Codingfish Discussions
  * @subpackage	plg_discussions_search
- * @copyright	Copyright (C) 2010-2012 Codingfish (Achim Fischer). All rights reserved.
+ * @copyright	Copyright (C) 2010-2013 Codingfish (Achim Fischer). All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://www.codingfish.com
  */
@@ -53,7 +53,11 @@ class plgSearchDiscussions extends JPlugin {
 			// not one of our areas... leave it alone!
 			return array();
 		}
-		
+
+        $text = trim($text);
+        if ($text == '') {
+            return array();
+        }
 		
 		// get the things we will need
 		$db =& JFactory::getDBO();		
