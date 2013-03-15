@@ -27,7 +27,7 @@ $params = JComponentHelper::getParams('com_discussions');
 $replyListLength = $params->get('replyListLength', '0');
 $_useFlickr 	 = $params->get( 'useFlickr', '0');  // 0 no, 1 yes
 $_useYouTube 	 = $params->get( 'useYouTube', '0');  // 0 no, 1 yes
-
+$_useLocation 	 = $params->get( 'useLocation', '0');  // 0 no, 1 yes
 
 // website root directory
 $_root = JURI::root();
@@ -37,6 +37,19 @@ $_root = JURI::root();
 
 
 <!-- Javascript functions -->
+
+<?php
+if ($_useLocation == 1) {
+    ?>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <script type="text/javascript">
+        var geocoder;
+        geocoder = new google.maps.Geocoder();
+    </script>
+    <?php
+}
+?>
 
 <script type="text/javascript">
 
@@ -92,6 +105,71 @@ $_root = JURI::root();
         echo "form.submit();";
 
    	echo "}";
+    ?>
+
+
+    <?php
+    if ($_useLocation == 1) {
+        ?>
+
+        function success(position) {
+            var locationLatitude = document.getElementById( 'post_latitude' );
+            var locationLongitude = document.getElementById( 'post_longitude' );
+            var currentlocation = document.getElementById("post_current_location");
+            var lat = parseFloat(position.coords.latitude);
+            var lng = parseFloat(position.coords.longitude);
+            var latlng = new google.maps.LatLng(lat, lng);
+
+            geocoder.geocode({'latLng': latlng}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            locationLatitude.value = position.coords.latitude;
+                            locationLongitude.value = position.coords.longitude;
+                            currentlocation.innerHTML = results[0].formatted_address;
+                        } else {
+                            if (results[1]) {
+                                locationLatitude.value = position.coords.latitude;
+                                locationLongitude.value = position.coords.longitude;
+                                currentlocation.innerHTML = results[1].formatted_address;
+                            }
+                        }
+                    } else {
+                        locationLatitude.value = null;
+                        locationLongitude.value = null;
+                        currentlocation.innerHTML = "Location could not be retrieved.";
+                    }
+                }
+            );
+        }
+
+        function error(msg) {
+            console.log(typeof msg == 'string' ? msg : "error");
+        }
+
+        function locationtag() {
+            var ele = document.getElementById("post_location_div");
+            var text = document.getElementById("post_location_text");
+
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+
+                document.getElementById( 'post_latitude' ).value = null;
+                document.getElementById( 'post_longitude' ).value = null;
+            }
+            else {
+                ele.style.display = "block";
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(success, error);
+                }
+                else {
+                    alert("HTML 5 geolocation is not supported in your browser!");
+                }
+            }
+        }
+
+        <?php
+    }
     ?>
 
 </script>
@@ -470,6 +548,27 @@ if ( $showBreadcrumbRow == "1") {
 
 
 
+                    if ($_useLocation == 1) {
+
+                        if ( ($this->task != "edit") || ($this->task == "edit" && $CofiHelper->isOwnerOfPostByIds($user->id, $this->id))  ) {
+                            ?>
+                            <!-- Location -->
+                            <div class="cofiTextLocation" id="post_location_text">
+
+                                <input type="checkbox" onclick="javascript:locationtag();" name="location" value="location"> <?php echo JText::_( 'COFI_SEND_LOCATION' ) ?>
+
+                            </div>
+                            <div id="post_location_div" style="display: none;">
+
+                                <div class="cofiTextCurrentLocation" id="post_current_location"></div>
+
+                            </div>
+                            <!-- Location -->
+                            <?
+                        }
+
+                    }
+
 
             		echo "<div class='cofiTextButton'>";
 
@@ -483,6 +582,10 @@ if ( $showBreadcrumbRow == "1") {
 								break;
 							}					
 						}
+
+                        echo "<input id='post_latitude' name='latitude' type='hidden' value='' />";
+                        echo "<input id='post_longitude' name='longitude' type='hidden' value='' />";
+
 						echo "<input type='hidden' name='task' value='save'>";  			
 						echo "<input class='cofiButton' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_( 'COFI_SAVE' ) ."'>";
 					

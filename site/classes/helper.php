@@ -1776,6 +1776,26 @@ class CofiHelper extends JObject {
    	}
 
 
+    function isOwnerOfPostByIds( $userid, $postid) {
+
+        $db	=& JFactory::getDBO();
+
+        // get user id of this post
+        $sql = "SELECT user_id FROM " . $db->quoteName('#__discussions_messages') . " WHERE id=" . $db->Quote($postid);
+        $db->setQuery( $sql);
+        $_userid = $db->loadResult();
+
+        if ( $_userid == $userid) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+
+
 }
 
 

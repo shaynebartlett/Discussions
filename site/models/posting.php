@@ -947,8 +947,10 @@ class DiscussionsModelPosting extends JModel {
         $_dateformat	= substr( $params->get( 'dateformat', '%d.%m.%Y'), 0, 10); // max 10 chars
        	$_timeformat	= substr( $params->get( 'timeformat', '%H:%i'), 0, 10); // max 10 chars
 
+        $_useLocation 	= $params->get( 'useLocation', '0');  // 0 no, 1 yes
 
-		$user =& JFactory::getUser();
+
+        $user =& JFactory::getUser();
 		$logUser = new CofiUser( $user->id);
 		
 		$CofiHelper = new CofiHelper();
@@ -986,13 +988,10 @@ class DiscussionsModelPosting extends JModel {
 		$_postParent    = JRequest::getInt('parent', '0');
 		$_postId        = JRequest::getInt('id', '0');
 
-
         $_latitude      = JRequest::getString('latitude', '');
         $_longitude     = JRequest::getString('longitude', '');
 
-
-
-		// get user IP address
+         // get user IP address
 		$_postIpAddress = $_SERVER['REMOTE_ADDR'];
 
 
@@ -1005,11 +1004,9 @@ class DiscussionsModelPosting extends JModel {
 			// if user is not logged in, kick him back into category
     		$app->redirect( $redirectLink, JText::_( 'COFI_POST_NOT_SAVED' ), "message"); 
 		} 
-        
-        
+
                         
 		// 1. check if subject >= 5 chars
-		// todo make minimum subject length configurable
 		if ( strlen( $_postSubject) < 5) {
 			$isSubjectTooShort = true;
 		}
@@ -1018,7 +1015,6 @@ class DiscussionsModelPosting extends JModel {
 		}
 
 		// 2. check if text >= 5 chars
-		// todo make minimum text length configurable
 		if ( strlen( $_postText) < 5) {
 			$isTextTooShort = true;
 		}
@@ -1026,11 +1022,9 @@ class DiscussionsModelPosting extends JModel {
 			$isTextTooShort = false;
 		}
         
-        
 
         // check if insert or update 
-        
-        
+
         // update
         if ( $this->_dbmode == "update") {
 
@@ -1063,38 +1057,67 @@ class DiscussionsModelPosting extends JModel {
                 }
 
 
-                //$_timestamp = "\n\n" . JText::_( 'COFI_EDITED_BY' ) . " " . $user->username . " - " . $_date . " " . $_time;
         		$_timestamp = "\n\n" . JText::_( 'COFI_EDITED_BY' ) . " " . $editUsername . " - " . $_date . " " . $_time;
         		$_postText .= $_timestamp;
-        		
-        			
-				if ( $logUser->isModerator()) { // moderators are allowed to edit all posts
-     				$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') . " SET" .
-     					" message = " . $db->Quote( $_postText) . ", " .
-     					" image1_description = " . $db->Quote( $_image1_description) . ", " .
-     					" image2_description = " . $db->Quote( $_image2_description) . ", " .
-     					" image3_description = " . $db->Quote( $_image3_description) . ", " .
-     					" image4_description = " . $db->Quote( $_image4_description) . ", " .
-     					" image5_description = " . $db->Quote( $_image5_description) .      					
-     					" WHERE id = " . $db->Quote($_postId);
-				}
-				else { // no mod? then user must be owner
-     				$sql = "UPDATE ".$db->quoteName( '#__discussions_messages') . " SET" .
-     					" message = " . $db->Quote( $_postText) . ", " .
-     					" image1_description = " . $db->Quote( $_image1_description) . ", " .
-     					" image2_description = " . $db->Quote( $_image2_description) . ", " .
-     					" image3_description = " . $db->Quote( $_image3_description) . ", " .
-     					" image4_description = " . $db->Quote( $_image4_description) . ", " .
-     					" image5_description = " . $db->Quote( $_image5_description) .      					
-     					" WHERE id = " . $db->Quote($_postId) .
-     					" AND user_id = " . $db->Quote($user->id);
-        		}
 
-        	
+
+                if ($_latitude != '' && $_longitude != '') {
+
+                    if ( $logUser->isModerator() && !$CofiHelper->isOwnerOfPostByIds( $user->id, $_postId)) { // moderators are allowed to edit all posts
+                        $sql = "UPDATE ".$db->quoteName( '#__discussions_messages') . " SET" .
+                            " message = " . $db->Quote( $_postText) . ", " .
+                            " image1_description = " . $db->Quote( $_image1_description) . ", " .
+                            " image2_description = " . $db->Quote( $_image2_description) . ", " .
+                            " image3_description = " . $db->Quote( $_image3_description) . ", " .
+                            " image4_description = " . $db->Quote( $_image4_description) . ", " .
+                            " image5_description = " . $db->Quote( $_image5_description) .
+                            " WHERE id = " . $db->Quote($_postId);
+                    }
+                    else { // no mod? then user must be owner
+                        $sql = "UPDATE ".$db->quoteName( '#__discussions_messages') . " SET" .
+                            " message = " . $db->Quote( $_postText) . ", " .
+                            " latitude = " . $db->Quote( $_latitude) . ", " .
+                            " longitude = " . $db->Quote( $_longitude) . ", " .
+                            " image1_description = " . $db->Quote( $_image1_description) . ", " .
+                            " image2_description = " . $db->Quote( $_image2_description) . ", " .
+                            " image3_description = " . $db->Quote( $_image3_description) . ", " .
+                            " image4_description = " . $db->Quote( $_image4_description) . ", " .
+                            " image5_description = " . $db->Quote( $_image5_description) .
+                            " WHERE id = " . $db->Quote($_postId) .
+                            " AND user_id = " . $db->Quote($user->id);
+                    }
+
+                } // if lat and long
+                else { // no location data
+
+                    if ( $logUser->isModerator() && !$CofiHelper->isOwnerOfPostByIds( $user->id, $_postId)) { // moderators are allowed to edit all posts
+                        $sql = "UPDATE ".$db->quoteName( '#__discussions_messages') . " SET" .
+                            " message = " . $db->Quote( $_postText) . ", " .
+                            " image1_description = " . $db->Quote( $_image1_description) . ", " .
+                            " image2_description = " . $db->Quote( $_image2_description) . ", " .
+                            " image3_description = " . $db->Quote( $_image3_description) . ", " .
+                            " image4_description = " . $db->Quote( $_image4_description) . ", " .
+                            " image5_description = " . $db->Quote( $_image5_description) .
+                            " WHERE id = " . $db->Quote($_postId);
+                    }
+                    else { // no mod? then user must be owner
+                        $sql = "UPDATE ".$db->quoteName( '#__discussions_messages') . " SET" .
+                            " message = " . $db->Quote( $_postText) . ", " .
+                            " latitude = null, " .
+                            " longitude = null, " .
+                            " image1_description = " . $db->Quote( $_image1_description) . ", " .
+                            " image2_description = " . $db->Quote( $_image2_description) . ", " .
+                            " image3_description = " . $db->Quote( $_image3_description) . ", " .
+                            " image4_description = " . $db->Quote( $_image4_description) . ", " .
+                            " image5_description = " . $db->Quote( $_image5_description) .
+                            " WHERE id = " . $db->Quote($_postId) .
+                            " AND user_id = " . $db->Quote($user->id);
+                    }
+
+                }
+
         		$db->setQuery( $sql);
         		$result = $db->query();
-
-
 
 				// check if there are images to delete
 				// get folder name		
@@ -1209,7 +1232,10 @@ class DiscussionsModelPosting extends JModel {
             	$alias = $_postSubject;
     			$alias = JFilterOutput::stringURLSafe($alias);
 
-        		$insert_sql = "INSERT INTO ".$db->quoteName( '#__discussions_messages') .
+
+                if ( ($_useLocation == 1) && ($_latitude != '') && ($_longitude != '')) {
+
+        		    $insert_sql = "INSERT INTO ".$db->quoteName( '#__discussions_messages') .
             					" ( parent_id, cat_id, thread, user_id, account, name, email, ip, subject, alias, message, image1_description,  image2_description, image3_description, image4_description, image5_description, published, wfm, latitude, longitude) " .
             					" VALUES ( " .
                                 $db->Quote( $_postParent) . ", " .
@@ -1231,7 +1257,36 @@ class DiscussionsModelPosting extends JModel {
                                 $db->Quote( $published) . ", " .
                                 $db->Quote( $wfm) . ", " .
                                 $db->Quote( $_latitude) . ", " .
-                                $db->Quote( $_longitude) . " )";
+                                $db->Quote( $_longitude) .
+                            " )";
+
+                }
+                else {
+
+                    $insert_sql = "INSERT INTO ".$db->quoteName( '#__discussions_messages') .
+                        " ( parent_id, cat_id, thread, user_id, account, name, email, ip, subject, alias, message, image1_description,  image2_description, image3_description, image4_description, image5_description, published, wfm) " .
+                        " VALUES ( " .
+                        $db->Quote( $_postParent) . ", " .
+                        $db->Quote( $_postCatId) . ", " .
+                        $db->Quote( $_postThread) . ", " .
+                        $db->Quote( $user->id) . ", " .
+                        $db->Quote( $user->username) . ", " .
+                        $db->Quote( $user->name) . ", " .
+                        $db->Quote( $user->email) . ", " .
+                        $db->Quote( $_postIpAddress) .  ", " .
+                        $db->Quote( $_postSubject) . ", " .
+                        $db->Quote( $alias) . ", " .
+                        $db->Quote( $_postText) . ", " .
+                        $db->Quote( $_image1_description) . ", " .
+                        $db->Quote( $_image2_description) . ", " .
+                        $db->Quote( $_image3_description) . ", " .
+                        $db->Quote( $_image4_description) . ", " .
+                        $db->Quote( $_image5_description) . ", " .
+                        $db->Quote( $published) . ", " .
+                        $db->Quote( $wfm) .
+                        " )";
+
+                }
 
 
         		$db->setQuery( $insert_sql);

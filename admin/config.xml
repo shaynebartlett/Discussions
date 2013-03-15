@@ -143,7 +143,12 @@
 	</fieldset>
 
 
-    <fieldset name="map" label="COFI_CONFIG_THREAD_MAP_SETTINGS">
+    <fieldset name="map" label="COFI_CONFIG_LOCATION_SETTINGS">
+
+        <field name="useLocation" type="radio" default="0" label="COFI_CONFIG_USE_LOCATION" description="COFI_CONFIG_USE_LOCATION_DESCRIPTION">
+            <option value="0">COFI_CONFIG_NO</option>
+            <option value="1">COFI_CONFIG_YES</option>
+        </field>
 
         <field name="useThreadMap" type="radio" default="0" label="COFI_CONFIG_USE_THREAD_MAP" description="COFI_CONFIG_USE_THREAD_MAP_DESCRIPTION">
             <option value="0">COFI_CONFIG_NO</option>

@@ -351,6 +351,14 @@ h2 {
 }
 
 
+.cofiTextLocation {
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+.cofiTextCurrentLocation {
+    margin-top: 5px;
+    font-style: italic;
+}
 
 .cofiTextButton {
     margin-top: 50px;
