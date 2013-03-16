@@ -1376,9 +1376,7 @@ class DiscussionsModelPosting extends JModel {
 					$app->redirect( $redirectLink, JText::_( 'COFI_POST_NOT_SAVED_INSERT_ERROR' ), "message"); 
 				}
 
-			
-			
-			}
+            }
 		
 		
 		} // end insert

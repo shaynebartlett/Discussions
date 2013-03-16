@@ -15,6 +15,9 @@ jimport('joomla.application.component.helper');
 // Load the base adapter.
 require_once JPATH_ADMINISTRATOR . '/components/com_finder/helpers/indexer/adapter.php';
 
+// jimport('joomla.log.log');
+
+
 
 /**
  * Finder adapter for com_discussions
@@ -89,7 +92,17 @@ class plgFinderDiscussions extends FinderIndexerAdapter {
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 
-	}
+        // Add the logger.
+        /*
+        JLog::addLogger(
+            array(
+                'text_file' => 'discussions_finder_plugin.log.php'
+                // 'text_file_path' => '/logs'
+            )
+        );
+        */
+
+    }
 
 
 
@@ -153,7 +166,11 @@ class plgFinderDiscussions extends FinderIndexerAdapter {
 			return;
 		}
 
-		// Initialize the item parameters.
+        // logging...
+        // JLog::add('Finder: index');
+
+
+        // Initialize the item parameters.
 		$registry = new JRegistry;
 		$registry->loadString($item->params);
 		$item->params = JComponentHelper::getParams('com_discussions', true);
@@ -301,6 +318,19 @@ class plgFinderDiscussions extends FinderIndexerAdapter {
 		}
 
 	}
+
+    /**
+     * Method to add a forum post to the index.
+     *
+     * @param   string  $context    The context of the action being performed.
+     *
+     * @return  boolean  True on success.
+     *
+     * @since   2.5
+     */
+    public function onFinderAfterSave($context) {
+
+    }
 
 
     protected function remove($id) {
