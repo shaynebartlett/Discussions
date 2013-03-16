@@ -3,7 +3,7 @@
 /**
  * @package		Codingfish Discussions
  * @subpackage	plg_discussions_smartsearch
- * @copyright	Copyright (C) 2012 Codingfish (Achim Fischer). All rights reserved.
+ * @copyright	Copyright (C) 2013 Codingfish (Achim Fischer). All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://www.codingfish.com
  */

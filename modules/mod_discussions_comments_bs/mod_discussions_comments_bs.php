@@ -2,7 +2,7 @@
 /**
  * @package		Codingfish Discussions
  * @subpackage	mod_discussions_comments_bs
- * @copyright	Copyright (C) 2010-2012 Codingfish (Achim Fischer). All rights reserved.
+ * @copyright	Copyright (C) 2010-2013 Codingfish (Achim Fischer). All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://www.codingfish.com
  */

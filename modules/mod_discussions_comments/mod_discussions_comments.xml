@@ -3,7 +3,7 @@
 <extension version="2.5" type="module" client="site" method="upgrade">
 
 	<name>Discussions Comments</name>
-	<creationDate>May 2012</creationDate>
+	<creationDate>March 2013</creationDate>
 	<author>Codingfish (Achim Fischer)</author> 
 	<authorEmail>info@codingfish.com</authorEmail> 
 	<authorUrl>http://www.codingfish.com</authorUrl>
