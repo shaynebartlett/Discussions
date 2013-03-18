@@ -24,7 +24,7 @@ $app = JFactory::getApplication();
 
 // get parameters
 $params = JComponentHelper::getParams('com_discussions');
-$replyListLength = $params->get('replyListLength', '0');
+$replyListLength = $params->get( 'replyListLength', '0');
 $_useFlickr 	 = $params->get( 'useFlickr', '0');  // 0 no, 1 yes
 $_useYouTube 	 = $params->get( 'useYouTube', '0');  // 0 no, 1 yes
 $_useLocation 	 = $params->get( 'useLocation', '0');  // 0 no, 1 yes
@@ -76,6 +76,21 @@ if ($_useLocation == 1) {
     		text.innerHTML = "<?php echo JText::_('COFI_POST_HIDE_IMAGE_ATTACHMENTS'); ?>";
     	}
     }
+
+
+    function toggleHelp() {
+        var ele = document.getElementById("toggleHelpDiv");
+        var text = document.getElementById("displayHelpDiv");
+        if(ele.style.display == "block") {
+            ele.style.display = "none";
+            text.innerHTML = "<?php echo JText::_('COFI_POST_SHOW_FORMAT_HELP'); ?>";
+        }
+        else {
+            ele.style.display = "block";
+            text.innerHTML = "<?php echo JText::_('COFI_POST_HIDE_FORMAT_HELP'); ?>";
+        }
+    }
+
 
     <?php
     echo "Joomla.submitbutton = function confirmnotices(pressbutton) { ";
@@ -337,7 +352,236 @@ if ( $showBreadcrumbRow == "1") {
 
     		echo "<tr>";
     			echo "<td align='left' valign='top' class='noborder' style='padding: 5px;' >";
-    			
+
+                    ?>
+                    <br>
+                    <a id="displayHelpDiv" href="javascript:toggleHelp();"><?php echo JText::_('COFI_POST_SHOW_FORMAT_HELP'); ?></a>
+
+                    <div class="cofiPostHelp" id='toggleHelpDiv' style='display: none'>
+
+                    <div class="cofiTextFormatHeader">
+                        <?php echo JText::_( 'COFI_FORMAT_YOUR_TEXT' ); ?>:
+                        <br>
+                        <br>
+                    </div>
+
+                    <div class="cofiTextFormat">
+
+                    <table cellspacing="0px" cellpadding="10px" width="100%" class="noborder" border="1px">
+
+                    <tr>
+                        <td class="noborder" width="33%">
+                            <b><?php echo JText::_( 'COFI_FORMAT_BOLD' ); ?></b>
+                            <br>
+                            [b]bold[/b]
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder" width="33%">
+                            <i><?php echo JText::_( 'COFI_FORMAT_ITALICS' ); ?></i>
+                            <br>
+                            [i]italics[/i]
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder" width="34%">
+                            <u><?php echo JText::_( 'COFI_FORMAT_UNDERLINE' ); ?></u>
+                            <br>
+                            [u]underline[/u]
+                            <br>
+                            <br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="noborder">
+                            <s><?php echo JText::_( 'COFI_FORMAT_STRIKE_THROUGH' ); ?></s>
+                            <br>
+                            [s]strikethrough[/s]
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <big><?php echo JText::_( 'COFI_FORMAT_BIG' ); ?></big>
+                            <br>
+                            [big]big[/big]
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <small><?php echo JText::_( 'COFI_FORMAT_SMALL' ); ?></small>
+                            <br>
+                            [small]small[/small]
+                            <br>
+                            <br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" class="noborder">
+                            <?php echo JText::_( 'COFI_FORMAT_UNORDERED_LIST' ); ?>
+                            <br>
+                            [ul]
+                            <br>
+                            [li]first[/li]
+                            <br>
+                            [li]second[/li]
+                            <br>
+                            [/ul]
+                            <br>
+                            <br>
+                        </td>
+                        <td valign="top" class="noborder">
+                            <?php echo JText::_( 'COFI_FORMAT_ORDERED_LIST' ); ?>
+                            <br>
+                            [ol]
+                            <br>
+                            [li]first[/li]
+                            <br>
+                            [li]second[/li]
+                            <br>
+                            [/ol]
+                            <br>
+                            <br>
+                        </td>
+                        <td valign="top" class="noborder">
+                            <?php echo JText::_( 'COFI_FORMAT_LINK' ); ?>
+                            <br>
+                            [url]http://www.codingfish.com[/url]
+                            <br>
+                            [url=http://www.codingfish.com]Codingfish[/url]
+                            <br>
+                            <br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" class="noborder">
+                            <?php echo JText::_( 'COFI_FORMAT_QUOTE' ); ?>
+                            <br>
+                            [quote]quoted text[/quote]
+                            <br>
+                            <br>
+                        </td>
+                        <td valign="top" class="noborder">
+                            <?php
+                            if ( $_useFlickr == 1) {
+                                echo JText::_( 'COFI_FLICKR_PHOTO' );
+                                echo "<br />";
+                                echo "[flickr=PHOTOID]";
+                            }
+                            else {
+                                echo "&nbsp;";
+                            }
+                            ?>
+                            <br>
+                            <br>
+                        </td>
+                        <td valign="top" class="noborder">
+                            <?php
+                            if ( $_useYouTube == 1) {
+                                echo JText::_( 'COFI_YOUTUBE_VIDEO' );
+                                echo "<br />";
+                                echo "[youtube=VIDEOID]";
+                            }
+                            else {
+                                echo "&nbsp;";
+                            }
+                            ?>
+                            <br>
+                            <br>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td colspan="3" class="noborder">
+                            &nbsp;
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/smile.gif' />"; ?> &nbsp;&nbsp; :-)
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/wink.gif' />"; ?> &nbsp;&nbsp; ;-)
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/sad.gif' />"; ?> &nbsp;&nbsp; :-(
+                            <br>
+                            <br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/laugh.gif' />"; ?> &nbsp;&nbsp; :-D
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/kiss.gif' />"; ?> &nbsp;&nbsp; ;-*
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/cool.gif' />"; ?> &nbsp;&nbsp; 8-)
+                            <br>
+                            <br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/thumbup.gif' />"; ?> &nbsp;&nbsp; (Y)
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/thumbdown.gif' />"; ?> &nbsp;&nbsp; (N)
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/tongue.gif' />"; ?> &nbsp;&nbsp; :-P
+                            <br>
+                            <br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/crying.gif' />"; ?> &nbsp;&nbsp; :'(
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/innocent.gif' />"; ?> &nbsp;&nbsp; O:-)
+                            <br>
+                            <br>
+                        </td>
+                        <td class="noborder">
+                            <?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/devil.gif' />"; ?> &nbsp;&nbsp; >:-)
+                            <br>
+                            <br>
+                        </td>
+                    </tr>
+
+                    </table>
+
+                    </div>
+
+                    </div>
+
+                    <?php
+
     				echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_TEXT' ) . ":</div> ";
    					   			
    					echo "<div class='cofiText'>";			    			
@@ -640,227 +884,6 @@ if ( $showBreadcrumbRow == "1") {
 
 
 
-<div class="cofiPostHelp">
-
-    <div class="cofiTextFormatHeader">
-    	<?php echo JText::_( 'COFI_FORMAT_YOUR_TEXT' ); ?>:
-    </div>
-    				
-    <div class="cofiTextFormat">
-    		
-		<table cellspacing="0px" cellpadding="10px" width="100%" class="noborder">
-
-			<tr>
-				<td class="noborder">
-					<b><?php echo JText::_( 'COFI_FORMAT_BOLD' ); ?></b>
-					<br />
-					[b]bold[/b]
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<i><?php echo JText::_( 'COFI_FORMAT_ITALICS' ); ?></i>
-					<br />
-					[i]italics[/i]
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<u><?php echo JText::_( 'COFI_FORMAT_UNDERLINE' ); ?></u>
-					<br />
-					[u]underline[/u]
-					<br />
-					<br />
-				</td>
-			</tr>
-
-			<tr>
-				<td class="noborder">
-					<s><?php echo JText::_( 'COFI_FORMAT_STRIKE_THROUGH' ); ?></s>
-					<br />
-					[s]strikethrough[/s]
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<big><?php echo JText::_( 'COFI_FORMAT_BIG' ); ?></big>
-					<br />
-					[big]big[/big]
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<small><?php echo JText::_( 'COFI_FORMAT_SMALL' ); ?></small>
-					<br />
-					[small]small[/small]
-					<br />
-					<br />
-				</td>
-			</tr>
-
-			<tr>
-				<td valign="top" class="noborder">
-					<?php echo JText::_( 'COFI_FORMAT_UNORDERED_LIST' ); ?>
-					<br />
-					[ul]
-					<br />
-					[li]first[/li]
-					<br />
-					[li]second[/li]
-					<br />
-					[/ul]
-					<br />
-					<br />
-				</td>
-				<td valign="top" class="noborder">
-					<?php echo JText::_( 'COFI_FORMAT_ORDERED_LIST' ); ?>
-					<br />
-					[ol]
-					<br />
-					[li]first[/li]
-					<br />
-					[li]second[/li]
-					<br />
-					[/ol]
-					<br />
-					<br />
-				</td>
-				<td valign="top" class="noborder">
-					<?php echo JText::_( 'COFI_FORMAT_LINK' ); ?>
-					<br />
-					[url]http://www.codingfish.com[/url]
-					<br />
-					[url=http://www.codingfish.com]Codingfish[/url]
-					<br />
-					<br />
-				</td>
-			</tr>
-
-            <tr>
-                <td valign="top" class="noborder">
-                    <?php echo JText::_( 'COFI_FORMAT_QUOTE' ); ?>
-                   <br />
-                   [quote]quoted text[/quote]
-                   <br />
-                   <br />
-                </td>
-                <td valign="top" class="noborder">
-                	<?php
-                	if ( $_useFlickr == 1) {                
-                    	echo JText::_( 'COFI_FLICKR_PHOTO' );
-                   		echo "<br />";
-                   		echo "[flickr=PHOTOID]";
-                   	}
-                   	else {
-                   		echo "&nbsp;";                   	
-                   	}
-                   	?>
-                   	<br />
-                   	<br />
-                </td>
-                <td valign="top" class="noborder">
-                	<?php
-                	if ( $_useYouTube == 1) {                
-                    	echo JText::_( 'COFI_YOUTUBE_VIDEO' );
-                   		echo "<br />";
-                   		echo "[youtube=VIDEOID]";
-                   	}
-                   	else {
-                   		echo "&nbsp;";                   	
-                   	}
-                   	?>
-                   	<br />
-                   	<br />
-                </td>
-            </tr>
-
-
-
-
-			<tr>
-				<td colspan="3" class="noborder">
-					&nbsp;
-				</td>
-			</tr>
-				  
-				  
-			<tr>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/smile.gif' />"; ?> &nbsp;&nbsp; :-)
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/wink.gif' />"; ?> &nbsp;&nbsp; ;-)
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/sad.gif' />"; ?> &nbsp;&nbsp; :-(
-					<br />
-					<br />
-				</td>
-			</tr>
-
-			<tr>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/laugh.gif' />"; ?> &nbsp;&nbsp; :-D
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/kiss.gif' />"; ?> &nbsp;&nbsp; ;-*
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/cool.gif' />"; ?> &nbsp;&nbsp; 8-)
-					<br />
-					<br />
-				</td>
-			</tr>
-
-			<tr>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/thumbup.gif' />"; ?> &nbsp;&nbsp; (Y)
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/thumbdown.gif' />"; ?> &nbsp;&nbsp; (N)
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/tongue.gif' />"; ?> &nbsp;&nbsp; :-P
-					<br />
-					<br />
-				</td>
-			</tr>
-
-			<tr>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/crying.gif' />"; ?> &nbsp;&nbsp; :'(
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/innocent.gif' />"; ?> &nbsp;&nbsp; O:-)
-					<br />
-					<br />
-				</td>
-				<td class="noborder">
-					<?php echo "<img src='" . $_root . "components/com_discussions/assets/emoticons/devil.gif' />"; ?> &nbsp;&nbsp; >:-)
-					<br />
-					<br />
-				</td>
-			</tr>
-
-		</table>
-    		    				    				
-    </div>
-
-</div>
 
 
 
