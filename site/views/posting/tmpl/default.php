@@ -808,7 +808,7 @@ if ( $showBreadcrumbRow == "1") {
 
                             </div>
                             <!-- Location -->
-                            <?
+                            <?php
                         }
 
                     }
