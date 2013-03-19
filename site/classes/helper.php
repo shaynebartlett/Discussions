@@ -152,7 +152,7 @@ class CofiHelper extends JObject {
 
             $_replacement = "";
 
-            // detect display mode: 0=browser popup, 1=slimbox, 3=YOOeffects
+            // detect display mode: 0=browser popup, 1=slimbox, 3=widgetkit
             switch ( $mode) {
 
                 case 1: { // slimbox
