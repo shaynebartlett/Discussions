@@ -3,7 +3,7 @@ Discussions
 
 Discussions is a Joomla! 2.5 forum extension.
 
-Discussions 1.6 is only available for Joomla! 2.5. It's not tested on Joomla! 3.x, yet.
+Discussions 1.6.x is only available for Joomla! 2.5. It's not tested on Joomla! 3.x, yet.
 
 
 Content
