@@ -81,7 +81,8 @@ class DiscussionsModelInbox extends JModel {
 	    
 	    	if( strlen( $_selmsg) > 0) {
 	      
-	      		$whereclause="";
+	      		$whereclause="(user_id=" . $db->Quote($user->id) .") AND (";
+
 	        	$tok = strtok( $_selmsg, " ");
 	        	while ($tok !== false) {
 	            	$whereclause .= "id=" . $db->Quote($tok);
@@ -90,7 +91,9 @@ class DiscussionsModelInbox extends JModel {
 	                	$whereclause .= " OR ";
 	            	}
 	        	}
-	
+
+                $whereclause .= ")";
+
 				$sql = "DELETE FROM #__discussions_messages_inbox WHERE $whereclause";
 				$db->setQuery( $sql);					
 				$db->query();
@@ -102,8 +105,9 @@ class DiscussionsModelInbox extends JModel {
 	    if( $_submit == JText::_( 'COFI_MESSAGES_BUTTON_MARK_READ' )) {
 	    
 	    	if( strlen( $_selmsg) > 0) {
-	      
-	      		$whereclause="";
+
+                $whereclause="(user_id=" . $db->Quote($user->id) .") AND (";
+
 	        	$tok = strtok( $_selmsg, " ");
 	        	while ($tok !== false) {
 	            	$whereclause .= "id=" . $db->Quote($tok);
@@ -112,8 +116,10 @@ class DiscussionsModelInbox extends JModel {
 	                	$whereclause .= " OR ";
 	            	}
 	        	}
-	
-				$sql = "UPDATE #__discussions_messages_inbox SET flag_read='1' WHERE $whereclause";
+
+                $whereclause .= ")";
+
+                $sql = "UPDATE #__discussions_messages_inbox SET flag_read='1' WHERE $whereclause";
 				$db->setQuery( $sql);					
 				$db->query();
 	
@@ -125,8 +131,9 @@ class DiscussionsModelInbox extends JModel {
 	    if( $_submit == JText::_( 'COFI_MESSAGES_BUTTON_MARK_UNREAD' )) {
 	    
 	    	if( strlen( $_selmsg) > 0) {
-	      
-	      		$whereclause="";
+
+                $whereclause="(user_id=" . $db->Quote($user->id) .") AND (";
+
 	        	$tok = strtok( $_selmsg, " ");
 	        	while ($tok !== false) {
 	            	$whereclause .= "id=" . $db->Quote($tok);
@@ -135,8 +142,10 @@ class DiscussionsModelInbox extends JModel {
 	                	$whereclause .= " OR ";
 	            	}
 	        	}
-	
-				$sql = "UPDATE #__discussions_messages_inbox SET flag_read='0' WHERE $whereclause";
+
+                $whereclause .= ")";
+
+                $sql = "UPDATE #__discussions_messages_inbox SET flag_read='0' WHERE $whereclause";
 				$db->setQuery( $sql);					
 				$db->query();
 	

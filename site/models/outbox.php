@@ -80,8 +80,9 @@ class DiscussionsModelOutbox extends JModel {
 	    if( $_submit == JText::_( 'COFI_MESSAGES_BUTTON_DELETE' )) {
 	    
 	    	if( strlen( $_selmsg) > 0) {
-	      
-	      		$whereclause="";
+
+                $whereclause="(user_id=" . $db->Quote($user->id) .") AND (";
+
 	        	$tok = strtok( $_selmsg, " ");
 	        	while ($tok !== false) {
 	            	$whereclause .= "id=" . $db->Quote($tok);
@@ -90,7 +91,9 @@ class DiscussionsModelOutbox extends JModel {
 	                	$whereclause .= " OR ";
 	            	}
 	        	}
-	
+
+                $whereclause .= ")";
+
 				$sql = "DELETE FROM #__discussions_messages_outbox WHERE $whereclause";
 				$db->setQuery( $sql);					
 				$db->query();
