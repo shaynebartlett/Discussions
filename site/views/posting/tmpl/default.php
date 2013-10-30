@@ -207,14 +207,8 @@ if ( $_htmlBoxTop != "") {
 
 
 
-<?php
-include( 'components/com_discussions/includes/topmenu.php');
-?>
-
-
-
 <!-- Category icon, name and description -->
-<table width="100%" class="noborder" style="margin-bottom:10px;">
+<table width="100%" class="noborder" style="margin:20px 0px 20px 0px;">
     <tr>
 
         <!-- category image -->
@@ -241,22 +235,15 @@ include( 'components/com_discussions/includes/topmenu.php');
         </td>
         <!-- category name and description -->
 
-        <!-- category quick select box -->
-        <td align="left" class="noborder">
-            <?php
-            echo $CofiHelper->getQuickJumpSelectBox( $this->categoryId);
-            ?>
-        </td>
-        <!-- category quick select box -->
 
     </tr>
 </table>
 <!-- Category icon, name and description -->
 
 
-
 <?php
 echo "<h3>";
+    echo "<br>";
 	echo $this->headline;
 echo "</h3>";
 ?>
@@ -311,27 +298,31 @@ if ( $showBreadcrumbRow == "1") {
 
 
 
-
 <?php
 
     echo "<form action='' method='post' name='postform' id='postform' enctype='multipart/form-data'>";
+
+    echo "<fieldset>";
 
     	echo "<table cellspacing='1' cellpadding='0' width='100%' class='noborder'>";
 
     		echo "<tr>";    		
     			echo "<td class='noborder' style='padding: 5px;' >";
 
-    				echo "<div class='cofiSubjectHeader'>" . JText::_( 'COFI_SUBJECT' ) . ":</div> ";
-   					
+
+
+                    echo "<label class='cofiSubjectHeader'>" . JText::_( 'COFI_SUBJECT' ) . "</label> ";
+
 					if ( $this->task == "new") { // new posting
 
             			echo "<div class='cofiSubject'>";
-            				echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' style='width: 500px;'>";
+            				echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' class='form-control' style='width: 500px;'  placeholder='Enter subject'>";
             			echo "</div>";
             			
             			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MIN_5_CHARS' ) . "</div> ";
 
 					}
+
 					else {
 						$_reSubject = "Re: ".$this->subject;
 						
@@ -342,7 +333,7 @@ if ( $showBreadcrumbRow == "1") {
 						$_reSubject = str_replace( '"', "'", $_reSubject);						
 						?>
 						
-            			<input type="hidden" name="postSubject" id="postSubject" value="<?php echo $_reSubject; ?>">	
+            			<input type="hidden" name="postSubject" id="postSubject" value="<?php echo $_reSubject; ?>" class="form-control" placeholder="Enter subject">
 
 						<?php
 					}
@@ -357,7 +348,9 @@ if ( $showBreadcrumbRow == "1") {
                     <br>
                     <a id="displayHelpDiv" href="javascript:toggleHelp();"><?php echo JText::_('COFI_POST_SHOW_FORMAT_HELP'); ?></a>
 
-                    <div class="cofiPostHelp" id='toggleHelpDiv' style='display: none'>
+                    <br>
+
+                    <div class="well" id='toggleHelpDiv' style='display: none; margin-top: 20px;'>
 
                     <div class="cofiTextFormatHeader">
                         <?php echo JText::_( 'COFI_FORMAT_YOUR_TEXT' ); ?>:
@@ -365,7 +358,7 @@ if ( $showBreadcrumbRow == "1") {
                         <br>
                     </div>
 
-                    <div class="cofiTextFormat">
+                    <div class="cofiTextFormt">
 
                     <table cellspacing="0px" cellpadding="10px" width="100%" class="noborder" border="1px">
 
@@ -582,10 +575,10 @@ if ( $showBreadcrumbRow == "1") {
 
                     <?php
 
-    				echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_TEXT' ) . ":</div> ";
+    				echo "<label class='cofiTextHeader'>" . JText::_( 'COFI_TEXT' ) . "</label> ";
    					   			
    					echo "<div class='cofiText'>";			    			
-   						echo "<textarea name='postText' cols='80' rows='20' wrap='VIRTUAL' id='postText' style='width: 600px;'>";
+   						echo "<textarea name='postText' cols='80' rows='15' wrap='VIRTUAL' id='postText' class='form-control'>";
 							if ( $this->task == "quote") {
    								echo "[quote]" . $this->messageText . "[/quote]";
 							}
@@ -814,7 +807,7 @@ if ( $showBreadcrumbRow == "1") {
                     }
 
 
-            		echo "<div class='cofiTextButton'>";
+            		echo "<div style='margin-top: 20px;'>";
 
     					switch ( $this->task) {
     						case "edit": {
@@ -831,7 +824,7 @@ if ( $showBreadcrumbRow == "1") {
                         echo "<input id='post_longitude' name='longitude' type='hidden' value='' />";
 
 						echo "<input type='hidden' name='task' value='save'>";  			
-						echo "<input class='cofiButton' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_( 'COFI_SAVE' ) ."'>";
+						echo "<input class='btn btn-primary' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_( 'COFI_SAVE' ) ."'>";
 					
 					echo "</div> ";
 
@@ -843,8 +836,9 @@ if ( $showBreadcrumbRow == "1") {
 
     	echo "</table>";
 
-    echo "</form>";
+    echo "</fieldset>";
 
+    echo "</form>";
 
 
     // display recent x posts if task = reply or quote
@@ -882,13 +876,6 @@ if ( $showBreadcrumbRow == "1") {
 
 
 
-
-
-
-
-
-
-
 <!-- HTML Box Bottom -->
 <?php
 $_htmlBoxBottom = $this->htmlBoxBottom;
@@ -908,4 +895,6 @@ include( 'components/com_discussions/includes/footer.php');
 
 </div>
 
+<br>
+<br>
 

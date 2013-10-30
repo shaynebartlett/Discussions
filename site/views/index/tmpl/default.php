@@ -144,19 +144,19 @@ if ( $_lastParent == -1) { // start new table
         <?php echo $category->name; ?>
     </h2>
 
-<table class="table">
 
-<thead>
-<tr>
-    <td width="53px" align="center">
-        &nbsp;
-    </td>
-    <th align="left"><?php echo JText::_( 'COFI_FORUM' ); ?></td>
-    <th width="70px" align="center"><?php echo JText::_( 'COFI_THREADS' ); ?></td>
-    <th width="70px" align="center"><?php echo JText::_( 'COFI_POSTS' ); ?></td>
-    <th width="150px" align="center"><?php echo JText::_( 'COFI_LAST_ENTRY' ); ?></td>
-</tr>
-</thead>
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th width="53px" align="center">&nbsp;</th>
+            <th align="left"><?php echo JText::_( 'COFI_FORUM' ); ?></th>
+            <th width="70px" align="center"><?php echo JText::_( 'COFI_THREADS' ); ?></th>
+            <th width="70px" align="center"><?php echo JText::_( 'COFI_POSTS' ); ?></th>
+            <th width="150px" align="center"><?php echo JText::_( 'COFI_LAST_ENTRY' ); ?></th>
+        </tr>
+    </thead>
+
 
 <?php
 }
@@ -168,19 +168,22 @@ else {
         <?php echo $category->name; ?>
     </h2>
 
-<table class="table">
+<table class="table table-striped">
 
     <thead>
-    <tr>
-        <td width="53px" align="center">
-            &nbsp;
-        </td>
-        <th align="left"><?php echo JText::_( 'COFI_FORUM' ); ?></td>
-        <th width="70px" align="center"><?php echo JText::_( 'COFI_THREADS' ); ?></td>
-        <th width="70px" align="center"><?php echo JText::_( 'COFI_POSTS' ); ?></td>
-        <th width="150px" align="center"><?php echo JText::_( 'COFI_LAST_ENTRY' ); ?></td>
-    </tr>
+        <tr>
+            <th width="53px" align="center">
+                &nbsp;
+            </th>
+            <th align="left"><?php echo JText::_( 'COFI_FORUM' ); ?></th>
+            <th width="70px" align="center"><?php echo JText::_( 'COFI_THREADS' ); ?></th>
+            <th width="70px" align="center"><?php echo JText::_( 'COFI_POSTS' ); ?></th>
+            <th width="150px" align="center"><?php echo JText::_( 'COFI_LAST_ENTRY' ); ?></th>
+        </tr>
     </thead>
+
+
+    <tbody>
 
     <?php
     }
@@ -275,6 +278,8 @@ else {
     endforeach;
 
     ?>
+
+    </tbody>
 
 </table>
 

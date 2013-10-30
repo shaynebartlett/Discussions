@@ -91,6 +91,11 @@ h2 {
     padding: 10px;
 }
 
+
+.cofiIndexTableRow {
+    padding: 10px;
+}
+
 .cofiIndexTableRow1 {
 	background-color: #f7f7f7;
     /* padding: 2px; */
@@ -207,15 +212,18 @@ h2 {
 
 
 .cofiPostMenu {
+    margin: 10px 0px 30px 0px;
+	/*
 	height: 20px;
 	background-color: #f7f7f7;
     border: 1px solid #ddd;
     padding: 5px 0px 5px 0px;
+    */
 }
 
 .cofiPostMenuLinks {
     padding: 0px 10px 0px 5px;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .cofiPostMenuItem {

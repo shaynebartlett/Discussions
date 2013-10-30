@@ -171,7 +171,8 @@ if ( $logUser->isModerator() == 1) {
 
 
 <!-- Category icon, name and description -->
-<table width="100%" class="noborder" style="margin-bottom:10px;">
+<table width="100%" class="noborder" style="margin:20px 0px 10px 0px;">
+
     <tr>
 
         <!-- category image -->
@@ -272,16 +273,14 @@ if ( $user->guest) { // user is not logged in
 }
 else { // user is logged in
 
-	echo "<table width='50%' class='noborder' style='margin:20px 0px 20px 0px;'>";
+	echo "<table width='50%' class='noborder' style='margin:40px 0px 30px 0px;'>";
     	echo "<tr>";       	
 
-        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-            	echo "<img src='" . $_root . "components/com_discussions/assets/threads/new.png' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
-        	echo "</td>";
         	echo "<td align='left' valign='middle' class='noborder'>";
             	$menuLinkNewTMP = "index.php?option=com_discussions&view=posting&task=new&catid=".$this->categorySlug;
             	$menuLinkNew = JRoute::_( $menuLinkNewTMP);
-            	echo "<a href='".$menuLinkNew."'>" . JText::_( 'COFI_NEW_THREAD' ) . "</a>";
+                // echo "<a class='btn btn-success' href='".$menuLinkNew."'><i class='icon-pencil'></i>" . JText::_( 'COFI_NEW_THREAD' ) . "</a>";
+            	echo "<a class='btn btn-success' href='".$menuLinkNew."'>" . JText::_( 'COFI_NEW_THREAD' ) . "</a>";
         	echo "</td>";        
         	
     	echo "</tr>";
@@ -292,7 +291,6 @@ else { // user is logged in
 
 
 
-
 <!-- Breadcrumb -->
 <?php
 $showBreadcrumbRow = $params->get('breadcrumb', '0');		
@@ -300,7 +298,7 @@ $showBreadcrumbRow = $params->get('breadcrumb', '0');
 if ( $showBreadcrumbRow == "1") {
 	?>
 
-	<table class="noborder" style="margin-top: 5px;">
+	<table class="noborder" style="margin: 0px;">
 	    <tr>
 	        <td class="noborder">
 	            <?php
@@ -350,27 +348,28 @@ if ( $showBreadcrumbRow == "1") {
 <!-- Pagination Links -->
 
 
+<!-- <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noborder"> -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="noborder"> 
+    <thead>
+        <tr>
+		    <th width="70px"  align="center" class="cofiTableHeaderx"><?php echo JText::_( 'COFI_REPLIES' ); ?></th>
+		    <th width="48px"  align="center" class="cofiTableHeaderx"><?php echo JText::_( 'COFI_TYPE' ); ?></th>
+            <th               align="left"   class="cofiTableHeaderx"><?php echo JText::_( 'COFI_TOPIC' ); ?></th>
+		    <th width="200px" align="center" class="cofiTableHeaderx"><?php echo JText::_( 'COFI_LAST_POST' ); ?></th>
+		    <th width="35px"  align="center" class="cofiTableHeaderx">&nbsp;</th>
+        </tr>
+    </thead>
 
-    <tr> 
-		<td width="70px"  align="center" class="cofiTableHeader"><?php echo JText::_( 'COFI_REPLIES' ); ?></td>
-		<td width="48px"  align="center" class="cofiTableHeader"><?php echo JText::_( 'COFI_TYPE' ); ?></td>
-        <td               align="left"   class="cofiTableHeader"><?php echo JText::_( 'COFI_TOPIC' ); ?></td>
-		<td width="200px" align="center" class="cofiTableHeader"><?php echo JText::_( 'COFI_LAST_POST' ); ?></td> 
-		<td width="35px"  align="center" class="cofiTableHeader">&nbsp;</td>
-    </tr> 
 
+    <tbody>
 
-
-	<?php 
-	$rowColor = 1;
-	
+    <?php
 	foreach ( $this->threads as $thread ) : ?>
 
     	<tr> 
 
-			<td align="center" class="cofiIndexTableRow<?php echo $rowColor; ?> cofiIndexTableRowReplies">	
+			<td align="center" class="cofiIndexTableRow cofiIndexTableRowReplies" style="padding: 0px 0px 0px 0px; text-align: center;">
 				<?php
 				echo "<span class='cofiIndexTableRowRepliesCounter'>"; 
 					echo $thread->counter_replies;
@@ -379,7 +378,7 @@ if ( $showBreadcrumbRow == "1") {
 			</td> 
 
 
-			<td align="center" class="cofiIndexTableRow<?php echo $rowColor; ?> cofiIndexTableRowIcon">	
+			<td align="center" class="cofiIndexTableRow cofiIndexTableRowIcon" style="padding: 10px 0px 0px 0px; text-align: center;">
 				<?php
 				
 				switch ( $thread->type) {  // check the type of this thread (discussion, question...)
@@ -408,7 +407,7 @@ if ( $showBreadcrumbRow == "1") {
 			</td> 
 
 
-			<td align="left" class="cofiIndexTableRow<?php echo $rowColor; ?> cofiIndexTableRowTopic">
+			<td align="left" class="cofiIndexTableRow cofiIndexTableRowTopic">
 
                 <?php
                 $_hoverSubject = $thread->subject;
@@ -417,13 +416,13 @@ if ( $showBreadcrumbRow == "1") {
 
                 $threadLink = JRoute::_('index.php?option=com_discussions&view=thread&catid='.$this->categorySlug.'&thread='.$thread->slug );
 
-                echo "<a href='$threadLink' title='".$_hoverSubject."'>".$thread->subject."</a>";
+                echo "<h3 style='margin: 0px 0px 0px 0px;'><a href='$threadLink' title='".$_hoverSubject."'>".$thread->subject."</a></h3>";
 
                 if ( $thread->locked == 1) { // show lock symbol
                     echo "<img src='" . $_root . "components/com_discussions/assets/threads/lock.png' style='margin-left: 5px; border:0px;' />";
                 }
 
-                echo "<div class='cofiIndexTableRowTopicSubtitle'>";
+                echo "<div class='cofiIndexTableRowTopicSubtitle' style='margin: 0px 0px 0px 0px;'>";
 
                     echo JText::_( 'COFI_POSTED' ) . " " . $thread->date . " " . JText::_( 'COFI_BY' ) . " ";
 
@@ -444,89 +443,78 @@ if ( $showBreadcrumbRow == "1") {
 			</td> 
 
 									
-			<td width="200" align="center" class="cofiIndexTableRow<?php echo $rowColor; ?> cofiIndexTableRowLastPost">
+			<td width="230" align="center" class="cofiIndexTableRow cofiIndexTableRowLastPost">
 
-                <table width="100%" cellspacing="0" cellpadding="0" border="0" class="noborder">
-                    <tr>
-                        <td width="32" align="left" class="noborder">
-                            <?php
-                                                        
-                            $CofiUser = new CofiUser( $thread->last_entry_user_id);
+                <div class="lastPost1" style="float: left;">
+                    <?php
+                    $CofiUser = new CofiUser( $thread->last_entry_user_id);
+                    // echo "<div class='cofiCategoryAvatarBox'>";
+                        if ( $showUsernameName == 1) {
+                            $lastEntryUserUsername = $CofiHelper->getRealnameById( $thread->last_entry_user_id);
+                        }
+                        else {
+                            $lastEntryUserUsername = $CofiHelper->getUsernameById( $thread->last_entry_user_id);
+                        }
 
-					    	echo "<div class='cofiCategoryAvatarBox'>";
+                        if ( $CofiUser->getAvatar() == "") { // display default avatar
+                            echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' class='img-thumbnail' alt='$lastEntryUserUsername' title='$lastEntryUserUsername' width='32' style='margin-top: 5px;' />";
+                        }
+                        else { // display uploaded avatar
+                            echo "<img src='" . $_root . "images/discussions/users/".$thread->last_entry_user_id."/small/".$CofiUser->getAvatar()."' class='img-thumbnail' alt='$lastEntryUserUsername' title='$lastEntryUserUsername' width='32' style='margin-top: 5px;' />";
+                        }
+                    // echo "</div>";
+                    ?>
+                </div>
 
-                                if ( $showUsernameName == 1) {
-                                    $lastEntryUserUsername = $CofiHelper->getRealnameById( $thread->last_entry_user_id);
-                                }
-                                else {
-                                    $lastEntryUserUsername = $CofiHelper->getUsernameById( $thread->last_entry_user_id);
-                                }
 
-                                if ( $CofiUser->getAvatar() == "") { // display default avatar
-                                    echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' class='cofiCategoryDefaultAvatar' alt='$lastEntryUserUsername' title='$lastEntryUserUsername' />";
-                                }
-                                else { // display uploaded avatar
-                                    echo "<img src='" . $_root . "images/discussions/users/".$thread->last_entry_user_id."/small/".$CofiUser->getAvatar()."' class='cofiCategoryAvatar' alt='$lastEntryUserUsername' title='$lastEntryUserUsername' />";
-                                }
-                                                        
-                            echo "</div>";
-                            
-                            
-                            ?>
-                        </td>
-                        <td align="left" valign="center" class="noborder" style="padding-left: 5px;">
-                            <?php
-                            echo $thread->last_entry_date;
-                            ?>
-                            <br />
-                            <?php echo JText::_( 'COFI_BY' ); ?>:&nbsp;
-                            <?php                                                        
-                            echo $lastEntryUserUsername;
-                            ?>
-                        </td>
-                        <td width="20" align="right" valign="center" class="noborder">
-                            <?php
-                            
-							// calculate jump point to last entry
-							$_threadListLength 	= $params->get('threadListLength', '20');							
-							//$_numberOfPosts 	= $CofiHelper->getNumberOfPostsByThreadId( $thread->id);
-							$_numberOfPosts 	= $thread->counter_replies + 1;							
-							$_lastPostId 		= $CofiHelper->getLastPostIdByThreadId( $thread->id);
-									
-							if ( ( $_numberOfPosts % $_threadListLength) == 0) {
-								$_start = ( $_numberOfPosts / $_threadListLength) - 1;
-							}
-							else {		
-								$_start = floor( $_numberOfPosts / $_threadListLength);
-							}
-					
-							$_start = $_start * $_threadListLength;					
-							
-							if ( $_start == 0) {  // first page = no limitstart
-								$_lastEntryJumpPoint = "#p" . $_lastPostId;		
-							}
-							else {
-								$_lastEntryJumpPoint = "&limitstart=" . $_start ."#p" . $_lastPostId;
-							}
-                                                        
-							$menuLinkLastTMP = "index.php?option=com_discussions&view=thread&catid=" . $this->categorySlug . "&thread=" . $thread->slug;
-							$menuLinkLastTMP .= $_lastEntryJumpPoint;							
-            				$menuLinkLast = JRoute::_( $menuLinkLastTMP);
-            				
-            				echo "<a href='" . $menuLinkLast . "' title='" . JText::_( 'COFI_GOTO_LAST_ENTRY' ) . ": " . $thread->subject .  "' rel='nofollow' >";
-            				echo "<img src='" . $_root . "components/com_discussions/assets/system/lastentry.png' style='border:0px;' />";
-            				echo "</a>";                                                                                    
-                            ?>
-                        </td>
-                        
-                    </tr>
-                </table>
+                <div class="lastPost2" style="margin: 2px 0px 0px 10px; float: left;">
+                    <?php
+                    echo $thread->last_entry_date;
+                    ?>
+                    <br />
+                    <?php echo JText::_( 'COFI_BY' ); ?>:&nbsp;
+                    <?php
+                    echo $lastEntryUserUsername;
+                    ?>
+                </div>
+
+
+                <div class="lastPost3" style="margin: 5px 0px 0px 0px; float: right;">
+                    <?php
+                    // calculate jump point to last entry
+                    $_threadListLength 	= $params->get('threadListLength', '20');
+                    //$_numberOfPosts 	= $CofiHelper->getNumberOfPostsByThreadId( $thread->id);
+                    $_numberOfPosts 	= $thread->counter_replies + 1;
+                    $_lastPostId 		= $CofiHelper->getLastPostIdByThreadId( $thread->id);
+                    if ( ( $_numberOfPosts % $_threadListLength) == 0) {
+                        $_start = ( $_numberOfPosts / $_threadListLength) - 1;
+                    }
+                    else {
+                        $_start = floor( $_numberOfPosts / $_threadListLength);
+                    }
+                    $_start = $_start * $_threadListLength;
+                    if ( $_start == 0) {  // first page = no limitstart
+                        $_lastEntryJumpPoint = "#p" . $_lastPostId;
+                    }
+                    else {
+                        $_lastEntryJumpPoint = "&limitstart=" . $_start ."#p" . $_lastPostId;
+                    }
+                    $menuLinkLastTMP = "index.php?option=com_discussions&view=thread&catid=" . $this->categorySlug . "&thread=" . $thread->slug;
+                    $menuLinkLastTMP .= $_lastEntryJumpPoint;
+                    $menuLinkLast = JRoute::_( $menuLinkLastTMP);
+                    echo "<a href='" . $menuLinkLast . "' title='" . JText::_( 'COFI_GOTO_LAST_ENTRY' ) . ": " . $thread->subject .  "' rel='nofollow' >";
+                    echo "<img src='" . $_root . "components/com_discussions/assets/system/lastentry.png' style='border:0px;' />";
+                    echo "</a>";
+                    ?>
+                </div>
+
+                <div style="clear: both;"></div>
 
 			</td> 
 
 
 			<!-- sticky -->		
-			<td width="32" align="center" class="cofiIndexTableRow<?php echo $rowColor; ?>  cofiIndexTableRowSticky">
+			<td width="32" align="center" class="cofiIndexTableRow cofiIndexTableRowSticky">
 					<?php
 					if ( $thread->sticky == 0) {  // do not show icon
 						echo "&nbsp;";
@@ -537,24 +525,15 @@ if ( $showBreadcrumbRow == "1") {
 					?>
 			</td> 
 			<!-- sticky -->		
-		
-		
+
     	</tr> 
 
-
-
-
-		<?php 
-		// toggle row color
-		if ( $rowColor == 1) {
-			$rowColor = 2;
-		}
-		else {
-			$rowColor = 1;
-		}
+		<?php
 
 	endforeach; 
 	?>
+
+    </tbody>
 
 </table>
 
@@ -660,7 +639,7 @@ $showRssFeedIcon = $params->get('showRssFeedIcon', 1);
 
 if ( $useRssFeeds == 1 && $showRssFeedIcon == 1) {
 
-	echo "<div style='margin: 30px 0px 10px 0px;'>";
+	echo "<div style='margin: 40px 0px 10px 0px;'>";
 
 		echo "<img src='" . $_root . "/components/com_discussions/assets/icons/rss_16.png' style='margin: 0px 10px 0px 5px;' align='top' />";
 		echo "<a href='" . $link .  "'>" . $_RssTitle . "</a>";				

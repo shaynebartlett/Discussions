@@ -209,7 +209,7 @@ include( 'components/com_discussions/includes/topmenu.php');
 
 
 <!-- Category icon, name and description -->
-<table width="100%" class="noborder" style="margin-bottom:10px;">
+<table width="100%" class="noborder" style="margin:40px 0px 10px 0px;">
     <tr>
 
         <!-- category image -->
@@ -312,16 +312,17 @@ if ( $user->guest) { // user is not logged in
 	echo "<table class='noborder' style='margin:20px 0px 20px 0px;'>";
 
     	echo "<tr>";
-        
+
+    /*
         	echo "<td width='16' align='center' valign='middle' class='noborder' style='padding-left: 0px;'>";
             	echo "<img src='" . $_root . "components/com_discussions/assets/system/lastentry.png' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
         	echo "</td>";
-        	
+    */
         	echo "<td align='left' valign='middle' class='noborder'>";
 				$menuLinkLastTMP = "index.php?option=com_discussions&view=thread&catid=" . $this->categorySlug . "&thread=" . $this->threadSlug;
 				$menuLinkLastTMP .= $this->lastEntryJumpPoint;
             	$menuLinkLast = JRoute::_( $menuLinkLastTMP);
-            	echo "<a href='".$menuLinkLast."'>" . JText::_( 'COFI_GOTO_LAST_ENTRY' ) . "</a>";
+            	echo "<a class='btn' href='".$menuLinkLast."'>" . JText::_( 'COFI_GOTO_LAST_ENTRY' ) . "</a>";
         	echo "</td>";        
 
 
@@ -334,40 +335,46 @@ if ( $user->guest) { // user is not logged in
 }
 else { // user is logged in
 
-	echo "<table class='noborder' style='margin:20px 0px 20px 0px;'>";
+	echo "<table class='noborder' style='margin:40px 0px 20px 0px;'>";
 	
     	echo "<tr>";       	
     	
     		if ( $this->lockedStatus == 0 || $logUser->isModerator()) { // thread is not locked or user is moderator
+
+/*
         		echo "<td width='16' align='center' valign='middle' class='noborder' style='padding-left: 0px;' >";
             		echo "<img src='" . $_root . "components/com_discussions/assets/threads/reply.png' style='margin-left: 15px; margin-right: 5px; border:0px;' />";
         		echo "</td>";
-        		echo "<td align='left' valign='middle' class='noborder'>";
+*/
+        		echo "<td align='left' valign='middle' class='noborder' style='padding: 0px 10px 0px 0px;'>";
             		$menuLinkReplyTMP = "index.php?option=com_discussions&view=posting&task=reply&catid=".$this->categorySlug."&thread=".$this->thread."&parent=".$this->threadId;
             		$menuLinkReply = JRoute::_( $menuLinkReplyTMP);
-            		echo "<a href='".$menuLinkReply."'>" . JText::_( 'COFI_REPLY1' ) . "</a>";
+            		echo "<a class='btn btn-info' href='".$menuLinkReply."'>" . JText::_( 'COFI_REPLY1' ) . "</a>";
         		echo "</td>";
 			}
 
+/*
         	echo "<td width='16' align='center' valign='middle' class='noborder' style='padding-left: 20px;'>";
             	echo "<img src='" . $_root . "components/com_discussions/assets/threads/new.png' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
         	echo "</td>";
-        	
-        	echo "<td align='left' valign='middle' class='noborder'>";
+*/
+        	echo "<td align='left' valign='middle' class='noborder' style='padding: 0px 10px 0px 0px;'>";
             	$menuLinkNewTMP = "index.php?option=com_discussions&view=posting&task=new&catid=" . $this->categorySlug;
             	$menuLinkNew = JRoute::_( $menuLinkNewTMP);
-            	echo "<a href='".$menuLinkNew."'>" . JText::_( 'COFI_NEW_THREAD' ) . "</a>";
+            	echo "<a class='btn btn-success' href='".$menuLinkNew."'>" . JText::_( 'COFI_NEW_THREAD' ) . "</a>";
         	echo "</td>";                	
-        	
+
+
+/*
         	echo "<td width='16' align='center' valign='middle' class='noborder' style='padding-left: 20px;'>";
             	echo "<img src='" . $_root . "components/com_discussions/assets/system/lastentry.png' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
         	echo "</td>";
-        	
-        	echo "<td align='left' valign='middle' class='noborder'>";
+*/
+        	echo "<td align='left' valign='middle' class='noborder' style='padding: 0px 10px 0px 0px;'>";
 				$menuLinkLastTMP = "index.php?option=com_discussions&view=thread&catid=" . $this->categorySlug . "&thread=" . $this->threadSlug;
 				$menuLinkLastTMP .= $this->lastEntryJumpPoint;
             	$menuLinkLast = JRoute::_( $menuLinkLastTMP);
-            	echo "<a href='".$menuLinkLast."'>" . JText::_( 'COFI_GOTO_LAST_ENTRY' ) . "</a>";
+            	echo "<a class='btn btn-default' href='".$menuLinkLast."'>" . JText::_( 'COFI_GOTO_LAST_ENTRY' ) . "</a>";
         	echo "</td>";        
 
     	echo "</tr>";
@@ -388,7 +395,7 @@ $showBreadcrumbRow = $params->get('breadcrumb', '0');
 if ( $showBreadcrumbRow == "1") {
 	?>
 
-	<table class="noborder" style="margin-top: 5px;">
+	<table class="noborder" style="margin: 5px 0px 10px 0px;">
 	    <tr>
 	        <td class="noborder">
 	            <?php
@@ -420,6 +427,9 @@ if ( $showBreadcrumbRow == "1") {
 <!-- Breadcrumb -->
 
 
+<?php
+if ($this->pagination->getPagesCounter()) {
+?>
 
 <!-- Pagination Links -->
 <div class="pagination" style="border:0px;">
@@ -445,6 +455,10 @@ if ( $showBreadcrumbRow == "1") {
 </div>
 <!-- Pagination Links -->
 
+<?php
+}
+?>
+
 
 
 <table width="100%" border="0" cellspacing="0" cellpadding="5" class="noborder">
@@ -458,7 +472,8 @@ if ( $showBreadcrumbRow == "1") {
     	<tr>
 
 			<td width="100" align="center" valign="top" class="cofiThreadTableRow<?php echo $rowColor; ?> cofiThreadBorder1" >
-                <?php
+
+            <?php
 
                 // show avatar and username
                 echo "<div class='cofiAvatarBox'>";
@@ -928,46 +943,25 @@ if ( $showBreadcrumbRow == "1") {
 							
 					        	// reply to post
 								echo "<div class='cofiPostMenuItem'>";
-
-									echo "<div class='cofiPostMenuIcon'>";
-									
-					            		echo "<img src='" . $_root . "components/com_discussions/assets/threads/reply.png' />";
-					            		
-					            	echo "</div>";
-
 									echo "<div class='cofiPostMenuText'>";
-					            	
 						                echo "<div class='cofiPostMenuLinks'>";
 						                    $menuLinkReplyTMP = "index.php?option=com_discussions&view=posting&task=reply&catid=".$this->categorySlug."&thread=".$this->thread."&parent=".$posting->id;
 						                    $menuLinkReply = JRoute::_( $menuLinkReplyTMP);
-						                    echo "<a href='".$menuLinkReply."'>" . JText::_( 'COFI_REPLY2' ) . "</a>";
+						                    echo "<a class='btn btn-default' href='".$menuLinkReply."'>" . JText::_( 'COFI_REPLY2' ) . "</a>";
 						                echo "</div>";
-						                
 						        	echo "</div>";
-						                
 								echo "</div>";
 					
 					
 					        	// reply to post with quote 
 								echo "<div class='cofiPostMenuItem'>";
-								
-									echo "<div class='cofiPostMenuIcon'>";
-									
-					            		echo "<img src='" . $_root . "components/com_discussions/assets/threads/quote.png' />";
-					            		
-					            	echo "</div>";
-
 					            	echo "<div class='cofiPostMenuText'>";
-					            	
 						            	echo "<div class='cofiPostMenuLinks'>";
-						            	
 											$menuLinkQuoteTMP = "index.php?option=com_discussions&view=posting&task=quote&catid=".$this->categorySlug."&thread=".$this->thread."&parent=".$posting->id."&id=".$posting->id;
 											$menuLinkQuote = JRoute::_( $menuLinkQuoteTMP);
-											echo "<a href='".$menuLinkQuote."'>" . JText::_( 'COFI_QUOTE2' ) . "</a>";
+											echo "<a class='btn btn-default' href='".$menuLinkQuote."'>" . JText::_( 'COFI_QUOTE2' ) . "</a>";
 						            	echo "</div>";
-						            	
-						            echo "</div>";	
-						            
+						            echo "</div>";
 								echo "</div>";
 					
 					
@@ -1009,25 +1003,13 @@ if ( $showBreadcrumbRow == "1") {
 					        	if ( $logUser->isModerator() || ( ($logUser->getId() == $CofiUser->getId()) && $isUserEditable == true)) {
 					        	
 									echo "<div class='cofiPostMenuItem'>";
-									
-										echo "<div class='cofiPostMenuIcon'>";
-
-						                	echo "<img src='" . $_root . "components/com_discussions/assets/threads/edit.png' />";
-						                	
-						            	echo "</div>";	
-
 										echo "<div class='cofiPostMenuText'>";
-
 						                	echo "<div class='cofiPostMenuLinks'>";
-						                	
 												$menuLinkEditTMP = "index.php?option=com_discussions&view=posting&task=edit&catid=".$this->categorySlug."&thread=".$this->thread."&parent=".$posting->id."&id=".$posting->id;
 												$menuLinkEdit = JRoute::_( $menuLinkEditTMP);
-												echo "<a href='".$menuLinkEdit."'>" . JText::_( 'COFI_EDIT' ) . "</a>";
-												
+												echo "<a class='btn btn-default' href='".$menuLinkEdit."'>" . JText::_( 'COFI_EDIT' ) . "</a>";
 						                	echo "</div>";
-						                	
-					            		echo "</div>";						                	
-						                	
+					            		echo "</div>";
 					            	echo "</div>";
 					        	}
 					
@@ -1035,23 +1017,11 @@ if ( $showBreadcrumbRow == "1") {
 							
 							else {
 									echo "<div class='cofiPostMenuItem'>";
-
-										echo "<div class='cofiPostMenuIcon'>";
-									
-											echo "<img src='" . $_root . "components/com_discussions/assets/threads/lock.png' />";
-
-					            		echo "</div>";						                	
-						
 										echo "<div class='cofiPostMenuText'>";
-
 											echo "<div class='cofiPostMenuLinks'>";
-											
-												echo JText::_( 'COFI_THREAD_IS_LOCKED' );									
-												
+												echo JText::_( 'COFI_THREAD_IS_LOCKED' );
 											echo "</div>";
-
-					            		echo "</div>";						                	
-										
+					            		echo "</div>";
 									echo "</div>";
 							
 							}
@@ -1060,33 +1030,18 @@ if ( $showBreadcrumbRow == "1") {
 							
 							// delete post / thread
 							if ( $logUser->isModerator()) {
-						
-									echo "<div class='cofiPostMenuItem'>";
-									
-										echo "<div class='cofiPostMenuIcon'>";
-										
-											echo "<img src='" . $_root . "components/com_discussions/assets/threads/delete.png' />";
-
-					            		echo "</div>";						                	
-
-										echo "<div class='cofiPostMenuText'>";
-						
-											echo "<div class='cofiPostMenuLinks'>";
-						
-												$menuLinkDeleteTMP = "index.php?option=com_discussions&view=moderation&task=delete&id=".$posting->id;
-												$menuLinkDelete = JRoute::_( $menuLinkDeleteTMP);
-										
-												echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();'>" . JText::_( 'COFI_DELETE' ) . "</a>";
-						
-											echo "</div>";
-
-					            		echo "</div>";						                	
-										
-									echo "</div>";
+                                echo "<div class='cofiPostMenuItem'>";
+                                    echo "<div class='cofiPostMenuText'>";
+                                        echo "<div class='cofiPostMenuLinks'>";
+                                            $menuLinkDeleteTMP = "index.php?option=com_discussions&view=moderation&task=delete&id=".$posting->id;
+                                            $menuLinkDelete = JRoute::_( $menuLinkDeleteTMP);
+                                            echo "<a class='btn btn-danger' href='".$menuLinkDelete."' onclick='return confirmdelete();'>" . JText::_( 'COFI_DELETE' ) . "</a>";
+                                        echo "</div>";
+                                    echo "</div>";
+                                echo "</div>";
 							}						
 							
-							
-							
+
 							
 							// check if it is the first post in a thread (parent_id == 0)
 					        if ( $posting->parent_id == 0) {
@@ -1096,37 +1051,18 @@ if ( $showBreadcrumbRow == "1") {
 							
 									// move thread
 									echo "<div class='cofiPostMenuItem'>";
-
-										echo "<div class='cofiPostMenuIcon'>";
-									
-											echo "<img src='" . $_root . "components/com_discussions/assets/threads/move.png' />";
-
-					            		echo "</div>";						                	
-
 										echo "<div class='cofiPostMenuText'>";
-						
 											echo "<div class='cofiPostMenuLinks'>";
-						
 												$menuLinkMoveTMP = "index.php?option=com_discussions&view=moderation&task=move&catid=".$this->categorySlug."&thread=".$this->thread;
 												$menuLinkMove = JRoute::_( $menuLinkMoveTMP);
-											
-												echo "<a href='".$menuLinkMove."'>" . JText::_( 'COFI_MOVE' ) . "</a>";
-						
+												echo "<a class='btn btn-warning' href='".$menuLinkMove."'>" . JText::_( 'COFI_MOVE' ) . "</a>";
 											echo "</div>";
-
-					            		echo "</div>";						                	
-										
+					            		echo "</div>";
 									echo "</div>";
 					
 					
 									// sticky or unsticky thread
 									echo "<div class='cofiPostMenuItem'>";
-
-										echo "<div class='cofiPostMenuIcon'>";
-									
-											echo "<img src='" . $_root . "components/com_discussions/assets/threads/sticky.png' />";
-
-					            		echo "</div>";						                	
 
 										echo "<div class='cofiPostMenuText'>";
 						
@@ -1135,12 +1071,12 @@ if ( $showBreadcrumbRow == "1") {
 												if ( $this->stickyStatus == 0) { // thread is not sticky
 													$menuLinkStickyTMP = "index.php?option=com_discussions&view=moderation&task=sticky&catid=".$this->categorySlug."&thread=".$this->thread;
 													$menuLinkSticky = JRoute::_( $menuLinkStickyTMP);
-													echo "<a href='".$menuLinkSticky."'>" . JText::_( 'COFI_STICKY' ) . "</a>";
+													echo "<a class='btn btn-warning' href='".$menuLinkSticky."'>" . JText::_( 'COFI_STICKY' ) . "</a>";
 												}
 												else {
 													$menuLinkUnstickyTMP = "index.php?option=com_discussions&view=moderation&task=unsticky&catid=".$this->categorySlug."&thread=".$this->thread;
 													$menuLinkUnsticky = JRoute::_( $menuLinkUnstickyTMP);
-													echo "<a href='".$menuLinkUnsticky."'>" . JText::_( 'COFI_UNSTICKY' ) . "</a>";
+													echo "<a class='btn btn-warning' href='".$menuLinkUnsticky."'>" . JText::_( 'COFI_UNSTICKY' ) . "</a>";
 												}
 						
 											echo "</div>";
@@ -1152,32 +1088,20 @@ if ( $showBreadcrumbRow == "1") {
 					
 									// close thread
 									echo "<div class='cofiPostMenuItem'>";
-									
-										echo "<div class='cofiPostMenuIcon'>";
-									
-											echo "<img src='" . $_root . "components/com_discussions/assets/threads/lock.png' />";
-
-					            		echo "</div>";						                	
-
 										echo "<div class='cofiPostMenuText'>";
-										
 											echo "<div class='cofiPostMenuLinks'>";
-						
 												if ( $this->lockedStatus == 0) { // thread is not locked
 													$menuLinkLockTMP = "index.php?option=com_discussions&view=moderation&task=lock&catid=".$this->categorySlug."&thread=".$this->thread;
 													$menuLinkLock = JRoute::_( $menuLinkLockTMP);
-													echo "<a href='".$menuLinkLock."'>" . JText::_( 'COFI_LOCK' ) . "</a>";
+													echo "<a class='btn btn-warning' href='".$menuLinkLock."'>" . JText::_( 'COFI_LOCK' ) . "</a>";
 												}
 												else {
 													$menuLinkUnlockTMP = "index.php?option=com_discussions&view=moderation&task=unlock&catid=".$this->categorySlug."&thread=".$this->thread;
 													$menuLinkUnlock = JRoute::_( $menuLinkUnlockTMP);
-													echo "<a href='".$menuLinkUnlock."'>" . JText::_( 'COFI_UNLOCK' ) . "</a>";
+													echo "<a class='btn btn-warning' href='".$menuLinkUnlock."'>" . JText::_( 'COFI_UNLOCK' ) . "</a>";
 												}
-											
 											echo "</div>";
-										
-					            		echo "</div>";						                	
-										
+					            		echo "</div>";
 									echo "</div>";
 								
 								}
@@ -1227,6 +1151,10 @@ if ( $showBreadcrumbRow == "1") {
 
 
 
+<?php
+if ($this->pagination->getPagesCounter()) {
+?>
+
 <!-- Pagination Links -->
 <div class="pagination" style="border:0px;">
 
@@ -1250,6 +1178,10 @@ if ( $showBreadcrumbRow == "1") {
 
 </div>
 <!-- Pagination Links -->
+
+<?php
+}
+?>
 
 
 
@@ -1344,5 +1276,8 @@ include( 'components/com_discussions/includes/footer.php');
 ?>
 
 </div>
+
+<br>
+<br>
 
 
