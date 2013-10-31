@@ -52,7 +52,7 @@ include( 'components/com_discussions/includes/topmenu.php');
 ?>
 
 
-
+<br>
 
 
 <?php
@@ -101,7 +101,10 @@ if ( $showBreadcrumbRow == "1") {
 echo "<br />";
 
 
-echo "<div class='cofiProfileContent'>";
+
+
+
+echo "<div class='row'>";
 
 
 echo "<form action='' method='post' name='postform' id='postform' enctype='multipart/form-data'>";
@@ -124,9 +127,53 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
 		echo "</tr>";
 
 
+
+        echo "<tr>";
+
+            echo "<td align='left' valign='top' width='50%' class='noborder' style='padding: 10px;' >";
+
+                echo "<div class='cofiProfileAvatarBox'>";
+
+                echo "<div class='cofiProfileAvatarHeader'>";
+                echo "<div class='cofiProfileHeader'>";
+                echo JText::_( 'COFI_AVATAR' );
+                echo "</div>";
+                echo "</div>";
+
+                echo "<div class='cofiProfileAvatarRow'>";
+                if ( $CofiUser->getAvatar() == "") {
+                    echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' class='img-thumbnail' alt='$user->username' />";
+                }
+                else {
+                    echo "<img src='" . $_root . "images/discussions/users/".$user->id."/large/".$CofiUser->getAvatar()."' class='img-thumbnail' alt='$user->username' />";
+                }
+
+
+                if ( $CofiUser->getAvatar() != "") {
+                    echo "<div style='margin: 5px 0px 5px 5px;'>";
+                    echo "<input type='checkbox' name='cb_avatar' value='1'> " . JText::_( 'COFI_AVATAR_DELETE' );
+                    echo "</div>";
+                }
+
+
+                echo "</div>";
+
+
+                echo "<div class='cofiProfileAvatarRow'>";
+                    echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_AVATAR_UPLOAD' ) . ":</div> ";
+                    echo "<input class='cofiText' type='file' name='avatar'>";
+                    echo "<div class='cofiTextFooter'>" . JText::_( 'COFI_AVATAR_FILE_INFO' ) . "</div> ";
+                echo "</div>";
+
+                echo "</div>";
+
+            echo "</td>";
+
+        echo "</tr>";
+
+
 		echo "<tr>";
 				
-			// left column			
 			echo "<td align='left' valign='top' width='50%' class='noborder' style='padding: 10px;' >";
 			
 				echo "<div class='cofiProfileLocationBox'>";
@@ -201,57 +248,8 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
 			    
 			    echo "</div>";
 
-
-
-			    							
 			echo "</td>";    
-			// left column
-									 
-									 
-			// right column		
-			echo "<td align='left' valign='top' width='50%' class='noborder' style='padding: 10px;' >";
 
-				echo "<div class='cofiProfileAvatarBox'>";
-
-					echo "<div class='cofiProfileAvatarHeader'>";
-						echo "<div class='cofiProfileHeader'>";
-							echo JText::_( 'COFI_AVATAR' );
-			    		echo "</div>";
-			    	echo "</div>";
-
-					echo "<div class='cofiProfileAvatarRow'>";
-					    echo "<div class='cofiAvatarBox'>";			    			    
-					    	if ( $CofiUser->getAvatar() == "") { 
-					        	echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' class='cofiAvatar' alt='$user->username' />";
-					    	}
-					    	else { 
-					        	echo "<img src='" . $_root . "images/discussions/users/".$user->id."/large/".$CofiUser->getAvatar()."' class='cofiAvatar' alt='$user->username' />";					        	
-					    	}			    
-					    echo "</div>";
-					  
-					  
-					    if ( $CofiUser->getAvatar() != "") {
-				    		echo "<div>";
-					        	echo "<input type='checkbox' name='cb_avatar' value='1'> " . JText::_( 'COFI_AVATAR_DELETE' );
-				    		echo "</div>";
-				    	}
-					  					  
-					    
-				    echo "</div>";
-
-				
-					echo "<div class='cofiProfileAvatarRow'>";				    			    
-						echo "<div class='cofiTextHeader'>" . JText::_( 'COFI_AVATAR_UPLOAD' ) . ":</div> ";
-		                	echo "<input class='cofiText' type='file' name='avatar'>";								
-		        		echo "<div class='cofiTextFooter'>" . JText::_( 'COFI_AVATAR_FILE_INFO' ) . "</div> ";
-				    echo "</div>";
-
-
-			    echo "</div>";
-			 
-			echo "</td>";    
-			// right column
-									 									    			
 		echo "</tr>";
 
 
@@ -500,7 +498,7 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
 
 		echo "<tr>";
 		
-			echo "<td align='left' valign='top' class='noborder' style='padding: 5px;' colspan='2'>";
+			echo "<td align='left' valign='top' style='padding: 5px;' colspan='2'>";
 		
 				echo "<div class='cofiProfileFollowMeBox'>";
 				
@@ -545,13 +543,9 @@ echo "<form action='' method='post' name='postform' id='postform' enctype='multi
         		
 
 		echo "<tr>";
-			echo "<td align='left' valign='top' class='noborder' style='padding-left: 10px;' colspan='2'>";
-        		
-        		echo "<div class='cofiTextButton'>";
-					echo "<input type='hidden' name='task' value='save'>";  			            		
-					echo "<input class='cofiButton' type='submit' name='submit' value='" . JText::_( 'COFI_SAVE' ) . "'>";
-				echo "</div> ";
-								
+			echo "<td align='left' valign='top' style='padding-top: 10px;padding-left: 10px;' colspan='2'>";
+					echo "<input type='hidden' name='task' value='save'>";
+					echo "<input class='btn btn-primary' type='submit' name='submit' value='" . JText::_( 'COFI_SAVE' ) . "'>";
 			echo "</td>";    			    			
 		echo "</tr>";
 
@@ -585,5 +579,6 @@ include( 'components/com_discussions/includes/footer.php');
 
 </div>
 
-
+<br>
+<br>
 

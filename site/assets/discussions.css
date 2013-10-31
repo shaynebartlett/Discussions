@@ -385,7 +385,7 @@ h2 {
 
 .cofiProfileUsername {
 	float: left;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-left: 5px;
 	font-size: 2em;
 	font-weight: bold;

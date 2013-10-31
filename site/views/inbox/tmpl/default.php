@@ -68,7 +68,8 @@ include( 'components/com_discussions/includes/topmenu.php');
 
 
 <!-- Box name and description -->
-<br />
+<br>
+<br>
 <table class="noborder">
     <tr>
 
@@ -83,7 +84,7 @@ include( 'components/com_discussions/includes/topmenu.php');
         <td align="left" valign="center" class="noborder">
             <?php
             $menuLinkOutbox = JRoute::_( 'index.php?option=com_discussions&view=outbox&task=outbox');
-            echo "<a href='$menuLinkOutbox' style='margin-left:20px;'>" . JText::_( "COFI_MESSAGES_OUTBOX", true ) . "</a>";
+            echo "<a class='btn btn-default' href='$menuLinkOutbox' style='margin-left:20px;'>" . JText::_( "COFI_MESSAGES_OUTBOX", true ) . "</a>";
             ?>
         </td>
         <!-- box name and description -->
@@ -97,16 +98,13 @@ include( 'components/com_discussions/includes/topmenu.php');
 
 
 <?php
-	echo "<table width='50%'  class='noborder' style='margin:20px 0px 20px 0px; border: 0px;'>";
+	echo "<table width='50%' style='margin:20px 0px 0px 0px; border: 0px;'>";
     	echo "<tr>";       	
 
-        	echo "<td width='16' align='center' valign='middle' class='noborder' style='border: 0px;'>";
-            	echo "<img src='" . $_root . "/components/com_discussions/assets/threads/new.png' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
-        	echo "</td>";
         	echo "<td align='left' valign='middle' class='noborder' style='border: 0px;'>";
             	$menuLinkNewTMP = "index.php?option=com_discussions&view=message&task=msg_new";
             	$menuLinkNew = JRoute::_( $menuLinkNewTMP);
-            	echo "<a href='".$menuLinkNew."'>" . JText::_( 'COFI_MESSAGES_NEW_MESSAGE' ) . "</a>";
+            	echo "<a class='btn btn-success' href='".$menuLinkNew."'>" . JText::_( 'COFI_MESSAGES_NEW_MESSAGE' ) . "</a>";
         	echo "</td>";        
         	
     	echo "</tr>";
@@ -118,7 +116,7 @@ include( 'components/com_discussions/includes/topmenu.php');
 <!-- Pagination Links -->
 <div class="pagination" style="border:0px;">
 
-<table width="100%" class="noborder" style="margin-bottom:10px; border: 0px;">
+<table width="100%" style="margin-bottom:10px; border: 0px;">
     <tr>
         <td class="noborder" style="border: 0px;">
             <?php
@@ -310,12 +308,12 @@ include( 'components/com_discussions/includes/topmenu.php');
 	
 		<input type="hidden" name="selectedMessages" value="" />
 		
-		<input type="submit" name="submit" class="cofiButton" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_DELETE' );?>" onclick="return confirmdelete();" />
+		<input type="submit" name="submit" class="btn btn-default" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_MARK_READ' );?>" />
 		&nbsp;
-		<input type="submit" name="submit" class="cofiButton" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_MARK_READ' );?>" />
-		&nbsp;
-		<input type="submit" name="submit" class="cofiButton" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_MARK_UNREAD' );?>" />
-	
+		<input type="submit" name="submit" class="btn btn-default" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_MARK_UNREAD' );?>" />
+        &nbsp;
+        <input type="submit" name="submit" class="btn btn-danger" value="<?php echo JText::_( 'COFI_MESSAGES_BUTTON_DELETE' );?>" onclick="return confirmdelete();" />
+
 	</div>
 
 </div>

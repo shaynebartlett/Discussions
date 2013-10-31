@@ -128,6 +128,7 @@ include( 'components/com_discussions/includes/topmenu.php');
 <table width="100%" style="margin-bottom:10px;" class="noborder">
     <tr>
 
+        <br>
         <!-- box name and description -->
         <td align="left" class="noborder">
             <?php
@@ -152,19 +153,17 @@ include( 'components/com_discussions/includes/topmenu.php');
 
                                         echo "<td width='32' align='left' class='noborder'>";
 
-                                            echo "<div class='cofiMessagesAvatarBox'>";
-                                                if ( $_avatar == "") { // display default avatar
-                                                    echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' width='32px' height='32px' class='cofiCategoryDefaultAvatar' alt='$_username' title='$_username' />";
-                                                }
-                                                else { // display uploaded avatar
-                                                    echo "<img src='" . $_root . "images/discussions/users/" . $this->user_to_id . "/small/".$_avatar."' width='32px' height='32px' class='cofiCategoryAvatar' alt='$_username' title='$_username' />";
-                                                }
-                                            echo "</div>";
+                                            if ( $_avatar == "") { // display default avatar
+                                                echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' width='32px' height='32px' class='img-thumbnail' alt='$_username' title='$_username' />";
+                                            }
+                                            else { // display uploaded avatar
+                                                echo "<img src='" . $_root . "images/discussions/users/" . $this->user_to_id . "/small/".$_avatar."' width='32px' height='32px' class='img-thumbnail' alt='$_username' title='$_username' />";
+                                            }
 
                                         echo "</td>";
 				
 
-				                        echo "<td align='left' valign='center' class='noborder' style='padding-left: 5px;'>";
+				                        echo "<td align='left' valign='center' class='noborder' style='padding-left: 10px;'>";
 
 					                    	echo $_username;
 				
@@ -215,18 +214,16 @@ include( 'components/com_discussions/includes/topmenu.php');
 
                                         echo "<td width='32' align='left' class='noborder'>";
 
-                                            echo "<div class='cofiMessagesAvatarBox'>";
-                                                if ( $_avatar == "") { // display default avatar
-                                                    echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' width='32px' height='32px' class='cofiCategoryDefaultAvatar' alt='$_username' title='$_username' />";
-                                                }
-                                                else { // display uploaded avatar
-                                                    echo "<img src='" . $_root . "images/discussions/users/" . $this->user_from_id . "/small/".$_avatar."' width='32px' height='32px' class='cofiCategoryAvatar' alt='$_username' title='$_username' />";
-                                                }
-                                            echo "</div>";
+                                            if ( $_avatar == "") { // display default avatar
+                                                echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' width='32px' height='32px' class='img-thumbnail' alt='$_username' title='$_username' />";
+                                            }
+                                            else { // display uploaded avatar
+                                                echo "<img src='" . $_root . "images/discussions/users/" . $this->user_from_id . "/small/".$_avatar."' width='32px' height='32px' class='img-thumbnail' alt='$_username' title='$_username' />";
+                                            }
 
                                         echo "</td>";
 
-                                        echo "<td align='left' valign='center' class='noborder' style='padding-left: 5px;'>";
+                                        echo "<td align='left' valign='center' class='noborder' style='padding-left: 10px;'>";
 
 					                    	echo $_username;
 				
@@ -281,18 +278,14 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 		            				
 		            					$_receivername = $cHelper->getUsernameById( $this->receiver_userid);
 		            				
-		            					echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;' value='" . $_receivername . "' >";
+		            					echo "<input type='text' class='form-control' placeholder='Enter username of receiver' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;' value='" . $_receivername . "' >";
 		            				}
 		            				else {
-		            					echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;'>";
+		            					echo "<input type='text' class='form-control' placeholder='Enter username of receiver' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;'>";
 		            				}
-		            				
-		            				
-		            				
-		            				
+
 		            				
 		            			echo "</div>";		            			
-		            			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_RECEIVER_INFO' ) . "</div> ";
 								break;
 							}   						
    						
@@ -300,7 +293,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 							case "msg_reply":
 							case "msg_quote": {
 		            			echo "<div class='cofiSubject'>";
-		            				echo "<input type='text' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;' value='" . $_user_from . "' readonly>";
+		            				echo "<input type='text' class='form-control' name='postReceiver' id='postReceiver' size='50' maxlength='80' style='width: 200px;' value='" . $_user_from . "' readonly>";
 		            			echo "</div>";		            			
 		            			echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_RECEIVER_INFO' ) . "</div> ";
 
@@ -329,9 +322,8 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 
 							case "msg_new": {
 		            			echo "<div class='cofiSubject'>";
-            						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' style='width: 500px;'>";
+            						echo "<input class='form-control' type='text' name='postSubject' id='postSubject' size='50' maxlength='80' style='width: 500px;' placeholder='Enter message test'>";
 		            			echo "</div>";		            			
-            					echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_SUBJECT_INFO' ) . "</div> ";
 								break;
 							}   						
    						
@@ -343,9 +335,8 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 		            				$_subject = $this->messageSubject;
 		            				$_subject = str_replace( "Re:", "", $_subject);
 		            				$_subject = "Re: " . ltrim($_subject);		            			
-            						echo "<input type='text' name='postSubject' id='postSubject' size='50' maxlength='80' style='width: 500px;' value='" . $_subject . "' readonly>";
+            						echo "<input class='form-control' type='text' name='postSubject' id='postSubject' size='50' maxlength='80' style='width: 500px;' value='" . $_subject . "' readonly>";
 		            			echo "</div>";		            			
-            					echo "<div class='cofiSubjectFooter'>" . JText::_( 'COFI_MESSAGES_SUBJECT_INFO' ) . "</div> ";
 
 								break;
 							}   						
@@ -367,7 +358,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
    					echo "<div class='cofiText'>";		
    					
    						if ( $this->task == "msg_quote") {
-   							echo "<textarea name='postText' cols='80' rows='20' style='width: 600px;' wrap='VIRTUAL' id='postText'>";
+   							echo "<textarea class='form-control' name='postText' cols='80' rows='20' style='width: 600px;' wrap='VIRTUAL' id=' postText' placeholder='Enter message test'>";
 	   							if ( $logUser->getMessagesUseSignature() == 1 && $logUser->getMessagesUseSignatureForReplies() == 1) { // use the users signature for quote
 	   								echo "\n\n\n";
 	   								echo $logUser->getMessagesSignature();
@@ -377,7 +368,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
     						echo "</textarea>";   						
    						}
    						else { // blank textarea
-   							echo "<textarea name='postText' cols='80' rows='20' style='width: 600px;' wrap='VIRTUAL' id='postText'>";
+   							echo "<textarea class='form-control' name='postText' cols='80' rows='20' style='width: 600px;' wrap='VIRTUAL' id='postText' placeholder='Enter message test'>";
    								if ( $this->task == "msg_reply") {
 		   							if ( $logUser->getMessagesUseSignature() == 1 && $logUser->getMessagesUseSignatureForReplies() == 1) { // use the users signature for reply
 		   								echo "\n\n\n";
@@ -395,9 +386,6 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
     					
     				echo "</div>";
 
-            		echo "<div class='cofiTextFooter'>" . JText::_( 'COFI_MESSAGES_TEXT_INFO' ) . "</div> ";
-
-
 
 
             		echo "<div class='cofiTextButton'>";
@@ -405,7 +393,7 @@ if ( $this->task == "msg_new" || $this->task == "msg_reply" || $this->task == "m
 						echo "<input type='hidden' name='dbmode' value='insert'>";
 								
 						echo "<input type='hidden' name='task' value='save'>";  			
-						echo "<input class='cofiButton' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_( 'COFI_MESSAGES_SEND_MESSAGE' ) ."'>";
+						echo "<input class='btn btn-primary' type='submit' name='submit' onclick='return Joomla.submitbutton()' value='" . JText::_( 'COFI_MESSAGES_SEND_MESSAGE' ) ."'>";
 					
 					echo "</div> ";
 
@@ -434,13 +422,10 @@ else { // display message
 		echo "<table style='margin:20px 0px 20px 0px;' class='noborder'>";
 	    	echo "<tr>";       	
 	
-	        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/reply.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
-	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
 	            	$menuLinkReplyTMP = "index.php?option=com_discussions&view=message&task=msg_reply&id=" . $this->id;
 	            	$menuLinkReply = JRoute::_( $menuLinkReplyTMP);
-	            	echo "<a href='".$menuLinkReply."'>" . JText::_( 'COFI_MESSAGES_REPLY_MESSAGE' ) . "</a>";
+	            	echo "<a class='btn btn-default' href='".$menuLinkReply."'>" . JText::_( 'COFI_MESSAGES_REPLY_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
 
 
@@ -449,13 +434,10 @@ else { // display message
 	        	echo "</td>";      
 
 
-	        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/quote.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
-	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
 	            	$menuLinkQuoteTMP = "index.php?option=com_discussions&view=message&task=msg_quote&id=" . $this->id;
 	            	$menuLinkQuote = JRoute::_( $menuLinkQuoteTMP);
-	            	echo "<a href='".$menuLinkQuote."'>" . JText::_( 'COFI_MESSAGES_QUOTE_MESSAGE' ) . "</a>";
+	            	echo "<a class='btn btn-default' href='".$menuLinkQuote."'>" . JText::_( 'COFI_MESSAGES_QUOTE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
 
 
@@ -464,13 +446,10 @@ else { // display message
 	        	echo "</td>";      
 	        	
 	        	  
-	        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/delete.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
-	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
 	            	$menuLinkDeleteTMP = "index.php?option=com_discussions&view=message&task=msg_idelete&id=" . $this->id;
 	            	$menuLinkDelete = JRoute::_( $menuLinkDeleteTMP);
-	            	echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_MESSAGES_DELETE_MESSAGE' ) . "</a>";
+	            	echo "<a class='btn btn-danger' href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_MESSAGES_DELETE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
 	        	  	        	
 	    	echo "</tr>";
@@ -485,13 +464,10 @@ else { // display message
 		
 	    	echo "<tr>";       	
 		        	        	  
-	        	echo "<td width='16' align='center' valign='middle' class='noborder'>";
-	            	echo "<img src='" . $_root . "/components/com_discussions/assets/messages/delete.gif' style='margin-left: 5px; margin-right: 5px; border:0px;' />";
-	        	echo "</td>";
 	        	echo "<td align='left' valign='middle' class='noborder'>";
 	            	$menuLinkDeleteTMP = "index.php?option=com_discussions&view=message&task=msg_odelete&id=" . $this->id;
 	            	$menuLinkDelete = JRoute::_( $menuLinkDeleteTMP);
-	            	echo "<a href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_MESSAGES_DELETE_MESSAGE' ) . "</a>";
+	            	echo "<a class='btn btn-danger' href='".$menuLinkDelete."' onclick='return confirmdelete();' >" . JText::_( 'COFI_MESSAGES_DELETE_MESSAGE' ) . "</a>";
 	        	echo "</td>";      
 	        	  	        	
 	    	echo "</tr>";
@@ -504,7 +480,7 @@ else { // display message
 
 	?>
 
-	<div class="cofiPostHelp" style="color: #555555; background: #FFFFFF;">
+	<div class="well" style="color: #555555; background: #FFFFFF;">
 	
 	    <div class="cofiTextFormatTimestamp">
 	    	<?php 	
@@ -564,3 +540,6 @@ include( 'components/com_discussions/includes/footer.php');
 ?>
 
 </div>
+
+<br>
+<br>
