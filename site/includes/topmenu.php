@@ -46,6 +46,7 @@ echo "</div>";
 
 
 if ( !$user->guest) { // user is logged in
+
     echo "<div class='cofiMainmenuItem'>";
     echo "<a href='$menuLinkProfile' class='btn btn-default'>" . JText::_( "COFI_PROFILE", true ) . "</a>";
     echo "</div>";
@@ -62,12 +63,9 @@ if ( !$user->guest) { // user is logged in
         }
         echo "</div>";
 
-
-
     }
 
 }
-
 
 echo "<div class='cofiMainmenuItemRecentText' style='padding-top:5px;'>";
 echo "<b>" . JText::_( "COFI_HISTORY", true ) . "</b>";
