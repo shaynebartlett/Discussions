@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 
 // version of new installed extension
-$version = "1.6.1";
+$version = "1.6.2";
 
 
 $componentInstaller =& JInstaller::getInstance();
@@ -650,7 +650,14 @@ else { // upgrade
         }
 
 
-		default: {
+        case "1.6.1": { // upgrade 1.6.1 -> new version
+
+            echo "Upgrading from 1.6.1 to " . $version;
+            echo "<br />";
+
+        }
+
+        default: {
 			break;
 		}
 		
