@@ -24,6 +24,8 @@ $params = JComponentHelper::getParams('com_discussions');
 // Messages
 $useMessages = $params->get('useMessages', 1); // default = Yes
 
+// Profile
+$showProfileLink = $params->get('showProfileLink', 1); // default = Yes
 
 $menuLinkHome    = JRoute::_( 'index.php?option=com_discussions');
 $menuLinkSearch  = '';
@@ -47,12 +49,13 @@ echo "</div>";
 
 if ( !$user->guest) { // user is logged in
 
-    echo "<div class='cofiMainmenuItem'>";
-    echo "<a href='$menuLinkProfile' class='btn btn-default'>" . JText::_( "COFI_PROFILE", true ) . "</a>";
-    echo "</div>";
+    if ( $showProfileLink == 1) { // show link to user profile
+        echo "<div class='cofiMainmenuItem'>";
+        echo "<a href='$menuLinkProfile' class='btn btn-default'>" . JText::_( "COFI_PROFILE", true ) . "</a>";
+        echo "</div>";
+    }
 
-    if ( $useMessages == 1) { // user is logged in
-
+    if ( $useMessages == 1) { // use private messages
         echo "<div class='cofiMainmenuItem'>";
         echo "<a href='$menuLinkInbox' class='btn btn-default'>" . JText::_( "COFI_MESSAGES_MAILBOX", true ) . "</a>";
         $_newMessages = $CofiHelper->getNumberOfNewMessagesByUserId($user->id);
@@ -62,7 +65,6 @@ if ( !$user->guest) { // user is logged in
             echo "</b>)";
         }
         echo "</div>";
-
     }
 
 }

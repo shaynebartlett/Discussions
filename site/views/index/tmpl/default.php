@@ -188,90 +188,142 @@ else {
     <?php
     }
 
-    $_lastParent=0;
+//    $_lastParent=0;
+    $_lastId     = $category->id;
+    $_lastParent = $category->parent_id;
+
 
     }
     else { // real forum
 
-        ?>
 
-        <tr>
+        if ( ($category->parent_id == $_lastId) && ($_lastParent != 0)) { // subforum for real forum
 
-            <td align="center">
+            // do not display subforums here
 
-                <?php
-                if ( $category->image == "") {  // show default category image
-                    echo "<img src='" . $_root . "components/com_discussions/assets/categories/default.png' style='border:0px;margin:5px;' />";
-                }
-                else {
-                    echo "<img src='" . $_root . "components/com_discussions/assets/categories/".$category->image."' style='border:0px;margin:5px;' />";
-                }
-                ?>
-            </td>
+            /*
+            echo $category->name;
+            echo $category->id;
+            echo $category->parent_id;
+            */
 
+        }
+        else {
 
-            <td>
-                <?php
-                if ( JText::_( 'COFI_INDEX_META_DESCRIPTION') == "") {
-                    $pageDescription .= $category->name . ", ";
-                }
-                ?>
+            /*
+            if ( $category->id == 8) {
+                echo $category->name;
+                echo $category->id;
+                echo $category->parent_id;
+            }
+            */
 
-                <h3 style="margin: 0px 0px 0px 0px;">
+            ?>
+
+            <tr>
+
+                <td align="center">
                     <?php
-                    $catLink = JRoute::_('index.php?option=com_discussions&view=category&catid=' . $this->escape( $category->slug) );
-                    echo "<a href='$catLink' title='$category->name'>".$category->name."</a>";
-                    ?>
-                </h3>
-
-                <?php
-                echo $category->description;
-                ?>
-                <br>
-            </td>
-
-
-            <td align="center">
-
-                <?php echo $category->counter_threads; ?>
-
-            </td>
-
-
-            <td align="center">
-
-                <?php echo $category->counter_posts; ?>
-
-            </td>
-
-
-            <td align="center">
-
-                <?php
-
-                if ( $category->counter_posts == 0) {
-                    echo JText::_( 'COFI_NO_POSTS' );
-                }
-                else {
-                    echo $category->last_entry_date."";
-                    echo "<br />";
-
-                    if ( $showUsernameName == 1) {
-                        echo JText::_( 'COFI_BY' ) . " " . $category->realname;
+                    if ( $category->image == "") {  // show default category image
+                        echo "<img src='" . $_root . "components/com_discussions/assets/categories/default.png' style='border:0px;margin:0px 5px 5px 5px;' />";
                     }
                     else {
-                        echo JText::_( 'COFI_BY' ) . " " . $category->username;
+                        echo "<img src='" . $_root . "components/com_discussions/assets/categories/".$category->image."' style='border:0px;margin:0px 5px 5px 5px;' />";
                     }
-                }
-                ?>
-            </td>
+                    ?>
+                </td>
+
+                <td>
+                    <?php
+                    if ( JText::_( 'COFI_INDEX_META_DESCRIPTION') == "") {
+                        $pageDescription .= $category->name . ", ";
+                    }
+                    ?>
+                    <h3 style="margin: 0px 0px 0px 0px;">
+                        <?php
+                        $catLink = JRoute::_('index.php?option=com_discussions&view=category&catid=' . $this->escape( $category->slug) );
+                        echo "<a href='$catLink' title='$category->name'>".$category->name."</a>";
+                        ?>
+                    </h3>
+                    <?php
+                    echo $category->description;
+
+                    // display subforums
+                    $subforums = CofiHelper::getSubForums( $category->id);
+
+                    if( count($subforums) > 0) {
+                        echo "<br>";
+
+                        foreach ( $subforums as $subforum) :
+
+                            if ( $subforum->show_image != 0) {
+
+                                if ( $subforum->image == "") {  // show default category image
+                                    echo "<img src='" . $_root . "components/com_discussions/assets/categories/default.png' width='24' style='border:0px;margin:5px;' />";
+                                }
+                                else {
+                                    echo "<img src='" . $_root . "components/com_discussions/assets/categories/".$subforum->image."' width='24' style='border:0px;margin:5px;' />";
+                                }
+
+                            }
+
+                            $catLink = JRoute::_('index.php?option=com_discussions&view=category&catid=' . $this->escape( $subforum->slug) );
+                            echo "<a href='$catLink' title='$subforum->name'>".$subforum->name."</a>";
+
+                            echo "<span style='color: #555555;'>";
+                            echo " (" . $subforum->counter_threads . "/" . $subforum->counter_posts . ")";
+                            echo "</span>";
+
+                            echo "&nbsp;&nbsp;";
+                        endforeach;
+                    }
+                    // display subforums
+
+                    ?>
+
+                    <br>
+                </td>
+
+                <td align="center">
+                    <?php echo $category->counter_threads; ?>
+                </td>
+
+                <td align="center">
+                    <?php echo $category->counter_posts; ?>
+                </td>
+
+                <td align="center">
+                    <?php
+                    if ( $category->counter_posts == 0) {
+                        echo JText::_( 'COFI_NO_POSTS' );
+                    }
+                    else {
+                        echo $category->last_entry_date."";
+                        echo "<br />";
+
+                        if ( $showUsernameName == 1) {
+                            echo JText::_( 'COFI_BY' ) . " " . $category->realname;
+                        }
+                        else {
+                            echo JText::_( 'COFI_BY' ) . " " . $category->username;
+                        }
+                    }
+                    ?>
+                </td>
+
+            </tr>
 
 
-        </tr>
+            <?php
+            $_lastId     = $category->id;
 
+        }
 
-        <?php
-        $_lastParent=1;
+//        $_lastId     = $category->id;
+        $_lastParent = $category->parent_id;
+
+//        echo "LastId: " . $category->id;
+//        echo "LastParentId: " . $category->parent_id;
     }
 
 

@@ -548,8 +548,89 @@ class CofiHelper extends JObject {
 	}
 
 
+    function getSubForums( $forum_id) {
 
-	function updateUserStats( $user_id) {
+        $db	=& JFactory::getDBO();
+
+        /*
+        static $sub_items;
+
+        if (isset($sub_items)) {
+            return $sub_items;
+        }
+        */
+
+        $params         = JComponentHelper::getParams('com_discussions');
+        $_dateformat	= substr( $params->get( 'dateformat', '%d.%m.%Y'), 0, 10); // max 10 chars
+        $_timeformat	= substr( $params->get( 'timeformat', '%H:%i'), 0, 10); // max 10 chars
+
+        // $db =& $this->getDBO();
+
+        $user =& JFactory::getUser();
+        $logUser = new CofiUser( $user->id);
+
+        if ( $logUser->isModerator()) {	// show me all categories
+            $query = "SELECT c.id, c.parent_id, c.name, c.alias, c.description, c.image, c.show_image, c.published,
+						c.counter_posts, c.counter_threads,
+						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username, u.name AS realname,
+						CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(':', c.id, c.alias) ELSE c.id END as slug
+						FROM ".$db->quoteName('#__discussions_categories')."c LEFT JOIN  (".$db->quoteName('#__users')." u) ON u.id=c.last_entry_user_id
+						WHERE c.parent_id='" . $forum_id . "' AND c.published='1' ORDER by c.ordering ASC";
+        }
+        else { // only show the public forums (privates are hidden)
+            $query = "SELECT c.id, c.parent_id, c.name, c.alias, c.description, c.image, c.show_image, c.published,
+						c.counter_posts, c.counter_threads,
+						DATE_FORMAT( c.last_entry_date, '" . $_dateformat . " " . $_timeformat . "') AS last_entry_date, c.last_entry_user_id, u.username, u.name AS realname,
+						CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(':', c.id, c.alias) ELSE c.id END as slug
+						FROM ".$db->quoteName('#__discussions_categories')."c LEFT JOIN  (".$db->quoteName('#__users')." u) ON u.id=c.last_entry_user_id
+						WHERE c.parent_id='" . $forum_id . "' AND c.private='0' AND c.published='1' ORDER by c.ordering ASC";
+        }
+
+        // echo $query;
+
+        $db->setQuery( $query );
+        $rows = $db->loadObjectList();
+
+        // echo "Count: " . count( $rows);
+
+
+        /*
+        $children = array ();
+
+        if( count( $rows)){
+
+            foreach ( $rows as $row) {
+
+                $pt = $row->parent_id;
+
+                $list = @$children[$pt] ? $children[$pt] : array ();
+
+                array_push( $list, $row);
+
+                $children[$pt] = $list;
+
+            }
+
+        }
+
+        $list = cofiTreeRecurse( 0, '', array (), $children, 10, 0, 1);
+
+        $sub_items = $list;
+
+        return $sub_items;
+        */
+
+        return $rows;
+
+    }
+
+
+
+
+
+
+
+        function updateUserStats( $user_id) {
 
 		$db	=& JFactory::getDBO();			
 

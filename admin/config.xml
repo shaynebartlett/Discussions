@@ -9,6 +9,11 @@
       			<option value="1">COFI_CONFIG_NAME</option>
       	</field>
 
+        <field name="showProfileLink" type="list" default="1" label="COFI_CONFIG_SHOW_PROFILE_LINK" description="COFI_CONFIG_SHOW_PROFILE_LINK_DESCRIPTION">
+            <option value="0">COFI_CONFIG_NO</option>
+            <option value="1">COFI_CONFIG_YES</option>
+        </field>
+
         <field name="showLoginRow" type="list" default="0" label="COFI_CONFIG_SHOW_LOGIN_ROW" description="COFI_CONFIG_SHOW_LOGIN_ROW_DESCRIPTION">
             <option value="0">COFI_CONFIG_NO</option>
             <option value="1">COFI_CONFIG_YES</option>

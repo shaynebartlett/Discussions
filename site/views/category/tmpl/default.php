@@ -213,7 +213,57 @@ if ( $logUser->isModerator() == 1) {
 
 
 
+
+
 <?php
+// Subforums
+$subforums = CofiHelper::getSubForums( $this->categoryId);
+
+if( count($subforums) > 0) {
+
+    echo "<table width='100%' class='noborder' style='margin:20px 0px 10px 0px;'>";
+
+        echo "<tr>";
+
+            echo "<td align='left' class='noborder'>";
+
+                foreach ( $subforums as $subforum) :
+
+                    if ( $subforum->show_image != 0) {
+
+                        if ( $subforum->image == "") {  // show default category image
+                            echo "<img src='" . $_root . "components/com_discussions/assets/categories/default.png' width='24' style='border:0px;margin:5px;' />";
+                        }
+                        else {
+                            echo "<img src='" . $_root . "components/com_discussions/assets/categories/".$subforum->image."' width='24' style='border:0px;margin:5px;' />";
+                        }
+
+                    }
+
+                    $catLink = JRoute::_('index.php?option=com_discussions&view=category&catid=' . $this->escape( $subforum->slug) );
+                    echo "<a href='$catLink' title='$subforum->name'>".$subforum->name."</a>";
+
+                    echo "<span style='color: #555555;'>";
+                    echo " (" . $subforum->counter_threads . "/" . $subforum->counter_posts . ")";
+                    echo "</span>";
+
+                    echo "&nbsp;&nbsp;";
+
+                endforeach;
+
+            echo "</td>";
+
+        echo "</tr>";
+
+    echo "</table>";
+
+}
+// Subforums
+
+
+
+
+
 // Forum specific top banner
 
 if ( $this->forumBannerTop != "") {

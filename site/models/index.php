@@ -118,6 +118,7 @@ class DiscussionsModelIndex extends JModel {
 	}
 
 
+
 	/** 
      * Gets RSS entries data 
      * 

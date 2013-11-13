@@ -476,7 +476,7 @@ if ($this->pagination->getPagesCounter()) {
             <?php
 
                 // show avatar and username
-                echo "<div class='cofiAvatarBox'>";
+                echo "<div style='width:128px;'>";
                 $CofiUser = new CofiUser( $posting->user_id);
 
                 if ( $showUsernameName == 1) {
@@ -487,10 +487,10 @@ if ($this->pagination->getPagesCounter()) {
                 }
 
                 if ( $CofiUser->getAvatar() == "") { // display default avatar
-                    echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' class='cofiAvatar' alt='$opUserUsername' title='$opUserUsername' />";
+                    echo "<img src='" . $_root . "components/com_discussions/assets/users/user.png' class='img-thumbnail' alt='$opUserUsername' title='$opUserUsername' />";
                 }
                 else { // display uploaded avatar
-                    echo "<img src='" . $_root . "images/discussions/users/".$posting->user_id."/large/".$CofiUser->getAvatar()."' class='cofiAvatar' alt='$opUserUsername' title='$opUserUsername' />";
+                    echo "<img src='" . $_root . "images/discussions/users/".$posting->user_id."/large/".$CofiUser->getAvatar()."' class='img-thumbnail' alt='$opUserUsername' title='$opUserUsername' />";
                 }
                 echo "</div>";
 
